@@ -1,0 +1,96 @@
+{
+  "debian:bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "golang:1.17": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.17.13",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "mysql:5.7": {
+    "Cmd": [
+      "mysqld"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.16",
+      "MYSQL_MAJOR=5.7",
+      "MYSQL_VERSION=5.7.44-1.el7",
+      "MYSQL_SHELL_VERSION=8.0.35-1.el7"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "php:5.6-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_EXTRA_BUILD_DEPS=apache2-dev",
+      "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2",
+      "PHP_LDFLAGS=-Wl,-O1 -Wl,--hash-style=both -pie",
+      "GPG_KEYS=0BD78B5F97500D450838F95DFE857D9A90D90EC1 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3",
+      "PHP_VERSION=5.6.40",
+      "PHP_URL=https://secure.php.net/get/php-5.6.40.tar.xz/from/this/mirror",
+      "PHP_ASC_URL=https://secure.php.net/get/php-5.6.40.tar.xz.asc/from/this/mirror",
+      "PHP_SHA256=1369a51eee3995d7fbd1c5342e5cc917760e276d561595b6052b21ace2656d1c",
+      "PHP_MD5="
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "python:3.7": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+      "PYTHON_VERSION=3.7.17",
+      "PYTHON_PIP_VERSION=23.0.1",
+      "PYTHON_SETUPTOOLS_VERSION=57.5.0",
+      "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/9af82b715db434abb94a0a6f3569f43e72157346/public/get-pip.py",
+      "PYTHON_GET_PIP_SHA256=45a2bb8bf2bb5eff16fdd00faef6f29731831c7c59bd9fc2bf1f3bed511ff1fe"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  }
+}

@@ -1,0 +1,186 @@
+#!/bin/bash
+# [patch-bundle] ensure-services —— 在单镜像内按原 docker-compose 语义拉起服务（幂等）。
+#
+# 等价于原 compose 的：后端折叠服务 + depends_on(condition: service_healthy) + healthcheck
+# + restart: unless-stopped。规则：
+#   * 只启动“未在运行”的服务，绝不重启已在运行的服务。agent 若修改了需要重启才生效的代码
+#     却没有重启服务，判定结果与原多容器环境一致（保持题目性质不变）。
+#   * 后端（如 mysql:5.7）是原镜像的完整 rootfs，构建期已按原 environment 初始化，
+#     运行期以原镜像 entrypoint + command、原用户身份在 chroot 中运行。
+#   * 主服务以原 compose 的 command 运行，环境变量取自镜像 ENV（构建期快照），不继承调用者环境。
+#
+# 调用方：镜像 CMD（/opt/pb/init）、BASH_ENV 钩子（/opt/pb/autostart.sh，平台不执行 CMD 时由
+# 沙箱内第一条 bash 命令触发）、tests/test.sh 前缀（判定前兜底）。
+#
+# 用法：ensure-services [--quiet]      退出码 0 = 全部服务健康（或本题无服务）
+set -u
+PB_DIR=/opt/pb
+RUN_DIR=/run/pb
+LOG_DIR=/var/log/pb
+WAIT_SEC="${PB_WAIT_SEC:-180}"
+
+QUIET=0
+[ "${1:-}" = "--quiet" ] && QUIET=1
+
+# 子进程（监管循环与服务本身）不得再触发 BASH_ENV 钩子
+unset BASH_ENV
+export PB_IN_SERVICE=1
+
+mkdir -p "$RUN_DIR" "$LOG_DIR"
+log() {
+    echo "[pb $(date '+%F %T')] $*" >> "$LOG_DIR/ensure-services.log"
+    [ "$QUIET" = 1 ] || echo "[pb] $*" >&2
+}
+
+# shellcheck source=/dev/null
+. "$PB_DIR/services.sh"
+[ -f "$PB_DIR/main-env.sh" ] && . "$PB_DIR/main-env.sh"
+
+if [ "${#PB_BACKENDS[@]}" -eq 0 ] && [ "${PB_MAIN:-0}" != 1 ]; then
+    exit 0   # 本题无常驻服务（原 compose 的 main 即 sleep infinity）
+fi
+
+if [ "$(id -u)" != 0 ]; then
+    log "not root (uid=$(id -u)); cannot manage services"
+    exit 1
+fi
+
+# 串行化：BASH_ENV 钩子、CMD 与 test.sh 可能并发调用
+exec 9>"$RUN_DIR/lock"
+flock -w 900 9 || { log "lock timeout"; exit 1; }
+
+# ---------------------------------------------------------------- helpers
+var()  { eval "printf '%s' \"\${$1:-}\""; }           # 取标量变量 $1 的值
+arr()  { eval "_A=(\"\${$1[@]}\")"; }                  # 把数组 $1 拷到 _A
+
+pidfile() { echo "$RUN_DIR/$1.supervisor.pid"; }
+supervisor_alive() {
+    local p; p=$(cat "$(pidfile "$1")" 2>/dev/null) || return 1
+    [ -n "$p" ] && kill -0 "$p" 2>/dev/null
+}
+
+tcp_open() { (exec 3<>"/dev/tcp/127.0.0.1/$1") 2>/dev/null; }
+
+# 健康判定，语义与 compose healthcheck 一致：
+#   CMD / CMD-SHELL：命令退出码 0 即健康（后端在其 rootfs 内以 root 执行，同 docker 的 healthcheck）
+#   TCP            ：原 compose 无 healthcheck 时，以端口可连作为“已启动”
+#   NONE           ：原 compose 无 healthcheck 且无端口，以监管进程存活作为“已启动”
+healthy() {
+    local name=$1 kind root to
+    kind=$(var "PB_${name}_health_kind"); kind=${kind:-NONE}
+    root=$(var "PB_${name}_root")
+    to=$(var "PB_${name}_health_timeout"); to=${to:-30}
+    arr "PB_${name}_health"
+    case "$kind" in
+        CMD)
+            if [ -n "$root" ]; then timeout "$to" chroot "$root" "${_A[@]}" >/dev/null 2>&1
+            else timeout "$to" "${_A[@]}" >/dev/null 2>&1; fi ;;
+        CMD-SHELL)
+            if [ -n "$root" ]; then timeout "$to" chroot "$root" /bin/sh -c "${_A[0]}" >/dev/null 2>&1
+            else timeout "$to" /bin/sh -c "${_A[0]}" >/dev/null 2>&1; fi ;;
+        TCP)  tcp_open "${_A[0]}" ;;
+        *)    supervisor_alive "$name" ;;
+    esac
+}
+
+# 有 compose healthcheck：首次通过即就绪（同 docker）。
+# 无 healthcheck（TCP/NONE）：要求连续 PB_STABLE_SEC 秒可用——原 entrypoint 常先起一个临时实例做初始化
+# （如 `timeout 5 <server>` 后再建管理员账号），不能把临时实例误判为就绪。原环境中这段时间被
+# agent 运行与 test.sh 联网安装依赖自然覆盖；离线化后须显式等待，才与原环境的就绪状态一致。
+wait_healthy() {
+    local name=$1 deadline=$((SECONDS + WAIT_SEC)) kind need=1 ok=0
+    kind=$(var "PB_${name}_health_kind")
+    case "$kind" in TCP|NONE|"") need="${PB_STABLE_SEC:-10}" ;; esac
+    while [ "$SECONDS" -lt "$deadline" ]; do
+        if healthy "$name"; then
+            ok=$((ok + 1))
+            [ "$ok" -ge "$need" ] && return 0
+        else
+            ok=0
+        fi
+        sleep 1
+    done
+    return 1
+}
+
+# 原 compose 服务名 + extra_hosts → 127.0.0.1（单镜像内所有服务共享回环）
+add_host_aliases() {
+    local h
+    for h in "${PB_HOST_ALIASES[@]}"; do
+        grep -Eq "^[[:space:]]*127\.0\.0\.1([[:space:]].*)?[[:space:]]$h([[:space:]]|\$)" /etc/hosts 2>/dev/null && continue
+        if ! echo "127.0.0.1 $h" >> /etc/hosts 2>/dev/null; then
+            log "ERROR: /etc/hosts not writable; alias '$h' missing"
+        fi
+    done
+}
+
+# 后端 rootfs 内的最小运行期准备（不改后端内容，只补容器运行时本应提供的东西）
+prepare_backend_root() {
+    local root=$1 n spec
+    mkdir -p "$root/dev" "$root/tmp" "$root/run"
+    chmod 1777 "$root/tmp"
+    for spec in "null 1 3" "zero 1 5" "random 1 8" "urandom 1 9" "full 1 7" "tty 5 0"; do
+        set -- $spec
+        [ -c "$root/dev/$1" ] && continue
+        rm -f "$root/dev/$1"
+        mknod -m 666 "$root/dev/$1" c "$2" "$3" 2>/dev/null || log "WARN: mknod $root/dev/$1 failed"
+    done
+    [ -e "$root/dev/fd" ] || ln -s /proc/self/fd "$root/dev/fd" 2>/dev/null
+    {
+        echo "127.0.0.1 localhost"
+        for n in "${PB_HOST_ALIASES[@]}"; do echo "127.0.0.1 $n"; done
+    } > "$root/etc/hosts" 2>/dev/null
+}
+
+start_backend() {
+    local name=$1 root user uid gid home workdir
+    root=$(var "PB_${name}_root"); user=$(var "PB_${name}_user"); workdir=$(var "PB_${name}_workdir")
+    prepare_backend_root "$root"
+    uid=$(awk -F: -v u="$user" '$1==u || $3==u {print $3; exit}' "$root/etc/passwd")
+    gid=$(awk -F: -v u="$user" '$1==u || $3==u {print $4; exit}' "$root/etc/passwd")
+    home=$(awk -F: -v u="$user" '$1==u || $3==u {print $6; exit}' "$root/etc/passwd")
+    if [ -z "$uid" ]; then log "ERROR: user '$user' not found in $root/etc/passwd"; return 1; fi
+    arr "PB_${name}_env"; local -a envv=("${_A[@]}" "HOME=${home:-/}" "HOSTNAME=$name")
+    arr "PB_${name}_cmd"; local -a cmd=("${_A[@]}")
+    log "starting backend '$name' as $user($uid:$gid) in $root: ${cmd[*]}"
+    # chroot 不挂 /proc（容器内无 CAP_SYS_ADMIN）；原 entrypoint 在“已初始化的数据目录”分支不依赖 /proc。
+    (
+        cd /
+        exec setsid "$PB_DIR/supervise" "pb-$name" \
+            env -i "${envv[@]}" chroot --userspec="$uid:$gid" "$root" \
+            /bin/sh -c 'cd "$1" 2>/dev/null; shift; exec "$@"' pb "${workdir:-/}" "${cmd[@]}"
+    ) </dev/null >>"$LOG_DIR/$name.log" 2>&1 9>&- &
+    echo $! > "$(pidfile "$name")"
+}
+
+start_main() {
+    local workdir; workdir=$(var PB_main_workdir)
+    arr PB_main_cmd; local -a cmd=("${_A[@]}")
+    local -a envv=("${PB_MAIN_ENV[@]}")
+    log "starting main in ${workdir:-/}: ${cmd[*]}"
+    (
+        cd "${workdir:-/}" 2>/dev/null || cd /
+        exec setsid env -i "${envv[@]}" "$PB_DIR/supervise" pb-main "${cmd[@]}"
+    ) </dev/null >>"$LOG_DIR/main.log" 2>&1 9>&- &
+    echo $! > "$(pidfile main)"
+}
+
+# ---------------------------------------------------------------- main flow
+rc=0
+add_host_aliases
+
+for b in "${PB_BACKENDS[@]}"; do
+    healthy "$b" && continue
+    supervisor_alive "$b" || start_backend "$b" || { rc=1; continue; }
+    if wait_healthy "$b"; then log "backend '$b' healthy"
+    else log "WARN: backend '$b' not healthy after ${WAIT_SEC}s (see $LOG_DIR/$b.log)"; rc=1; fi
+done
+
+if [ "${PB_MAIN:-0}" = 1 ]; then
+    if ! healthy main; then
+        supervisor_alive main || start_main
+        if wait_healthy main; then log "main healthy"
+        else log "WARN: main not healthy after ${WAIT_SEC}s (see $LOG_DIR/main.log)"; rc=1; fi
+    fi
+fi
+exit $rc
