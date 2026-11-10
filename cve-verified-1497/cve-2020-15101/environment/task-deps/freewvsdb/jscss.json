@@ -1,0 +1,58 @@
+[
+  {
+    "name": "jquery",
+    "url": "https://jquery.com/",
+    "safe": "3.5.1",
+    "vuln": "CVE-2020-11022",
+    "latest": "3.5.1",
+    "thirdparty": "yes",
+    "detection": [
+      {
+        "file": "jquery.js",
+        "variable": "/*! jQuery",
+        "subdir": 0
+      },
+      {
+        "file": "jquery.min.js",
+        "variable": "/*! jQuery",
+        "subdir": 0
+      }
+    ]
+  },
+  {
+    "name": "bootstrap",
+    "url": "https://getbootstrap.com/",
+    "safe": "4.3.1",
+    "old_safe": "3.4.1",
+    "vuln": "CVE-2019-8331",
+    "latest": "4.4.1",
+    "thirdparty": "yes",
+    "detection": [
+      {
+        "file": "bootstrap.min.css",
+        "variable": "* Bootstrap v",
+        "subdir": 0
+      }
+    ]
+  },
+  {
+    "name": "Moment.js",
+    "url": "https://momentjs.com/",
+    "safe": "2.19.3",
+    "vuln": "CVE-2017-18214",
+    "latest": "2.24.0",
+    "thirdparty": "yes",
+    "detection": [
+      {
+        "file": "moment.js",
+        "variable": ".version",
+        "subdir": 0
+      },
+      {
+        "file": "moment.min.js",
+        "variable": ".version",
+        "subdir": 0
+      }
+    ]
+  }
+]

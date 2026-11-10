@@ -1,0 +1,47 @@
+# Exim test configuration 0196
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_expn = accept hosts = 127.0.0.1
+log_selector = +address_rewrite
+
+
+# ----- Rewrite -----
+
+begin rewrite
+
+rhubarb@*   custard@$domain
+
+
+# ----- Routers -----
+
+begin routers
+
+alias:
+  driver = redirect
+  allow_defer
+  data = a, b, c
+  local_parts = postmaster
+  retry_use_local_part
+
+abc:
+  driver = accept
+  local_parts = a:b:c
+  retry_use_local_part
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+# End

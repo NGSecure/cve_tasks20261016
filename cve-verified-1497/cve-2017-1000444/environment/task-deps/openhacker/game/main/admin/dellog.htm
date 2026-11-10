@@ -1,0 +1,13 @@
+<?php
+
+if ($row["role"] == 'user') {
+	header("location: /");
+};
+
+$Tempid = $_POST['tempId'];
+
+	$sql = "DELETE FROM gamelogs where id = '$Tempid'";
+	$result = $conn->query($sql);
+
+header("location: ?m=logs");
+?>

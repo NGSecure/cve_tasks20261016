@@ -1,0 +1,20 @@
+# Exim test configuration 0394
+
+OPT=
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_connect = connect
+host_lookup = *
+
+# ----- ACL -----
+
+begin ACL
+
+connect:
+  require verify = OPT
+
+# End

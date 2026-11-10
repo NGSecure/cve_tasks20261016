@@ -1,0 +1,68 @@
+# Exim test configuration 0175
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  require verify = sender
+  accept  domains = +local_domains
+  deny    message = relay not permitted
+
+# ----- Routers -----
+
+begin routers
+
+fail_sender:
+  driver = manualroute
+  domains = ! +local_domains
+  route_list = bad.domain localhost byname
+  self = fail
+  verify_only
+  verify_sender
+
+fail_sender2:
+  driver = manualroute
+  domains = ! +local_domains
+  fail_verify
+  route_list = bad.domain2 localhost byname
+  self = send
+  verify_only
+  verify_sender
+
+lookuphost:
+  driver = dnslookup
+  domains = ! +local_domains
+  transport = smtp
+  no_more
+
+all:
+  driver = accept
+  retry_use_local_part
+  transport = appendfile
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+appendfile:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# End

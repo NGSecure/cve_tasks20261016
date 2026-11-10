@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>OutlookTwin Theme</TITLE>
+</HEAD>
+<BODY onload="_nn4_loaded=true;">
+
+<script>
+function fOnRange(rng) { // call back from within the calendar engine.
+	var sd=new Date(rng[0]);
+	var ed=new Date(rng[1]);
+	document.fm.startDate.value=sd.getUTCFullYear()+"-"+(sd.getUTCMonth()+1)+"-"+sd.getUTCDate();
+	document.fm.endDate.value=ed.getUTCFullYear()+"-"+(ed.getUTCMonth()+1)+"-"+ed.getUTCDate();
+}
+</script>
+
+
+<form name="fm">
+<table>
+<tr>
+	<td>Selected range start</td>
+	<td><input name="startDate" size=14></td>
+</tr>
+<tr>
+	<td>Selected range end</td>
+	<td><input name="endDate" size=14></td>
+</tr>
+</table>
+</form>
+
+
+<TABLE border="0" cellspacing="0" cellpadding="0"><TR><TD>
+<iframe width="150" height="141" name="gToday:outlookleft:agenda.js:gfFlat_1" id="gToday:outlookleft:agenda.js:gfFlat_1" src="iflateng.htm" scrolling="no" frameborder="0" >
+<a name="gfFlat_1_spacer"><img width=146 height=140></a>
+</iframe></TD>
+<TD>
+<iframe width="150" height="141" name="gToday:outlookright:share[gfFlat_1]:gfFlat_2" id="gToday:outlookright:share[gfFlat_1]:gfFlat_2" src="iflateng.htm" scrolling="no" frameborder="0" >
+<a name="gfFlat_2_spacer"><img width=150 height=140></a>
+</iframe></TD></TR></TABLE>
+
+
+
+<font size=-1>
+<BR><BR><BR>NOTE: Please read the "Working with themes" tutorial for how to preview and install a theme.
+<BR>NOTE: Use shift, alt or ctrl to select range. (Useful for those that don't support dragging)
+</font>
+
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+
+
+
+<LAYER name="gToday:outlookleft:agenda.js:gfFlat_1" src="nflateng.htm" background="nflateng.htm">     </LAYER>
+<LAYER name="gToday:outlookright:share[gfFlat_1]:gfFlat_2" src="nflateng.htm" background="nflateng.htm">     </LAYER>
+</BODY>
+</HTML>

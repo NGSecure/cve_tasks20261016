@@ -1,0 +1,617 @@
+
+******** SERVER ********
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<a@test.ex>
+250 OK
+RCPT TO:<b@test.ex>
+451 Temp error
+RCPT TO:<c@test.ex>
+550 Perm error
+RCPT TO:<d@test.ex>
+250 OK
+DATA
+351 Send more
+Received: from CALLER by myhost.test.ex with local (Exim x.yz)
+	(envelope-from <CALLER@test.ex>)
+	id 10HmaX-0005vi-00; Tue, 2 Mar 1999 09:44:33 +0000
+Message-Id: <E10HmaX-0005vi-00@myhost.test.ex>
+From: CALLER_NAME <CALLER@test.ex>
+Date: Tue, 2 Mar 1999 09:44:33 +0000
+
+.
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<e@test.ex>
+250 OK
+*sleep 2
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+451 Temp error
+RCPT TO:<h@test.ex>
+503 No sender given
+RCPT TO:<i@test.ex>
+503 No sender given
+DATA
+503 No envelope
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+550 Perm error
+RCPT TO:<j@test.ex>
+503 No sender given
+RCPT TO:<k@test.ex>
+503 No sender given
+DATA
+503 No envelope
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<l@test.ex>
+451 Temp error 1
+RCPT TO:<m@test.ex>
+451 Temp error 2
+DATA
+503 No recipients
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<n@test.ex>
+551 Perm error 1
+RCPT TO:<o@test.ex>
+551 Perm error 2
+DATA
+503 No recipients
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<p@test.ex>
+451 Temp error 1
+RCPT TO:<q@test.ex>
+551 Perm error 2
+DATA
+503 No recipients
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<r@test.ex>
+250 OK
+RCPT TO:<s@test.ex>
+250 OK
+DATA
+503 Sorry perm data error
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<t@test.ex>
+250 OK
+RCPT TO:<u@test.ex>
+250 OK
+DATA
+403 Sorry temp data error
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<yes@test.ex>
+250 OK
+RCPT TO:<n00@test.ex>
+550 NO
+RCPT TO:<n01@test.ex>
+550 NO
+RCPT TO:<n02@test.ex>
+550 NO
+RCPT TO:<n03@test.ex>
+550 NO
+RCPT TO:<n04@test.ex>
+550 NO
+RCPT TO:<n05@test.ex>
+550 NO
+RCPT TO:<n06@test.ex>
+550 NO
+RCPT TO:<n07@test.ex>
+550 NO
+RCPT TO:<n08@test.ex>
+550 NO
+RCPT TO:<n09@test.ex>
+550 NO
+RCPT TO:<n10@test.ex>
+550 NO
+RCPT TO:<n11@test.ex>
+550 NO
+RCPT TO:<n12@test.ex>
+550 NO
+RCPT TO:<n13@test.ex>
+550 NO
+RCPT TO:<n14@test.ex>
+550 NO
+RCPT TO:<n15@test.ex>
+550 NO
+RCPT TO:<n16@test.ex>
+550 NO
+RCPT TO:<n17@test.ex>
+550 NO
+RCPT TO:<n18@test.ex>
+550 NO
+RCPT TO:<n19@test.ex>
+550 NO
+RCPT TO:<n20@test.ex>
+550 NO
+RCPT TO:<n21@test.ex>
+550 NO
+RCPT TO:<n22@test.ex>
+550 NO
+RCPT TO:<n23@test.ex>
+550 NO
+RCPT TO:<n24@test.ex>
+550 NO
+RCPT TO:<n25@test.ex>
+550 NO
+RCPT TO:<n26@test.ex>
+550 NO
+RCPT TO:<n27@test.ex>
+550 NO
+RCPT TO:<n28@test.ex>
+550 NO
+RCPT TO:<n29@test.ex>
+550 NO
+RCPT TO:<n30@test.ex>
+550 NO
+RCPT TO:<n31@test.ex>
+550 NO
+RCPT TO:<n32@test.ex>
+550 NO
+RCPT TO:<n33@test.ex>
+550 NO
+RCPT TO:<n34@test.ex>
+550 NO
+RCPT TO:<n35@test.ex>
+550 NO
+RCPT TO:<n36@test.ex>
+550 NO
+RCPT TO:<n37@test.ex>
+550 NO
+RCPT TO:<n38@test.ex>
+550 NO
+RCPT TO:<n39@test.ex>
+550 NO
+RCPT TO:<n40@test.ex>
+550 NO
+RCPT TO:<n41@test.ex>
+550 NO
+RCPT TO:<n42@test.ex>
+550 NO
+RCPT TO:<n43@test.ex>
+550 NO
+RCPT TO:<n44@test.ex>
+550 NO
+RCPT TO:<n45@test.ex>
+550 NO
+RCPT TO:<n46@test.ex>
+550 NO
+RCPT TO:<n47@test.ex>
+550 NO
+RCPT TO:<n48@test.ex>
+550 NO
+RCPT TO:<n49@test.ex>
+550 NO
+RCPT TO:<n50@test.ex>
+550 NO
+RCPT TO:<n51@test.ex>
+550 NO
+RCPT TO:<n52@test.ex>
+550 NO
+RCPT TO:<n53@test.ex>
+550 NO
+RCPT TO:<n54@test.ex>
+550 NO
+RCPT TO:<n55@test.ex>
+550 NO
+RCPT TO:<n56@test.ex>
+550 NO
+RCPT TO:<n57@test.ex>
+550 NO
+RCPT TO:<n58@test.ex>
+550 NO
+RCPT TO:<n59@test.ex>
+550 NO
+RCPT TO:<n60@test.ex>
+550 NO
+RCPT TO:<n61@test.ex>
+550 NO
+RCPT TO:<n62@test.ex>
+550 NO
+RCPT TO:<n63@test.ex>
+550 NO
+RCPT TO:<n64@test.ex>
+550 NO
+RCPT TO:<n65@test.ex>
+550 NO
+RCPT TO:<n66@test.ex>
+550 NO
+RCPT TO:<n67@test.ex>
+550 NO
+RCPT TO:<n68@test.ex>
+550 NO
+RCPT TO:<n69@test.ex>
+550 NO
+RCPT TO:<n70@test.ex>
+550 NO
+RCPT TO:<n71@test.ex>
+550 NO
+RCPT TO:<n72@test.ex>
+550 NO
+RCPT TO:<n73@test.ex>
+550 NO
+RCPT TO:<n74@test.ex>
+550 NO
+RCPT TO:<n75@test.ex>
+550 NO
+RCPT TO:<n76@test.ex>
+550 NO
+RCPT TO:<n77@test.ex>
+550 NO
+RCPT TO:<n78@test.ex>
+550 NO
+RCPT TO:<n79@test.ex>
+550 NO
+RCPT TO:<n80@test.ex>
+550 NO
+RCPT TO:<n81@test.ex>
+550 NO
+RCPT TO:<n82@test.ex>
+550 NO
+RCPT TO:<n83@test.ex>
+550 NO
+RCPT TO:<n84@test.ex>
+550 NO
+RCPT TO:<n85@test.ex>
+550 NO
+RCPT TO:<n86@test.ex>
+550 NO
+RCPT TO:<n87@test.ex>
+550 NO
+RCPT TO:<n88@test.ex>
+550 NO
+RCPT TO:<n89@test.ex>
+550 NO
+RCPT TO:<n90@test.ex>
+550 NO
+RCPT TO:<n91@test.ex>
+550 NO
+RCPT TO:<n92@test.ex>
+550 NO
+RCPT TO:<n93@test.ex>
+550 NO
+RCPT TO:<n94@test.ex>
+550 NO
+RCPT TO:<n95@test.ex>
+550 NO
+RCPT TO:<n96@test.ex>
+550 NO
+RCPT TO:<n97@test.ex>
+550 NO
+RCPT TO:<n98@test.ex>
+550 NO
+RCPT TO:<n99@test.ex>
+550 NO
+RCPT TO:<n100@test.ex>
+550 NO
+RCPT TO:<n101@test.ex>
+550 NO
+RCPT TO:<n102@test.ex>
+550 NO
+RCPT TO:<n103@test.ex>
+550 NO
+RCPT TO:<n104@test.ex>
+550 NO
+RCPT TO:<n105@test.ex>
+550 NO
+RCPT TO:<n106@test.ex>
+550 NO
+RCPT TO:<n107@test.ex>
+550 NO
+RCPT TO:<n108@test.ex>
+550 NO
+RCPT TO:<n109@test.ex>
+550 NO
+RCPT TO:<n110@test.ex>
+550 NO
+RCPT TO:<n111@test.ex>
+550 NO
+RCPT TO:<n112@test.ex>
+550 NO
+RCPT TO:<n113@test.ex>
+550 NO
+RCPT TO:<n114@test.ex>
+550 NO
+RCPT TO:<n115@test.ex>
+550 NO
+RCPT TO:<n116@test.ex>
+550 NO
+RCPT TO:<n117@test.ex>
+550 NO
+RCPT TO:<n118@test.ex>
+550 NO
+RCPT TO:<n119@test.ex>
+550 NO
+RCPT TO:<n120@test.ex>
+550 NO
+RCPT TO:<n121@test.ex>
+550 NO
+RCPT TO:<n122@test.ex>
+550 NO
+RCPT TO:<n123@test.ex>
+550 NO
+RCPT TO:<n124@test.ex>
+550 NO
+RCPT TO:<n125@test.ex>
+550 NO
+RCPT TO:<n126@test.ex>
+550 NO
+RCPT TO:<n127@test.ex>
+550 NO
+RCPT TO:<n128@test.ex>
+550 NO
+RCPT TO:<n129@test.ex>
+550 NO
+RCPT TO:<n130@test.ex>
+550 NO
+RCPT TO:<n131@test.ex>
+550 NO
+RCPT TO:<n132@test.ex>
+550 NO
+RCPT TO:<n133@test.ex>
+550 NO
+RCPT TO:<n134@test.ex>
+550 NO
+RCPT TO:<n135@test.ex>
+550 NO
+RCPT TO:<n136@test.ex>
+550 NO
+RCPT TO:<n137@test.ex>
+550 NO
+RCPT TO:<n138@test.ex>
+550 NO
+RCPT TO:<n139@test.ex>
+550 NO
+RCPT TO:<n140@test.ex>
+550 NO
+RCPT TO:<n141@test.ex>
+550 NO
+RCPT TO:<n142@test.ex>
+550 NO
+RCPT TO:<n143@test.ex>
+550 NO
+RCPT TO:<n144@test.ex>
+550 NO
+RCPT TO:<n145@test.ex>
+550 NO
+RCPT TO:<n146@test.ex>
+550 NO
+RCPT TO:<n147@test.ex>
+550 NO
+RCPT TO:<n148@test.ex>
+550 NO
+RCPT TO:<n149@test.ex>
+550 NO
+RCPT TO:<n150@test.ex>
+550 NO
+RCPT TO:<n151@test.ex>
+550 NO
+RCPT TO:<n152@test.ex>
+550 NO
+RCPT TO:<n153@test.ex>
+550 NO
+RCPT TO:<n154@test.ex>
+550 NO
+RCPT TO:<n155@test.ex>
+550 NO
+RCPT TO:<n156@test.ex>
+550 NO
+RCPT TO:<n157@test.ex>
+550 NO
+RCPT TO:<n158@test.ex>
+550 NO
+RCPT TO:<n159@test.ex>
+550 NO
+RCPT TO:<n160@test.ex>
+550 NO
+RCPT TO:<n161@test.ex>
+550 NO
+RCPT TO:<n162@test.ex>
+550 NO
+RCPT TO:<n163@test.ex>
+550 NO
+RCPT TO:<n164@test.ex>
+550 NO
+RCPT TO:<n165@test.ex>
+550 NO
+RCPT TO:<n166@test.ex>
+550 NO
+RCPT TO:<n167@test.ex>
+550 NO
+RCPT TO:<n168@test.ex>
+550 NO
+RCPT TO:<n169@test.ex>
+550 NO
+RCPT TO:<n170@test.ex>
+550 NO
+RCPT TO:<n171@test.ex>
+550 NO
+RCPT TO:<n172@test.ex>
+550 NO
+RCPT TO:<n173@test.ex>
+550 NO
+RCPT TO:<n174@test.ex>
+550 NO
+RCPT TO:<n175@test.ex>
+550 NO
+RCPT TO:<n176@test.ex>
+550 NO
+RCPT TO:<n177@test.ex>
+550 NO
+RCPT TO:<n178@test.ex>
+550 NO
+RCPT TO:<n179@test.ex>
+550 NO
+RCPT TO:<n180@test.ex>
+550 NO
+RCPT TO:<n181@test.ex>
+550 NO
+RCPT TO:<n182@test.ex>
+550 NO
+RCPT TO:<n183@test.ex>
+550 NO
+RCPT TO:<n184@test.ex>
+550 NO
+RCPT TO:<n185@test.ex>
+550 NO
+RCPT TO:<n186@test.ex>
+550 NO
+RCPT TO:<n187@test.ex>
+550 NO
+RCPT TO:<n188@test.ex>
+550 NO
+RCPT TO:<n189@test.ex>
+550 NO
+RCPT TO:<n190@test.ex>
+550 NO
+RCPT TO:<n191@test.ex>
+550 NO
+RCPT TO:<n192@test.ex>
+550 NO
+RCPT TO:<n193@test.ex>
+550 NO
+RCPT TO:<n194@test.ex>
+550 NO
+RCPT TO:<n195@test.ex>
+550 NO
+RCPT TO:<n196@test.ex>
+550 NO
+RCPT TO:<n197@test.ex>
+550 NO
+RCPT TO:<n198@test.ex>
+550 NO
+RCPT TO:<n199@test.ex>
+550 NO
+DATA
+403 Sorry temp data error
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<a@test.ex>
+250 OK
+RCPT TO:<b@test.ex>
+550 NO
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Server ready
+EHLO myhost.test.ex
+250-OK
+250 PIPELINING
+MAIL FROM:<CALLER@test.ex>
+250 OK
+RCPT TO:<w@test.ex>
+250 OK
+RCPT TO:<x@test.ex>
+250 OK
+RCPT TO:<y@test.ex>
+250 OK
+RCPT TO:<z@test.ex>
+250 OK
+DATA
+351 Send more
+Received: from CALLER by myhost.test.ex with local (Exim x.yz)
+	(envelope-from <CALLER@test.ex>)
+	id 10HmbP-0005vi-00; Tue, 2 Mar 1999 09:44:33 +0000
+Message-Id: <E10HmbP-0005vi-00@myhost.test.ex>
+From: CALLER_NAME <CALLER@test.ex>
+Date: Tue, 2 Mar 1999 09:44:33 +0000
+
+.
+250 OK
+End of script

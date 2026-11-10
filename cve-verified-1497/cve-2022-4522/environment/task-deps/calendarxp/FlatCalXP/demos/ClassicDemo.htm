@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>Classic Demo</TITLE>
+</HEAD>
+<BODY  onload="_nn4_loaded=true;">
+
+
+<table>
+<tr>
+	<td><iframe width=174 height=189 name="gToday:normal:agenda.js:gfFlat_arrDate" id="gToday:normal:agenda.js:gfFlat_arrDate" src="Classic/iflateng.htm" scrolling="no" frameborder="0">
+<a name="gfFlat_arrDate_spacer"><img width=172 height=180></a>
+</iframe>
+</td>
+	<td><iframe width=174 height=189 name="gToday:normal:agenda.js:gfFlat_deptDate" id="gToday:normal:agenda.js:gfFlat_deptDate" src="Classic/iflateng.htm" scrolling="no" frameborder="0">
+<a name="gfFlat_deptDate_spacer"><img width=172 height=180></a>
+</iframe>
+</td>
+</tr>
+</table>
+
+<FORM name="demoform">
+<TABLE border=0 >
+  <TR>
+    <TD align="right" class="toright" width="35%" nowrap>Arrival On: </TD>
+    <TD class="toleft" nowrap>
+	<select name="arrDate_day">
+	<script>document.write('<option value="-">-');for(var i=1;i<=31;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="arrDate_mon">
+	<script>document.write('<option value="-">-');for(var i=1;i<=12;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="arrDate_year">
+	<script>document.write('<option value="-">-');for(var i=1980;i<=2030;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select>
+	</TD>
+  </TR>
+
+  <TR>
+    <TD align="right" class="toright" width="35%" nowrap>Depart On: </TD>
+    <TD class="toleft" nowrap>
+	<select name="deptDate_day">
+	<script>document.write('<option value="-">-');for(var i=1;i<=31;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="deptDate_mon">
+	<script>document.write('<option value="-">-');for(var i=1;i<=12;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="deptDate_year">
+	<script>document.write('<option value="-">-');for(var i=1980;i<=2030;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select>
+	</TD>
+  </TR>
+</TABLE>
+</FORM>
+
+<P>
+NOTE: 
+<OL>
+<LI>This demo is nothing but 2 calendars with a plugin function fAfterSelect(),
+which is located in the plugins.js file. The plugin assumes the prefix of the same
+set of date fields is defined as part of the calendar's context name, 
+ie. gfFlat_[prefix].
+<LI>If you would like to use hidden input boxes instead of dropdown boxes, you
+just need to replace the fAfterSelect() with the following:
+<pre>
+function fAfterSelected(y,m,d,e) {
+	var prefix=gTheme[3].split('_')[1];
+	var formRef=gContainer.document.forms[0]; // you may change this if you have more than 1 forms on page
+	formRef.elements[prefix].value=y+'-'+(m<10?'0'+m:m)+'-'+(d<10?'0'+d:d);
+}
+</pre>
+Then, remove all the dropdowns with the following fields:
+<pre>
+&lt;input name="arrDate" type="hidden"&gt;
+&lt;input name="deptDate" type="hidden"&gt;
+</pre>
+</OL>
+
+</P>
+
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+
+
+<!-- calendar engine for netscape 4.x. "src" and "background" must match. -->
+<LAYER name="gToday:normal:agenda.js:gfFlat_arrDate" src="Classic/nflateng.htm" background="Classic/nflateng.htm">     </LAYER>
+<LAYER name="gToday:normal:agenda.js:gfFlat_deptDate" src="Classic/nflateng.htm" background="Classic/nflateng.htm">     </LAYER>
+</BODY>
+</HTML>
+

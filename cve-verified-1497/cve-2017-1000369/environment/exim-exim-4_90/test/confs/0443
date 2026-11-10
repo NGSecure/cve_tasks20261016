@@ -1,0 +1,32 @@
+# Exim test configuration 0443
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+acl_smtp_rcpt = rcpt
+
+
+# ----- ACLs -----
+
+begin acl
+
+rcpt:
+  accept verify = sender/callout=1s
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = dnslookup
+  verify_only
+
+
+# End

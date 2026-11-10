@@ -1,0 +1,55 @@
+# Exim test configuration 0520
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+qualify_domain = anydom
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = redirect
+  local_parts = alice
+  data = alice-1
+
+r2:
+  driver = redirect
+  local_parts = alice-1
+  data = alice-2
+
+r3:
+  driver = redirect
+  local_parts = alice-2
+  data = alice-1
+
+r4:
+  driver = redirect
+  local_parts = bob
+  data = bob-1
+
+r5:
+  driver = redirect
+  local_parts = bob-1
+  data = alice-2
+
+r9:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+# End

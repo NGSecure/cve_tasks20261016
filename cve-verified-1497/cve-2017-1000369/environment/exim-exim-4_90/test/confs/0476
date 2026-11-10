@@ -1,0 +1,38 @@
+# Exim test configuration 0476
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+queue_run_in_order
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  transport = t1
+  route_list = * 127.0.0.1
+  self = send
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  port = PORT_S
+
+
+# ----- Retry -----
+
+begin retry
+
+* *  F,1d,2h
+
+
+# End

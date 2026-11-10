@@ -1,0 +1,34 @@
+# queryprogram general tests
+1
+exim -bt '"ACCEPT hosts=localhost lookup=byname"@some.host'
+****
+2
+exim -d-all+route -bt '"DECLINE cannot route this one (DECLINE)"@some.host'
+****
+2
+exim -d-all+route -bt '"FAIL cannot route this one (FAIL)"@some.host'
+****
+1
+exim -d-all+route -bt '"ERROR cannot route this one (ERROR)"@some.host'
+****
+1
+exim -d-all+route -bt '"DEFER cannot route this one (DEFER)"@some.host'
+****
+exim -d-all+route -bt '"ACCEPT transport = other_smtp hosts=ten-1.test.ex"@some.host'
+****
+exim -d-all+route -bt PASS@some.host
+****
+1
+exim -d-all+route -bt '"FREEZE cannot route this one (FREEZE)"@some.host'
+****
+exim -d-all+route -bt '"REDIRECT postmaster@test.ex"@some.host'
+****
+exim -odi '"FAIL cannot route this one (FAIL)"@some.host'
+Test message
+****
+exim -DCOMMAND_USER=CALLER -d-all+route -bh V4NET.2.3.4
+ehlo some.name
+mail from:<x@y>
+rcpt to:<"FAIL cannot route this one (FAIL)"@some.host>
+quit
+****

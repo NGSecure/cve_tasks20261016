@@ -1,0 +1,32 @@
+[
+  {
+    "name": "smarty",
+    "url": "https://www.smarty.net/",
+    "safe": "3.1.33",
+    "vuln": "CVE-2018-16831",
+    "latest": "3.1.33",
+    "thirdparty": "yes",
+    "detection": [
+      {
+        "file": "Smarty.class.php",
+        "variable": "@version",
+        "subdir": 1
+      }
+    ]
+  },
+  {
+    "name": "PHPMailer",
+    "url": "https://github.com/PHPMailer/PHPMailer",
+    "safe": "6.5.0",
+    "vuln": "CVE-2021-3603",
+    "latest": "6.8.0",
+    "thirdparty": "yes",
+    "detection": [
+      {
+        "file": "PHPMailer.php",
+        "variable": "VERSION",
+        "subdir": 1
+      }
+    ]
+  }
+]

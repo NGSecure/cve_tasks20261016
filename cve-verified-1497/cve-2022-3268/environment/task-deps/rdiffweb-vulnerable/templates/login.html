@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block title %}{% trans %}Sign in{% endtrans %}{% endblock %}
+{% block body %}
+<div class='container'>
+    <div class='col-sm-offset-3 col-sm-6'>
+        <center>
+            <h1>{% if header_name %}{{ header_name }}{% else %}rdiffweb{% endif %}</h1>
+            <p class='light'>
+                {% if welcome_msg %}
+                {% autoescape false %}{{ welcome_msg }}{% endautoescape %}
+                {% else %}
+                {% trans %}A simplified backup management software for quick access to your archives through an
+                efficient web interface.{% endtrans %}
+                <br /><br />
+                <a href="https://rdiffweb.org/">{% trans %}website{% endtrans %}</a> •
+                <a href="https://rdiffweb.org/doc/">{% trans %}docs{% endtrans %}</a> •
+                <a href="https://groups.google.com/d/forum/rdiffweb">{% trans %}community{% endtrans %}</a>
+                {% endif %}
+            </p>
+        </center>
+    </div>
+    <!-- /content -->
+</div>
+<!-- /container -->
+<div class="container login-page">
+    <form class="form-signin" role="form" method="post" action="/login/" id="form-login">
+        <h2 class="form-signin-heading">{{ _('Sign in') }}</h2>
+        {% include 'message.html' %}
+        <p>{% trans %}Enter your username and password to log in.{% endtrans %}</p>
+        {{ form }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">{{ _('Sign in') }}</button>
+    </form>
+</div>
+{% endblock %}

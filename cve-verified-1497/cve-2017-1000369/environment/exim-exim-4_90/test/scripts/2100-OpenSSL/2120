@@ -1,0 +1,10 @@
+# TLS server: no certificate defined, autogen selfsign used
+exim -DSERVER=server -bd -oX PORT_D
+****
+exim userx
+Test
+****
+exim -qf
+****
+killdaemon
+no_msglog_check

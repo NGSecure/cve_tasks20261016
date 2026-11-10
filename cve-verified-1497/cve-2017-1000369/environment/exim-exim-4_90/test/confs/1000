@@ -1,0 +1,26 @@
+# Exim test configuration 1000
+
+HL=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+acl_smtp_connect = check_connect
+HL
+
+
+# ----- ACL -----
+
+begin acl
+
+check_connect:
+  warn    log_message = matched hostlist
+          hosts = <; 2001:ab8:37f:20:0:0:0:1 ; v6.test.ex
+
+  accept  condition = ${if eq{$sender_host_address}{2001:0ab8:037f:0020:0000:0000:0000:0001}}
+
+# End

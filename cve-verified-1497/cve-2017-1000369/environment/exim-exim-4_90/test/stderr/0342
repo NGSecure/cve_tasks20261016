@@ -1,0 +1,25 @@
+>>> host in hosts_connection_nolog? no (option unset)
+>>> host in host_lookup? no (option unset)
+>>> host in host_reject_connection? no (option unset)
+>>> host in sender_unqualified_hosts? no (option unset)
+>>> host in recipient_unqualified_hosts? no (option unset)
+>>> host in helo_verify_hosts? no (option unset)
+>>> host in helo_try_verify_hosts? no (option unset)
+>>> host in helo_accept_junk_hosts? no (option unset)
+>>> using ACL "check_rcpt"
+>>> processing "deny"
+>>>   message: unverifiable
+>>> check !verify = recipient
+>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>> routing x@ten-1
+>>> calling dnslookup router
+>>> re-routed to x@ten-1.test.ex
+>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>> routing x@ten-1.test.ex
+>>> calling dnslookup router
+>>> routed by dnslookup router
+>>> ----------- end verify ------------
+>>> deny: condition test failed in ACL "check_rcpt"
+>>> processing "accept"
+>>> accept: condition test succeeded in ACL "check_rcpt"
+>>> end of ACL "check_rcpt": ACCEPT

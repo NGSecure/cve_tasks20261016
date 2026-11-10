@@ -1,0 +1,42 @@
+# Exim test configuration 0451
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+acl_smtp_rcpt = accept
+acl_smtp_data = data_check
+
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = redirect
+  allow_fail
+  data = ${if eq{$local_part}{good}{}{:fail:custom message}}
+
+r2:
+  driver = accept
+  local_parts = good
+  verify_only
+
+
+
+# ----- ACL -----
+
+begin AcL
+
+data_check:
+  accept   message = message="$acl_verify_message"
+           verify = sender
+
+
+# End

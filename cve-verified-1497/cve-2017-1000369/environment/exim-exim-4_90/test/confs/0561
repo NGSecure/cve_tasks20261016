@@ -1,0 +1,37 @@
+# Exim test configuration 0561
+
+QOLL=true
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+
+queue_only_load = 0.001
+queue_only_load_latch = QOLL
+queue_run_in_order
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  route_data = 127.0.0.1
+  self = send
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  port = PORT_D
+
+# End

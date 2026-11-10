@@ -1,0 +1,131 @@
+<script type="text/javascript">
+function checkDelete(){
+    return confirm('Are you sure? This action can only be reversed by an administrator.');
+}
+</script>
+
+<div id="content">
+
+<h1>Account Details</h1>
+
+<?php
+$username = $_SESSION['login_user'];
+$sql = "SELECT * FROM accounts WHERE username = '$username'";
+$result = $conn->query($sql);
+$dot = ".";
+$png = "png";
+$jpg = "jpg";
+$gif = "gif";
+$jpeg = "jpeg";
+
+while ($row = $result->fetch_assoc()){
+$bio = $row['bio'];
+$clan = $row['clan'];
+
+if($clan != ''){
+	$sqlClanName = "SELECT clanname FROM clans WHERE id = '$clan'";
+	$resultClanName = $conn->query($sqlClanName);
+	while ($clanrow = $resultClanName->fetch_assoc()){
+		$clanname = $clanrow['clanname'];
+	};
+};
+};
+
+
+echo "<br>";
+
+echo "<p>Avatar</p>";
+
+$b = $userid;
+
+$filename = "/usr/share/nginx/html/public/images/avatars/{$b}";
+
+if (file_exists("$filename.png")) {
+    $b = ("$userid.png");
+
+} elseif (file_exists("$filename.jpg")) {
+	$b = ("$userid.jpg");
+
+} elseif (file_exists("$filename.jpeg")) {
+	$b = ("$userid.jpeg");
+
+} elseif (file_exists("$filename.gif")) {
+	$b = ("$userid.gif");
+
+}
+else {
+    $b = ("default.png");
+}
+
+
+
+
+?>
+	<img style="height:150;width:150px;"src="/public/images/avatars/<?php echo $b;?>">
+	<br>
+	<br>
+	
+	<form action="?a=avup" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <br>
+    <br>
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <br>
+    <br>
+    <button class='btn waves-effect waves-dark' type='submit' name='action'>Upload Avatar</button>
+	</form>
+	
+
+<?php
+
+$sql = "SELECT * FROM tickets WHERE userid = '$userid' AND status = 'Open'";
+$mysqli_result = $conn->query($sql);
+$num_rows = mysqli_num_rows($mysqli_result);
+
+
+if ($num_rows == 1) {
+	echo "You have one support ticket open. <a style='color:red !important;' href='?a=support'>[view]</a>";
+}
+else {
+	if ($num_rows > 1) {
+	echo "You have ";
+	echo $num_rows;
+	echo " support tickets open. <a style='color:red !important;' href='?a=support'>[view]</a>";
+	}
+	else {
+		echo "You have no open support tickets";
+	};
+};
+echo "<br>";
+
+if($clan != ''){
+	echo "You're a clan member of "; echo $clanname;
+}
+else {
+	echo "You do not belong to any clan.";
+}
+
+
+echo "<br>";
+
+$sql = "SELECT id FROM accounts WHERE username = '$username'";
+$result = $conn->query($sql);
+
+while($row = $result->fetch_assoc()) {
+
+echo "<form action='?a=updateacc' method='POST'><input type='hidden' name='tempId' value='".$row["id"]."'/>";
+
+echo "<p>Bio</p>";
+
+echo "<textarea style='background-color:#2D2628;color:white;height:10%;width:50%;border:0;box-shadow: 2px 2px 10px black;' rows='40' cols='1000' type='Text' name='bio'>$bio</textarea>";
+
+echo "<br>";
+echo "<br>";
+
+echo "<button class='btn waves-effect waves-dark' type='submit' name='action'>Update Account<i class='material-icons center'></i></button></form>"; 
+
+echo "<form onclick='return checkDelete()' action='?a=userselfdelete' method='POST'><input type='hidden' name='tempId' value='".$row["id"]."'/>";
+echo "<button class='btn waves-effect waves-dark' type='submit' name='action'>Delete Account<i class='material-icons center'></i></button></form>";
+};
+?>
+</div>

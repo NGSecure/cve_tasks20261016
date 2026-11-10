@@ -1,0 +1,32 @@
+# Exim test configuration 0399
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = redirect
+  data =
+  more = ${if eq {1}{0}{no}fail}
+
+r2:
+  driver = redirect
+  data =
+  more = ${if eq {1}{0}{no}{yes}}
+
+r3:
+  driver = redirect
+  data =
+  more = $unknown_variable
+
+
+# End

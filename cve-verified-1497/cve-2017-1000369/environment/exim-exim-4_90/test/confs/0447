@@ -1,0 +1,55 @@
+# Exim test configuration 0447
+
+INSERT=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+#----- Routers -----
+
+begin routers
+
+r0:
+  driver = dnslookup
+  domains = *.test.again.dns
+  transport = t1
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+# A connection timeout of 999999 turns connection refused into connection
+# timeout when running in the test harness.
+
+t1:
+  driver = smtp
+  hosts = 127.0.0.1
+  port = PORT_S
+  allow_localhost
+  connect_timeout = 999999s
+
+
+# ----- Retry -----
+
+begin retry
+
+INSERT
+#* timeout_dns     F,1d,13s
+* timeout_connect F,1d,1m
+* timeout         F,1d,2m
+* auth_failed     F,1d,10m
+* *               F,1d,3m
+
+
+# End

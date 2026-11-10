@@ -1,0 +1,32 @@
+# Exim test configuration 0354
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+qualify_domain = test.ex
+system_filter = non-absolute-file
+system_filter_user = EXIMUSER
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  user = CALLER
+  file = DIR/test-mail/$local_part
+
+# End

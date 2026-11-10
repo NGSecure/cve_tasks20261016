@@ -1,0 +1,9 @@
+#! /bin/sh
+
+echo "PDFing the spec"
+ps2pdf spec.ps spec.pdf
+
+echo "PDFing the filter spec"
+ps2pdf filter.ps filter.pdf
+
+# End

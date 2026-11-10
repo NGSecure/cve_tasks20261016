@@ -1,0 +1,24 @@
+POST https://api.recurly.com/v2/transactions HTTP/1.1
+X-Api-Version: {api-version}
+Accept: application/xml
+Authorization: Basic YXBpa2V5Og==
+User-Agent: {user-agent}
+Content-Type: application/xml; charset=utf-8
+
+<?xml version="1.0" encoding="UTF-8"?>
+<transaction>
+  <account />
+  <currency>USD</currency>
+  <amount_in_cents type="integer">1000</amount_in_cents>
+</transaction>
+
+HTTP/1.1 422
+Content-Type: application/xml; charset=utf-8
+
+<?xml version="1.0" encoding="UTF-8"?>
+<errors>
+  <error field="transaction.account.billing_info.first_name" symbol="blank">can't be blank</error>
+  <error field="transaction.account.billing_info.last_name" symbol="blank">can't be blank</error>
+  <error field="transaction.account.billing_info.number" symbol="required">is required</error>
+  <error field="transaction.account.account_code" symbol="blank">can't be blank</error>
+</errors>

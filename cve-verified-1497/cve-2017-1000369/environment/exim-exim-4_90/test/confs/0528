@@ -1,0 +1,46 @@
+# Exim test configuration 0528
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector = +outgoing_port
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  route_list = * "<= 127.0.0.1:PORT_D = \
+                     127.0.0.1:PORT_D2 = \
+                     [127.0.0.1]:PORT_D3 = \
+                     [HOSTIPV4]:PORT_D4 = \
+                     [HOSTIPV4]:PORT_N"
+
+  fallback_hosts = <= 127.0.0.1:PORT_S = [HOSTIPV4]:PORT_D
+  self = send
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts_max_try = 20
+  allow_localhost
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1d,1d
+
+
+# End

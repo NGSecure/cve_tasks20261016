@@ -1,0 +1,54 @@
+# Exim test configuration 0217
+
+HAP=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+ignore_bounce_errors_after = 0s
+
+
+# ----- Routers -----
+
+begin routers
+
+bounce:
+  driver = redirect
+  allow_defer
+  allow_fail
+  data = :fail: just discard
+  retry_use_local_part
+  senders = :
+
+client:
+  driver = accept
+  retry_use_local_part
+  transport = send_to_server
+
+
+# ----- Transports -----
+
+begin transports
+
+send_to_server:
+  driver = smtp
+  allow_localhost
+  command_timeout = 1s
+  hosts = 127.0.0.1
+  port = PORT_S
+  HAP
+  max_rcpt = 1000
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,10s
+
+
+# End

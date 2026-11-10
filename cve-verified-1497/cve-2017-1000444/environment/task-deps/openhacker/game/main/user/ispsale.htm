@@ -1,0 +1,74 @@
+<div id="content">
+
+<?php
+function myRand($length, $sep = ":", $space = 4) {
+    if (function_exists("mcrypt_create_iv")) {
+        $r = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+    } else if (function_exists("openssl_random_pseudo_bytes")) {
+        $r = openssl_random_pseudo_bytes($length);
+    } else if (is_readable('/dev/urandom')) {
+        $r = file_get_contents('/dev/urandom', false, null, 0, $length);
+    } else {
+        $i = 0;
+        $r = "";
+        while($i ++ < $length) {
+            $r .= chr(mt_rand(0, 255));
+        }
+    }
+    return wordwrap(substr(bin2hex($r), 0, $length), $space, $sep, true);
+}
+
+do {
+	$ranIPv4 = "".mt_rand(0,255).".".mt_rand(0,255).".".mt_rand(0,255).".".mt_rand(0,255);
+
+	// Check and make sure that this random address is not already used.
+	$sqlcheckIP = "SELECT ipaddress from usersystems WHERE ipaddress = '$ranIPv4'";
+	$checkIPResult = $conn->query($sqlcheckIP);
+	$num_rowsIPADD = mysqli_num_rows($checkIPResult);
+
+} while ($num_rowsIPADD == 1);
+
+do {
+	$ranIPv6 = myRand(36);
+
+	// Check and make sure that this random address is not already used.
+	$sqlcheckIPv6 = "SELECT ipaddress from usersystems WHERE ipaddress = '$ranIPv4'";
+	$checkIPv6Result = $conn->query($sqlcheckIPv6);
+	$num_rowsIPv6ADD = mysqli_num_rows($checkIPv6Result);
+} while ($num_rowsIPv6ADD == 1);
+
+
+$packageselect = $_POST['packageselect'];
+
+switch($packageselect) {
+	case "1" : echo "Dialup"; break;
+	case "2" : echo "T1"; break;
+	case "3" : echo "T2"; break;
+	case "4" : echo "T3"; break;
+	case "5" : echo "OC-24"; break;
+	case "6" : echo "OC-192"; break;
+	case "7" : echo "Setting up new connection...";
+			
+		$sql = "UPDATE usersystems SET connectedto='Internet', connectiontype='OC-1920', ipaddress='$ranIPv4', ipv6address='$ranIPv6' WHERE userid='$userid'"; 
+		$result = $conn->query($sql);
+		break;
+}
+
+		echo "<br><br><br>";
+		echo "<p>Connection Established Successfully</p>";
+		echo "<br>";
+		echo "<p>Your new addressing information is: </p>";
+		echo "<br>";
+		echo "<p>IPv4: $ranIPv4</p>";
+		echo "<br>";
+		echo "<p>IPv6: $ranIPv6</p>";
+		echo "<br>";
+
+
+?>
+
+
+
+
+
+</div>

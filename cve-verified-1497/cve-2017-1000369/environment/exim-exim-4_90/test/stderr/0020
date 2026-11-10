@@ -1,0 +1,38 @@
+>>> host in hosts_connection_nolog? no (option unset)
+>>> host in host_lookup? yes (matched "10.250.104.0/21")
+>>> looking up host name for 10.250.104.42
+>>> IP address lookup yielded "manyhome.test.ex"
+>>> checking addresses for manyhome.test.ex
+>>>   10.250.104.51
+>>>   10.250.104.17
+>>>   10.250.104.2
+>>>   10.250.104.26
+>>>   10.250.104.8
+>>>   10.250.104.18
+>>>   10.250.104.25
+>>>   10.250.104.21
+>>>   10.250.104.39
+>>>   10.250.104.32
+>>>   10.250.104.29
+>>>   10.250.104.23
+>>>   10.250.104.43
+>>>   10.250.104.46
+>>>   10.250.104.28
+>>>   10.250.104.4
+>>>   10.250.104.41
+>>>   10.250.104.15
+>>>   10.250.104.14
+>>>   10.250.104.45
+>>>   10.250.104.42 OK
+>>> host in host_reject_connection? no (option unset)
+>>> host in sender_unqualified_hosts? no (option unset)
+>>> host in recipient_unqualified_hosts? no (option unset)
+>>> host in helo_verify_hosts? no (option unset)
+>>> host in helo_try_verify_hosts? no (option unset)
+>>> host in helo_accept_junk_hosts? no (option unset)
+>>> using ACL "check_connect"
+>>> processing "accept"
+>>> check hosts = 10.250.104.0/21
+>>> host in "10.250.104.0/21"? yes (matched "10.250.104.0/21")
+>>> accept: condition test succeeded in ACL "check_connect"
+>>> end of ACL "check_connect": ACCEPT

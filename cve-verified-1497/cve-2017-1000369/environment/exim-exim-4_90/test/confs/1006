@@ -1,0 +1,42 @@
+# Exim test configuration 1006
+
+SERVER=
+D6=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+D6
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = dnslookup
+  local_parts = dnslookup
+  transport = smtp
+
+r2:
+  driver = manualroute
+  local_parts = manualroute
+  route_list = * 46.test.ex
+  transport = smtp
+
+
+
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+
+# End

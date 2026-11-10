@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         stopOnFailure="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         stopOnSkipped="false"
+         stopOnRisky="false"
+         stopOnIncomplete="false"
+         stopOnDeprecation="false"
+         failOnEmptyTestSuite="false"
+         failOnDeprecation="false"
+         failOnIncomplete="false"
+         failOnNotice="false"
+         failOnRisky="false"
+         failOnSkipped="false"
+         failOnWarning="false"
+
+
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+
+
+        <testsuite name="Core">
+            <directory>./src/MicroweberPackages/Core/</directory>
+        </testsuite>
+
+
+        <testsuite name="MicroweberModulesTests">
+            <directory>./userfiles/modules/*/tests/</directory>
+            <exclude>./userfiles/templates/*/src/tests/Browser/</exclude>
+            <exclude>./userfiles/modules/*/src/tests/Browser/</exclude>
+        </testsuite>
+
+        <testsuite name="MicroweberTemplatesTests">
+            <directory>./userfiles/templates/*/tests/</directory>
+            <directory>./userfiles/templates/*/src/tests/</directory>
+            <exclude>./userfiles/templates/*/src/tests/Browser/</exclude>
+            <exclude>./userfiles/modules/admin/import_export_tool/src/tests/</exclude>
+        </testsuite>
+
+        <testsuite name="MicroweberCoreTestsAll">
+            <directory>./src/MicroweberPackages/*/tests/</directory>
+
+            <directory>./userfiles/modules/*/*/src/tests/</directory>
+            <exclude>./src/MicroweberPackages/Multilanguage/tests/*</exclude>
+            <exclude>./src/MicroweberPackages/Helper/tests/*</exclude>
+            <exclude>./src/MicroweberPackages/User/tests/*</exclude>
+            <exclude>./userfiles/modules/admin/import_export_tool/src/tests/</exclude>
+            <exclude>./userfiles/modules/*/src/tests/Browser/</exclude>
+            <exclude>./src/MicroweberPackages/*/tests/Browser/</exclude>
+
+        </testsuite>
+
+
+        <testsuite name="MicroweberModulesImportToolTests">
+            <directory>./userfiles/modules/admin/import_export_tool/src/tests/</directory>
+            <exclude>./userfiles/modules/*/src/tests/Browser/</exclude>
+
+        </testsuite>
+
+<!--        <testsuite name="MicroweberTestMultilanguage">-->
+<!--            <directory>./src/MicroweberPackages/Multilanguage/tests/</directory>-->
+<!--            -->
+<!--        </testsuite>-->
+<!--        <testsuite name="MicroweberTestUser">-->
+<!--            <directory>./src/MicroweberPackages/User/tests/</directory>-->
+<!--        </testsuite>-->
+        <testsuite name="MicroweberModuleListTests">
+            <directory>./src/MicroweberPackages/Module/slow_tests/</directory>
+            <exclude>./src/MicroweberPackages/*/tests/Browser/</exclude>
+
+            <exclude>./userfiles/modules/*/tests/Browser/</exclude>
+
+
+        </testsuite>
+
+
+        <testsuite name="MicroweberModulesTests">
+            <directory>./userfiles/modules/*/tests/</directory>
+            <directory>./userfiles/modules/*/src/tests/</directory>
+            <exclude>./src/MicroweberPackages/*/tests/Browser/</exclude>
+            <exclude>./src/MicroweberPackages/*/src/tests/Browser/</exclude>
+
+            <exclude>./userfiles/modules/admin/import_export_tool/src/tests/</exclude>
+            <exclude>./userfiles/modules/*/tests/Browser/</exclude>
+            <exclude>./userfiles/modules/*/src/tests/Browser/</exclude>
+
+        </testsuite>
+
+        <testsuite name="MicroweberSlowTests">
+            <directory>./src/MicroweberPackages/Helper/tests/*</directory>
+            <directory>./src/MicroweberPackages/App/tests/*</directory>
+            <exclude>./src/MicroweberPackages/*/tests/Browser/</exclude>
+
+            <exclude>./userfiles/modules/*/tests/Browser/</exclude>
+
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>app</directory>
+            <directory>src</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <ini name="memory_limit" value="-1"/>
+        <env name="MAIL_DRIVER" value="array"/>
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>
+        <ini name="display_errors" value="On"/>
+        <ini name="display_startup_errors" value="On"/>
+
+    </php>
+
+
+</phpunit>

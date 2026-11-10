@@ -1,0 +1,26 @@
+/*
++---------------------------------------------------------------------------+
+| Revive Adserver                                                           |
+| http://www.revive-adserver.com                                            |
+|                                                                           |
+| Copyright: See the COPYRIGHT.txt file.                                    |
+| License: GPLv2 or later, see the LICENSE.txt file.                        |
++---------------------------------------------------------------------------+
+*/
+
+.div-demo
+{
+  background-color: #FFFFFF;
+  border: none;
+  text-align=center;
+}
+.img-demo
+{
+}
+.span-demo
+{
+  background-color: #FFFFFF;
+  font-size:200%;
+  font-weight:bold;
+  text-decoration:none;
+}

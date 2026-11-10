@@ -1,0 +1,100 @@
+<script type="text/javascript">
+function checkDelete(){
+    return confirm('Are you sure? This action can only be reversed by an administrator.');
+}
+</script>
+
+<?php
+
+$sql = "SELECT * FROM usersystems WHERE userid = '$userid'";
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()){
+$cpu = $row['cpu'];
+$motherboard = $row['motherboard'];
+$ram = $row['ram'];
+$os = $row['os'];
+$hddtype = $row['hddtype'];
+$hddhealth = $row['hddhealth'];
+$size = $row['size'];
+$spaceused = $row['spaceused'];
+$spacefree = $row['spacefree'];
+$logs = $row['logs'];
+$securitypack = $row['securitypack'];
+$firewall = $row['firewall'];
+$sphealth = $row['sphealth'];
+$firewallhealth = $row['firewallhealth'];
+$connectedto = $row['connectedto'];
+$connectiontype = $row['connectiontype'];
+$ipaddress = $row['ipaddress'];
+$ipv6address = $row['ipv6address'];
+$gatewayip = $row['gatewayip'];
+$gatewaystatus = $row['gatewaystatus'];
+$systemstatus = $row['systemstatus'];
+}
+?>
+<div id="profile">
+<h2><?php echo $_SESSION['login_user']?>'s System</h2>
+<!--  <div style="width: 20%; float:left;"> -->
+<ul>
+<li>System Status: 
+
+<?php 
+
+if ($systemstatus == 'online') {
+echo "<font style='color:limegreen !important;'>Online</font>";
+}
+else {
+	echo "<font style='color:red !important;'>Offline</font>";
+}
+
+?>
+</li>
+</ul>
+
+
+<h3>System Specs</h3>
+<ul>
+	<li>CPU: <?php echo $cpu;?></li>
+	<li>Motherboard: <?php echo $motherboard;?></li>
+	<li>RAM: <?php echo $ram;?></li>
+</ul>
+<h3>Installed Software</h3>
+<ul>
+	<li>Operating System: <?php echo $os;?></li>
+	<li>Logs: <?php echo $logs;?></li>
+	<li>Security Pack: <?php echo $securitypack;?></li>
+	<li>Firewall: <?php echo $firewall;?></li>
+</ul>
+
+
+<h3>Hard Drive Details</h3>
+<ul>
+<li>Type: <?php echo $hddtype;?></li>
+<li>Health: <?php echo $hddhealth;?></li>
+<li>Size: <?php echo $size;?></li>
+<li>Space Used: <?php echo $spaceused;?></li>
+<li>Space Free: <?php echo $spacefree;?></li>
+</ul>
+<h3>Network</h3>
+<ul>
+<li>Connected To: <?php echo $connectedto;?></li>
+<li>Connection Type: <?php echo $connectiontype;?></li>
+<li>IPv4 Address: <?php echo $ipaddress;?></li>
+<li>IPv6 Address: <?php echo $ipv6address;?></li>
+<li>Gateway IP: <?php echo $gatewayip;?></li>
+<li>Gateway Status: 
+<?php
+if ($gatewaystatus == 'Online' || $gatewaystatus == 'online') {
+echo "<font style='color:limegreen !important;'>Online</font>";
+}
+else {
+	echo "<font style='color:red !important;'>Offline</font>";
+}
+?>
+
+</li>
+</ul>
+<br style="clear:both;"/>
+</div>
+</div>

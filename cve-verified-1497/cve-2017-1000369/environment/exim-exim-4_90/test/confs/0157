@@ -1,0 +1,28 @@
+# Exim test configuration 0157
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+
+domainlist local_domains = test.ex
+hostlist relay_hosts = V4NET.0.0.1 : V4NET.0.0.2
+qualify_domain = test.ex
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  accept  hosts = :
+  accept  domains = +local_domains
+  accept  hosts = V4NET.0.0.1
+          endpass
+          message = invalid sender
+          senders = userx@test.ex
+  accept  hosts = +relay_hosts
+  deny    message = relay not permitted
+
+# End

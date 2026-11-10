@@ -1,0 +1,22 @@
+# Exim test configuration 0524
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_mail = check_mail
+qualify_domain = test.ex
+
+
+# ----- ACL -----
+
+begin acl
+
+check_mail:
+  accept  endpass
+          message = CSA status is $csa_status
+          verify = csa
+
+# End

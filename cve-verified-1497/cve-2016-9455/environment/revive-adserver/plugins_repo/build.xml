@@ -1,0 +1,103 @@
+<project name="openx-private-plugins-repo" default="help" basedir=".">
+
+    <target name="clean" description="Clean all the files generated during the build.">
+        <delete dir="${basedir}/../build" />
+        <delete file="${basedir}/temp.xml" />
+    </target>
+
+	<target name="process-override" unless="nooverride">
+
+		<copy todir="${basedir}/${sourcepath}" verbose="true" overwrite="true">
+			<fileset dir="${basedir}/${sourcepath}">
+				<include name="**/*.template.xml"/>
+			</fileset>
+			<mapper type="glob" from="*.template.xml" to="*.temp.xml"/>
+			<filterset onmissingfiltersfile="ignore">
+				<filtersfile file="${basedir}/${sourcepath}/plugins/etc/override.properties"/>
+			</filterset>
+		</copy>
+
+		<copy todir="${basedir}/${sourcepath}" verbose="true" overwrite="true">
+			<fileset dir="${basedir}/${sourcepath}">
+				<include name="**/*.temp.xml"/>
+			</fileset>
+			<mapper type="glob" from="*.temp.xml" to="*.xml"/>
+			<filterset onmissingfiltersfile="warn">
+				<filtersfile file="${basedir}/${sourcepath}/plugins/etc/default.properties"/>
+			</filterset>
+		</copy>
+
+		<delete verbose="true">
+			<fileset dir="${basedir}/${sourcepath}">
+				<include name="**/*.temp.xml"/>
+			</fileset>
+		</delete>
+
+	</target>
+
+	<target name="process-no-override" if="nooverride">
+
+		<copy todir="${basedir}/${sourcepath}" verbose="true" overwrite="true">
+			<fileset dir="${basedir}/${sourcepath}">
+				<include name="**/*.template.xml"/>
+			</fileset>
+			<mapper type="glob" from="*.template.xml" to="*.xml"/>
+			<filterset onmissingfiltersfile="warn">
+				<filtersfile file="${basedir}/${sourcepath}/plugins/etc/default.properties"/>
+			</filterset>
+		</copy>
+
+	</target>
+
+	<target name="process-settings">
+		<fail unless="name" message="[name] property is not given via -Dname=[folder] e.g. -Dname=openXTests"/>
+		<property name="sourcepath" value="${name}" />
+		<fail message="directory provided by -Dname=${name} does not exist (Looked for ${sourcepath})">
+			<condition>
+				<not>
+					<available file="${sourcepath}"/>
+				</not>
+			</condition>
+		</fail>
+
+		<echo>processing of ${name} started</echo>
+
+		<antcall target="process-no-override"/>
+		<antcall target="process-override"/>
+
+		<echo>processing of ${name} finished</echo>
+
+	</target>
+
+	<target name="package" depends="process-settings" description="Process settings and create zip file.">
+
+		<echo>packaging of ${name} started</echo>
+
+		<delete file="${basedir}/${sourcepath}.zip"/>
+		<zip destfile="${basedir}/${sourcepath}.zip" basedir="${basedir}/${sourcepath}" level="9"
+			excludes="**/.git*,**/.git/**,**/tests/**,**/packages/**,**/*.template.xml,**/override.properties,**/default.properties,**/${name}.zip,**/${name}.spec.dist"/>
+
+		<echo>packaging of ${name} finished</echo>
+
+	</target>
+
+    <target name="release" depends="package">
+        <move todir="${basedir}/release" overwrite="true">
+            <fileset file="${basedir}/${sourcepath}.zip" />
+        </move>
+    </target>
+
+    <target name="bundle" depends="package">
+        <move todir="${basedir}/../etc/plugins" overwrite="true">
+            <fileset file="${basedir}/${sourcepath}.zip" />
+        </move>
+    </target>
+
+	<target name="help" description="Print help text.">
+		<echo>Usage: ant [release|bundle|package|package-defaults] -Dname=[FOLDER]</echo>
+		<echo>- release: package and move file to release folder</echo>
+		<echo>- bundle:  package and move file to etc/plugins folder</echo>
+		<echo>- package: package the plugin to a zip file</echo>
+	</target>
+
+</project>

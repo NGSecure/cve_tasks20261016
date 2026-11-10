@@ -1,0 +1,29 @@
+{
+  "name": "ldapauth-fork",
+  "version": "2.3.2",
+  "main": "./lib/ldapauth.js",
+  "description": "Authenticate against an LDAP server",
+  "author": "Vesa Poikajärvi <vesa.poikajarvi@iki.fi>",
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/vesse/node-ldapauth-fork/raw/master/LICENSE"
+  },
+  "keywords": [
+    "authenticate",
+    "ldap",
+    "authentication",
+    "auth"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vesse/node-ldapauth-fork.git"
+  },
+  "engines": [
+    "node >=0.8.0"
+  ],
+  "dependencies": {
+    "bcryptjs": "2.1.0",
+    "ldapjs": "0.7.1",
+    "lru-cache": "2.5.0"
+  }
+}

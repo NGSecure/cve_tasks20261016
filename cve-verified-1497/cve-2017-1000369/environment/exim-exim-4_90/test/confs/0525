@@ -1,0 +1,45 @@
+# Exim test configuration 0525
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = redirect
+  senders = :
+  data = /dev/null
+  user = CALLER
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts = 127.0.0.1
+  port = PORT_S
+  allow_localhost
+  data_timeout = 1s
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1d,1h
+
+# End

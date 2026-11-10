@@ -1,0 +1,14 @@
+# Exim test configuration 0148
+
+.include DIR/aux-var/std_conf_prefix
+
+qualify_domain = test.ex
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = @
+hold_domains = "a\x65b :\
+                c.d
+
+# End

@@ -1,0 +1,44 @@
+# Exim test configuration 0557
+
+FAKE=
+OPT=
+HOSTS=
+HAI=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  route_list = * HOSTS
+FAKE host_find_failed = ignore
+OPT  host_all_ignored = HAI
+  no_more
+  self = send
+  transport = t1
+
+r2:
+  driver = accept
+  transport = t2
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+
+t2:
+  driver = appendfile
+  file = /dev/null
+
+# End

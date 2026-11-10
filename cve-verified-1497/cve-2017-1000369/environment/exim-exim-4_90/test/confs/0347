@@ -1,0 +1,46 @@
+# Exim test configuration 0347
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  self = pass
+  route_list = * 127.0.0.1
+
+r2:
+  driver = accept
+  transport = t1
+
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  batch_max = 100
+  file = /dev/null
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+begin retry
+
+*         *        F,1d,15m
+
+# End

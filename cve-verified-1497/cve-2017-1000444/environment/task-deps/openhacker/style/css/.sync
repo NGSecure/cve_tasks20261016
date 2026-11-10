@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ "upload" == $1 ];then
+rsync -azcuv -e "/usr/bin/ssh -p2222 -q" /home/boothf/workspace/web/ boothf@cardinal.boothlabs.me:/home/boothf/workspace/web/$2/
+elif [ 'download' == $1 ];then
+rsync -azcuv -e "/usr/bin/ssh -p2222 -q" boothf@cardinal.boothlabs.me:/workspace/$2/$3 /home/boothf/workspace/web/ $0/$2/$3
+fi

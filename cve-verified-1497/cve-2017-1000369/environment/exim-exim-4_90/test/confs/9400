@@ -1,0 +1,49 @@
+# Exim test configuration 9400
+
+.include DIR/aux-var/std_conf_prefix
+
+trusted_users = CALLER
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+acl_smtp_rcpt = accept
+local_scan_timeout = 1s
+
+
+# ----- Local_scan -----
+
+begin local_scan
+
+local_scan_int = 24
+local_scan_string = the quick brown fox
+
+
+# ------ Routers ------
+
+begin routers
+
+r0:
+  driver = redirect
+  local_parts = bounce
+  allow_fail
+  data = :fail: bounced (:fail:)
+
+r1:
+  driver = accept
+  transport = local_delivery
+
+
+# ------ Transports ------
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+  headers_add = ${if eq {$local_scan_data}{}{}{LSD: $local_scan_data}}
+
+# End

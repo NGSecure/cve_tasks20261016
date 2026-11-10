@@ -1,0 +1,52 @@
+# Exim test configuration 0481
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = redirect
+  headers_remove = Remove-Me:
+  data = $local_part@domain
+
+r2:
+  driver = redirect
+  headers_remove = Remove-Me-Also:
+  headers_remove = Remove-Me:
+  headers_remove = <; Remove-Me-Too ; Remove-Me-Too2
+  data = $local_part@domain
+
+r3:
+  driver = accept
+  headers_remove = Remove-Me:
+  headers_add = X-Was-Remove-Me: >$h_remove-me:<
+  headers_add = ${if def:h_remove-me-also {X-Was-Remove-Me-Also: >$h_remove-me-also:<}}
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,10s
+
+
+# End

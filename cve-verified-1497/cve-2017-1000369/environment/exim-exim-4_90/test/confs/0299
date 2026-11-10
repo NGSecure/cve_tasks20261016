@@ -1,0 +1,49 @@
+# Exim test configuration 0299
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector = +delivery_size
+remote_max_parallel = 1
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = accept
+  domains = test.ex
+  transport = t1
+
+r2:
+  driver = accept
+  transport = t2
+
+
+# ------ Transports ------
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+  shadow_transport = t3
+
+t2:
+  driver = smtp
+  hosts = 127.0.0.1
+  port = PORT_S
+  allow_localhost
+  max_rcpt = 2
+
+t3:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+# End

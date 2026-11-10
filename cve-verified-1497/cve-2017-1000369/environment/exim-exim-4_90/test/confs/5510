@@ -1,0 +1,57 @@
+# Exim test configuration 5510
+# Client PRDR
+
+LOG_SELECTOR=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+
+LOG_SELECTOR
+
+qualify_domain = test.ex
+trusted_users = CALLER
+
+prdr_enable = true
+
+acl_smtp_rcpt = accept
+acl_smtp_data = data_acl
+
+# ----- ACLs -----
+
+begin acl
+
+data_acl:
+  deny	local_parts = usery
+  accept
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts = 127.0.0.1
+  port = PORT_S
+  allow_localhost
+  hosts_try_prdr = *
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = accept
+  transport = t1
+
+# ----- Retry -----
+
+begin retry
+
+*                *   F,5d,5m
+
+# End

@@ -1,0 +1,41 @@
+# Exim test configuration 0430
+
+LIST=
+SELF=freeze
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+disable_ipv6
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  domains = manual.route
+  transport = t1
+  route_list = * LIST
+  self = SELF
+
+r2:
+  driver = manualroute
+  domains = random.manual.route
+  transport = t1
+  route_list = * LIST
+  hosts_randomize
+  ignore_target_hosts = 127.0.0.1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+
+# End

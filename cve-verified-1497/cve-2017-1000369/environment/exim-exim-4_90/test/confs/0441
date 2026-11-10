@@ -1,0 +1,11 @@
+# Exim test configuration 0441
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+
+# End

@@ -1,0 +1,30 @@
+# Exim test configuration 0054
+
+.include DIR/aux-var/std_conf_prefix
+
+trusted_users = CALLER
+primary_hostname = myhost.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+lookuphost:
+  driver = dnslookup
+  mx_domains = !ten-1.test.ex : *.test.ex
+  transport = smtp
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+
+# End

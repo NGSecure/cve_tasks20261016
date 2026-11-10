@@ -1,0 +1,43 @@
+# Exim test configuration 0032
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.ex
+
+
+# ----- Main settings -----
+
+dsn_from = MailProgram <xyz@some.where>
+
+
+# ----- Routers -----
+
+begin routers
+
+localuser:
+  driver = accept
+  check_local_user
+  transport = local_delivery
+
+others:
+  driver = dnslookup
+  transport = smtp
+  self = fail
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  delivery_date_add
+  envelope_to_add
+  file = DIR/test-mail/$local_part
+  return_path_add
+
+smtp:
+  driver = smtp
+
+
+# End

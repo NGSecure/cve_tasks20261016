@@ -1,0 +1,17 @@
+# Exim test configuration 9902
+
+# NOT WORKING!
+
+ORDER=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+host_lookup = *
+ORDER
+
+# End

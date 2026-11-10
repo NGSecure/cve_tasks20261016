@@ -1,0 +1,54 @@
+# Exim test configuration 0283
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+never_users = root
+
+# ----- Routers -----
+
+begin routers
+
+never:
+  driver = accept
+  local_parts = never
+  transport = t3
+
+caller:
+  driver = accept
+  local_parts = CALLER
+  transport = t2
+
+rest:
+  driver = accept
+  transport = t1
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = pipe
+  command = DIR/bin/showids
+  return_output
+
+t2:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+t3:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = root
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1d,1d
+
+# End

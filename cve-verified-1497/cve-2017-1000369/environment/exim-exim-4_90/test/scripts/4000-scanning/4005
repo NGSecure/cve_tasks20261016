@@ -1,0 +1,129 @@
+# content scan interface: clamav
+#
+# SCAN command interface, on a unix socket, only.  No ExtendedDetectionInfo.
+#
+server DIR/eximdir/clam_sock
+<SCAN
+>LF>scanned_file_name: OK
+<*eof
+****
+#
+#
+#
+exim -odi -bs -DOPT=
+ehlo test.ex
+mail from:<>
+rcpt to:<userx@test.ex>
+data
+Date: Fri, 17 Dec 2004 14:35:01 +0100
+Subject: message should be accepted
+
+.
+quit
+****
+#
+#
+#
+server DIR/eximdir/clam_sock
+<SCAN
+>LF>scanned_file_name: 666 ERROR
+<*eof
+****
+#
+#
+#
+exim -odi -bs -DOPT=
+ehlo test.ex
+mail from:<>
+rcpt to:<userx@test.ex>
+data
+Date: Fri, 17 Dec 2004 14:35:01 +0100
+Subject: defer this one due to scanner error
+
+.
+quit
+****
+#
+#
+#
+server DIR/eximdir/clam_sock
+<SCAN
+>LF>scanned_file_name: VNAME FOUND
+<*eof
+****
+#
+#
+#
+exim -odi -bs -DOPT=/defer_ok
+ehlo test.ex
+mail from:<>
+rcpt to:<userx@test.ex>
+data
+Date: Fri, 17 Dec 2004 14:35:01 +0100
+Subject: message should be rejected
+
+.
+quit
+****
+#
+#
+#
+server DIR/eximdir/clam_sock
+*sleep 3
+****
+#
+#
+#
+exim -odi -bs -DOPT="/ tmo=2s"
+ehlo test.ex
+mail from:<>
+rcpt to:<userx@test.ex>
+data
+Date: Fri, 17 Dec 2004 14:35:01 +0100
+Subject: defer this one due to timeout
+
+.
+quit
+****
+#
+#
+#
+server DIR/eximdir/clam_sock
+*sleep 3
+****
+#
+#
+#
+exim -odi -bs -DOPT="/ tmo=2s / defer_ok"
+ehlo test.ex
+mail from:<>
+rcpt to:<userx@test.ex>
+data
+Date: Fri, 17 Dec 2004 14:35:01 +0100
+Subject: accept this one despite timeout
+
+.
+quit
+****
+#
+#
+#
+#
+server -i 2 DIR/eximdir/clam_sock
+<SCAN
+>LF>scanned_file_name: OK
+<*eof
+****
+#
+exim -odi -bs -DCONTROL="retry=4s"
+ehlo test.ex
+mail from:<>
+rcpt to:<userx@test.ex>
+data
+Date: Fri, 17 Dec 2004 14:35:01 +0100
+Subject: message should be accepted after a retry
+
+.
+quit
+****
+#

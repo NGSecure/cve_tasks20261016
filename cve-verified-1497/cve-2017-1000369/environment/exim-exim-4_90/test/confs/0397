@@ -1,0 +1,16 @@
+# Exim test configuration 0397
+
+exim_path = EXIM_PATH
+keep_environment =
+host_lookup_order = bydns
+spool_directory = DIR/spool
+gecos_pattern = ""
+gecos_name = CALLER_NAME
+tls_advertise_hosts =
+
+# ----- Main settings -----
+
+log_file_path = /non/existent/path/to/force/failure/%s
+
+
+# End

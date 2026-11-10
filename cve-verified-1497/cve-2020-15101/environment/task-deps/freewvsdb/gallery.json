@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Phormer",
+    "url": "http://p.horm.org/er/",
+    "safe": "",
+    "vuln": "CVE-2007-5013",
+    "detection": [
+      {
+        "file": "funcs.php",
+        "variable": "PHORMER_VERSION",
+        "subdir": 0
+      }
+    ]
+  },
+  {
+    "name": "Gallery",
+    "url": "http://galleryproject.org/",
+    "safe": "3.0.9",
+    "old_safe": "2.3.2",
+    "vuln": "CVE-2013-2241",
+    "detection": [
+      {
+        "file": "module.inc",
+        "variable": "setGalleryVersion",
+        "subdir": 2,
+        "note": "2.x, earlier vulnerable to CVE-2012-1113"
+      },
+      {
+        "file": "gallery.php",
+        "variable": "const VERSION",
+        "subdir": 3
+      }
+    ]
+  },
+  {
+    "name": "Coppermine",
+    "url": "https://coppermine-gallery.net/",
+    "safe": "1.5.48",
+    "vuln": "CVE-2018-14478",
+    "detection": [
+      {
+        "file": "versioncheck.php",
+        "variable": "Coppermine version",
+        "subdir": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwigo/PhpWebGallery",
+    "url": "http://www.phpwebgallery.net/",
+    "safe": "2.6.3",
+    "vuln": "CVE-2014-4648",
+    "detection": [
+      {
+        "file": "constants.php",
+        "variable": "PHPWG_VERSION",
+        "subdir": 1
+      }
+    ]
+  },
+  {
+    "name": "LinPHA",
+    "url": "http://linpha.sourceforge.net",
+    "safe": "1.3.4",
+    "vuln": "CVE-2008-1856",
+    "detection": [
+      {
+        "file": "upgrade.php",
+        "variable": "$version",
+        "subdir": 1,
+        "extra_match": "$inst_linpha_not_work_correctly"
+      }
+    ]
+  },
+  {
+    "name": "mig",
+    "url": "http://mig.sourceforge.net/",
+    "safe": "1.5.0",
+    "vuln": "CVE-2005-2603",
+    "detection": [
+      {
+        "file": "index.php",
+        "variable": "$version",
+        "subdir": 0,
+        "extra_match": "Mig - A general purpose photo gallery management system."
+      }
+    ]
+  },
+  {
+    "name": "zenphoto",
+    "url": "http://www.zenphoto.org/",
+    "safe": "1.4.5.4",
+    "vuln": "CVE-2013-7242",
+    "detection": [
+      {
+        "file": "version.php",
+        "variable": "define('ZENPHOTO_VERSION'",
+        "subdir": 1
+      }
+    ]
+  }
+]

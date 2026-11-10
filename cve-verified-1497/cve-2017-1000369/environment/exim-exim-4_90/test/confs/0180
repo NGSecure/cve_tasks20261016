@@ -1,0 +1,18 @@
+# Exim test configuration 0180
+
+# Require immense amount of disk space, expecting to fail.  Can unfortunately work on big filesystems.
+CSS=check_spool_space=400G
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+CSS
+message_size_limit = ${if eq {$sender_host_address}{}{100}\
+                     {    \
+                     ${if eq {$sender_host_address}{1.2.3.4}{500}{600}}\
+                     }}
+
+# End

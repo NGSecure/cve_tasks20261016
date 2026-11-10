@@ -1,0 +1,22 @@
+# Exim test configuration 0373
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+acl_smtp_connect = connect
+trusted_users = CALLER
+
+
+# ----- ACL -----
+
+begin acl
+
+connect:
+  deny condition = ${readsocket{DIR/test-socket}{QUERY-ACL\n}{2s}{*EOL*}}
+  accept
+
+# End

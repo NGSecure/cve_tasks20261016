@@ -1,0 +1,63 @@
+<script type="text/javascript">
+function checkDelete(){
+    return confirm('Are you sure?');
+}
+</script>
+
+<div id="admin">
+<div id="content">
+	<h1>Support</h1>
+	<br>
+
+<?php
+	$username = $_SESSION['login_user'];
+	
+	$sql = "SELECT * FROM tickets WHERE status = 'Open' and userid = '$userid' ";
+	$result = $conn->query($sql);
+
+
+
+if ($result->num_rows > 0) {
+     echo "<div id=admintable><table><tr><th>ID</th><th>Ticket Name</th><th>Report Time</th><th>Assignment</th><th>Status</th><th>Comments</th><th>User</th><th>Action</th>";
+     // output data of each row
+     while($row = $result->fetch_assoc()) {
+
+		$assignee = $row["assignment"];
+		$sql2 = "SELECT username FROM accounts WHERE id='$assignee'";
+		$result2 = $conn->query($sql2);
+		$id = $row["id"];
+
+		while ($row2 = $result2->fetch_assoc()){
+		$assigned = $row2['username'];
+}
+		$user = $row["userid"];
+		$sql3 = "SELECT username FROM accounts WHERE id='$user'";
+		$result3 = $conn->query($sql3);
+
+		while ($row3 = $result3->fetch_assoc()){
+		$userrep = $row3['username'];
+}
+
+		$sql4 = "SELECT COUNT(*) FROM ticketcomments WHERE ticketid = '$id'";
+		$result4 = $conn->query($sql4);
+		while ($row4 = $result4->fetch_assoc()){
+		$comments = $row4['COUNT(*)'];
+}
+
+	     echo "<tr><td> <a href=?m=view&id=" . $row["id"]. ">" . $row["id"]. "</td><td><a href=?m=view&id=" . $row["id"]. ">" . $row["ticketname"]. "</td><td>" . $row["ticketcreation"]. "</td><td>" . $assigned. "</td><td>" . $row["status"]. "</td><td>" . $comments. "</td><td>" . $userrep.  "</td>";
+		 echo "<td><a href=?m=view&id=" . $row["id"]. "><button type='submit' name='action'><i class='material-icons center'>edit</i></button></a>";
+		 echo "<button type='submit' name='action'><i class='material-icons center'>block</i></button></td>";
+         
+     }
+     echo "</table>";
+}
+else {
+     echo "You have no open tickets.";
+};
+echo "<br>";
+echo "<br>";
+
+echo "<td><form action='?a=ticketcreation' method='POST'><button class='btn waves-effect waves-dark' type='submit' name='action'>Create Ticket<i class='material-icons center'></i></button></form></td></form>";
+?>
+</div>
+</div>

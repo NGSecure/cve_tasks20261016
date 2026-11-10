@@ -1,0 +1,43 @@
+# Exim test configuration 3410
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+# Use first three components of address to select ACL
+acl_smtp_rcpt = acl_${sg{${tr{$sender_host_address}{.}{_}}}{^(.*)_.*\$}{\$1}}
+
+# ----- ACLs -----
+
+begin acl
+
+# These ones test defers
+
+acl_5_6_9:
+  accept  endpass
+          message = You must authenticate
+          authenticated = *
+
+acl_5_6_10:
+  accept  authenticated = auth1
+
+
+# ------ Authenticators ----
+
+begin authenticators
+
+auth1:
+  driver = plaintext
+  public_name = PLAIN
+  server_condition = ${if eq {$3}{secret}{yes}{no}}
+
+auth2:
+  driver = plaintext
+  public_name = LOGIN
+  server_prompts = "User Name : Password "
+  server_condition = ${if eq {$2}{secret}{yes}{no}}
+
+
+# End

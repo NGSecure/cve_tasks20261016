@@ -1,0 +1,19 @@
+# Exim test configuration 0606
+
+.include DIR/aux-var/std_conf_prefix
+
+slow_lookup_log = 1000
+
+acl_smtp_rcpt = accept verify = recipient
+
+queue_only
+
+begin routers
+
+all:
+  driver = dnslookup
+  verify_only
+  self = send
+
+# End
+

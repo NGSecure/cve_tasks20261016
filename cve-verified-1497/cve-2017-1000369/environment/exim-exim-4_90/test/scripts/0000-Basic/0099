@@ -1,0 +1,90 @@
+# retry data
+#
+#
+# This should add an entry for "thishost.test.ex"
+exim -odi userx@simple
+Test message
+****
+dump retry
+sleep 1
+exim -odi -q
+****
+dump retry
+sleep 3
+exim -odi -q
+****
+#
+# This should add two entries for "localhost.test.ex" (ipv4, ipv6)
+exim -odi usery@complex
+Test message 2
+****
+dump retry
+#
+# and one for thishost without its IP
+exim -odi -DRETRY=retry_include_ip_address=no userz@simple
+Test message
+****
+dump retry
+#
+# expanded option, giving true, should leave the localhost pair unchanged
+exim -odi -DRETRY='retry_include_ip_address=${if eq{with}{$local_part} {yes}{no}}' with@complex
+Test message
+****
+dump retry
+#
+# expanded option, giving false, should add another localhost entry, without IP
+exim -odi -DRETRY='retry_include_ip_address=${if eq{with}{$local_part} {yes}{no}}' without@complex
+Test message
+****
+dump retry
+#
+# a lookup-failure (in manualroute)
+exim -odi userx@nonexist
+Test message
+****
+# a lookup-failure (good MX, missing A) in dnslookup, deferred
+exim -odi userx@mxt2.test.ex
+Test message
+****
+# a lookup-failure (missing MX) in dnslookup, deferred
+exim -odi userx@mxnonexist.test.ex
+Test message
+****
+dump retry
+#
+#
+exim -brt x@dark.star.ex
+****
+exim -brt x@a.b.c
+****
+exim -brt x@x.y.z
+****
+exim -brt x@9CDE.ex
+****
+exim -brt x@Q.abcd.ex
+****
+exim -brt x@literal.ex
+****
+exim -brt x@look.up
+****
+exim -brt x@[127.0.0.1]
+****
+exim -brt x@primary.test.ex
+****
+exim -brt x@rcpt4xx.test.ex rcpt_4xx
+****
+exim -brt x@rcpt45x.test.ex rcpt_45x
+****
+exim -brt x@rcpt463.test.ex rcpt_463
+****
+exim -f "" -brt x@Q.abcd.ex
+****
+exim -f "d@e.f" -brt x@Q.abcd.ex
+****
+exim -brt x@not.not.ex
+****
+exim -brt x@nonexist.test.ex lookup
+****
+#
+#
+no_msglog_check

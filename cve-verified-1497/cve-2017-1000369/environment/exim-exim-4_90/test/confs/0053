@@ -1,0 +1,40 @@
+# Exim test configuration 0053
+
+.include DIR/aux-var/std_conf_prefix
+
+trusted_users = CALLER
+primary_hostname = myhost.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+aliases:
+  driver = redirect
+  allow_defer
+  data = ${lookup{$local_part@$domain}lsearch{DIR/aux-fixed/TESTNUM.aliases}}
+  retry_use_local_part
+
+localuser:
+  driver = accept
+  local_parts = userx
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  delivery_date_add
+  envelope_to_add
+  file = DIR/test-mail/$local_part
+  return_path_add
+  user = CALLER
+
+
+# End

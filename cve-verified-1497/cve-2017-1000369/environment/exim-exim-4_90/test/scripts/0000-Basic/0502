@@ -1,0 +1,43 @@
+# ACL for QUIT
+exim -bs
+mail from:<x@y>
+rcpt to:<a@y>
+rcpt to:<b@y>
+data
+.
+mail from:<x@y>
+rcpt to:<c@y>
+rset
+mail from:<x@y>
+rset
+mail from:<x@y>
+rcpt to:<d@y>
+data
+.
+quit
+****
+exim -bs -DLAST='deny message = Your message here'
+quit
+****
+exim -bs -DLAST=''
+mail from:<a@b>
+quit
+****
+#
+# Check the server closes conn after a quit-response
+exim -DSERVER=server -DLAST=accept -bd -oX PORT_D
+****
+client 127.0.0.1 PORT_D
+??? 220
+EHLO test.ex
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250 HELP
+QUIT
+??? 221
+???*eof
+****
+#
+killdaemon

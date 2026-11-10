@@ -1,0 +1,35 @@
+# Exim test configuration 0302
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector = +delivery_size
+queue_only
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = redirect
+  local_parts = ^defer
+  allow_defer
+  data = :defer: forced defer
+  retry_use_local_part
+
+r2:
+  driver = redirect
+  data = :blackhole:
+
+
+# ------ Retry ------
+
+begin retry
+
+* * F,1d,10m
+
+# End

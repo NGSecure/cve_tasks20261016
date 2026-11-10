@@ -1,0 +1,56 @@
+# Exim test configuration 0130
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+
+acl_smtp_rcpt = check_recipient
+
+domainlist local_domains = test.ex
+hostlist relay_hosts = V4NET.0.0.0
+qualify_domain = test.ex
+
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  deny    message = unrouteable address
+         !verify = recipient
+  accept  domains = +local_domains
+  accept  hosts = +relay_hosts
+  deny    message = relay not permitted
+
+
+# ----- Routers -----
+
+begin routers
+
+islocal:
+  driver = manualroute
+  domains = ! +local_domains
+  route_list = "* localhost byname"
+  transport = smtp
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,1d,15m
+
+
+# End

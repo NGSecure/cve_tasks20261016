@@ -1,0 +1,30 @@
+# Exim test configuration 3453
+
+REMEMBER=false
+
+.include DIR/aux-var/tls_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+tls_advertise_hosts = *
+tls_certificate = DIR/aux-fixed/cert1
+tls_privatekey = DIR/aux-fixed/cert1
+tls_remember_esmtp = REMEMBER
+
+
+# ----- Authenticators -----
+
+begin authenticators
+
+plain:
+  driver = plaintext
+  public_name = PLAIN
+  server_condition = "\
+    ${if and {{eq{$2}{userx}}{eq{$3}{secret}}}{yes}{no}}"
+  server_set_id = $2
+
+# End

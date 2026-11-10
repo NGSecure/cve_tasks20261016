@@ -1,0 +1,22 @@
+# RPM macros for test 'macro with a line starting by "{"'
+
+%def is_defined
+%first %{?def:macro_1\
+}
+%second %{?def:macro_2}
+
+%comment1 %{expand:
+read
+%dnl comment
+me
+}
+
+%comment2 see\
+%dnl comment\
+this
+
+%comment3 %{expand:
+read
+%dnl expansion depends on the braces inside %dnl line
+%dnl e.g. '}' change this meaning
+me}

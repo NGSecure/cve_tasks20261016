@@ -1,0 +1,20 @@
+server:
+  http:
+    addr: 0.0.0.0:80
+data:
+  database:
+    driver: "sqlite3"
+    connection: "/data/sqlite3/answer.db"
+  cache:
+    file_path: "/data/cache/cache.db"
+i18n:
+  bundle_dir: "/data/i18n"
+swaggerui:
+  show: true
+  protocol: http
+  host: 127.0.0.1
+  address: ':80'
+service_config:
+  secret_key: "answer"
+  web_host: "http://127.0.0.1:9080"
+  upload_path: "/data/uploads"

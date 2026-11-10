@@ -1,0 +1,132 @@
+<div id="content">
+
+<?php
+
+$sql = "SELECT * FROM usersystems WHERE userid = $userid";
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()){
+$connectedto = $row['connectedto'];
+$connectiontype = $row['connectiontype'];
+$ip = $row['ipaddress'];
+$ipv6 = $row['ipv6address'];
+}
+
+?>
+
+<img style="height:100px;width:100px;float:left;" src="/images/isplogo.png"> <h2>&nbsp;Nexper Telecommunications</h2>
+<table class="rounded" style="width:100%;">
+		<tbody>
+		
+			<tr>
+				<td></td>
+			</tr>	
+		</tbody>
+</table>
+<br>
+Your IP: <?php echo $ip; ?>
+<br>
+IPv6: <?php echo $ipv6; ?>
+<br>
+Your Connection Type: <?php echo $connectedto; ?>
+<br>
+Request IP Refresh: Coming Soon!
+
+<h3>Packages</h3>
+
+<h5>n00bnet</h5>
+	<ul>
+		<li>1 Loopback IPv4 and IPv6 Address</li>
+		<li>Cannot be Downgraded from higher tiered packages</li>
+		<li>No IP Refreshes</li>
+		<li>Not connected to the Internet</li>
+	</ul>
+	
+	<form action='#' method='POST'><input type='hidden' name='packageselect' value='0' disabled/><button style="background-color:gray;" class='btn waves-effect waves-dark' type='submit' name='action'>Package Unavailable<i class='material-icons center'></i></button></form>
+
+<h5>Dialup (28.8 Kbaud)</h5>
+	<ul>
+		<li>3 Simultaneous Downloads</li>
+		<li>1 Minute IP Change</li>
+		<li>1 IPv4 Address</li>
+		<li>Free Access</li>
+	</ul>
+	
+	<form action='?a=ispsale' method='POST'><input type='hidden' name='packageselect' value='1'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Purchase Package<i class='material-icons center'></i></button></form>
+	
+<h5>T1 (1.5 Mbps)</h5>
+	<ul>
+		<li>6 Simultaneous Downloads</li>
+		<li>2 Minute IP Change</li>
+		<li>1 IPv4 Address</li>
+	</ul>
+	
+	<form action='?a=ispsale' method='POST'><input type='hidden' name='packageselect' value='2'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Purchase Package<i class='material-icons center'></i></button></form>
+
+<h5>T2 (3.0 Mbps)</h5>
+	<ul>
+		<li>9 Simultaneous Downloads</li>
+		<li>4 Minute IP Change</li>
+		<li>1 IPv4 and IPv6 Address</li>
+	</ul>
+	
+	<form action='?a=ispsale' method='POST'><input type='hidden' name='packageselect' value='3'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Purchase Package<i class='material-icons center'></i></button></form>
+	
+<h5>T3 (45 Mbps)</h5>
+	<ul>
+		<li>12 Simultaneous Downloads</li>
+		<li>8 Minute IP Change</li>
+		<li>1 IPv4 and IPv6 Address</li>
+	</ul>
+	
+	<form action='?a=ispsale' method='POST'><input type='hidden' name='packageselect' value='4'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Purchase Package<i class='material-icons center'></i></button></form>
+	
+<h5>OC-24 (1Gbps)</h5>
+	<ul>
+		<li>40 Simultaneous Downloads</li>
+		<li>30 Minute IP Change</li>
+		<li>Chance of instant DL per each download</li>
+		<li>3 IPv4 and IPv6 Addresses</li>
+	</ul>
+	
+	<form action='?a=ispsale' method='POST'><input type='hidden' name='packageselect' value='5'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Purchase Package<i class='material-icons center'></i></button></form>
+	
+<h5>OC-192 (10Gbps)</h5>
+	<ul>
+		<li>80 Simultaneous Downloads</li>
+		<li>1 Hour IP Change</li>
+		<li>8 IPv4 and IPv6 Addresses</li>
+	</ul>
+	
+	<form action='?a=ispsale' method='POST'><input type='hidden' name='packageselect' value='6'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Purchase Package<i class='material-icons center'></i></button></form>
+	
+<?php
+
+
+	$username = $_SESSION['login_user'];
+	$sql = "SELECT role FROM accounts WHERE username='$username'";
+	$result = $conn->query($sql);
+	$row = mysqli_fetch_assoc($result);
+
+if ($row["role"] != 'user') {
+
+	echo "<h5>OC-1920 (100 Gbps)</h5>";
+	echo "<ul>";
+		echo "<li>Unlimited Simultaneous Downloads</li>";
+		echo "<li>Instant IP Changes</li>";
+		echo "<li>1 Unhackable IPv4 and IPv6 Address</li>";
+		echo "<li>No Daily Connection Fees</li>";
+	echo "</ul>";
+
+	echo "<h3>Write switch into selection script to allow admins / mods to switch to a sub-account while retaining their username but allow them to play the game but with their own personal stats</h3>";
+
+	echo "<form action='?a=ispsale' method='POST'><input type='hidden' name='packageselect' value='7'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Select Package<i class='material-icons center'></i></button></form>";
+
+}
+else { 
+echo '';
+}
+?>
+	
+
+</div>

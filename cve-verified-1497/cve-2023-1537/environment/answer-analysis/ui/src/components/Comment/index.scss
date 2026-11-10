@@ -1,0 +1,23 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins/_breakpoints';
+
+.comments-wrap {
+  .comment-item {
+    &:hover {
+      @include media-breakpoint-up(md) {
+        .control-area {
+          display: flex !important;
+        }
+      }
+    }
+  }
+  .fmt {
+    display: inline;
+    p {
+      &:last-child {
+        display: inline;
+      }
+    }
+  }
+}

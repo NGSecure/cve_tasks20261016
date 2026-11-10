@@ -1,0 +1,78 @@
+# Exim test configuration 0252
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+trusted_users = CALLER
+
+
+# ----- Routers -----
+
+begin routers
+
+a:
+  driver = redirect
+  allow_defer
+  data = ${lookup{$local_part}lsearch{DIR/aux-fixed/TESTNUM.alias}}
+  errors_to = alias@test.ex
+  retry_use_local_part
+
+f:
+  driver = redirect
+  no_check_local_user
+  errors_to = forward@test.ex
+  file = DIR/aux-fixed/TESTNUM.forward
+  local_parts = forward
+  retry_use_local_part
+
+s:
+  driver = redirect
+  allow_defer
+  data = from-smart@test.ex
+  errors_to = smart@test.ex
+  local_parts = smart
+  retry_use_local_part
+
+u:
+  driver = accept
+  errors_to = postmaster@test.ex
+  retry_use_local_part
+  transport = t1
+  unseen
+
+z:
+  driver = accept
+  retry_use_local_part
+  transport = t2
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/t1
+  return_path_add
+  user = CALLER
+
+t2:
+  driver = appendfile
+  file = DIR/test-mail/t2
+  return_path_add
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,10s
+
+
+# End

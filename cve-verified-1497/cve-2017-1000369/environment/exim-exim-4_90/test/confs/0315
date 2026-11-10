@@ -1,0 +1,32 @@
+# Exim test configuration 0315
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+remote_max_parallel = 1
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = dnslookup
+  domains = ten-1.test.ex
+  transport = t1
+  same_domain_copy_routing
+
+r2:
+  driver = dnslookup
+  transport = t1
+
+
+# ------ Transports ------
+
+begin transports
+
+t1:
+  driver = smtp
+
+# End

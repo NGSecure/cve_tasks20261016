@@ -1,0 +1,69 @@
+# Exim test configuration 3455
+
+HOSTS_AVOID_TLS=
+
+.include DIR/aux-var/tls_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+
+domainlist local_domains = test.ex
+
+log_selector = +smtp_no_mail
+
+queue_only = true
+
+tls_advertise_hosts = *
+tls_certificate = DIR/aux-fixed/cert1
+tls_privatekey = DIR/aux-fixed/cert1
+
+
+# ----- Authenticators -----
+
+begin authenticators
+
+plain:
+  driver = plaintext
+  public_name = PLAIN
+  server_condition = "\
+    ${if and {{eq{$2}{userx}}{eq{$3}{secret1}}}{yes}{no}}"
+  server_set_id = $2
+  client_condition = ${if !eq {$tls_out_cipher}{}}
+  client_send = ^userx^secret1
+
+login:
+  driver = plaintext
+  public_name = LOGIN
+  server_prompts = User Name : Password
+  server_condition = "\
+    ${if and {{eq{$auth1}{usery}}{eq{$auth2}{secret2}}}{yes}{no}}"
+  server_set_id = $auth1
+  client_send = : usery : secret2
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts = 127.0.0.1
+  port = PORT_D
+  hosts_avoid_tls = HOSTS_AVOID_TLS
+  hosts_require_auth = *
+  allow_localhost
+
+
+# End

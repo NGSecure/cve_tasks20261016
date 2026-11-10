@@ -1,0 +1,76 @@
+# Exim test configuration 5204
+
+COMMAND_USER=EXIMUSER
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept verify = recipient
+domainlist local_domains = test.ex
+
+# ----- Routers -----
+
+begin routers
+
+b:
+  driver = accept
+  senders = :
+  transport = local_delivery
+
+q:
+  driver = queryprogram
+  caseful_local_part
+  command = /bin/echo \
+    "${if match{$local_part}{^\"([^\"]*)\"(.*)\\$}{$1$2}{$local_part}}"
+  command_user = COMMAND_USER
+  domains = ! +local_domains
+  no_more
+  transport = smtp
+
+s:
+  driver = manualroute
+  domains = ! +local_domains
+  route_list = * 127.0.0.1 byname
+  self = send
+  transport = smtp
+  no_more
+
+pm:
+  driver = accept
+  local_parts = postmaster
+  retry_use_local_part
+  transport = null
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+other_smtp:
+  driver = smtp
+
+null:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,2h,15m
+
+
+# End

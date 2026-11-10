@@ -1,0 +1,34 @@
+# Exim test configuration 0322
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+# ----- Routers -----
+
+begin routers
+
+null:
+  driver = redirect
+  senders = :
+  data = :blackhole:
+
+remote:
+  driver = accept
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  allow_localhost
+  hosts = 127.0.0.1
+  port = PORT_S
+
+
+# End

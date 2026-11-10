@@ -1,0 +1,86 @@
+# OCSP stapling, client, events
+# duplicate of 5601
+#
+#
+# Client works when we request but don't require OCSP stapling and none comes
+exim -bd -oX PORT_D -DSERVER=server -DRETURN=/dev/null
+****
+exim norequire_1@test.ex
+test message.
+****
+sleep 1
+killdaemon
+#
+#
+#
+#
+# Client works when we request but don't require OCSP stapling and some arrives
+exim -bd -oX PORT_D -DSERVER=server \
+ -DRETURN=DIR/aux-fixed/exim-ca/example.com/server1.example.com/server1.example.com.ocsp.good.resp
+****
+exim norequire_2@test.ex
+test message.
+****
+millisleep 700
+#
+#
+#
+#
+# Client works when we don't request OCSP stapling
+exim nostaple@test.ex
+test message.
+****
+millisleep 700
+#
+#
+#
+#
+# Client accepts good stapled info
+exim good@test.ex
+test message.
+****
+sleep 1
+killdaemon
+#
+#
+#
+# Client fails on lack of required stapled info
+exim -bd -oX PORT_D -DSERVER=server -DRETURN=/dev/null
+****
+exim failrequire@test.ex
+test message.
+****
+sleep 1
+killdaemon
+no_msglog_check
+sudo rm -f DIR/spool/db/retry
+#
+#
+#
+# Client fails on revoked stapled info
+EXIM_TESTHARNESS_DISABLE_OCSPVALIDITYCHECK=y exim -bd -oX PORT_D -DSERVER=server \
+ -DRETURN=DIR/aux-fixed/exim-ca/example.com/server1.example.com/server1.example.com.ocsp.revoked.resp
+****
+exim failrevoked@test.ex
+test message.
+****
+sleep 1
+killdaemon
+sudo rm -f DIR/spool/db/retry
+#
+#
+#
+#
+# Client fails on expired stapled info
+EXIM_TESTHARNESS_DISABLE_OCSPVALIDITYCHECK=y exim -bd -oX PORT_D -DSERVER=server \
+ -DRETURN=DIR/aux-fixed/exim-ca/example.com/server1.example.com/server1.example.com.ocsp.dated.resp
+****
+exim failexpired@test.ex
+test message.
+****
+sleep 1
+killdaemon
+#
+#
+#
+#

@@ -1,0 +1,315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Financial 4-4-5 Calendar Demo</title>
+
+<script language="JavaScript">
+// ----- start of year mod ----
+var curYear=new Date().getFullYear(), capYear;
+function init() {
+	capYear=document.all?document.all("CapYear"):document.getElementById("CapYear");
+	capYear.innerHTML=curYear;
+    var selectedYear=document.getElementById("YearSelect");
+    for (x=0;x<selectedYear.length;x++) {
+        if (selectedYear.options[x].text == curYear) {
+            selectedYear.options.selectedIndex = x;
+            break;
+        }
+    }
+	var fs=document.getElementById("fiscalStart");
+	fs.options.selectedIndex = 0;
+}
+function yearChange() {
+	curYear=parseInt(document.getElementById("YearSelect").value,10);
+	capYear.innerHTML=curYear;
+	fiscalSelect();
+}
+// ----- end of year mod ----
+
+// ----- start of short-cut functions ----
+function fiscalSelect() {
+	var fs=document.getElementById("fiscalStart");
+	var dow = new Date(curYear, fs.value-1, 1).getDay();
+	for (var i=1; i<=12; i++) {
+		var cal = eval("gfFlat_"+i);
+		cal.giFirstMonth=fs.value-0;
+		cal.giFirstDOW=dow;
+	}
+	gfFlat_1.fSetCal(curYear, fs.value, 0, true);
+}
+
+function fSelQuarter(q) {
+	var p=(q-1)*3+1;
+	with (gfFlat_1) {
+		var sr = fGetFinPeriod(curYear, p), er = fGetFinPeriod(curYear, p+2);
+
+        if ( fIsSelected(sr[0][0],sr[0][1],sr[0][2]) ) {
+            fRemoveRange(sr[0][0],sr[0][1],sr[0][2],false);
+            fRemoveRange(er[1][0],er[1][1],er[1][2],false);
+			fRemoveRange(sr[0][0],sr[0][1],sr[0][2]+1,true);
+        }
+        else {
+            fAddRange(sr[0][0],sr[0][1],sr[0][2],false);
+            fAddRange(er[1][0],er[1][1],er[1][2],true);
+        }
+    }
+	for (var i=0; i<3; i++)
+		eval("gfFlat_"+(p+i)+".fRepaint()");
+}
+
+function quickSelect() {
+	var qType=document.getElementById("QuickSelect");
+	with (gfFlat_1)
+	switch(qType.value-0)
+	{
+	case 1: //today
+	    gfFlat_1.fAddRange(gToday[0],gToday[1],gToday[2],false);
+	    break
+	case 2: //yesterday
+		gfFlat_1.fAddRange(gToday[0],gToday[1],gToday[2]-1,false);
+	    break;
+	case 3: //wtd
+		with (gfFlat_1) {
+			var wn = fDate2W(gToday[0],gToday[1],gToday[2]);
+			var sd = fW2Date(wn[0],wn[1],1);
+			fAddRange(sd[0],sd[1],sd[2],false);
+			fAddRange(gToday[0],gToday[1],gToday[2],true);
+		}
+	    break;
+	case 4: //last week
+			var wn = fDate2W(gToday[0],gToday[1],gToday[2]);
+			var dt = fW2Date(wn[0],wn[1],1);
+			var sd = new Date(dt[0], dt[1]-1, dt[2]-7), ed=new Date(dt[0], dt[1]-1, dt[2]-1);
+			fAddRange(sd.getFullYear(),sd.getMonth()+1,sd.getDate(),false);
+			fAddRange(ed.getFullYear(),ed.getMonth()+1,ed.getDate(),true);
+	    break;
+	case 5: //year to date
+			var yy=gToday[1]<giFirstMonth?gToday[0]-1:gToday[0];
+			fAddRange(yy,giFirstMonth,1,false);
+			fAddRange(gToday[0],gToday[1],gToday[2],true);
+		break;
+	default: return;
+	}
+
+	gfFlat_1.fRepaintAll();
+}
+
+function fResetAll() {
+	document.getElementById("QuickSelect").value="";
+	gfFlat_1.fClearAll();
+	gfFlat_1.fRepaintAll();
+}
+
+// ----- end of short-cut functions ----
+
+
+// ----- start of callback functions -----
+function fAddListItem(strDate) {	// called by plugins1.js
+	var dl=document.getElementById("dateList");
+	dl.options[dl.options.length]=new Option(strDate);
+}
+function fRemoveListItem(strDate) {	// called by plugins1.js
+	var dl=document.getElementById("dateList");
+	for (var i=0;i < dl.options.length;i++)
+		if (strDate==dl.options[i].text) break;
+	dl.options[i]=null;
+}
+// ----- end of callback functions -----
+
+function submitByDates(fm) {	// construct the selected dates in the hidden form field allSelected
+	var dl=document.getElementById("dateList");
+	var dateItems="";
+	for (var i=0; i < dl.length; i++) {
+		if (i>0) dateItems+=",";
+		dateItems+=dl.options[i].text;
+	}
+	// fm.action="ByDate.php";
+	alert(dateItems); // in your app you should call fm.submit() instead so that the allSelected.value can be submitted.
+}
+
+function submitByRanges(fm) {	// construct the selected date ranges in the hidden form field allSelected
+	var value="";
+	var _cxp_pds=gfFlat_1.fGetPDS();
+	for (var i=0; i<_cxp_pds.length; i++) {
+		var d0=new Date(_cxp_pds[i][0]);
+		var d1=new Date(_cxp_pds[i][1]);
+		value+="["+d0.getUTCFullYear()+"/"+(d0.getUTCMonth()+1)+"/"+d0.getUTCDate()
+			+","
+			+d1.getUTCFullYear()+"/"+(d1.getUTCMonth()+1)+"/"+d1.getUTCDate()+"]";
+	}
+	// fm.action="ByRange.php";
+	alert(value);
+}
+</script>
+
+<BODY onload="init()">
+
+<h3>
+A financial 4-4-5 calendar powered by FlatCalendarXP version 9.8 or above.
+</h3>
+
+<!-- NOTE, only the first calendar gfFlat_1 has the agenda.js set in its parameter list.
+All other calendars are specify "share[<context-name>]" instead, so that the engine
+knows to share whose agenda.
+gbShareAgenda is also reset to true in the plugins.js to enable agenda sharing.
+-->
+
+<!-- NOTE, refreshing all 12 calendars might take up to 3-6 seconds on old browsers, but it's still
+faster than loading from cgi server. Once loaded, it won't consume more network bandwidth
+or your precious server CPU cycles. -->
+
+
+
+<table cellpadding=0 cellspacing=0 bgcolor="#FFFFFF">
+<tr>
+<td>
+&nbsp; Fiscal Year: <SELECT id='YearSelect' class='yearTitle' onchange='yearChange()'>
+		<OPTION value='2005'>2005</OPTION>
+		<OPTION value='2006'>2006</OPTION>
+		<OPTION value='2007'>2007</OPTION>
+		<OPTION value='2008'>2008</OPTION>
+		<OPTION value='2009'>2009</OPTION>
+		<OPTION value='2010'>2010</OPTION>
+		<OPTION value='2011'>2011</OPTION>
+		<OPTION value='2012'>2012</OPTION>
+	</SELECT>
+&nbsp;  starts on: <SELECT id='fiscalStart' class='yearTitle' onchange='fiscalSelect()'>
+		<OPTION value='1' selected>January</OPTION>
+		<OPTION value='2'>Feburary</OPTION>
+		<OPTION value='3'>March</OPTION>
+		<OPTION value='4'>April</OPTION>
+		<OPTION value='5'>May</OPTION>
+		<OPTION value='6'>June</OPTION>
+		<OPTION value='7'>July</OPTION>
+		<OPTION value='8'>August</OPTION>
+		<OPTION value='9'>Septempber</OPTION>
+		<OPTION value='10'>October</OPTION>
+		<OPTION value='11'>November</OPTION>
+		<OPTION value='12'>December</OPTION>
+	</SELECT>
+&nbsp; Quick Select: <SELECT id='QuickSelect' class='yearTitle' onchange='quickSelect()'>
+		<OPTION value='0'></OPTION>
+		<OPTION value='1'>Today</OPTION>
+		<OPTION value='2'>Yesterday</OPTION>
+		<OPTION value='3'>Week to Date</OPTION>
+		<OPTION value='4'>Last Week</OPTION>
+		<OPTION value='5'>Fiscal Year to Date</OPTION>
+	</SELECT>
+</td>
+</tr>
+
+<tr>
+<td>&nbsp;</td>
+</tr>
+
+<td>
+<fieldset>
+<legend style="font:12pt Arial Western">Fiscal Year <span id="CapYear">Loading...</span></legend>
+<table border=0 cellpadding=0 cellspacing=4 bgcolor="#FFFFFF">
+<tr>
+<td bgcolor="#FFCC00" onclick="fSelQuarter(1)" style="cursor:pointer; border-style:solid; border-width: 1px ;border-color:#000000;text-align:center;">Q1</td><td></td>
+<td bgcolor="#FFCC00" onclick="fSelQuarter(2)" style="cursor:pointer; border-style:solid; border-width: 1px ;border-color:#000000;text-align:center;">Q2</td><td></td>
+<td bgcolor="#FFCC00" onclick="fSelQuarter(3)" style="cursor:pointer; border-style:solid; border-width: 1px ;border-color:#000000;text-align:center;">Q3</td><td></td>
+<td bgcolor="#FFCC00" onclick="fSelQuarter(4)" style="cursor:pointer; border-style:solid; border-width: 1px ;border-color:#000000;text-align:center;">Q4</td>
+</tr>
+<tr valign="top">
+<td>
+<iframe width=126 height=105 name="[gToday[0],1]:fin445:agenda.js:gfFlat_1" id="[gToday[0],1]:fin445:agenda.js:gfFlat_1" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td><td width=10></td>
+<td>
+<iframe width=126 height=105 name="[gToday[0],4]:fin445:share[gfFlat_1]:gfFlat_4" id="[gToday[0],4]:fin445:share[gfFlat_1]:gfFlat_4" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td><td width=10></td>
+<td>
+<iframe width=126 height=105 name="[gToday[0],7]:fin445:share[gfFlat_1]:gfFlat_7" id="[gToday[0],7]:fin445:share[gfFlat_1]:gfFlat_7" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td><td width=10></td>
+<td>
+<iframe width=126 height=105 name="[gToday[0],10]:fin445:share[gfFlat_1]:gfFlat_10" id="[gToday[0],10]:fin445:share[gfFlat_1]:gfFlat_10" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td>
+</tr>
+
+<tr valign="top">
+<td>
+<iframe width=126 height=105 name="[gToday[0],2]:fin445:share[gfFlat_1]:gfFlat_2" id="[gToday[0],2]:fin445:share[gfFlat_1]:gfFlat_2" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td><td></td>
+<td>
+<iframe width=126 height=105 name="[gToday[0],5]:fin445:share[gfFlat_1]:gfFlat_5" id="[gToday[0],5]:fin445:share[gfFlat_1]:gfFlat_5" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td><td></td>
+<td>
+<iframe width=126 height=105 name="[gToday[0],8]:fin445:share[gfFlat_1]:gfFlat_8" id="[gToday[0],8]:fin445:share[gfFlat_1]:gfFlat_8" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td><td></td>
+<td>
+<iframe width=126 height=105 name="[gToday[0],11]:fin445:share[gfFlat_1]:gfFlat_11" id="[gToday[0],11]:fin445:share[gfFlat_1]:gfFlat_11" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td>
+</tr>
+
+<tr valign="top">
+<td>
+<iframe width=126 height=105 name="[gToday[0],3]:fin445:share[gfFlat_1]:gfFlat_3" id="[gToday[0],3]:fin445:share[gfFlat_1]:gfFlat_3" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td><td></td>
+<td>
+<iframe width=126 height=105 name="[gToday[0],6]:fin445:share[gfFlat_1]:gfFlat_6" id="[gToday[0],6]:fin445:share[gfFlat_1]:gfFlat_6" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td><td></td>
+<td>
+<iframe width=126 height=105 name="[gToday[0],9]:fin445:share[gfFlat_1]:gfFlat_9" id="[gToday[0],9]:fin445:share[gfFlat_1]:gfFlat_9" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td><td></td>
+<td>
+<iframe width=126 height=105 name="[gToday[0],12]:fin445:share[gfFlat_1]:gfFlat_12" id="[gToday[0],12]:fin445:share[gfFlat_1]:gfFlat_12" src="Fin445/iflateng.htm" scrolling="no" frameborder="0">
+</iframe></td>
+</tr>
+</table>
+</fieldset>
+</td>
+<td>&nbsp;</td>
+<td align="middle" valign="middle"  style="font:7.5pt verdana;width:160px;">
+
+<form name=testForm onsubmit="submitByDates(this);">
+<!-- the hidden form field used to store selected dates to submit to server end  -->
+<input type=hidden name="allSelected">
+    Selection<BR>
+    <select name="dateList" id="dateList" size="8" multiple="multiple" style="font:6.5pt verdana;width:100px;height:140px;" ></select>
+    <input type=button value="Clear All" onclick="fResetAll()" style="width:100px">
+    <BR>
+    <input type=button value="Dates" onclick="submitByDates(this);" style="width:100px">
+    <input type=button value="Ranges" onclick="submitByRanges(this);" style="width:100px"> </td>
+</form>
+</td>
+</tr>
+</table>
+
+
+<BR>
+
+<P>
+<UL>
+<LI>Click on any date to select it into the list; click on any selected date
+again to remove it from the list. Click on the DoW (day of week) caption will
+select the whole day column of current month. Click on week number will select
+the whole week.
+<LI>Holding the Shift, Ctrl or Alt key to select/remove multiple dates by range.
+
+<LI>Hit and drag on the dates to select range, right-click to deselect range.
+<LI>Dragging is supported on IE4+(except Mac), NS6+, Mozilla, Safari and
+Konqueror3+.
+<LI>You may find more about the multi-select capability in the Multi-Picker demo
+in the download package.
+<LI>The last day (or 2 days if leap year) of the last quarter is hidden - this is
+not a bug but a nature of 4-4-5 calendars - because they only cover 364 days of a
+year.
+</UL>
+Acknowledgement to Clark Matthews for the help buiding this wonderful demo.
+
+</P>
+
+
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions,
+    Inc. All rights reserved.</em></font></div>
+
+
+
+
+</BODY>
+
+
+</html>

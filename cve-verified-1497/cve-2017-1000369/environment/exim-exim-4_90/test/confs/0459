@@ -1,0 +1,27 @@
+# Exim test configuration 0459
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+acl_smtp_rcpt = $local_part
+
+
+# ----- ACLs -----
+
+begin acl
+
+inner:
+  defer log_message = forced defer
+
+outer:
+  deny  senders = ${lookup{xxx}lsearch{/non/exist}}
+  deny  acl     = inner
+
+
+# End

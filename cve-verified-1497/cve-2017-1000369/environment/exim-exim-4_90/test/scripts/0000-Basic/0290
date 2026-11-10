@@ -1,0 +1,12 @@
+# .include and macro tests
+exim -bP local_interfaces message_size_limit recipients_max remote_sort_domains receive_timeout
+****
+exim -DOPT= -bP receive_timeout
+****
+exim -DOPT -bP receive_timeout
+****
+exim '-D OPT = receive_timeout = 4s ' -bP receive_timeout
+****
+1
+exim -DINC='.include_if_exists non/absolute' -bP receive_timeout
+****

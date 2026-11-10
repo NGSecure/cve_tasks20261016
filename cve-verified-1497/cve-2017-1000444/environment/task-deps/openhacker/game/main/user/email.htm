@@ -1,0 +1,43 @@
+<div id="admin">
+<div id="content">
+	<h1>Game Emails</h1>
+	<br>
+
+<?php
+	$username = $_SESSION['login_user'];
+	$sql1 = "SELECT id FROM accounts WHERE username='$username'";
+	$result1 = $conn->query($sql1);
+	$row1 = mysqli_fetch_assoc($result1);
+	$id = $row1["id"];
+	
+	$sql = "SELECT * FROM emails WHERE recieverid = '$id'";
+	$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+     echo "<div id=admintable><table><tr><th>Subject</th><th>From</th><th>Recieved Time</th>";
+
+     // output data of each row
+     while($row = $result->fetch_assoc()) {
+
+		$senderid = $row["senderid"];
+		$emailid = $row['id'];
+
+		$sql2 = "SELECT username FROM accounts WHERE id = '$senderid'";
+		$result2 = $conn->query($sql2);
+		while ($row2 = $result2->fetch_assoc()){
+		$sender = $row2['username'];
+		}
+
+    	echo "<tr><td><a href=?a=viewmessage&id=" . $row["id"]. "><form action=''> <input type='checkbox' name='email'>" . $row["subject"]. "</td><td>" . $sender. "</td><td>" . $row["timesent"]. "</td>";
+     }
+     echo "</table>";
+} else {
+     echo "No have no messages.";
+};
+echo "<br>";
+echo "<form action='?a=newmessage' onclick='return checkDelete()' method='POST'><input type='hidden' name='tempid' value='".$row["id"]."'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Compose Message<i class='material-icons center'></i></button></form>";
+echo "<br>";
+echo "<br>";
+?>
+</div>
+</div>

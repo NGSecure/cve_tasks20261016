@@ -1,0 +1,16 @@
+.tag-selector-wrap {
+  .dropdown-menu {
+    min-width: 15rem;
+  }
+  .dropdown-toggle {
+    &::after {
+      display: none;
+    }
+  }
+
+  .dropdown-item.active {
+    color: #212529;
+    background-color: #e9ecef;
+  }
+
+}

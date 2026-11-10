@@ -1,0 +1,28 @@
+# Exim test configuration 0545
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+disable_ipv6
+
+# ----- Routers -----
+
+begin routers
+
+dns:
+  driver = dnslookup
+  transport = smtp
+  self = send
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+
+# End

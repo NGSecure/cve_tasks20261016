@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet type="text/xsl" href=""?>
+
+<plugin>
+    <name>demoBannerTypeHtml</name>
+    <creationDate>2008-05-30</creationDate>
+    <author>Revive Adserver</author>
+    <authorEmail>noreply@revive-adserver.com</authorEmail>
+    <authorUrl>http://www.revive-adserver.com</authorUrl>
+    <license>license.txt</license>
+    <description>Demo HTML Banner Type extension for Revive Adserver</description>
+    <version>2.0.4</version>
+    <oxversion>3.2.0-beta-rc3</oxversion>
+    <extends>bannerTypeHtml</extends>
+
+    <install>
+        <files>
+            <file path="{MODULEPATH}bannerTypeHtml/demoBannerTypeHtml/">demoHtml.class.php</file>
+            <file path="{MODULEPATH}bannerTypeHtml/demoBannerTypeHtml/">demoHtml.delivery.php</file>
+
+        </files>
+
+        <schema>
+            <mdb2schema>tables_demobannertypehtml</mdb2schema>
+            <dboschema>db_schema</dboschema>
+            <dbolinks>db_schema.links</dbolinks>
+            <dataobject>Banners_demo.php</dataobject>
+        </schema>
+
+        <components>
+           <component>
+                <name>demoHtml</name>
+                <translations>{GROUPPATH}_lang/</translations>
+                <hook>postAdRender</hook>
+           </component>
+        </components>
+
+    </install>
+
+</plugin>

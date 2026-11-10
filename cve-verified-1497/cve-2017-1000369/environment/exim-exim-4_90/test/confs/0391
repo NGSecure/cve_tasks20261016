@@ -1,0 +1,41 @@
+# Exim test configuration 0391
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = acl_rcpt
+log_selector = +address_rewrite
+
+
+# ----- ACL -----
+
+begin acl
+
+acl_rcpt:
+  accept  verify = sender
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  debug_print = sender_address=<$sender_address> \
+                local_part=$local_part \
+                domain=$domain
+  verify_only
+  verify_sender
+
+
+# ----- Rewrite ------
+
+begin rewrite
+
+*@*.x.y   $local_part@x.y
+
+
+# End

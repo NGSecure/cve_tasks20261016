@@ -1,0 +1,42 @@
+# Exim test configuration 0033
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+
+# ----- Routers -----
+
+begin routers
+
+all:
+  driver = manualroute
+  domains = ! +local_domains
+  route_list = * 127.0.0.1 byname
+  self = send
+  transport = smtp
+  no_more
+
+d1:
+  driver = redirect
+  no_check_local_user
+  file = DIR/aux-fixed/TESTNUM.list
+  forbid_file
+  forbid_filter_reply
+  forbid_pipe
+  one_time
+  retry_use_local_part
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_S
+
+# End

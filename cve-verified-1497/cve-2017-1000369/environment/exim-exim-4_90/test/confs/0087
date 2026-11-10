@@ -1,0 +1,46 @@
+# Exim test configuration 0087
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+acl_smtp_rcpt = check_recipient
+acl_smtp_data = check_message
+
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  accept  hosts = :
+  require verify = sender
+  accept  domains = +local_domains
+  deny    message = relay not permitted
+
+check_message:
+  require verify = header_sender
+  accept
+
+
+# ----- Routers -----
+
+begin routers
+
+defer:
+  driver = redirect
+  local_parts = defer
+  allow_defer
+  data = :defer: this is a forced defer
+
+localuser:
+  driver = accept
+  local_parts = userx
+  verify_only
+
+
+# End

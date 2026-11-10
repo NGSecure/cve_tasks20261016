@@ -1,0 +1,51 @@
+# Exim test configuration 0069
+
+LOG_SELECTOR=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+disable_ipv6 = true
+
+domainlist local_domains = test.ex : myhost.ex
+
+acl_smtp_rcpt = check_recipient$local_part
+sender_unqualified_hosts = +include_unknown: ^ten-1\\.test\\.ex
+LOG_SELECTOR
+
+# ------ ACL ------
+
+begin acl
+
+check_recipientx:
+  accept  hosts = :
+  deny    hosts = +include_unknown : ^ten-1\\.test\\.ex
+  accept  domains = +local_domains
+  deny    message = relay not permitted
+
+check_recipienty:
+  accept  hosts = non.existent.invalid : V4NET.0.0.13
+  deny    message = "Denied"
+
+check_recipientz:
+  accept  hosts = +ignore_unknown : non.existent.invalid : V4NET.0.0.13
+  deny    message = "Denied"
+
+check_recipienta:
+  accept  hosts = :
+  deny    hosts = +include_defer : test.again.dns
+  accept  domains = +local_domains
+  deny    message = relay not permitted
+
+check_recipientb:
+  accept  hosts = test.again.dns : V4NET.0.0.13
+  deny    message = "Denied"
+
+check_recipientc:
+  accept  hosts = +ignore_defer : test.again.dns : V4NET.0.0.13
+  deny    message = "Denied"
+
+# End

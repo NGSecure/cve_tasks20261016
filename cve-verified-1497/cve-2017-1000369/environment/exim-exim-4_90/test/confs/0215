@@ -1,0 +1,57 @@
+# Exim test configuration 0215
+
+IGNORE_QUOTA=false
+AUTHS=
+AUTHF=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+log_selector =  +sender_on_delivery
+
+
+# ----- Routers -----
+
+begin routers
+
+bounces:
+  driver = redirect
+  allow_defer
+  data = :blackhole:
+  retry_use_local_part
+  senders = :
+
+smartuser:
+  driver = accept
+  retry_use_local_part
+  transport = lmtp
+
+
+# ----- Transports -----
+
+begin transports
+
+lmtp:
+  driver = smtp
+  allow_localhost
+  hosts = 127.0.0.1
+  port = PORT_S
+  protocol = LMTP
+  lmtp_ignore_quota = IGNORE_QUOTA
+  AUTHS
+  AUTHF
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

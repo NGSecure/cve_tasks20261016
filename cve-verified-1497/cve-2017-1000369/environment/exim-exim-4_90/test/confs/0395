@@ -1,0 +1,34 @@
+# Exim test configuration 0395
+
+TRUSTED=
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+qualify_domain = test.ex
+smtp_max_synprot_errors = 20
+trusted_users = TRUSTED
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+# End

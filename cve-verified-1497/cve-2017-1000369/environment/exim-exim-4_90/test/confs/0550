@@ -1,0 +1,39 @@
+# Exim test configuration 0550
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts = 127.0.0.1 : HOSTIPV4
+  port = PORT_S
+  allow_localhost
+  helo_data = \
+    ${if eq{$sending_ip_address}{127.0.0.1}{Tweedledum}{Tweedledee}} \
+    to $host [$host_address]
+
+
+# ------ Retry ------
+
+begin retry
+
+* * F,1d,1d
+
+# End

@@ -1,0 +1,49 @@
+# Exim test configuration 0078
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : myhost.test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+lookuphost:
+  driver = dnslookup
+  domains = ! +local_domains
+  no_more
+  self = pass
+  transport = remote_smtp
+
+self:
+  driver = manualroute
+  debug_print = "self_hostname=$self_hostname\n"
+  domains = ! +local_domains
+  host_find_failed = pass
+  no_more
+  route_list = * $local_part byname
+  transport = remote_smtp
+
+self2:
+  driver = manualroute
+  debug_print = "self_hostname=$self_hostname\n"
+  domains = ! +local_domains
+  route_list = * myhost.test.ex byname
+  transport = remote_smtp
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+remote_smtp:
+  driver = smtp
+
+
+# End

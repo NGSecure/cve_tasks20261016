@@ -1,0 +1,37 @@
+# Exim test configuration 9903
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = myhost.text.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = smtp
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_S
+  hosts = 127.0.0.1
+  allow_localhost
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1s,1s
+
+# End

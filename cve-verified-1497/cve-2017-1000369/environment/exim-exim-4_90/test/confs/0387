@@ -1,0 +1,23 @@
+# Exim test configuration 0387
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = rcpt
+trusted_users = CALLER
+
+
+# ----- ACLs -----
+
+begin acl
+
+rcpt:
+  accept sender_domains = partial2-lsearch;DIR/aux-fixed/TESTNUM.1
+  accept hosts          = net-lsearch;DIR/aux-fixed/TESTNUM.1     : \
+                          net16-lsearch;DIR/aux-fixed/TESTNUM.1
+
+
+# End

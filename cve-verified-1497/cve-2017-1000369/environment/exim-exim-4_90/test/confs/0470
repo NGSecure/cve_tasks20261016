@@ -1,0 +1,23 @@
+# Exim test configuration 0470
+
+SRV=smtp
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = acl1
+
+
+# ----- ACLs -----
+
+begin acl
+
+acl1:
+  warn log_message = "This is the log message"
+  deny
+
+
+# End

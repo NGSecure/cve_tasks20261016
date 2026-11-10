@@ -1,0 +1,32 @@
+# Exim test configuration 0419
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+domainlist local_domains = !mxt13.test.ex : !other1.test.ex : *.test.ex
+hosts_treat_as_local = +local_domains
+
+
+# ----- Routers -----
+
+begin routers
+
+dnslookup:
+  driver = dnslookup
+  domains = ! +local_domains
+  transport = smtp
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+ driver = smtp
+
+
+# End

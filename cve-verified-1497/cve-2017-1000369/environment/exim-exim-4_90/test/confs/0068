@@ -1,0 +1,12 @@
+# Exim test configuration 0068
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+recipients_max = 5
+recipients_max_reject
+
+# End

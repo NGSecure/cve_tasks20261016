@@ -1,0 +1,26 @@
+<div id="content">
+
+<?php
+
+$sql = "SELECT * FROM jail WHERE userid = $userid";
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()){
+$jailreason = $row['jailreason'];
+$jailrelease = $row['jailrelease'];
+$bail = $row['bail'];
+}
+
+?>
+
+<h2>In Jail</h2>
+
+<br>
+You were caught <?php echo $jailreason; ?>
+<br>
+Your bail is set at: $<?php echo $bail; ?>
+<br>
+You are scheduled for release at <?php echo $jailrelease; ?>
+
+
+</div>

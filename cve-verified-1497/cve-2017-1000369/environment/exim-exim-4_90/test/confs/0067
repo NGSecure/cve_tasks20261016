@@ -1,0 +1,35 @@
+# Exim test configuration 0067
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : myhost.ex
+domainlist relay_domains = test.ex : myhost.ex
+
+acl_smtp_rcpt = check_recipient
+smtp_accept_max_nonmail = 1000
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  accept  hosts = :
+  accept  recipients = postmaster@*
+  deny    senders = !x@b.c : *@b.c :\
+           !^philip@a.b.c : ^(phil|quil)[^@]*@ :\
+           !yy@lsearch;DIR/aux-fixed/TESTNUM.rej.lsearch :\
+           lsearch*@;DIR/aux-fixed/TESTNUM.rej.lsearch :\
+           @@lsearch*;DIR/aux-fixed/TESTNUM.rej.bydomain : \
+           ! x@bb.cc : *@bb.cc :\
+           ! DIR/aux-fixed/TESTNUM.not1 : !DIR/aux-fixed/TESTNUM.not2 : \
+           bbb.ccc
+  deny    senders = 1234@m.n.o : DIR/aux-fixed/TESTNUM.rejrec
+  accept  domains = +local_domains
+  accept  domains = +relay_domains
+  deny    message = relay not permitted
+
+# End

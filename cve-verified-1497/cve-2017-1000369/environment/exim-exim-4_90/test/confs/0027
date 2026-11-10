@@ -1,0 +1,76 @@
+# Exim test configuration 0027
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+acl_smtp_rcpt = acl_rcpt
+acl_smtp_data = $h_subject:
+
+trusted_users = CALLER
+
+
+# ------ ACLs ------
+
+begin acl
+
+userx:
+  deny   message = deny for userx
+
+postmaster:
+  accept verify = sender
+
+data:
+  accept
+
+data1:
+  accept verify = recipient
+
+data2:
+  accept domains = a.b.c
+
+data3:
+  accept local_parts = a.b.c
+
+acl_rcpt:
+  warn	 set acl_m_1 = ${acl {data}}
+  accept endpass
+         acl = ${tr{$local_part}{:}{\n}}
+  deny   message = this message should not occur
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = dnslookup
+  domains = ! +local_domains
+  transport = dev_null
+  no_more
+
+r2:
+  driver = accept
+  local_parts = userx : postmaster
+  transport = local_delivery
+
+
+# ------ Transports ------
+
+begin transports
+
+dev_null:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+# End

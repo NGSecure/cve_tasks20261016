@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+        <title>frequency decoder - Unobtrusive JavaScript date-picker widgit (v2) demo</title>
+        <script type="text/javascript" src="./js/datepicker.js"></script>
+        <link href="./css/datepicker.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+/*
+        The following function dynamically disables dates depending on the
+        select list choice
+*/
+function disableDates() {
+        var dp = datePickerController.datePickers["finalDate"];
+
+        // For Internet Explorer: If the datePicker has not been created then call this function 200 milliseconds later
+        if(!dp) {
+                setTimeout("disableDates()", 200);
+                return;
+        }
+
+        var dayArr = [ document.getElementById("datesTest").options[document.getElementById("datesTest").selectedIndex].value ];
+
+        dp.setDisabledDates(dayArr);
+}
+
+// Use the inBuilt addEvent method to call the above function on page load
+datePickerController.addEvent(window, 'load', disableDates);
+
+/*
+        The following function dynamically disables days of the week depending on the
+        select list choice
+*/
+function disableDays() {
+        var dp = datePickerController.datePickers["finalDate"];
+
+        // For Internet Explorer: If the datePicker has not been created then call this function 200 milliseconds later
+        if(!dp) {
+                setTimeout("disableDays()", 200);
+                return;
+        }
+
+        var dayArr = [
+                [0,0,0,0,0,0,0], // No disabled days of the week
+                [1,1,0,0,0,0,0], // Monday, Tuesday
+                [0,0,1,1,0,0,0], // Wednesday, Thursday
+                [0,0,0,0,1,1,0], // Friday, Saturday
+                [0,0,0,0,0,0,1]  // Sunday
+        ];
+        
+        dp.setDisabledDays(dayArr[document.getElementById("daysTest").selectedIndex]);
+}
+
+// Use the inBuilt addEvent function to call the above function on page load
+datePickerController.addEvent(window, "load", disableDays);
+
+
+        </script>
+        <style type="text/css" media="screen">
+/* DEMO SPECIFIC CSS */
+body
+        {
+        padding:0;
+        border:0;
+        margin:0;
+        text-align:center;
+        font-size:11px;
+        font-family: "Lucida Grande","Lucida Sans Unicode",geneva,verdana,sans-serif;
+        color:#545454;
+        min-width: 800px;
+        background:#fff url(/media/gradient-e5e5e5-ffffff.gif) repeat-x 0 0;
+        }
+h1,
+h2
+        {
+        font-weight:lighter;
+        font-family:georgia, times new roman, times, georgia, palatino, serif;
+        text-align:center;
+        margin-top:1em;
+        }
+input
+        {
+        margin:0;
+        padding:0;
+        border:1px solid #ccc;
+        border-top-color:#aaa;
+        border-left-color:#aaa;
+        position:relative;
+        height:1.2em;
+        }
+p { margin:0 0 1.5em; }
+.w2em { width:2em; }
+.w4em { width:4em; }
+.w8em { width:8em; }
+label
+        {
+        font-weight:bold;
+        color:#545454;
+        margin:0;
+        }
+legend
+        {
+        color:#545454;
+        font-weight:bold;
+        margin-bottom:1em;
+        }
+form
+        {
+        width:600px;
+        background:#fcfcfc;
+        border:1px solid #ccc;
+        text-align:left;
+        padding:10px;
+        margin:0 auto;
+        }
+a:link
+        {
+        background:transparent;
+        color:#678602;
+        text-decoration:none;
+        font-weight:normal;
+        }
+a:visited
+        {
+        color:#83aa00;
+        background:transparent;
+        text-decoration:none;
+        font-weight:normal;
+        }
+a:hover
+        {
+        color:#880000;
+        background:transparent;
+        text-decoration:none;
+        font-weight:normal;
+        }
+fieldset
+        {
+        margin-bottom:1.6em;
+        padding:1em;
+        border:1px solid #ccc;
+        }
+        </style>
+
+</head>
+<body>
+  <h1>Unobtrusive JavaScript datePicker widget</h1>
+  <form id="testform" method="" action="">
+    <fieldset>
+      <label for="datesTest">Disable Dates:</label>
+      <p>
+      <select name="datesTest" id="datesTest" onchange="disableDates();">
+        <option value="20061225">20061225 i.e. December 25th, 2006</option>
+        <option value="****1225">****1225 i.e. December 25th for all years</option>
+        <option value="******25">******25 i.e. The 25th of every month for all years</option>
+      </select>
+      </p>
+      <label for="daysTest">Disable Days:</label>
+      <p>
+      <select name="daysTest" id="daysTest" onchange="disableDays();">
+        <option value="1">No days</option>
+        <option value="2">Monday and Tuesday</option>
+        <option value="3">Wednesday and Thursday</option>
+        <option value="4">Friday and Saturday</option>
+        <option value="5">Sunday</option>
+      </select>
+      </p>
+      <label id="label-1" for="finalDate">Date :</label>
+      <p><input type="text" class="w8em format-d-m-y highlight-days-67" id="finalDate" name="finalDate" value="" maxlength="10" /></p>
+    </fieldset>
+    <p>View the related &#8220;<a href="http://www.frequency-decoder.com/2006/10/02/unobtrusive-date-picker-widgit-update/">language in the lab</a>&#8221; post for this demo.</p>
+  </form>
+
+</body>
+</html>
+

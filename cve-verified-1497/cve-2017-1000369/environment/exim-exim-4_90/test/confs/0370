@@ -1,0 +1,28 @@
+# Exim test configuration 0370
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = redirect
+  data = |DIR/bin/iefbr14
+  group = CALLER_GID
+  pipe_transport = t1
+
+
+# ------ Transports ------
+
+begin transports
+
+t1:
+  driver = pipe
+
+# End

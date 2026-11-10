@@ -1,0 +1,31 @@
+# Exim test configuration 0305
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist ok_domains = ${if eq{$domain}{ten-1.test.ex}{$domain}}
+
+acl_smtp_rcpt = acl1
+
+# ----- ACLs -----
+
+begin acl
+
+acl1:
+  accept  domains = +ok_domains
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = accept
+  domains = +ok_domains
+  verify_only
+
+
+# End

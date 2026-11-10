@@ -1,0 +1,80 @@
+<div id="content">
+<h1>Technology Specifications</h1>
+
+<p>This web application utilizes the following technologies:</p>
+	<ul>
+		<li>Gentoo Linux - Virtualization Host</li>
+		<li>Debian (9) Stretch - Guest running the site</li> 
+		<li>HaProxy - SSL and load balancing proxy</li>
+		<li>Nginx</li>
+		<li>PHP / PHP-FPM</li>
+		<li>HTML5</li>
+		<li>MySQL</li>
+		<li>QEMU</li>
+		<li>Amazon Web Services (AWS) Lightsail - Public-facing Server</li>
+	</ul>
+
+<p>All additional technologies seen in this site are built in-house.</p>
+
+<p>The base from which this game originates can be found <a style="color:cyan !important;" href="https://github.com/Eleix/7Habits-QA">Here</a> All additional game resources are copyright 2017 Francis Booth. They will not be released as open-source.</p>
+
+
+<?php
+echo "<br>";
+echo "There is currently ";
+$sql = "SELECT id FROM accounts";
+$result = $conn->query($sql);
+$num_rows = mysqli_num_rows($result);
+
+if ($result->num_rows == 1) {
+	echo "one registered user";
+}
+else {
+if ($result->num_rows > 1) {
+		echo $num_rows;
+		echo " registered users";
+		echo "<!-- Stuck in the matrix -->";
+	}
+	else {
+		echo "no registered users";
+	};
+};
+
+echo ", ";
+$sql = "SELECT id FROM accounts WHERE deleted = '1'";
+$result = $conn->query($sql);
+$num_rows = mysqli_num_rows($result);
+
+
+if ($result->num_rows == 1) {
+	echo "one user have been deleted";
+}
+else {
+	if ($result->num_rows > 1) {
+		echo $num_rows;
+		echo " users have been deleted";
+	}
+	else {
+		echo "no users have been deleted";
+	};
+};
+
+echo ", and ";
+$sql = "SELECT id FROM accounts WHERE banned = '1'";
+$result = $conn->query($sql);
+$num_rows = mysqli_num_rows($result);
+
+if ($result->num_rows == 1) {
+	echo "one user has been banned.";
+}
+else {
+	if ($result->num_rows > 1) {
+	echo $num_rows;
+	echo " users have been banned.";
+	}
+	else {
+		echo "no users have been banned";
+	};
+};
+?>
+</div>

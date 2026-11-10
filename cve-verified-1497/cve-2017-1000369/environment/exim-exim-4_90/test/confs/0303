@@ -1,0 +1,12 @@
+# Exim test configuration 0303
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+trusted_users = CALLER
+
+# End

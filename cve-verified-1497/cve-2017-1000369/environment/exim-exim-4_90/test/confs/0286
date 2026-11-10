@@ -1,0 +1,49 @@
+# Exim test configuration 0286
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+queue_only
+remote_max_parallel = 2
+
+
+# ----- Routers -----
+
+begin routers
+
+bounces:
+  driver = redirect
+  senders = :
+  data = :blackhole:
+
+all:
+  driver = manualroute
+  route_list = * 127.0.0.1 byname
+  self = send
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_S
+  max_rcpt = 2
+  connection_max_messages = 3
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,1h,10m
+
+
+# End

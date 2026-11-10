@@ -1,0 +1,50 @@
+
+<HTML>
+<HEAD><TITLE>Range Picker Demo</TITLE>
+</HEAD>
+<BODY>
+
+<script>
+function fOnRange(rng) { // call back from within the calendar engine.
+	var sd=new Date(rng[0]), ed=new Date(rng[1]);
+	var which=sd.getTime()==ed.getTime()?gfPop.gdCtrl.name=="startDate"?1:2:1+2;
+	if(which&1)document.demoform.startDate.value=gfPop.fFormatInput(sd.getUTCFullYear(),sd.getUTCMonth()+1,sd.getUTCDate());
+	if(which&2)document.demoform.endDate.value=gfPop.fFormatInput(ed.getUTCFullYear(),ed.getUTCMonth()+1,ed.getUTCDate());
+}
+</script>
+
+
+<form name="demoform">
+<table>
+<tr>
+	<td>start</td>
+	<td><a name="startDatedummy:27"><input name="startDate" size=14></a></td>
+	<td><a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.demoform.startDate);return false;" ><img name="popcal" align="absbottom" src="RangePicker/calbtn.gif" width="34" height="22" border="0" alt=""></a></td>
+	<td>end</td>
+	<td><a name="endDatedummy:27"><input name="endDate" size=14></a></td>
+	<td><a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.demoform.endDate);return false;" ><img name="popcal" align="absbottom" src="RangePicker/calbtn.gif" width="34" height="22" border="0" alt=""></a></td>
+</tr>
+</table>
+</form>
+
+
+
+
+
+
+<BR>
+<P><sup>*</sup><font size=-1>Hold the Ctrl, Shift or Alt key to select range.
+You may also drag-select the range in most major browsers.</font>
+</P>
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions,
+    Inc. All rights reserved.</em></font></div>
+
+
+
+<!--  PopCalendar(tag name and id must match) Tags should not be enclosed in tags other than the html body tag. -->
+<iframe width=178 height=183 name="gToday:xp:agenda.js" id="gToday:xp:agenda.js" src="RangePicker/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
+<LAYER name="gToday:xp:agenda.js" src="RangePicker/npopeng.htm" background="RangePicker/npopeng.htm">     </LAYER>
+</iframe>
+</BODY>
+</HTML>

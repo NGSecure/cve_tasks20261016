@@ -1,0 +1,23 @@
+# Exim test configuration 0086
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+acl_smtp_data = check_message
+
+recipient_unqualified_hosts = V4NET.10.10.9
+
+# ----- ACL -----
+
+begin acl
+
+check_message:
+  deny	!verify = header_syntax
+	logwrite = acl_verify_message: '$acl_verify_message'
+  accept
+
+# End

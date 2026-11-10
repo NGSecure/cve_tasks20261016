@@ -1,0 +1,32 @@
+<?php
+
+$tempId = $_POST['tempId'];
+$userid = $_SESSION['userid'];
+$username = $_SESSION['login_user'];
+
+if ($_POST['tempId'] == '1') {
+
+echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('User cannot be deleted, user is game admin')
+    window.location.href='?m=usermanagement';
+    </SCRIPT>");
+}
+else {
+
+//check if userid and tempid match, if not, user is doing something bad and log it
+if ($tempId !== $userid) {
+	echo ("You attempted to delete a user who is not your own, this action has been logged and an alert has been triggered");
+	$sql = "INSERT INTO gamelogs(userid,username,type) VALUES('".$_SESSION['userid']."', '".$_SESSION['login_user']."', 'Modified delete id value [Inspect Element]')";
+	$result = $conn->query($sql);
+	}
+		
+else {
+	$sql1 = "INSERT INTO gamelogs(userid,username,type) VALUES('".$_SESSION['userid']."', '".$_SESSION['login_user']."', '$username deleted their account.')";
+	$sql = "UPDATE accounts SET deleted='1', isonline='0', username = CONCAT(username, '_deleted') WHERE id = '$tempId'";
+	$result = $conn->query($sql);
+	$result = $conn->query($sql1);
+
+	header("location: ?a=logout");
+};
+};
+?>

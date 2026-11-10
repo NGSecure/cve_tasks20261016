@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>FlatCalendarXP Popup Demo</title>
+</head>
+<body>
+
+<script>
+var gsDateFieldName="";	// set a global variable for reference from within plugins.js
+
+function fPopCal(sName) {
+	gsDateFieldName=sName;	// pass in field name dynamically
+	var winParam="top=200,left=200,width=174,height=189,scrollbars=0,resizable=0,toolbar=0";
+	if (document.layers)	// NN4 param
+		winParam="top=200,left=200,width=172,height=200,scrollbars=0,resizable=0,toolbar=0";
+	window.open("Popup/PickerWindow.htm","_new_picker",winParam);
+}
+</script>
+
+<form name="testForm">
+<input name="dateField" value="" size="12" onfocus="this.blur()" readonly><a href="javascript:void(0)" onclick="fPopCal('testForm.dateField');return false;" HIDEFOCUS><img name="popcal" align="absbottom" src="Popup/calbtn.gif" width="34" height="22" border="0" alt=""></a>
+</form>
+
+
+<font size=-1>This demo shows how to create a popup date picker, although it's not as powerful as PopCalendarXP.</font>
+
+<BR><BR>
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+
+
+</body>
+</html>

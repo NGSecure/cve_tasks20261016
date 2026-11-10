@@ -1,0 +1,96 @@
+# SMTP connection & EHLO/HELO error responses (+log_sender_on_delivery)
+need_ipv4
+munge optional_dsn_info
+#
+exim -z "Test: temp-rej connect"
+****
+server PORT_S
+450 I'm busy
+QUIT
+250 OK
+****
+exim -odi userx@domain1
+Test message 1
+****
+#
+sudo rm DIR/spool/db/*
+exim -z "Test: temp-rej helo"
+****
+server PORT_S
+220 Connected OK
+EHLO
+450 I'm busy
+HELO
+450 I'm busy
+QUIT
+250 OK
+****
+exim -qf
+****
+#
+sudo rm DIR/spool/db/*
+exim -z "Test: drop conn after banner"
+****
+server PORT_S
+220 Connected OK
+****
+exim -qf
+****
+#
+sudo rm DIR/spool/db/*
+exim -z "Test: reject connect"
+****
+server PORT_S
+550 Go away (A)
+QUIT
+250 OK
+****
+exim -qf
+****
+#
+sudo rm DIR/spool/db/*
+exim -z "Test: reject helo"
+****
+server PORT_S
+220 Connected OK
+EHLO
+550 Go away (B)
+HELO
+550 Go away (C)
+QUIT
+250 OK
+****
+exim -odi userx@domain1 usery@domain2
+Test message 2
+****
+#
+exim -z "Test: reject ehlo, then close (late, giving time for HELO)"
+****
+sudo rm DIR/spool/db/retry
+server PORT_S
+220 Connected OK
+EHLO
+550 You are banned
+HELO
+****
+exim -odi userx@domain1
+Test message 4
+****
+#
+#
+#
+sudo rm DIR/spool/db/*
+exim -z "Test: smtp-reject conn on 1MX, timeout TCP conn on 2MX"
+****
+server PORT_S 2
+554 no smtp service here
+QUIT
+220 bye
+*eof
+*sleep 2
+****
+exim -DLIST -qf
+****
+#
+#
+no_msglog_check

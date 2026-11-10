@@ -1,0 +1,45 @@
+# Exim test configuration 0229
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+
+
+
+# ----- Routers -----
+
+begin routers
+
+all:
+  driver = accept
+  retry_use_local_part
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  allow_localhost
+  hosts = 127.0.0.1 : 127.0.0.1 : HOSTIPV4 : \
+          127.0.0.1 : 127.0.0.1 : HOSTIPV4 : \
+          127.0.0.1 : 127.0.0.1 : HOSTIPV4
+  port = PORT_S
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,10s
+
+
+# End

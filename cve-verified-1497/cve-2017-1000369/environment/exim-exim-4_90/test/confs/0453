@@ -1,0 +1,17 @@
+# Exim test configuration 0453
+
+LIMIT=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+LIMIT
+
+
+# End

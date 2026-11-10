@@ -1,0 +1,275 @@
+<div id="content">
+<?php
+
+	$username = $_SESSION['login_user'];
+	$sql = "SELECT role FROM accounts WHERE username='$username'";
+	$result = $conn->query($sql);
+	$row = mysqli_fetch_assoc($result);
+
+	$id = $_GET['id'];
+	$sql2 = "SELECT * FROM tickets WHERE id = $id";
+	$result2 = $conn->query($sql2);
+	while ($row5 = $result2->fetch_assoc()){
+		$user = $row5["userid"];
+	}
+	
+
+	if ($row["role"] == 'user' && $_SESSION["userid"] != $user) {
+	header("location: ?a=support");
+	};
+
+
+	$result2->free();
+	$result->free();
+  
+  	$username = $_SESSION['login_user'];
+
+  	$sql = "SELECT * FROM tickets WHERE id = '$id'";
+  	$result = $conn->query($sql);
+
+
+while ($row = $result->fetch_assoc()){
+$id = $row['id'];
+$tname = $row['ticketname'];
+$ticketcreation = $row['ticketcreation'];
+$body = $row['body'];
+$status = $row['status'];
+$type = $row['type'];
+$body = $row['body'];
+
+ 		$assignee = $row["assignment"];
+  		$sql2 = "SELECT username FROM accounts WHERE id='$assignee'";
+  		$result2 = $conn->query($sql2);
+		
+  		while ($row2 = $result2->fetch_assoc()){
+  		$assigned = $row2['username'];
+		}
+
+  		$user = $row["userid"];
+  		$sql3 = "SELECT username FROM accounts WHERE id='$user'";
+  		$result3 = $conn->query($sql3);
+
+  		while ($row3 = $result3->fetch_assoc()){
+  		$userrep = $row3['username'];
+		}
+
+}
+
+
+
+?>
+
+<table class="rounded" style="width:40%;">
+			<tbody>
+				<tr>
+					<td>Ticket ID:</td>
+						<td style="min-width:2px;"><?php echo $id; ?></td>
+				</tr>
+				<tr>
+					<td>Ticket Name:</td>
+						<td style="min-width:2px;"><?php echo $tname; ?></td>
+				</tr>
+				<tr>
+					<td>Report Time:</td>
+						<td style="min-width:2px;"><?php echo $ticketcreation;?></td>
+				</tr>
+				<tr>
+					<td>Assigned:</td>
+						<td style="min-width:2px;"><?php echo $assigned; ?></td>
+				</tr>
+				<tr>
+					<td>Status:</td>
+						<td style="min-width:2px;"><?php echo $status; ?></td>
+				</tr>
+				<tr>
+					<td>Reporter:</td>
+						<td style="min-width:2px;"><?php echo $userrep; ?></td>
+				</tr>
+			</tbody>
+		</table>
+<br>
+
+
+<?php
+
+if ($row["role"] != 'user' || $user == $_SESSION['userid']) {
+	echo "Ticket Management";
+	echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+    if($status != "Closed"){
+    	echo "<form action='?a=ticketclose' method='POST'><input type='hidden' name='ticketid' value='$id'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Close Ticket<i class='material-icons center'></i></button></form>";
+		echo "<form action='?m=assignticket' method='POST'><select name='assignment'>";
+
+
+		$sql12 = "SELECT username FROM accounts WHERE role != 'user' AND role != 'system'";
+		$result12 = $conn->query($sql12);
+
+// Loop through the query results, outputing the options one by one
+while($row12 = $result12->fetch_assoc()) {
+   echo "<option value='".$row12['username']."'></option>";
+}
+echo '</select></form>';// Close your drop down box
+
+	}
+	else{
+		echo "<form action='?m=ticketreopen' method='POST'><input type='hidden' name='ticketid' value='$id'/><button class='btn waves-effect waves-dark' type='submit' name='action'>Re-Open Ticket<i class='material-icons center'></i></button></form>";
+	}
+};
+
+
+
+
+?>
+
+
+
+
+
+<br>
+<table class="rounded" style="width:100%;">
+		<tbody>
+		
+			<tr>
+				<td></td>
+			</tr>	
+		</tbody>
+</table>
+<div style="text-align:center;" id="ticketentry">
+			
+	<h5 style="color:#255193;">Issue:</h5>
+	<?php echo $body; ?>	
+					
+</div>
+
+
+
+<?php 
+$b = $userid;
+
+$filename = "/usr/share/nginx/html/public/images/avatars/{$b}";
+
+if (file_exists("$filename.png")) {
+    $b = ("$userid.png");
+
+} elseif (file_exists("$filename.jpg")) {
+	$b = ("$userid.jpg");
+
+} elseif (file_exists("$filename.jpeg")) {
+	$b = ("$userid.jpeg");
+
+} elseif (file_exists("$filename.gif")) {
+	$b = ("$userid.gif");
+
+}
+else {
+    $b = ("default.png");
+}
+
+
+
+
+?>
+	<br>
+	<br>
+	<div style="text-align:center;" id="ticketcomments">
+
+	<h5 style="color:#255193;">Comments:</h5>
+	</div>
+	<img style="height:75;width:75px;float:left;padding-left:15%;position:absolute;"src="/public/images/avatars/<?php echo $b;?>">
+	<div style="text-align:center;" id="ticketcomments">
+<?php
+
+	$ticketid = $_GET['id'];
+
+	echo "<form name='addcomment' method='POST' autocomplete='off' action='?a=subcom'>";
+	echo "<input type='hidden' name='ticketid' value='$ticketid'/>";
+	echo "<textarea name='body' style='background-color:#2D2628;color:white;height:10%;width:50%;margin:0 auto;' rows='40' cols='1000' type='Text' name ='body' value=''></textarea>";
+	echo "<button class='' style='color:white;background-color:#255193;' type='submit' name='action'>Add Comment</button>";
+	echo "<br>";
+
+echo "</div>";
+echo "<div style='' id='comment-section'>";
+
+
+	$sql5 = "SELECT * FROM ticketcomments WHERE ticketid = $id ORDER BY posttime DESC";
+	$result5 = $conn->query($sql5);
+
+if ($result5->num_rows > 0) {
+     echo "";
+     // output data of each row
+     while($row = $result5->fetch_assoc()) {
+	
+$posttime = $row["posttime"];
+$c = $row["userid"];
+
+$filename2 = "/usr/share/nginx/html/public/images/avatars/{$c}";
+
+if (file_exists("$filename2.png")) {
+    $c = ("$userid.png");
+
+} elseif (file_exists("$filename2.jpg")) {
+	$c = ("$userid.jpg");
+
+} elseif (file_exists("$filename2.jpeg")) {
+	$c = ("$userid.jpeg");
+
+} elseif (file_exists("$filename2.gif")) {
+	$c = ("$userid.gif");
+
+}
+else {
+    $c = ("default.png");
+}
+
+$userid = $row["userid"];
+
+$sql12 = "SELECT * FROM accounts WHERE id = '$userid'";
+$result12 = $conn->query($sql12);
+while ($row12 = $result12->fetch_assoc()){
+$user = $row12['username']; 
+
+
+$c = $row12["id"];
+
+$filename2 = "/usr/share/nginx/html/public/images/avatars/{$c}";
+
+if (file_exists("$filename2.png")) {
+    $c = ("$userid.png");
+
+} elseif (file_exists("$filename2.jpg")) {
+	$c = ("$userid.jpg");
+
+} elseif (file_exists("$filename2.jpeg")) {
+	$c = ("$userid.jpeg");
+
+} elseif (file_exists("$filename2.gif")) {
+	$c = ("$userid.gif");
+
+}
+else {
+    $c = ("default.png");
+}
+
+
+}
+
+echo "<br>";
+echo "<br>";
+	     echo "<a href='?a=profile&id=$userid'><img style='height:75;width:75px;float:left;padding-left:20%;position:absolute;' src='/public/images/avatars/$c'></a>";
+	echo "<div class='rounded' style='background-color:#255193;text-align:center;padding-right:5%;width:20%;padding-left:20%;margin-left:20%;color:#ffffff;' id='comment-container'>";
+		 echo $posttime;
+		 echo "<br>";
+    	 echo $user, "<br>";
+		 echo $row["body"];
+		 echo "</div>";
+     }
+     echo "</div>";
+}
+else {
+	echo "There are no comments for this ticket.";
+}
+
+?>
+
+
+</div>
+
