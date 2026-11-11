@@ -1,0 +1,38 @@
+# How to get started developing
+
+@(#) $File: README.DEVELOPER,v 1.4 2014/03/10 12:35:59 kim Exp $
+
+## Auto files
+
+After checking out the source, run the following:
+
+	autoreconf -f -i
+	./configure --disable-silent-rules
+	make -j4
+	make -C tests check
+
+
+## Installing dependencies
+
+If your platform doesn't have the above tools, install the following
+packages first.
+
+### Debian
+
+	apt-get install \
+	    automake \
+	    gcc \
+	    libtool \
+	    make \
+	    python \
+	    zlib1g-dev \
+
+See also `.travis.yml`.
+
+### Mac OS X (MacPorts)
+
+	port install \
+	    autoconf \
+	    automake \
+	    libtool \
+

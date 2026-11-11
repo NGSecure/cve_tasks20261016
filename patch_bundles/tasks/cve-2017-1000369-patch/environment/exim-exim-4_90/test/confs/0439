@@ -1,0 +1,12 @@
+# Exim test configuration 0439
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+message_size_limit = 8796093022208M
+
+# End

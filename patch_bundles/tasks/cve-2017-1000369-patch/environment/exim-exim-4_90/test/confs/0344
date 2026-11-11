@@ -1,0 +1,54 @@
+# Exim test configuration 0344
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  domains = d1
+  route_data = 192.168.4.3 t1
+
+r2:
+  driver = manualroute
+  route_list = d2 V4NET.9.8.7 t2
+
+r3:
+  driver = manualroute
+  transport = t3
+  route_list = d30 1.2.3.4 t4 ; d31 1.2.3.4
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+
+t2:
+  driver = smtp
+
+t3:
+  driver = smtp
+
+t4:
+  driver = smtp
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,10m
+
+
+# End

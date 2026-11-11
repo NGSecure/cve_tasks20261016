@@ -1,0 +1,28 @@
+# Exim test configuration 3402
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+
+
+# ----- Authentication -----
+
+begin authenticators
+
+plain1:
+  driver = plaintext
+  public_name = PLAIN
+  server_condition = \
+    ${if or {\
+      {and {{eq{$2}{userx}}{eq{$3}{secret}}}}\
+      {and {{eq{$2}{usery}}{eq{$3}{ab?}}}}\
+    }\
+    {yes}{no}}
+  server_set_id = $2
+  server_mail_auth_condition = ${if eq{$authenticated_id}{userx}{yes}}
+
+# End

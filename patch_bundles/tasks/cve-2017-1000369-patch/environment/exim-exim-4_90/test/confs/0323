@@ -1,0 +1,29 @@
+# Exim test configuration 0323
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  transport = t1
+  route_list = * "${lookup{'$domain'} lsearch{DIR/aux-fixed/TESTNUM.lookup}}"
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+# End

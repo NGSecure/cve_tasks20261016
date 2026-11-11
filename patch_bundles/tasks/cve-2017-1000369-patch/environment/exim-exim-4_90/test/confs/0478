@@ -1,0 +1,42 @@
+# Exim test configuration 0478
+
+SERVER=
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+deliver_drop_privilege
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  port = PORT_D
+  hosts = ${if eq {$sender_host_address}{}{$local_part}{V4NET.0.0.2}}
+  allow_localhost
+  connect_timeout = 1s
+
+
+# ----- Retry -----
+
+begin retry
+
+* *  F,1d,2h
+
+
+# End

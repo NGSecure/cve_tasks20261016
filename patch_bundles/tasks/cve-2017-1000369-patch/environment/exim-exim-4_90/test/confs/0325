@@ -1,0 +1,75 @@
+# Exim test configuration 0325
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist    test_domains = lsearch; DIR/aux-fixed/TESTNUM.data
+localpartlist test_local_parts = lsearch;DIR/aux-fixed/TESTNUM.data
+
+acl_smtp_rcpt = a1
+
+# ----- ACLs -----
+
+begin ACL
+
+a1:
+  accept   domains = +test_domains
+           local_parts = +test_local_parts
+           condition = ${if eq{$domain_data/$local_part_data}\
+                       {DOMAIN DATA/LOCAL PART DATA}{no}{yes}}
+
+  deny     domains = +test_domains
+           local_parts = +test_local_parts
+           message = \$domain_data=$domain_data \$local_part_data=$local_part_data
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = redirect
+  domains = lsearch;DIR/aux-fixed/TESTNUM.data
+  local_parts = lsearch;DIR/aux-fixed/TESTNUM.data
+  data =
+  debug_print = r1: \$domain_data = $domain_data\n\
+                $router_name: \$local_part_data = $local_part_data
+
+r2:
+  driver = redirect
+  domains = lsearch;DIR/aux-fixed/TESTNUM.data
+  local_parts = lsearch;DIR/aux-fixed/TESTNUM.data
+  data =
+  debug_print = r2: \$domain_data = $domain_data\n\
+                $router_name: \$local_part_data = $local_part_data
+
+r3:
+  driver = redirect
+  domains = +test_domains
+  local_parts = +test_local_parts
+  data =
+  debug_print = r3: \$domain_data = $domain_data\n\
+                $router_name: \$local_part_data = $local_part_data
+
+r4:
+  driver = accept
+  domains = +test_domains
+  local_parts = +test_local_parts
+  transport = t1
+  debug_print = r4: \$domain_data = $domain_data\n\
+                $router_name: \$local_part_data = $local_part_data
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+# End

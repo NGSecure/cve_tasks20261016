@@ -1,0 +1,20 @@
+# Exim test configuration 3213
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_mail = check_mail
+
+
+# ----- ACLs -----
+
+begin ACL
+
+check_mail:
+  accept  senders = testdb;<$sender_address>
+
+
+# End

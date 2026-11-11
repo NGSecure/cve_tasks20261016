@@ -1,0 +1,149 @@
+<html>
+<head>
+<title>Netscape 4.x trouble-shooting</title>
+<link href="style-1.0/css/tigris.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="app"> 
+  <h3>Working in Netscape 4.x</h3>
+  <p>In this tutorial, we'll focus on how to make the calendar work properly in 
+    the outdated NN4 browser. Before we start, please bear it in mind that what 
+    we are dealing with is an old browser engine with only preliminary DHTML support 
+    and funky bugs. Therefore, your web authoring life has to be a bit more tough 
+    than without it.</p>
+  <p><em>Note: All the readings in this page apply to NN4 calendar tags only, 
+    i.e. the <code>&lt;layer&gt;</code> tags. You don't need to touch or move 
+    the <code>&lt;iframe&gt;</code> tag in your page at all.</em></p>
+  <h4>Rule #0: Set the calendar tag at the VERY bottom of your page</h4>
+  <p>A simple but mandatory rule for NN4 is to set the calendar tag at the very 
+    bottom (just above the <code>&lt;/BODY&gt;</code> tag) of your page. Your 
+    page must end like following:</p>
+  <div class="dottedBox"> 
+    <p><code>...<br>
+      &lt;iframe ...&gt;&lt;layer ...calendar layer tag...&gt; &lt;/layer&gt;&lt;/iframe&gt;<br>
+      &lt;/BODY&gt;&lt;/HTML&gt;</code></p>
+  </div>
+  <p> No exceptions, otherwise it won't work properly. (iframe tag can be moved 
+    anyway since NN4 doesn't understand it at all)</p>
+  <h4>Rule #1: Never use inline CSS style in HTML tags, use CSS classes instead.</h4>
+  <p>In order to make PopCalendarXP work seamlessly under Netscape 4.x, you MUST 
+    NOT use any inline CSS style (like style=&quot;xxxx&quot;) in the HTML tags. 
+    NN4 has serious problems with inline styles. Although sometimes the inline 
+    CSS styles won't cause any trouble, sticking to CSS classes (like class=&quot;xxx&quot;) 
+    is always a safe approach.</p>
+  <h4>Rule #2: Lay out the NN4 localizer tags</h4>
+  <p>In NN4, PopCalendarXP uses special <code>&lt;A&gt;</code> tags to locate 
+    the pop-up position of the calendar panel. You <strong>must</strong> set one 
+    for each <code>fPopCalendar()</code> call, otherwise you will encounter an 
+    error saying &quot;Expected NN4 localizer not found!&quot;.</p>
+  <p>These localizer tags only have one &quot;name&quot; property and can be placed 
+    anywhere in the page or used to enclose any other HTML tags.</p>
+  <p><code>&lt;A name=&quot;&lt;date-field-name&gt;dummy:&lt;vertical-offset&gt;&quot;&gt; 
+    &lt;/A&gt;</code></p>
+  <p>The name comprises 2 parts separated by a colon - The left part is a string 
+    started with the name of the date field, or the name property of the object 
+    passed in as dateCtrl, and concatenated by the word &quot;dummy&quot;; the 
+    right part is a number that indicates the vertical offset in pixels. For example, 
+    if we have an <code>&lt;input type=&quot;text&quot; name=&quot;dc&quot;&gt;</code> 
+    and want to pop the calendar under it, we just use the following code:</p>
+  <div class="dottedBox"> 
+    <p><code>&lt;A name=&quot;dcdummy:27&quot;&gt;&lt;input type=&quot;text&quot; 
+      name=&quot;dc&quot;&gt;&lt;/A&gt;</code></p>
+  </div>
+  <p><code>27</code> is the normal height of an input box in NN4, the engine uses 
+    this offset to calculate the popup position when the calendar needs popping 
+    above the localizer object.</p>
+  <p><strong>NOTE: If you put this localizer tag into any <code>&lt;layer&gt;</code>, 
+    <code>&lt;ilayer&gt;</code> or positioned <code>&lt;div&gt;</code> tags, you 
+    must also pass in the name and/or id of such layer as the 3rd parameter of 
+    the <code>fPopCalendar()</code> function so that the engine can find it. </strong> 
+  </p>
+  <p>Please check out Netscape4 demo for more examples.</p>
+  <h4>Rule #3: Fix the infamous resize bug.</h4>
+  <p>Some versions of Netscape 4.x have an infamous bug - all the dynamic layers 
+    will get lost when the browser is resized. There are many solutions posted 
+    over the internet to fix it, you may do a search to get the detail description 
+    from google or yahoo.</p>
+  <p>For a quick example, simply insert the following javascript snippet into 
+    the header of your html page. </p>
+  <div class="dottedBox"><code>&lt;script language=&quot;JavaScript&quot;&gt;<br>
+    if(document.layers){<br>
+    origWidth=innerWidth;origHeight=innerHeight;<br>
+    onresize=function(){if(innerWidth!=origWidth||innerHeight!=origHeight)location.reload()<br>
+    }}<br>
+    &lt;/script&gt;</code></div>
+  <p>If you have a better solution, you may use your own.</p>
+  <h4>Rule #4: Set the &lt;BASE&gt; tag explicitly if page gets lost after resizing</h4>
+  <p>Sometimes the NN4 will get confused about the URL path of the current document 
+    after resizing and reloading. If this does happen, it can be fixed by setting 
+    a correct &lt;BASE&gt; tag in your page.</p>
+  <h4>Rule #5: Never tamper the script engine</h4>
+  <p>Some free web hosting service providers, like GeoCity!Yahoo, mandatorily 
+    inject ad code into every html file they hosted. Such actions will disrupt 
+    the calendar engine totally since the script engine files, like <code>ipopeng.htm</code>, 
+    are very sensitive to modifications. There is no workaround for it and the 
+    license agreement also requires the engine remaining intact.</p>
+  <h4>Rule #6: Avoid being penetrated by the form elements</h4>
+  <p>In NN4, the calendar panel is not bulletproof and will be penetrated by form 
+    elements if it lays over them. To work around we've built a good demo that 
+    shows how to do it right. Please refer to Netscape4 demo in the product package 
+    for details.</p>
+  <h4>Rule #7: Bypass the borderWidth &amp; paddings CSS properties</h4>
+  <p>In themes that have <code>borderWidths</code>, <code>padding</code> or <code>margin</code> 
+    CSS settings, NN4 will throw out errors against them and stop interpreting 
+    the subsequent CSS rules. Whenever you notice that part of the calendar is 
+    not rendered properly, you may type &quot;javascript:&quot; into the address 
+    bar of NN4 to show the related errors in the popup debug window.</p>
+  <p>To work around, you just need to append the name of the class with a border 
+    or padding style in it to a build-in array in the <code>plugins.js</code> 
+    file and the engine will handle the remaining work. e.g. We introduced an 
+    extra DIV with a border style in outlook theme, and then added the following 
+    NN4 specific code.</p>
+  <div class="dottedBox"> 
+    <p><code>if (NN4) _nn4_css[_nn4_css.length]=&quot;BottomDiv&quot;;</code></p>
+  </div>
+	
+  <p>Remember to do the same for every new class added to the theme, unless it 
+    has no border, padding or margin settings.</p>
+  <h4>Rule #8: Work around the missing fonts</h4>
+  <p>In certain situation, the fonts on the page might turn into rectangles if 
+    the page were generated by ASP or other cgi server. It's caused by the server 
+    sending different charset encoding than NN4's default setting. To workaround, 
+    simply specify an empty string as the http charset header in your server-end 
+    code. e.g. in ASP we may have the following set:</p>
+  <div class="dottedBox"> 
+    <p><code>Response.Charset=&quot;&quot;</code></p>
+  </div>
+  <p>The other way to work around is using the engine wrappers mentioned in the 
+    i18n tutorial, which is a bit more complicated but very effective if your 
+    page were to serve multiple languages.</p>
+  <h4>Rule #9: Fill NN4 calendar tag with proper spaces</h4>
+  <p>If you don't follow Rule #1, sometimes NN4 will embed some strange duplicated 
+    closing tags right behind the calendar tag, like <code>&lt;/layer&gt;</code> 
+    or other weird tags. You'll see them blinking in blue color when you open 
+    the &quot;page source&quot; window. This is really a weird bug and it may 
+    cause other strange behaviors on your page.</p>
+  <p>To work around, you need to place some dummy SPACE characters inside the 
+    <code>&lt;layer&gt;</code> tag to adjust the offset of those garbage tags 
+    until they become normal and stop blinking in the page-source-window. Usually 
+    5 spaces will do the trick, but you'd better verify it by looking into the 
+    page source window. Appending the following dummy tag to the bottom of your 
+    page might also be of some help.</p>
+  <div class="dottedBox"><code>&lt;layer name=&quot;bugfix-dummy&quot;&gt;&lt;/layer&gt;<br>
+    &lt;/BODY&gt;</code></div>
+  <p>We strongerly suggest you following Rule #1 to avoid such problems.</p>
+  <h4>Rule #10: Relative path fix </h4>
+  <p>Whenever you try to put the calendar related files into a separate directory and reference them via a relative path in the <code>src</code> property of the &lt;layer&gt; tag, you'll have to set up the <code>background</code> property to have the same relative path. To make it simple, always keep both properties the same. If you don't, graphics will be disappeared from the calendar panel after redrawing.</p>
+  <p>You don't need to do it if you keep using absolute path in the <code>src</code> property.</p>
+</div>
+
+  
+<p>&nbsp;</p>
+<hr size="1">
+<div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+  Inc. All rights reserved.</em></font></div>
+<p>&nbsp;</p>
+  
+</body>
+</html>

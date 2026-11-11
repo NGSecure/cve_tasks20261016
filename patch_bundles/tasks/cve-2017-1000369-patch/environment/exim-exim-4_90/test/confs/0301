@@ -1,0 +1,25 @@
+# Exim test configuration 0301
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_helo = check_helo
+acl_smtp_rcpt = accept
+smtp_enforce_sync = no
+queue_only
+
+
+# ----- ACL -----
+
+begin ACL
+
+check_helo:
+  warn     condition = ${if eq {$sender_helo_name}{en.force}{yes}{no}}
+           control = enforce_sync
+  accept
+
+
+# End

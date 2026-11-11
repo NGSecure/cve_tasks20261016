@@ -1,0 +1,40 @@
+# Exim test configuration 0200
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+
+# ----- Routers -----
+
+begin routers
+
+lookuphost:
+  driver = dnslookup
+  caseful_local_part
+  local_parts = xx
+  widen_domains = _bad
+  no_more
+  transport = smtp
+
+domainlist:
+  driver = manualroute
+  caseful_local_part
+  local_parts = yy
+  no_more
+  route_list = * bad_$domain bydns
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+
+# End

@@ -1,0 +1,102 @@
+# Exim test configuration 0275
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept verify = recipient
+
+domainlist nocache = $local_part
+domainlist nocache2 = +nocache
+domainlist local_domains = test.ex
+domainlist never_domains = never.ex
+domainlist n1_domains = never1.ex
+domainlist n2_domains = <; never2.ex ; +n1_domains
+domainlist hold_domains = ! *.ex
+domainlist not_queue_domains = test.ex
+domainlist_cache forcecache = $local_part
+
+hold_domains = +hold_domains
+queue_domains = !+not_queue_domains
+
+percent_hack_domains = +hold_domains : +not_queue_domains : \
+                       +n2_domains : +local_domains
+qualify_domain = test.ex
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+# ----- Routers -----
+
+begin routers
+
+.ifdef FAKE
+r0f:
+  driver = accept
+  local_parts = error
+  domains = +no_such_list
+  transport = t1
+.endif
+
+r00:
+  driver = accept
+  domains = +nocache
+  transport = t1
+
+r01:
+  driver = accept
+  domains = +nocache
+  transport = t1
+
+r02:
+  driver = accept
+  domains = +nocache2
+  transport = t1
+
+r03:
+  driver = accept
+  domains = +nocache2
+  transport = t1
+
+r04:
+  driver = accept
+  domains = +forcecache
+  transport = t1
+
+r05:
+  driver = accept
+  domains = +forcecache
+  transport = t1
+
+r1:
+  driver = manualroute
+  domains = +never_domains : +n1_domains : ! +local_domains
+  route_list = never
+  transport = t1
+
+r2:
+  driver = dnslookup
+  domains = +never_domains : +n2_domains : !+local_domains
+  transport = t1
+
+r3:
+  driver = accept
+  local_parts = userx
+  domains = +local_domains
+  transport = t1
+
+# ----- Retry -----
+
+begin retry
+
+*                *   F,5d,5m
+
+# End

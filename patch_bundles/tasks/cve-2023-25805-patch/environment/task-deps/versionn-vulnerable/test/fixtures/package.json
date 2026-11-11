@@ -1,0 +1,41 @@
+{
+  "name": "markedpp",
+  "version": "0.3.6",
+  "description": "Preprocessor for markdown files",
+  "main": "lib/markedpp.js",
+  "bin": {
+    "markedpp": "./bin/markedpp.js"
+  },
+  "author": "commenthol",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/commenthol/markedpp.git"
+  },
+  "homepage": "https://github.com/commenthol/markedpp",
+  "bugs": {
+    "url": "http://github.com/commenthol/markedpp/issues"
+  },
+  "keywords": [
+    "markdown",
+    "preprocessor",
+    "toc",
+    "table of contents",
+    "include files",
+    "number headings",
+    "autonumber ordered lists"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "async": "^0.9.0"
+  },
+  "devDependencies": {
+    "express": "^4.8.7",
+    "mocha": "^1.21.4"
+  },
+  "scripts": {
+    "test": "mocha test/*.mocha.js"
+  }
+}

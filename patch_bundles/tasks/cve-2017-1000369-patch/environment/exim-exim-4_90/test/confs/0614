@@ -1,0 +1,15 @@
+# Exim test configuration 0614
+# hosts_connection_nolog versus sender_host lists caching
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector = +smtp_connection
+hostlist nolog = 127.0.0.1
+hosts_connection_nolog = +nolog
+queue_only
+
+# End

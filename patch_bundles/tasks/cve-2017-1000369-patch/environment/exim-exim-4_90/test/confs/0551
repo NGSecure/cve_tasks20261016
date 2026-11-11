@@ -1,0 +1,31 @@
+# Exim test configuration 0551
+
+LOG_SELECTOR=+pid
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector = LOG_SELECTOR
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  user = CALLER
+  file = DIR/test-mail/$local_part
+
+# End

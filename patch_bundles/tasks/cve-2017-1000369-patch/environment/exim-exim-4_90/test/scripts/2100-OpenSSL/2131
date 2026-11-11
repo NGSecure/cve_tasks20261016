@@ -1,0 +1,20 @@
+# TLS server: SNI used to select certificate
+#
+exim -DSERVER=server -bd -oX PORT_D
+****
+# Extended: certificate choice is unchanged by received SNI
+exim CALLER@test.ex
+Test message.
+****
+sleep 2
+#
+#
+# Extended: server uses SNI to change certificate
+exim abcd@test.ex
+Test message.
+****
+millisleep 500
+#
+#
+killdaemon
+sleep 2

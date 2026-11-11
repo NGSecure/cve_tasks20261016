@@ -1,0 +1,39 @@
+<br>
+
+<div id="content">
+
+<div id='homecontent2'>
+	NEWS: [BETA TESTING IS LIVE] Please report all issues with the internal ticket system.
+</div>
+<br>
+<br>
+
+<fieldset>
+
+	<h5><?php echo $_SESSION['login_user'];?></h5>
+<?php
+	$sql = "SELECT cash FROM economy WHERE userid = '$userid'";
+	$result = $conn->query($sql);
+	while ($row = $result->fetch_assoc()){
+		$balance = $row['cash'];
+	};
+	
+	echo "<p>Money: $"; printf("%.2f", $balance); echo "</p>";
+?>
+
+
+</fieldset>
+
+
+<?php
+
+echo "<br>";
+
+
+echo "<br>";
+echo "<br>";
+
+	
+?>
+</div>
+

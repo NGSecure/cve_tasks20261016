@@ -1,0 +1,17 @@
+# Exim test configuration 0433
+
+PORT=
+IFACE=
+
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+PORT
+IFACE
+disable_ipv6
+
+# End

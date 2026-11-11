@@ -1,0 +1,26 @@
+# Exim test configuration 0162
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+acl_smtp_data = check_message
+
+domainlist local_domains = test.ex : myhost.test.ex
+
+
+# ----- ACLs -----
+
+begin acl
+
+check_recipient:
+  accept  hosts = :
+
+check_message:
+  require verify = header_syntax
+  accept
+
+# End

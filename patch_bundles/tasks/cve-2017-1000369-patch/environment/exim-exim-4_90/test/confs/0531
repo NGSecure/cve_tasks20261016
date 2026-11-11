@@ -1,0 +1,53 @@
+# Exim test configuration 0531
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+log_selector =  +sender_on_delivery
+
+
+# ----- Routers -----
+
+begin routers
+
+bounces:
+  driver = accept
+  senders = :
+  transport = t1
+
+smartuser:
+  driver = accept
+  retry_use_local_part
+  transport = lmtp
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+lmtp:
+  driver = smtp
+  allow_localhost
+  hosts = 127.0.0.1
+  port = PORT_S
+  protocol = LMTP
+
+
+# ----- Retry -----
+
+
+begin retry
+
+retry.test.ex * F,1s,1s
+
+
+# End

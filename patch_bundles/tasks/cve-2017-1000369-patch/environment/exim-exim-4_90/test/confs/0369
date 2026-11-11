@@ -1,0 +1,49 @@
+# Exim test configuration 0369
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = accept
+  domains = test.ex
+  transport = t1
+
+r2:
+  driver = accept
+  domains = test2.ex
+  transport = t2
+  cannot_route_message = I can't route to $local_part
+
+
+# ------ Transports ------
+
+begin transports
+
+t1:
+  driver = pipe
+  command = /bin/sh -c 'exit $local_part'
+  user = CALLER
+  temp_errors = 45 : 56
+
+t2:
+  driver = pipe
+  command = /bin/sh -c 'exit $local_part'
+  user = CALLER
+  temp_errors = *
+
+
+# ------ Retry ------
+
+begin retry
+
+* * F,1d,15m
+
+# End

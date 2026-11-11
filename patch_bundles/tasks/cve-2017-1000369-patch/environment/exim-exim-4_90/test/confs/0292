@@ -1,0 +1,43 @@
+# Exim test configuration 0292
+
+.include DIR/aux-var/std_conf_prefix
+
+trusted_users = CALLER
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = manualroute
+  domains = t1
+  route_list = * host.1:host.2
+  transport = t1
+
+r2:
+  driver = manualroute
+  domains = t2
+  route_list = * 127.0.0.1:ten-1.test.ex bydns
+  transport = t2
+  self = send
+
+
+# ------ Transports ------
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+  debug_print = \$host=$host \$host_address=$host_address
+  user = CALLER
+
+t2:
+  driver = smtp
+  debug_print = \$host=$host \$host_address=$host_address
+
+# End

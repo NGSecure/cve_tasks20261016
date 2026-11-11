@@ -1,0 +1,45 @@
+# Exim test configuration 0247
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+# ----- Routers -----
+
+begin routers
+
+d1:
+  driver = redirect
+  allow_defer
+  data = ${lookup{$local_part}lsearch{DIR/aux-fixed/TESTNUM.alias}}
+  file_transport = t1
+  retry_use_local_part
+
+d2:
+  driver = redirect
+  allow_defer
+  data = :defer: explicit defer
+  retry_use_local_part
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /x/y
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,1d,1h
+
+
+# End

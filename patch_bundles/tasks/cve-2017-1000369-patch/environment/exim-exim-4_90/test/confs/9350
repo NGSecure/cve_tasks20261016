@@ -1,0 +1,41 @@
+# Exim test configuration 3650
+
+SERVER=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+
+tls_advertise_hosts = *
+tls_certificate = ${if eq {SERVER}{server}{DIR/aux-fixed/cert1}fail}
+tls_privatekey = ${if eq {SERVER}{server}{DIR/aux-fixed/cert1}fail}
+
+tls_verify_hosts = HOSTIPV4
+tls_verify_certificates = ${if eq {SERVER}{server}{DIR/aux-fixed/cert2}fail}
+
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  deny     message = authentication required
+          !authenticated = *
+  accept
+
+
+# ----- Authentication -----
+
+begin authenticators
+
+dovecot:
+  driver = dovecot
+  public_name = PLAIN
+  server_socket = /var/run/dovecot/auth-client
+  server_set_id = $auth1
+
+# End

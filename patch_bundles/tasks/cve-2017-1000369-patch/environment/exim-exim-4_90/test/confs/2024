@@ -1,0 +1,25 @@
+# Exim test configuration 2024
+
+CERT=DIR/aux-fixed/cert1
+TVC=/dev/null
+
+.include DIR/aux-var/tls_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+
+log_selector = +tls_peerdn
+
+tls_advertise_hosts = *
+
+tls_certificate = CERT
+tls_privatekey = CERT
+
+tls_verify_hosts = HOSTIPV4
+#tls_verify_certificates = TVC
+tls_verify_certificates = CERT
+
+# End

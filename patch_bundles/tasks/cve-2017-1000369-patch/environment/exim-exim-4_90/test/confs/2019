@@ -1,0 +1,63 @@
+# Exim test configuration 2019
+
+.include DIR/aux-var/tls_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+
+log_selector = +tls_peerdn
+
+queue_only
+queue_run_in_order
+
+tls_advertise_hosts = *
+
+tls_certificate = DIR/aux-fixed/cert1
+tls_privatekey = DIR/aux-fixed/cert1
+
+tls_verify_hosts = HOSTIPV4
+tls_verify_certificates = DIR/aux-fixed/cert2
+
+
+# ------ ACL ------
+
+begin acl
+
+check_recipient:
+  accept  hosts = :
+  deny    hosts = HOSTIPV4
+         !encrypted = AES256-SHA:\
+                      AES256-GCM-SHA384:\
+                      IDEA-CBC-MD5:\
+                      DES-CBC3-SHA:\
+                      DHE_RSA_AES_256_CBC_SHA1:\
+                      DHE_RSA_3DES_EDE_CBC_SHA:\
+                      RSA_AES_256_CBC_SHA1 :\
+		      ECDHE_RSA_AES_256_GCM_SHA384
+  accept
+
+
+# ----- Routers -----
+
+begin routers
+
+abc:
+  driver = accept
+  retry_use_local_part
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  headers_add = TLS: cipher=$tls_cipher peerdn=$tls_peerdn
+  user = CALLER
+
+# End

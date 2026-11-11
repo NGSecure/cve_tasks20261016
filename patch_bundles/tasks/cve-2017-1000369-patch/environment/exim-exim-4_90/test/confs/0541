@@ -1,0 +1,20 @@
+# Exim test configuration 0541
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_helo = check_helo
+
+
+# ----- ACLs -----
+
+begin acl
+
+check_helo:
+  require verify = helo
+  accept
+
+# End

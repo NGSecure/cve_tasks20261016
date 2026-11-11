@@ -1,0 +1,23 @@
+# Exim test configuration 0482
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+acl_smtp_data = a1
+
+queue_only
+
+# ----- ACL -----
+
+begin acl
+
+a1:
+  require verify = header_syntax
+  accept
+
+
+# End

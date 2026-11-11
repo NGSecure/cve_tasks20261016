@@ -1,0 +1,48 @@
+# Exim test configuration 0145
+
+.include DIR/aux-var/std_conf_prefix
+
+qualify_domain = test.ex
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+
+
+# ------ ACL ------
+
+begin acl
+
+check_recipient:
+  require verify = sender
+  require verify = recipient
+
+
+# ----- Routers -----
+
+begin routers
+
+domainlist:
+  driver = dnslookup
+  transport = smtp
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,1h,10m
+
+
+# End

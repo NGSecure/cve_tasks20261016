@@ -1,0 +1,58 @@
+# Exim test configuration 0461
+
+FALLBACK=fallback_hosts = 127.0.0.1
+ROUTE_DATA=V4NET.0.0.1
+RETRY1=1s
+RETRY2=2s
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = accept
+  senders = :
+  transport = t2
+
+r1:
+  driver = manualroute
+  route_data = ROUTE_DATA
+  transport = t1
+  FALLBACK
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  port = PORT_S
+  connect_timeout = 1s
+  allow_localhost
+
+t2:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# ----- Retry -----
+
+begin retry
+
+V4NET.0.0.1  * F,1s,RETRY1
+V4NET.0.0.2  * F,1s,RETRY2
+*            * F,1d,1s
+
+
+# End

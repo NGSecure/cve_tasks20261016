@@ -1,0 +1,50 @@
+# Exim test configuration 0193
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+bounce:
+  driver = redirect
+  allow_defer
+  data = :blackhole:
+  retry_use_local_part
+  senders = :
+
+all:
+  driver = accept
+  retry_use_local_part
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  batch_max = 100
+  envelope_to_add
+  file = DIR/test-mail/$local_part
+  message_size_limit = 50
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

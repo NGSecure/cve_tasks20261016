@@ -1,0 +1,35 @@
+<?php
+
+	$username = $_SESSION['login_user'];
+	$sql = "SELECT role FROM accounts WHERE username='$username'";
+	$result = $conn->query($sql);
+	$row = mysqli_fetch_assoc($result);
+
+if ($row["role"] == 'user') {
+	header("location: /");
+};
+	$result->free();
+
+$tempId = $_POST['tempId'];
+$modnotes = $_POST['modnotes'];
+
+
+$sql3 = "SELECT * FROM accounts where id = '$tempId'";
+$result3 = $conn->query($sql3);
+$row3 = mysqli_fetch_assoc($result3);
+
+$moduser = $row3['username'];
+
+$sql2 = "INSERT INTO gamelogs(userid,username,type) VALUES('".$_SESSION['userid']."', '".$_SESSION['login_user']."', 'Edited modnote of user $moduser  ')";
+$result2 = $conn->query($sql2);
+	
+	
+$safemod = mysqli_real_escape_string($conn, $modnotes);
+
+$sql = "UPDATE accounts SET modnotes='$safemod' WHERE id='$tempId'";
+
+$result = $conn->query($sql);
+
+
+header("location: /game/main/index.php?a=profile&id=$tempId");
+?>

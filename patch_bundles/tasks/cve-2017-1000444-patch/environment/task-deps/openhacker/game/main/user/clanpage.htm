@@ -1,0 +1,87 @@
+<script type="text/javascript">
+function checkDelete(){
+    return confirm('Are you sure? This action can only be reversed by an administrator.');
+}
+</script>
+
+<?php
+$safeid = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['id']);
+$sql = "SELECT * FROM clans WHERE id = '$safeid'";
+$result = $conn->query($sql);
+$id = $_GET['id'];
+
+while ($row = $result->fetch_assoc()){
+$proclan = $row['clanname'];
+$userlevel = $row['level'];
+$role = $row['role'];
+$regdate = $row['regdate'];
+$lastlogindate = $row['lastlogindate'];
+$lastseen = $row['lastseen'];
+$lastip = $row['lastip'];
+$regip = $row['regip'];
+$bio = $row['bio'];
+$modnotes = $row['modnotes'];
+$ep = $row['experience'];
+$clan = $row['clan'];
+$prevclan = $row['prevclan'];
+
+};
+?>
+<div id="profile" style="background-image:url('');">
+
+<h1><?php echo $prouser;?></h1>
+<ul>
+
+<?php 
+
+		
+$b = $safeid;
+
+$filename = "/usr/share/nginx/html/public/images/avatars/{$b}.png";
+
+if (file_exists($filename)) {
+    $b = $safeid;
+} else {
+    $b = "default";
+}
+
+?>
+
+
+	<li><img style="display:inline-block;height:150;width:150px;"src="/public/images/avatars/<?php echo $b;?>.png"></li>
+	<?php
+
+	?>
+	<br>
+	<li>Bio: <?php echo $bio;?></li>
+
+</ul>
+
+<table class="rounded" style="width:50%;">
+			<tbody>
+				<tr>
+					<td>Formation Date</td>
+					<td style="min-width:300px;"><?php echo $regdate; ?></td></tr>
+					<tr><td>Total Members</td>
+					<td style="min-width:300px;"><?php echo $lastseen; ?></td>
+				</tr>
+
+				<tr>
+					<td>Total Servers</td>
+					<td style="min-width:300px;"><?php echo $userlevel;?></td></tr>
+					<td>Gateway Status</td>
+					<?php 
+					if ($gwstat == 'online'){
+						echo '<td style="min-width:300px;color:limegreen !important;">Online</td>';
+					}
+					else {
+						echo '<td style="min-width:300px;color:red !important;">Offline</td>';
+					}; 
+
+					?>
+				</tr>
+				
+			</tbody>
+		</table>
+
+</div>

@@ -1,0 +1,42 @@
+# Exim test configuration 3460
+
+.include DIR/aux-var/tls_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+hostlist auth_over_tls_hosts = 127.0.0.1
+
+acl_smtp_auth = check_auth
+
+tls_advertise_hosts = *
+tls_certificate = DIR/aux-fixed/cert1
+tls_privatekey = DIR/aux-fixed/cert1
+
+
+# ----- ACL -----
+
+begin acl
+check_auth:
+  accept  hosts = +auth_over_tls_hosts
+          endpass
+          message = STARTTLS required before AUTH
+          encrypted = *
+  accept
+
+
+# ----- Authenticators -----
+
+
+begin authenticators
+
+plain:
+  driver = plaintext
+  public_name = PLAIN
+  server_condition = "\
+    ${if and {{eq{$2}{userx}}{eq{$3}{secret}}}{yes}{no}}"
+  server_set_id = $2
+
+# End

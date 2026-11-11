@@ -1,0 +1,20 @@
+# TLS client: verify certificate from server - name-fails
+gnutls
+exim -DSERVER=server -bd -oX PORT_D
+****
+# this will fail to verify the cert name and fallback to unencrypted
+exim userr@test.ex
+Testing
+****
+# this will pass the cert verify including name check
+exim users@test.ex
+Testing
+****
+# this will fail to verify the cert name but carry on (try-verify mode)
+exim usert@test.ex
+Testing
+****
+exim -qf
+****
+killdaemon
+no_msglog_check

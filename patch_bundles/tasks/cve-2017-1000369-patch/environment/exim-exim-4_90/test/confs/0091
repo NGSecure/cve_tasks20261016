@@ -1,0 +1,38 @@
+# Exim test configuration 0091
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+acl_smtp_data = check_message
+domainlist local_domains = test.ex : *.test.ex
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  deny    hosts = ! V4NET.0.0.1
+         !verify = sender
+  accept  domains = +local_domains
+  deny    message = relay not permitted
+
+check_message:
+  require verify = header_sender
+  accept
+
+
+# ----- Routers -----
+
+begin routers
+
+localuser:
+  driver = accept
+  local_parts = userx
+  verify_only
+
+
+# End

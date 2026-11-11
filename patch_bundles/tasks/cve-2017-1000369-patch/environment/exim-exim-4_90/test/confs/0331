@@ -1,0 +1,32 @@
+# Exim test configuration 0331
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+log_selector = +address_rewrite
+
+# ----- Rewrite -----
+
+begin rewrite
+
+^x@y           p@q                  S
+\N^a@b         p@q                  S
+2047@x.y       "AÄÅÆZ <2047@x.y>"   w
+unq1@x.y       "a phrase <unq1>"    w
+unq2@x.y       "a phrase <unq2>"    wQ
+unq3@x.y       unq3                 wQ
+
+4@x.y          "a 4. phrase <4@22> (a comment AÄÅÆZ)"   w
+
+fw@fw          "harry <fw@we.de>"   fw
+fw@*           harry@we.de          f
+
+gw@fw          "härry <gw@we.de>"   fw
+gw@*           harry@we.de          f
+
+abc@abc        was-$local_part@abc
+
+# End

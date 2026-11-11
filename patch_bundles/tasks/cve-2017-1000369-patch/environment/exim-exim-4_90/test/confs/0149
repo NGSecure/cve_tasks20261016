@@ -1,0 +1,50 @@
+# Exim test configuration 0149
+
+.include DIR/aux-var/std_conf_prefix
+
+qualify_domain = test.ex
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = <- test1 - test2-test3--4
+domainlist relay_domains = <+
+
+
+# ----- Routers -----
+
+begin routers
+
+domainlist1:
+  driver = manualroute
+  domains = ! +local_domains
+  route_list = ten <+V4NET.0.0.0+V4NET.0.0.1 byname;\
+               two   V4NET.0.0.2:V4NET.0.0.4 byname;
+
+domainlist2:
+  driver = manualroute
+  domains = ! +local_domains
+  route_list = <= six <+V4NET.0.0.6+V4NET.0.0.7 byname=\
+                  one   V4NET.0.0.2:V4NET.0.0.4 byname=
+  no_more
+
+local:
+  driver = accept
+  retry_use_local_part
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+# End

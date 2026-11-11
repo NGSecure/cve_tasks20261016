@@ -1,0 +1,104 @@
+<div id="content">
+<?php 
+
+
+$sql = "SELECT * FROM accounts WHERE id ='$userid'";
+$result = $conn->query($sql);
+while ($row = $result->fetch_assoc()){
+$sjcd = $row['smallhackcd'];
+$currenttime = $row['lastseen'];
+}
+
+if ($sjcd > $currenttime){
+	echo "Your system is not ready for another job, please try again later.";
+	echo "</div>";
+}
+else {
+
+echo '
+
+<h3>Small Jobs</h3>
+<form name="smalljob" method="POST" action="?a=dojob">
+  <ul>
+  <li>
+    <input type="radio" value="1" id="1" name="smalljob">
+    <label for="1">Steal a password by looking over their shoulder</label>
+    
+    <div class="check"><div class="inside"></div></div>
+    <br>
+  </li>
+  
+  <li>
+    <input type="radio" value="2" id="2" name="smalljob">
+    <label for="2">Install a keylogger on a computer</label>
+    
+    <div class="check"><div class="inside"></div></div>
+    <br>
+  </li>
+  
+  <li>
+    <input type="radio" value="3" id="3" name="smalljob">
+    <label for="3">Sniff Open Wireless Traffic</label>
+    
+    <div class="check"><div class="inside"></div></div>
+    <br>
+  </li>
+  
+   <li>
+    <input type="radio" value="4" id="4" name="smalljob">
+    <label for="4">Crack a WEP-Secured Wireless Network</label>
+    
+    <div class="check"><div class="inside"></div></div>
+    <br>
+  </li>
+  
+   <li>
+    <input type="radio" value="5" id="5" name="smalljob">
+    <label for="5">Decrypt a Windows 10 Password</label>
+    
+    <div class="check"><div class="inside"></div></div>
+    <br>
+  </li>
+
+   <li>
+    <input type="radio" value="6" id="6" name="smalljob">
+    <label for="6">Change your grades</label>
+    
+    <div class="check"><div class="inside"></div></div>
+    <br>
+  </li>
+
+   <li>
+    <input type="radio" value="7" id="7" name="smalljob">
+    <label for="7">DDoS A Government Website Offline</label>
+    
+    <div class="check"><div class="inside"></div></div>
+    <br>
+  </li>
+  
+   <li>
+    <input type="radio" value="8" id="8" name="smalljob">
+    <label for="8">Break into the NSA to find proof of illegal spying</label>
+    
+    <div class="check"><div class="inside"></div></div>
+    <br>
+  </li>
+  
+  
+ 
+</ul>
+			 <button class="btn waves-effect waves-light" type="submit" name="action">Do Job
+  			</button>
+</form>
+</div>';
+
+
+
+
+
+
+
+}
+
+?>
+

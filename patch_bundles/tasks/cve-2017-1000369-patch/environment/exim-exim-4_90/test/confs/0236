@@ -1,0 +1,14 @@
+# Exim test configuration 0236
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+A_MACRO_WHOSE_NAME_IS_LONGER_THAN_63_CHARACTERS_IS_DEFINED_HERE_FOR_TESTING = macro value
+
+qualify_domain = A_MACRO_WHOSE_NAME_IS_LONGER_THAN_63_CHARACTERS_IS_DEFINED_HERE_FOR_TESTING
+
+# End

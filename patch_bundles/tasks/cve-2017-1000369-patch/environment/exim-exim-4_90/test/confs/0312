@@ -1,0 +1,19 @@
+# Exim test configuration 0312
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_rcpt
+
+# ------ ACL ------
+
+begin acl
+
+check_rcpt:
+    deny    dnslists = +defer_unknown : test.again.dns
+    accept
+
+# End

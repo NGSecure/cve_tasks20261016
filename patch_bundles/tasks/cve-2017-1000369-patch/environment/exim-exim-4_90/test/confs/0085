@@ -1,0 +1,52 @@
+# Exim test configuration 0085
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : \
+    myhost.test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+smart1:
+  driver = manualroute
+  caseful_local_part
+  domains = smart.domain
+  local_parts = ${lookup{$domain}lsearch{DIR/aux-fixed/TESTNUM.data}{$value}}
+  route_list = *
+  senders = ${lookup{$domain}lsearch{DIR/aux-fixed/TESTNUM.data}{$value}}
+  verify_only
+
+fail_remote_domains:
+  driver = redirect
+  domains = ! +local_domains
+  allow_fail
+  data = :fail: unrouteable mail domain "$domain"
+
+smart2:
+  driver = accept
+  domains = test.ex
+  local_parts = ${lookup{$domain}lsearch{DIR/aux-fixed/TESTNUM.data}{$value}}
+  require_files = ${lookup{$domain.files}lsearch{DIR/aux-fixed/TESTNUM.data}{$value}}
+  retry_use_local_part
+  senders = ${lookup{$domain}lsearch{DIR/aux-fixed/TESTNUM.data}{$value}}
+  transport = dummy
+  verify_only
+
+
+# ----- Transports -----
+
+begin transports
+
+dummy:
+  driver = appendfile
+  user = CALLER
+
+
+# End

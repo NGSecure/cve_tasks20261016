@@ -1,0 +1,19 @@
+# Exim test configuration 0117
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+
+
+# ----- Routers -----
+
+begin routers
+
+lookuphost:
+  driver = dnslookup
+  verify_only
+
+
+# End

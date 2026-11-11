@@ -1,0 +1,30 @@
+# Exim test configuration 9450
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+alias:
+  driver = redirect
+  data = ${lookup{$local_part}lsearch{DIR/aux-fixed/TESTNUM.alias}}
+
+null:
+  driver = redirect
+  data = :blackhole:
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,10m
+
+
+# End

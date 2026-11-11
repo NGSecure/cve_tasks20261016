@@ -1,0 +1,33 @@
+<HTML>
+<HEAD><TITLE>Decent Demo</TITLE>
+</HEAD>
+<BODY onload="_nn4_loaded=true;">
+
+
+<FORM>
+Do you know how easy it is to control?
+<INPUT type='button' value='&lt;&lt;' onclick='with(gfFlat)fSetCal(gCurMonth[0]-1,gCurMonth[1],0);'>
+<INPUT type='button' value='&lt;' onclick='gfFlat.fPrevMonth();'>
+<INPUT type='button' value='Today' onclick='with(gfFlat)if(!fSetDate(gToday[0],gToday[1],gToday[2]))alert("You cannot select today!");'>
+<INPUT type='button' value='&gt;' onclick='gfFlat.fNextMonth();'>
+<INPUT type='button' value='&gt;&gt;' onclick='with(gfFlat)fSetCal(gCurMonth[0]+1,gCurMonth[1],0);'>
+</FORM>
+
+
+
+<iframe name="[2002,12]:decent:agenda.js:gfFlat" id="[2002,12]:decent:agenda.js:gfFlat" src="Fullsized/iflateng.htm" scrolling="no" frameborder="0">
+<a name="gfFlat_spacer"><img width=590 height=400 border=0></a>
+</iframe>
+
+
+
+<BR><BR>
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions,
+    Inc. All rights reserved.</em></font></div>
+
+
+<!-- calendar engine for netscape 4.x. "src" and "background" must match. -->
+<LAYER name="[2002,12]:decent:agenda.js:gfFlat" src="Fullsized/nflateng.htm" background="Fullsized/nflateng.htm">     </LAYER>
+</BODY>
+</HTML>

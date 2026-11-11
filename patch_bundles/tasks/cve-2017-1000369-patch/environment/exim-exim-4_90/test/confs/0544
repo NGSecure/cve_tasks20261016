@@ -1,0 +1,65 @@
+# Exim test configuration 0544
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist dlist = $domain
+
+acl_smtp_helo = check_helo
+acl_smtp_mail = check_mail
+acl_smtp_rcpt = check_rcpt
+queue_smtp_domains = $domain
+qualify_domain = test.ex
+
+
+# ----- ACLs -----
+
+begin acl
+
+check_helo:
+  warn
+  condition = ${if match_domain {$sender_helo_name}{+dlist}}
+  accept
+
+
+check_mail:
+  warn  hosts = domain=$domain/sender_domain=$sender_address_domain
+  accept
+
+check_rcpt:
+  warn  domains = domain=$domain/sender_domain=$sender_address_domain
+  warn  sender_domains = domain=$domain/sender_domain=$sender_address_domain
+  accept
+
+
+# ----- Routers -----
+
+begin routers
+
+smarthost:
+  driver = accept
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  hosts = 127.0.0.1
+  allow_localhost
+  port = PORT_S
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,15m
+
+
+# End

@@ -1,0 +1,8 @@
+#!/bin/bash
+# [patch-bundle] 镜像 CMD。平台若执行镜像 CMD，则在容器启动时按原 compose 语义拉起服务，随后常驻。
+# （OpenSandbox 等平台默认以 tail -f /dev/null 为入口、不执行 CMD，此时由 /opt/pb/autostart.sh 兜底。）
+mkdir -p /run/pb /var/log/pb
+BASH_ENV= /opt/pb/ensure-services --quiet
+: > /run/pb/autostart.done
+trap 'exit 0' TERM INT
+while :; do sleep 3600 & wait $!; done

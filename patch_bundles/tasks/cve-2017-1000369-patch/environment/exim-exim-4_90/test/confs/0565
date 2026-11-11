@@ -1,0 +1,45 @@
+# Exim test configuration 0565
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+
+
+# ----- Routers -----
+
+begin routers
+
+hdronly_dnslookup:
+  domains = test.ex
+  driver = manualroute
+  route_data = 127.0.0.1
+  self = send
+  transport = remote_smtp_hdrs
+
+dnslookup:
+  driver = manualroute
+  route_data = 127.0.0.1
+  self = send
+  transport = remote_smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+remote_smtp:
+  driver = smtp
+  port = PORT_S
+  allow_localhost
+
+remote_smtp_hdrs:
+  driver = smtp
+  port = PORT_S
+  allow_localhost
+  headers_only
+
+# End

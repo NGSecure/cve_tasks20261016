@@ -1,0 +1,50 @@
+# Exim test configuration 0379
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+defer:
+  driver = redirect
+  local_parts = ^defer
+  allow_defer
+  data = :defer: forced defer
+
+aaaa_redirect:
+  driver = redirect
+  local_parts = aaaa
+  data = bbbb@$domain, cccc@$domain
+
+bc:
+  driver = accept
+  local_parts = bbbb : cccc
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,5d,10s
+
+
+# End

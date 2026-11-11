@@ -1,0 +1,24 @@
+# Exim test configuration 0509
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+acl_smtp_connect = check_connect
+
+
+# ----- ACL -----
+
+begin acl
+
+check_connect:
+   warn  dnslists = rbl.test.ex/<;1.2.3.4;V4NET.11.12.13
+         logwrite = rbl.test.ex/<;1.2.3.4;V4NET.11.12.13
+
+   warn  dnslists = test.ex/a.b.c.d::ten-1
+         logwrite = test.ex/a.b.c.d::ten-1
+
+# End

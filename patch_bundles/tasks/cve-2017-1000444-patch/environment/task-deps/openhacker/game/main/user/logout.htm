@@ -1,0 +1,18 @@
+<script>alert('You have logged out successfully')</script>
+
+<?php
+
+$username = $_SESSION['login_user'];
+
+$sql = "INSERT INTO gamelogs(userid,username,type) VALUES('".$_SESSION['userid']."', '".$_SESSION['login_user']."', 'Logged out')";
+$result = $conn->query($sql);
+
+
+$sql = "UPDATE accounts SET isonline=0 WHERE username='$username'";
+$result = $conn->query($sql);
+if(session_destroy()) // Destroying All Sessions
+{
+header("Location: /?a=guest"); // Redirecting To Home Page
+}
+?>
+

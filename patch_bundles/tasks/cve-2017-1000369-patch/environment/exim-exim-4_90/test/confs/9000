@@ -1,0 +1,14 @@
+# Exim test configuration 9000
+
+LDAPSERVERS=
+
+.include DIR/aux-var/std_conf_prefix
+
+keep_environment = LDAPTLS_REQCERT
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+LDAPSERVERS
+
+# End

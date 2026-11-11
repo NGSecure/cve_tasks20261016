@@ -1,0 +1,15 @@
+# Exim test configuration 0019
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_etrn = accept
+log_selector =  \
+              +smtp_syntax_error \
+              +smtp_protocol_error
+recipients_max = 5
+smtp_max_synprot_errors = 1000
+
+# End

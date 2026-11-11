@@ -1,0 +1,34 @@
+# Exim test configuration 0339
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ------ Transports ------
+
+begin transports
+
+t1:
+  driver = pipe
+  user = CALLER
+
+
+# ------ Retry ------
+
+begin retry
+
+* * F,1d,15m
+
+# End

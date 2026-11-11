@@ -1,0 +1,42 @@
+# Exim test configuration 0109
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+remote:
+  driver = manualroute
+  fallback_hosts = HOSTIPV4
+  route_list = * 127.0.0.1
+  self = send
+  transport = smtp
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_N
+  allow_localhost
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

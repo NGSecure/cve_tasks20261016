@@ -1,0 +1,55 @@
+# Exim test configuration 0361
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = dnslookup
+  domains = !thishost.test.ex : !recurse.test.ex.test.ex
+  widen_domains = test.ex
+  transport = t1
+
+r2:
+  driver = redirect
+  local_parts = miles
+  data = miles@thishost
+
+r3:
+  driver = redirect
+  local_parts = kilos
+  data = $local_part@$domain
+
+r4:
+  driver = accept
+  transport = t2
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+
+t2:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+
+# ----- Retry -----
+
+begin retry
+
+*   *   F,3s,1s; G,1h,2s,2
+
+# End

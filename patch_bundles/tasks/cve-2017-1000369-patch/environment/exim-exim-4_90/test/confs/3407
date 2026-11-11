@@ -1,0 +1,38 @@
+# Exim test configuration 3407
+
+OPTION=server_condition = xxx
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+
+# ----- Authenticators -----
+
+begin authenticators
+
+a1:
+  driver = plaintext
+  public_name = PLAIN
+  server_condition = xxx
+
+a2:
+  driver = plaintext
+  public_name = PLAIN
+  OPTION
+
+a3:
+  driver = plaintext
+  public_name = LOGIN
+  OPTION
+
+a4:
+  driver = plaintext
+  public_name = LOGIN
+  OPTION
+
+# End

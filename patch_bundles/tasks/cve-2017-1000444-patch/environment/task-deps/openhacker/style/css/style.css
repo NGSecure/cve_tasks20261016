@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: "Source Code Pro";
+}
+
+
+body {
+	background-image: url(/images/pattern.png), linear-gradient(to bottom, rgba(45,97,3,1) 0%, rgba(0,0,0,1) 100%);
+}
+
+h1 {
+	color:lightgreen;
+}
+h6 {
+	color:lightgreen;
+	font-weight: bold;
+	font-size: 15px;
+}
+h4 {
+	color:lightgreen;
+}
+
+#welcome {
+	//background-image: url(/images/pattern1.png);
+	//background-color: rgba(0, 0, 0, .5);
+
+}
+#welcome p {
+	color:#999;
+	font-weight:bold;
+	margin: 0 auto;
+    max-width: 1440px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+}
+
+#footer {
+	position:absolute;
+	bottom:5px;
+	
+}
+
+#header {
+	background-color: rgba(0, 0, 0, .5);
+   // background-image: url(/images/bg1.png);
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    text-align: center;
+}
+
+header .bg-mask {
+    padding: 50px 0;
+    background-color: rgba(0,0,0,0.5);
+}
+
+article, aside, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+
+#buildid {
+	position:absolute;
+	top:5px;"
+}
+
+.clearfix:after {
+    display:block;
+    clear:both;
+}
+
+#register {
+  margin:auto;
+  z-index: 1;
+  color: rgba(0, 0, 0, 255);
+  background-color: rgba(130, 130, 130, .2);
+  filter:blur(.5px);
+    -o-filter:blur(.7px);
+    -ms-filter:blur(.7px);
+    -moz-filter:blur(.7px);
+    -webkit-filter:blur(.7px);
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-box-reflect: below -75px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent), to(rgba(255,255,255,0.2)));
+  width:70%;
+}
+
+table {
+	font-size:14px;
+	clear:both;
+}
+
+table form {
+	display:inline;
+	clear:both;
+}
+
+
+#register input {
+	margin: 0 auto;
+	width:40%;
+}
+
+#login {
+  margin:auto;
+  z-index: 1;
+  color: rgba(0, 0, 0, 255);
+  background-color: rgba(130, 130, 130, .2);
+  filter:blur(.5px);
+    -o-filter:blur(.7px);
+    -ms-filter:blur(.7px);
+    -moz-filter:blur(.7px);
+    -webkit-filter:blur(.7px);
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-box-reflect: below -45px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.2)));
+  width:70%;
+}
+
+.badge {
+	font-weight:bold;
+	font-style:italic;
+}
+
+span {
+	background-color:darkpink;
+	text-align:center;
+	border:5px;
+	margin:0 auto;
+}
+
+
+#login input {
+	margin: 0 auto;
+	width:40%;
+}
+
+
+/*----- Menu Outline -----*/
+.menu-wrap {
+    width:100%;
+    box-shadow:0px 1px 3px rgba(0,0,0,0.2);
+    background:#3e3436;
+    opacity:0.9;
+}
+ 
+.menu {
+    width:100%;
+    margin:0px auto;
+}
+ 
+.menu li {
+    margin:0px;
+    list-style:none;
+    font-family:'Ek Mukta';
+}
+ 
+.menu a {
+    transition:all linear 0.15s;
+    text-decoration:none;
+    color:white;
+}
+ 
+.menu li:hover > a, .menu .current-item > a {
+    text-decoration:none;
+    color:cyan;
+}
+
+
+/*----- Top Level -----*/
+.menu > ul > li {
+    float:left;
+    display:inline-block;
+    position:relative;
+    font-size:19px;
+    background-color: transparent !important;
+}
+ 
+.menu > ul > li > a {
+    padding:1px 45px;
+    display:inline-block;
+    text-shadow:0px 1px 0px rgba(0,0,0,0.4);
+}
+ 
+.menu > ul > li:hover > a, .menu > ul > .current-item > a {
+    background:#2e2728;
+}
+
+
+
+/*----- Bottom Level -----*/
+.menu li:hover .sub-menu {
+    z-index:1;
+    opacity:1;
+}
+ 
+.sub-menu {
+    width:140%;
+    padding:5px 0px;
+    position:absolute;
+    top:100%;
+    left:0px;
+    z-index:-1;
+    opacity:0;
+    transition:opacity linear 0.15s;
+    box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+    background: rgba(46,39,40,0.8);
+
+}
+ 
+.sub-menu li {
+    display:block;
+    font-size:16px;
+}
+ 
+.sub-menu li a {
+    padding:10px 30px;
+    display:block;
+}
+ 
+.sub-menu li a:hover, .sub-menu .current-item a {
+	background: rgba(62,52,54,0.6);
+}

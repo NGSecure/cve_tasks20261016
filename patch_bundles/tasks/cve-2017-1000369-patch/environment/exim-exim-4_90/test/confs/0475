@@ -1,0 +1,21 @@
+# Exim test configuration 0475
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = $local_part
+
+
+# ----- ACL -----
+
+begin acl
+
+a1:
+  deny hosts = 1.2.3.4 : <; 1.2.3.4::5.6.7.8
+
+a2:
+  deny hosts = 1.2.3/24
+
+# End

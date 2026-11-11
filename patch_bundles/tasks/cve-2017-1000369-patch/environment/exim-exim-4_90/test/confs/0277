@@ -1,0 +1,17 @@
+# Exim test configuration 0277
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+hostlist lookup_hosts = V4NET.2.3.4
+hostlist never_hosts = V4NET.6.7.8
+hostlist n1_hosts = V4NET.1.1.1
+hostlist n2_hosts = <; V4NET.2.2.2 ; +n1_hosts
+
+host_lookup = +lookup_hosts : !+never_hosts
+sender_unqualified_hosts = +lookup_hosts : !+n2_hosts
+
+# End

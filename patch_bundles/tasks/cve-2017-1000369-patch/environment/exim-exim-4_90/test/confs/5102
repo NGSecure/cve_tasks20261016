@@ -1,0 +1,49 @@
+# Exim test configuration 5102
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+bounces:
+  driver = redirect
+  allow_defer
+  data = :blackhole:
+  retry_use_local_part
+  senders = :
+
+smartuser:
+  driver = accept
+  retry_use_local_part
+  transport = lmtp
+
+
+# ----- Transports -----
+
+begin transports
+
+lmtp:
+  driver = lmtp
+  batch_max = 100
+  socket = DIR/test.socket
+  timeout = 1s
+  user = EXIMUSER
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

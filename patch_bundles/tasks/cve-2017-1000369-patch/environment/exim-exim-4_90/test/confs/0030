@@ -1,0 +1,49 @@
+# Exim test configuration 0030
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_rcpt
+
+
+# ------ ACL ------
+
+begin acl
+
+check_rcpt:
+  accept  message   = <<$address_data>>
+          verify    = recipient
+          message   = >>$address_data<<
+          condition = no
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = accept
+  address_data = data from accept router
+  local_parts = OK
+  transport = t1
+
+# Always declines, but sets $address_data
+
+r2:
+  driver = redirect
+  address_data = data from redirect router
+  data =
+
+
+# ------ Transports ------
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+
+# End

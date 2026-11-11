@@ -1,0 +1,76 @@
+# Exim test configuration 3401
+
+.include DIR/aux-var/std_conf_prefix
+
+log_selector = +smtp_mailauth
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+
+
+# ----- Authentication -----
+
+begin authenticators
+
+login:
+  driver = plaintext
+  public_name = LOGIN
+  client_send = : userx : secret
+  client_set_id = userx
+
+plain:
+  driver = plaintext
+  public_name = PLAIN
+  client_send = ^userx^secret
+
+xlogin:
+  driver = plaintext
+  public_name = XLOGIN
+  client_send = : $auth1 : $auth1+$auth2
+  client_set_id = $auth1
+
+
+# ----- Routers -----
+
+begin routers
+
+try:
+  driver = manualroute
+  route_list = domain.com 127.0.0.1 byname
+  self = send
+  transport = smtp_try
+
+force:
+  driver = manualroute
+  route_list = authdomain.com 127.0.0.1 byname
+  self = send
+  transport = smtp_force
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp_try:
+  driver = smtp
+  hosts_try_auth = *
+  port = PORT_S
+  authenticated_sender = ${if eq{$local_part}{forcesender}{force@x.y.z}fail}
+
+smtp_force:
+  driver = smtp
+  hosts_require_auth = *
+  port = PORT_S
+
+
+# ----- Retry -----
+
+
+begin retry
+
+*  auth_failed
+*  *  F,1h,10m
+
+# End

@@ -1,0 +1,23 @@
+# Exim test configuration 0234
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+
+domainlist relay_domains = @mx_any
+
+
+# ----- ACLs -----
+
+begin acl
+
+check_recipient:
+  accept  domains = +relay_domains
+  deny    message = relay not permitted
+
+
+# End

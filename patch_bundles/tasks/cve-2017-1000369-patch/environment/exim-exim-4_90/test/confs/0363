@@ -1,0 +1,32 @@
+# Exim test configuration 0363
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+percent_hack_domains = *
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts = 127.0.0.1
+  port = PORT_S
+  allow_localhost
+
+
+# End

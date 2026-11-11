@@ -1,0 +1,42 @@
+# Exim test configuration 5002
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+all:
+  driver = accept
+  retry_use_local_part
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  directory = DIR/test-mail
+  maildir_format
+  quota = 1.5K
+  quota_filecount = ${if eq {$local_part}{qqq}{1}{4}}
+  user = CALLER
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

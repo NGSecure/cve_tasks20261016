@@ -1,0 +1,25 @@
+# Exim test configuration 3413
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+smtp_accept_max_nonmail = 3
+
+# Set this large to avoid it biting first
+smtp_max_synprot_errors = 20
+
+# ----- Authenticators -----
+
+begin authenticators
+
+plain:
+  driver = plaintext
+  public_name = PLAIN
+  server_condition = "\
+    ${if and {{eq{$2}{userx}}{eq{$3}{secret}}}{yes}{no}}"
+  server_set_id = $2
+
+# End

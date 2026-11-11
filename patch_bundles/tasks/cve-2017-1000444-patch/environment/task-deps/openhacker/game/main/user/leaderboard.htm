@@ -1,0 +1,27 @@
+<div id="content">
+<h1>Leaderboard</h1>
+<!--  <p>Users &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Clans</p> -->
+
+<?php
+
+$sql3 = "SELECT id, username, experience, hp, level, regdate  FROM accounts, (SELECT @curRank := 0) r WHERE deleted < 1 AND experience > 0 AND role != 'admin' AND role!= 'moderator' ORDER BY experience DESC";
+$result3 = $conn->query($sql3);
+$num = 0;
+echo "<br>";
+
+if ($result3->num_rows > 0) {
+	$count = 0;
+     echo "<div id=admintable><table><tr><th>Rank</th><th>Username</th><th>EP</th><th>HP</th><th>Level</th><th>Registration Date</th></tr>";
+     // output data of each row
+     while($row = $result3->fetch_assoc()) {
+		$count = $count + 1;
+         echo "<tr><td> $count </td><td> <a href=?a=profile&id=" . $row["id"]. ">" . $row["username"]. "</a></td><td>" . $row["experience"]. "</td><td>" . $row["hp"]. "</td><td>" . $row["level"] . "</td><td>" . $row["regdate"] . "</td></tr>";
+     }
+     echo "</table>";
+} else {
+     echo "0 results";
+};
+
+?>
+</div>
+</div>

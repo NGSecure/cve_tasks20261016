@@ -1,0 +1,43 @@
+# Exim test configuration 0388
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = redirect
+  senders = :
+  local_parts = CALLER
+  data = :blackhole:
+
+r1:
+  driver = manualroute
+  route_list = * "127.0.0.1 : V4NET.0.0.0"
+  transport = smtp
+  self = send
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  hosts_max_try = 1
+  port = PORT_S
+  connect_timeout = 2s
+  address_retry_include_sender = false
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1s,1s
+
+# End

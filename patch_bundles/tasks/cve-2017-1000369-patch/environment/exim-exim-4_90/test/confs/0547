@@ -1,0 +1,18 @@
+# Exim test configuration 0547
+
+MAXNM = 100
+LOG_SELECTOR =
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+
+log_selector = +smtp_no_mail LOG_SELECTOR
+
+smtp_accept_max_nonmail = MAXNM
+
+# End

@@ -1,0 +1,35 @@
+# Exim test configuration 9001
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = accept
+  senders = :
+  transport = t1
+
+r1:
+  driver = redirect
+  data = ${lookup ldap user="cn=xxx,o=yyy,c=UK" pass="secret" \
+         ldap:///o=zzz,c=UK,?sn?sub?(cn=foo)}}
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# End

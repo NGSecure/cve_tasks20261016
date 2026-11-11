@@ -1,0 +1,9 @@
+# Exim test configuration 5800
+# DANE common
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+

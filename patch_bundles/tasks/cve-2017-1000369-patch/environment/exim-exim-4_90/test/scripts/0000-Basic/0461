@@ -1,0 +1,72 @@
+# fallback_hosts after main hosts have timed out
+need_ipv4
+#
+server PORT_S
+220 server ready
+EHLO
+250 OK
+MAIL
+250 OK
+RCPT
+250 OK
+DATA
+354 OK
+.
+250 OK
+QUIT
+221 OK
+****
+exim -odi userx@test.ex
+Short message
+****
+sleep 2
+server PORT_S
+220 server ready
+EHLO
+250 OK
+MAIL
+250 OK
+RCPT
+250 OK
+DATA
+354 OK
+.
+250 OK
+QUIT
+221 OK
+****
+exim -odi userx@test.ex
+Short message
+****
+sleep 1
+server PORT_S
+220 server ready
+EHLO
+250 OK
+MAIL
+250 OK
+RCPT
+250 OK
+DATA
+354 OK
+.
+250 OK
+QUIT
+221 OK
+****
+exim -DRETRY1=5s -odi userx@test.ex
+Short message
+****
+exim -DFALLBACK= -odi userx@test.ex
+Short message
+****
+exim -DFALLBACK= -DROUTE_DATA=V4NET.0.0.2 -odi userx@test.ex
+Short message
+****
+sleep 3
+exim -DFALLBACK= -DROUTE_DATA=V4NET.0.0.2 -DRETRY2=5s -q
+****
+exim -DFALLBACK= -DROUTE_DATA=V4NET.0.0.2 -odi userx@test.ex
+Short message
+****
+no_msglog_check

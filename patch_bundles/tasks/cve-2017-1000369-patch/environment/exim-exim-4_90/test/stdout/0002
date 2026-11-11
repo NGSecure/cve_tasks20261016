@@ -1,0 +1,956 @@
+> 
+> # These expansions can test variables in the configuration, but as there
+> # is no message being processed, there is no message-related data. But
+> # that of course gets tested in plenty of other places.
+> 
+> # Some fixed variables
+> 
+> exim_path: TESTSUITE/eximdir/exim
+> exim_version: x.yz
+> config_dir: TESTSUITE
+> config_file: TESTSUITE/test-config
+> primary_hostname: myhost.test.ex
+> primary_hostname: myhost.test.ex
+> qualify_domain: myhost.test.ex
+> bounce_return_size_limit: 102400
+> spool_directory: TESTSUITE/spool
+> queue_name: 
+> Failed: unknown variable in "${unknown}"
+> h_subject: (should be empty)
+> h_subject: (should be empty)
+> Failed: unknown expansion operator "header_subject"
+> 
+> # $message_headers should be empty
+> message_headers: ><
+> 
+> # Continuation
+> xy
+> xy
+> 
+> # Overlong names and overbig numbers
+> 
+> Failed: unknown variable name "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+> Failed: unknown variable in "${aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}"
+> +
+> +
+> 
+> # List operations
+> 
+> filter: "a:b:c"
+> filter: a:c
+> filter: a'c
+> filter: ''a' ''c
+> filter: ""
+> 
+> map: ""
+> map: a:b:c
+> map: ::a::: ::b::: ::c::
+> map: fail string
+> map: []:[b]:[c]
+> 
+> reduce: "+"
+> reduce: +abc
+> reduce: 6
+> reduce: 9
+> # Check for extract corrupting reduce's 
+> reduce: a , b
+> 
+> listnamed: *.aa.bb : ^\Nxxx(.*)
+> listnamed: *.aa.bb : ^\Nxxx(.*)
+> listnamed: V4NET.11.12.13 : iplsearch;TESTSUITE/aux-fixed/0002.iplsearch
+> listnamed: *.aa.bb : ^\Nxxx(.*) : ;;
+> listnamed: a : b;c : *.aa.bb : ^\Nxxx(.*) : ;; : 2001::630::212::8::204::::b664
+> Failed: "nolist" is not a named list
+> listnamed: *.aa.bb : ^\Nxxx(.*)
+> Failed: "hlist" is not a domain named list
+> Failed: bad suffix on "list" operator
+> 
+> listcount: 3
+> listcount: 0
+> listcount: 3
+> listcount: 2
+> 
+> listextract: b
+> listextract: XcX
+> listextract: 
+> listextract: 
+> listextract: fail
+> Failed: "listextract" failed and "fail" requested
+> 
+> sort: 1:2:3:4
+> sort: 4,3,2,1
+> sort: a:aa:B:c
+> sort: 10 smtp.ex.com:100 r2.ex.com:666 r99.ex.com
+> sort: 10,smtp.ex.com:100,r2.ex.com:666,r99.ex.com
+> sort: ""
+> 
+> # Tests with iscntrl() and illegal separators
+> 
+> map: 'a'
+''
+'b'
+'c'
+> 
+> Failed: error in expression evaluation: expecting number or opening parenthesis (after processing "0+") inside "reduce" item
+> reduce: 6
+> reduce: 6
+> reduce: 6
+> 
+> # Operators
+> 
+> Failed: Not enough arguments for 'acl' (min is 1)
+> Failed: Not enough arguments for 'acl' (min is 1)
+> Failed: error from acl "a_nosuch"
+> acl: (0) [] []
+> acl: (1) [person@dom.ain] []
+> acl: (2) [firstarg] [secondarg]
+> acl: (1) [arg with spaces] []
+> acl: 
+> acl: 
+> acl: (0) [] []
+> acl: (1) [person@dom.ain] []
+> Failed: error from acl "a_defer"
+> acl: (2) [new arg1] [top_arg_1]
+> acl:  (1) [1] [] (1) [2] [] (1) [3] [] (1) [4] []
+> 
+> addrss: local-part@dom.ain
+> addrss: local-part@dom.ain
+> domain: dom.ain
+> domain: dom.ain
+> 
+> addresses: ''abc@xyz' ''pqr@xyz
+> addresses: local-part@dom.ain
+> addresses: local-part@dom.ain+xyz@abc
+> addresses: local-part@dom.ain:xyz@abc:p@q:r@s
+> addresses: 
+> Failed: output separator missing in expanding ${addresses:>}
+> 
+> escape:     B7\267F2\362
+> excape8bit: undisturbed text	tab
+newline	tab\134backslash ~tilde\177DEL\200\201.
+> 
+> eval:   2
+> eval:   7
+> eval:   9
+> eval:   4
+> eval:   6
+> eval:   42
+> Failed: error in expression evaluation: expecting number or opening parenthesis (after processing "")
+> eval:   -2
+> eval:   1
+> eval:   1
+> Failed: error in expression evaluation: expecting closing parenthesis (after processing "-2 - (-3")
+> Failed: error in expression evaluation: expecting operator (after processing "-2 - -3")
+> eval:   1
+> eval:   -5
+> eval:   1
+> eval:   40962
+> eval:   63
+> Failed: error in expression evaluation: expecting operator (after processing "0")
+> eval10: 77
+> eval10: 8
+> Failed: error in expression evaluation: expecting operator (after processing "0")
+> eval:   4
+> eval:   4
+> eval:   4
+> eval:   13
+> eval:   9
+> eval:   6
+> eval:   3
+> eval:   0
+> eval:   24
+> eval:   4608
+> eval:   4608
+> eval:   -4608
+> 
+> expand: $primary_hostname myhost.test.ex
+> hash:   jmg monty fbWx
+> hash:   abcX abX aX X
+> hex2b64:EjRWeA==
+> hex2b64:q83v
+> hex2b64:q83v
+> hex2b64:Gis8TV5v
+> Failed: "1a2b3c4d5e6" contains an odd number of characters
+> Failed: "1a2b3c4d5e6g" is not a hex string
+> hex2b64:MPPJPkZDbetYunCBao7BJA==
+> hex2b64:ztcfpyNSMb7Tg/rP3EHE3cwi7PE=
+> 
+> base32: 0  <>
+> base32: 1  <b>
+> base32: 31 <7>
+> base32: 32 <ba>
+> base32: 42 <bk>
+> Failed: argument for base32 operator is "0x1", which is not a decimal number
+> 
+> base32d: 0  0
+> base32d: 1  1
+> base32d: 31 31
+> base32d: 32 32
+> base32d: 42 42
+> Failed: argument for base32d operator is "ABC", which is not a base 32 number
+> 
+> the base62 operator is actually a base36 operator in the Darwin and Cygwin
+> environments. Write cunning tests that produce the same output in both cases,
+> while doing a reasonable check.
+> 
+> base62:  OK
+> base62d: OK
+> base62d: OK
+> Failed: argument for base62 operator is "12345x", which is not a decimal number
+> Failed: argument for base62d operator is "0003D7.", which is not a base 36/62 number
+> 
+> hmac:   dd97e3ba5d1a61b5006108f8c8252953
+> hmac:   0210cf9d274b53f1550f657c378b29e8bfed1064
+> md5:    77add1d5f41223d5582fca736a5cb335
+> sha1:   DA39A3EE5E6B4B0D3255BFEF95601890AFD80709
+> sha1:   A9993E364706816ABA3E25717850C26C9CD0D89D
+> mask:   192.168.10.192/28
+> mask:   192.168.10.206/32
+> Failed: mask value too big in "192.168.10.206/33"
+> mask:   0.0.0.0/0
+> Failed: missing mask value in "192.168.10.206"
+> Failed: "a.b.c.d" is not an IP address
+> ipv6denorm: 0000:0000:0000:0000:0000:0000:0000:0001
+> ipv6denorm: fe00:0000:0000:0000:0000:0000:0000:0001
+> ipv6denorm: 0000:0000:0000:0000:0000:ffff:c0a8:0001
+> ipv6denorm: fe80:0000:0000:0000:0000:0000:c0a8:0001
+> ipv6norm:   ::1
+> ipv6norm:   2a00::
+> ipv6norm:   2a00::1
+> ipv6norm:   2a00:eadf::1:0
+> ipv6norm:   2a00:eadf:0:1::
+> ipv6norm:   2a00::
+> ipv6norm:   2a00:2:3:4:5:6:7:8
+> nhash:  19 0/61
+> lc/uc:  the quick  BROWN FOX
+> length: The quick  abc
+> lclpt:  local-part
+> lclpt:  local-part
+> quote:  aZ09_.-Q "ab*cd" "abcd\"ef"
+> quote:  "nl(\n)"
+> quote:  "cr(\r)"
+> quote:  "tab(	)"
+> quote:  "xff(ÿ)"
+> quote:  Empty>""<
+> quote_local_part: abcd
+> quote_local_part: O'Reilly
+> quote_local_part: "a space"
+> quote_local_part: ".something"
+> quote_local_part: "something."
+> quote_local_part: joe.bloggs
+> quote_local_part: a!b
+> quote_local_part: "x@y"
+> quote_local_part: ab*cd
+> quote_local_part: "x:y"
+> quote_local_part: "abcd\"ef"
+> quote_local_part: ""
+> rxquote:aZ09\_\,\-Q ab\*cd abcd\"ef
+> hexquote: \x01\x02\x03\x04\x05\x06\x07\x20\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x20\x10\x11\x12\x13\x14\x15\x16\x17\x20\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\x20!"#$%&'\x20()*+,-./\x2001234567\x2089:;<=>?\x20@ABCDEFG\x20HIJKLMNO\x20PQRSTUVW\x20XYZ[\]^_\x20`abcdefg\x20hijklmno\x20pqrstuvw\x20xyz{|}~\x7f
+> substr: ba 34  1
+> substr: barb rhuba
+> substr: 
+> substr: 
+> str2b64:YWJjZA==
+> str2b64:VGhlIHF1aWNrIGJyb3duIAogZm94
+> base64: YWJjZA==
+> base64: VGhlIHF1aWNrIGJyb3duIAogZm94
+> base64d:abcd
+> base64d:The quick brown 
+ fox
+> strlen: 0
+> strlen: 1
+> strlen: 8
+> time_eval:     10
+> time_eval:     7200
+> time_eval:     86700
+> time_eval:     788645
+> Failed: string "14" is not an Exim time interval in "time_eval" operator
+> Failed: string "rhubarb" is not an Exim time interval in "time_eval" operator
+> time_interval: 0s
+> time_interval: 44s
+> time_interval: 1w4d13h46m39s
+> Failed: string "-1" is not a positive number in "time_interval" operator
+> Failed: string "rhubarb" is not a positive number in "time_interval" operator
+> 
+> # stat is a bit tricky, but some of the fields of the aux-var directory
+> # should be the same on all systems
+> 
+> stat:   40755
+> stat:   drwxr-xr-x
+> Failed: stat(/a/non/existent/file) failed: No such file or directory
+> 
+> # "Operators" that have expanded arguments
+> 
+> hash:   jmg monty fbWx
+> hash:   abcX abX aX X
+> nhash:  19 0/61
+> length: The quick  abc
+> substr: ba 34  1
+> substr: 
+> 
+> # Error forms
+> 
+> Failed: Not enough arguments for 'hash' (min is 2)
+> Failed: "nonnumber" is not a number (in "hash" expansion)
+> Failed: Too many arguments for 'hash' (max is 3)
+> Failed: "-2" is not a positive number (in "substr" expansion)
+> 
+> # Skipped operators
+> 
+> addrss: NO
+> domain: NO
+> escape: NO
+> expand: NO
+> hash:   NO
+> md5:    NO
+> mask:   NO
+> 
+> # Number suffixes in conditions
+> 1k: y
+> 1K: y
+> 1M: y
+> 1G: y
+> 
+> # Numeric overflow
+> # >32b should work, >64b not
+> 
+> 1 > 2047M                n
+> 1 > 2048M                n
+> 1 > 4096000000           n
+> 1 > 4096M                n
+> 1 > 4611686018427387904  n
+> Failed: absolute value of integer "46116860184273879040" is too large (overflow)
+> 
+> # Conditions
+> 
+> 2=2:    y
+> 2==2:   y
+> 3=2:    n
+> 2==3:   n
+> !2=2:   n
+> !2==2:  n
+> !3=2:   y
+> !2==3:  y
+> 2>3:    n
+> 3>3:    n
+> 4>3:    y
+> 1>-1:   y
+> 2>=3:   n
+> 3>=3:   y
+> 4>=3:   y
+> 2<3:    y
+> 3<3:    n
+> 4<3:    n
+> 2<=3:   y
+> 3<=3:   y
+> 4<=3:   n
+> 5<=3:   n
+> -3<=1:  y
+> 
+> 5>3k:   n
+> 5>3m:   n
+> Failed: invalid integer "3z "
+> Failed: integer expected but "a" found
+> Failed: integer expected but "${substr_2_2:65535}" found
+> 
+> >0:     n
+> =:      y
+> -2<:    y
+> 08>07:  y
+> 011=11: y
+> 
+> def:y   y
+> def:n   n
+> Failed: unknown variable "post" after "def:"
+> def:h_f n
+> def:h_f n
+> Failed: curly-bracket problem in conditional yes/no parsing: 'yes' part did not start with '{'
+ remaining string is ':{y}{n}}'
+> 
+> exists: y
+> exists: n
+> 
+> eq:     y
+> eq:     n
+> !eq:    n
+> !eq:    y
+> 
+> eqi:    y
+> eqi:    y
+> eqi:    n
+> !eqi:   n
+> !eqi:   n
+> !eqi:   y
+> 
+> lt:     y
+> lti:    n
+> le:     y
+> lei:    y
+> gt:     n
+> gti:    n
+> ge:     n
+> gei:    y
+> 
+> isip:   y  1.2.3.4
+> isip4:  y  1.2.3.4
+> isip6:  n  1.2.3.4
+> isip:   n  ::1.2.3.256
+> isip4:  n  1.2.3.256
+> isip:   n  1:2:3:4
+> isip4:  n  1:2:3:4
+> isip6:  n  1:2:3:4
+> isip:   y      ::1
+> isip4:  n      ::1
+> isip6:  y      ::1
+> isip:   y  fe80::a00:20ff:fe86:a061
+> isip4:  n  fe80::a00:20ff:fe86:a061
+> isip6:  y  fe80::a00:20ff:fe86:a061
+> isip:   y  fe80::1.2.3.4
+> isip:   n  rhubarb
+> isip4:  n  rhubarb
+> isip6:  n  rhubarb
+> 
+> match:  cdab
+> match:  cdab
+> match:  cdab
+> Failed: "if" failed and "fail" requested
+> match:  cd[xyz]ab
+> 
+> match_domain:    yes
+> match_domain:    no
+> match_domain:    yes
+> match_domain:    yes
+> match_domain:    no
+> 
+>  >x@zz.aa.bb< [] >x@zz.aa.bb< 
+> 
+>  >x@xxxabc< [] >x@xxxabc< 
+> 
+> match_address:   yes
+> match_address:   yes
+> 
+> match_local_part:yes
+> match_local_part:yes
+> 
+> match_ip:        01 true
+> match_ip:        02 
+> match_ip:        03 true
+> match_ip:        04 true
+> match_ip:        05 
+> match_ip:        06 
+> match_ip:        07 true
+> match_ip:        08 true
+> match_ip:        09 
+> match_ip:        10 true
+> Failed: "somename" is not an IP address
+> match_ip:        12 true
+> match_ip:        13 true
+> match_ip:        14 true
+> match_ip:        15 true
+> 
+> queue_running:  n
+> first_delivery: n
+> 
+> queue_running after or: y
+> first_delivery after or: y
+> 
+> # acl expansion condition
+> acl if: Y:(0) [] []
+> acl if: Y:(1) [argY] []
+> acl if: N:(2) [argN] [arg2]
+> Failed: error from acl "a_defer"
+> 
+> # Default values for both if strings
+> 
+> ${if eq{1}{1}}  >true<
+> ${if eq{1}{2}}  ><
+> 
+> # Lookups: DIR is the testing directory. In this test we can only use the
+> # lookups that are required in all cases.
+> 
+> CALLER
+> 
+> ==X@Y
+> ==*
+> ==*@Z
+> ==*
+> 
+> data for a.b.c.d
+> failed x.y.z
+> data for *.p.q
+> data for *.p.q
+> data for *.p.q
+> Failed: "lookup" failed and "fail" requested
+> data for *
+> 
+> q1:  "abc"
+> q2:  "xyz":
+> q3:  "pqr"  :
+> q4:  "a:b" abc continued data (make sure not key)
+> q5:  "\"quoted\""
+> q6:  "white space"
+> q7:  "b\\s"
+> 
+> abc:   abc
+> a.b.c: *.b.c
+> ab.c:  *b.c
+> xyz:   ^X
+> .Xyz:   ^X
+> .Zyz:   ^Z
+> a b:   "^a +b"
+> a  b:  "^a +b"
+> a:b:   lookup succeeded
+> a.b:   ^a\\.+b
+> a..b:  ^a\\.+b
+> a9b:   \N^a\d+b
+> a99b:  \N^a\d+b
+> 
+> # Should give the same results as above because expansion does nothing
+> 
+> abc:   abc
+> a.b.c: *.b.c
+> ab.c:  *b.c
+> xyz:   ^X
+> .Xyz:   ^X
+> .Zyz:   ^Z
+> a b:   "^a +b"
+> a  b:  "^a +b"
+> a:b:   lookup succeeded
+> 
+> # Should fail because of no expansion
+> 
+> a.b:   NO
+> a..b:  NO
+> a9b:   NO
+> a99b:  NO
+> 
+> # But these should succeed
+> 
+> a\:b:  ^a\\.+b
+> a\:Xb: ^a\\.+b
+> 
+> # Some tests of case-(in)dependence
+> 
+> .MiXeD-CD:  Data found for case-dependent MiXeD-CD
+> .MixeD-CD:  NOT FOUND
+> .MiXeD-Ncd: Data found for case-independent MiXeD-nCD
+> .MixeD-Ncd: Data found for case-independent MiXeD-nCD
+> 
+> # IP address (CIDR) lookups
+> 
+> 1.2.3.4:      data for 1.2.3.4
+> 1.2.3.5:      
+> 1.2.3.5:      data for *
+> abcd::cdab:   data for abcd::cdab
+> 192.168.1.2:  data for 192.168.0.0/16
+> 192.168.5.6:  data for 192.168.0.0/16
+> abcd:abcd::   data for abcd:abcd::/32
+> abcd:abcd:1:: data for abcd:abcd::/32
+> abcd:abcd::3  data for abcd:abcd::/32
+> Failed: lookup of "rhubarb" gave DEFER: "rhubarb" is not a valid iplsearch key (an IP address, with optional CIDR mask, is wanted): in a host list, use net-iplsearch as the search type
+> 
+> 
+> # Nested Lookups - style 1
+> 
+> The data for key1->key2
+> Failed: "lookup" failed and "fail" requested
+> 
+> # Nested Lookups - style 2
+> 
+> The data for key1->key2
+> failed for key4
+> 
+> # Other nesting tests
+> 
+> 1-in-1
+> 2-in-2
+> both-in-1,both-in-2
+> Failed: "lookup" failed and "fail" requested
+> 
+> # Lookup quotes for standardly expected lookups
+> 
+> lsearch  !@#$%^&*()_-+=|\~`1234567890{[}]qwertyuiop:;"'asdfghjkl<,>.?/zxcvbnm
+> Failed: unknown lookup type "xxx"
+> 
+> # Extract
+> 
+> 2
+> 2
+> 2
+> 2
+> empty:<>
+> empty:<>
+> <3>
+> <3>
+> empty:<>
+> empty:<>
+> no Z
+> no 4
+> Failed: "extract" failed and "fail" requested
+> Failed: "extract" failed and "fail" requested
+> D
+> a:b:c:d:e
+> a
+> e
+> a
+> FAIL
+> b
+> 
+> b
+> three four
+> Failed: first argument of "extract" must not be empty
+> Failed: first argument of "extract" must not be empty
+> b
+> 
+> a:b:c
+> Failed: missing '}' closing extract inside "map" item
+> a:b:c
+> 
+> # Translation
+> 
+> abcdea aaa xyz zbcdez
+> abcdea a   z   zbcdez
+> abcdea a       abcdea
+> abcdea abc z   zzzdez
+> 
+> # Boolean
+> "TrUe"                true      EXPECT: true
+> "FALSE"               false     EXPECT: false
+> " yes"                true      EXPECT: true
+> " no"                 false     EXPECT: false
+> "yes "                true      EXPECT: true
+> "-1"                  true     EXPECT: true
+> "0"                   false     EXPECT: false
+> "1"                   true      EXPECT: true
+> " 0 "                 false     EXPECT: false
+> " 1 "                 true      EXPECT: true
+> "1111111111111111111" true      EXPECT: true
+> "9"                   true      EXPECT: true
+> " "                   false     EXPECT: false
+> Failed: unrecognised boolean value "text"
+> Failed: unrecognised boolean value "text"
+> Failed: unrecognised boolean value "-text"
+> Failed: unrecognised boolean value "text"
+> Failed: unrecognised boolean value "text"
+> "00"                  false     EXPECT: false
+> "!true"               false     EXPECT: false
+> "!false"              true      EXPECT: true
+> 
+> "TrUe"                true      EXPECT: true
+> "FALSE"               false     EXPECT: false
+> " yes"                true      EXPECT: true
+> " no"                 false     EXPECT: false
+> "yes "                true      EXPECT: true
+> "-1"                  true      EXPECT: true
+> "0"                   false     EXPECT: false
+> "1"                   true      EXPECT: true
+> " 0 "                 false     EXPECT: false
+> " 1 "                 true      EXPECT: true
+> "1111111111111111111" true      EXPECT: true
+> "9"                   true      EXPECT: true
+> " "                   false     EXPECT: false
+> "text"                true      EXPECT: true
+> " text"               true      EXPECT: true
+> "text "               true      EXPECT: true
+> " text "              true      EXPECT: true
+> "00"                  true      EXPECT: true
+> "!true"               false     EXPECT: false
+> "!false"              true      EXPECT: true
+> 
+> # RFC 2047
+> 
+> abcd      abcd
+> <:abcd:>  =?iso-8859-8?Q?=3C=3Aabcd=3A=3E?=
+> <:ab cd:> =?iso-8859-8?Q?=3C=3Aab_cd=3A=3E?=
+> long:     =?iso-8859-8?Q?_here_we_go=3A_a_string_that_is_going_to_be_encoded=3A_?= =?iso-8859-8?Q?it_will_go_over_the_75-char_limit?=
+> long:     =?iso-8859-8?Q?_here_we_go=3A_a_string_that_is_going_to_be_encoded=3A_?= =?iso-8859-8?Q?it_will_go_over_the_75-char_limit_by_a_long_way=3B_in?= =?iso-8859-8?Q?_fact_this_one_will_go_over_the_150_character_limit?=
+> 
+> # RFC 2047 decode
+> 
+> abcd      abcd
+> <:abcd:>  <:abcd:>
+> <:ab cd:> <:ab cd:>
+> Long:      here we go: a string that is going to be encoded: it will go over the 75-char limit
+> Long:      here we go: a string that is going to be encoded: it will go over the 75-char limit by a long way; in fact this one will go over the 150 character limit
+> 
+> # UTF-8
+> 
+> abcd      abcd
+> aÀÿd      aÀÿd
+> toobig    a_d
+> 
+> # Substitution
+> 
+> ${sg{abcdefabcdef}{abc}{xyz}}          =xyzdefxyzdef
+> ${sg{ab:xy::z}{:}{::}}                 =ab::xy::::z
+> ${sg{abcdefabcdef}{(..)[^c]}{>$1<}}    =a><><><ef
+> ${sg{abcdefabcdef}{(..)[^c]}{>\$1<}}   =a>bc<>ef<>bc<ef
+> ${sg{abcdefabcdef}{(..)[^c]}{>\N$1\N<}}=a>bc<>ef<>bc<ef
+> ${sg{abbab}{a*}{+}}                    =++b+b++b+
+> 
+> # File insertion
+> 
+> Failed: Not enough arguments for 'readfile' (min is 1)
+> abcde
+12345
+
+xyz
+
+> abcde12345xyz
+> abcde:12345::xyz:
+> abcde - 12345 -  - xyz - 
+> Failed: failed to open /non/exist/file: No such file or directory
+> non-exist
+> >abcde!12345!!xyz!<
+> 
+> # Calling a command
+> 
+> abcd
+1234
+
+> rc=0
+> 1
+> rc=0
+> abcd
+1234
+
+> rc=0
+> 2
+> rc=1
+> abcd
+1234
+
+> rc=1
+> N
+> rc=127
+> >><<
+> rc=0
+> 1!=2
+> rc=0
+> 
+> # PRVS
+> 
+> prvs=xxxxxxxxxx=userx@test.ex
+> prvs=xxxxxxxxxx=userx@test.ex
+> prvs=xxxxxxxxxx=userx@test.ex
+> 
+> # Syntax errors
+> 
+> Failed: prvs third argument must be a single digit
+> Failed: prvs third argument must be a single digit
+> Failed: prvs third argument must be a single digit
+> 
+> # Correct checks; can't put explicit addresses in the tests, because they
+> # will change over time.
+> 
+> userx@test.ex
+> result=1
+> 
+> >1< >userx@test.ex< >1<
+> result=1
+> 
+> userx@test.ex
+> result=1
+> 
+> # Incorrect secret
+> 
+> userx@test.ex
+> result=
+> 
+> 0
+> result=
+> 
+> # Non-prvs address
+> 
+> >><<
+> result=
+> 
+> # Syntax errors
+> 
+> Failed: "${tod_log" is not a known operator (or a } is missing in a variable reference)
+> Failed: "${tod_log" is not a known operator (or a } is missing in a variable reference)
+> Failed: missing } at end of string
+> Failed: missing } at end of string
+> Failed: hmac algorithm "xxx" is not recognised
+> Failed: each subcondition inside an "and{...}" condition must be in its own {}
+> Failed: unknown condition "xya" inside "and{...}" condition
+> Failed: condition name expected, but found "${lookup{x}lsear" inside "and{...}" condition
+> Failed: missing } at end of string - could be header name not terminated by colon
+> Failed: curly-bracket problem in conditional yes/no parsing: did not close with '}'
+ remaining string is ''
+> Failed: missing or misplaced { or } - could be header name not terminated by colon
+> Failed: each subcondition inside an "or{...}" condition must be in its own {}
+> Failed: missing } at end of condition inside "or" group
+> Failed: unknown condition "yes" inside "or{...}" condition
+> Failed: non-digit after underscore in "substr_1_"
+> Failed: non-digit after underscore in "substr__3"
+> 
+> # Iterations: forany and forall
+> 
+> yes
+> yes
+> yes
+> no
+> yes
+> no
+> no
+> yes
+> yes
+> 
+> Failed: unknown condition "yes" inside "forany" condition
+> Failed: missing } at end of condition inside "forany"
+> 
+> yes
+> no
+> no
+> no
+> 
+> no
+> yes
+> yes
+> yes
+> 
+> # Expect yes
+> outer=yes item='' (unset)
+> 
+> # Expect no
+> outer=no
+> 
+> # Error inside nest - check message is helpful
+> Failed: missing } at end of condition inside "forall" inside "forany" condition
+> 
+> 
+> # Miscellaneous (for bug fixes, etc)
+> 
+> true
+> 
+> # Environment access
+> 
+> CALLER
+> correct
+> 
+> 
+> escape: B7·F2ò
+> 
+> primary_hostname: myhost.test.ex
+> match:  cdab
+> Failed: "if" failed and "fail" requested
+> yes
+> match_address:   no
+> 
+> -be Sender host name and address etc, all unset
+> -oMa  sender_host_address = 
+>       sender_host_port = 0
+> -oMaa sender_host_authenticated = 
+> -oMai authenticated_id = CALLER
+> -oMas authenticated_sender = CALLER@myhost.test.ex
+> -oMi  interface_address = 
+>       interface_port = -1
+> -oMr  received_protocol = 
+> -oMs  sender_host_name = 
+> -oMt  sender_ident = CALLER
+> 
+> -be Sender host name and address etc, all set except host name.
+> -oMa  sender_host_address = V4NET.0.0.1
+>       sender_host_port = 1234
+> -oMaa sender_host_authenticated = AAA
+> -oMai authenticated_id = philip
+> -oMas authenticated_sender = xx@yy.zz
+> -oMi  interface_address = 1.1.1.1
+>       interface_port = 99
+> -oMr  received_protocol = special
+> -oMt  sender_ident = me
+> 
+> -be Sender host name explicitly set
+> -oMa  sender_host_address = V4NET.0.0.1
+>       sender_host_port = 1234
+> -oMs  sender_host_name = my.host.name
+> 
+> be Sender host name lookup fails (V4NET.11.12.13 is not reverse registered)
+> -oMs  sender_host_name = 
+>       host_lookup_failed = 1
+> 
+> -be Sender host name and protocol set by Sendmail-compatible option
+> -p  received_protocol = special
+> -p  sender_host_name = host.name
+> 
+> -be Sender host name and address etc, all set except host name
+> -oMa  sender_host_address = V4NET.0.0.1
+>       sender_host_port = 1234
+> -oMaa sender_host_authenticated = AAA
+> -oMai authenticated_id = philip
+> -oMas authenticated_sender = xx@yy.zz
+> -oMi  interface_address = 1.1.1.1
+>       interface_port = 99
+> -oMr  received_protocol = special
+> ----> No lookup yet: No
+> -oMs  sender_host_name = ten-1.test.ex
+> -oMt  sender_ident = me
+> 
+
+**** SMTP testing session as if from host V4NET.0.0.1
+**** but without any ident (RFC 1413) callback.
+**** This is not for real!
+
+550 Administrative prohibition
+
+**** SMTP testing session as if from host V4NET.0.0.2
+**** but without any ident (RFC 1413) callback.
+**** This is not for real!
+
+550 Administrative prohibition
+
+**** SMTP testing session as if from host V4NET.0.0.0
+**** but without any ident (RFC 1413) callback.
+**** This is not for real!
+
+220 myhost.test.ex ESMTP Exim x.yz Tue, 2 Mar 1999 09:44:33 +0000
+250 OK
+250 Accepted
+354 Enter message, ending with "." on a line by itself
+550 reply_address=<>
+250 OK
+250 Accepted
+354 Enter message, ending with "." on a line by itself
+550 reply_address=<a@b>
+250 OK
+250 Accepted
+354 Enter message, ending with "." on a line by itself
+550 reply_address=<c@d>
+250 OK
+250 Accepted
+354 Enter message, ending with "." on a line by itself
+550 reply_address=<>
+250 OK
+250 Accepted
+354 Enter message, ending with "." on a line by itself
+550 reply_address=<x@y>
+221 myhost.test.ex closing connection
+
+**** SMTP testing session as if from host V4NET.0.0.0
+**** but without any ident (RFC 1413) callback.
+**** This is not for real!
+
+220 myhost.test.ex ESMTP Exim x.yz Tue, 2 Mar 1999 09:44:33 +0000
+250 OK
+250 Accepted
+354 Enter message, ending with "." on a line by itself
+550 reply_address=<>
+221 myhost.test.ex closing connection
+
+**** SMTP testing session as if from host V4NET.0.0.0
+**** but without any ident (RFC 1413) callback.
+**** This is not for real!
+
+220 myhost.test.ex ESMTP Exim x.yz Tue, 2 Mar 1999 09:44:33 +0000
+250 OK
+250 Accepted
+354 Enter message, ending with "." on a line by itself
+550 reply_address=<>
+221 myhost.test.ex closing connection
+> match_ip:        15 
+> match_ip:        16 
+> 
+> in list
+> in list
+> 

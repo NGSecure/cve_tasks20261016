@@ -1,0 +1,59 @@
+<script type="text/javascript">
+function checkDelete(){
+    return confirm('Are you sure?');
+}
+</script>
+
+<?php
+
+	$username = $_SESSION['login_user'];
+	$sql = "SELECT role FROM accounts WHERE username='$username'";
+	$result = $conn->query($sql);
+	$row = mysqli_fetch_assoc($result);
+
+if ($row["role"] == 'user') {
+	header("location: /");
+};
+	$result->free();
+?>
+
+<div id="admin">
+<div id="content">
+	<h1>Bank Logs</h1>
+	<br>
+
+<?php
+	
+	$sql = "SELECT id, userid, recvid, timestamp, details, amount, watchdog_approve FROM bank_transactions ORDER BY id DESC LIMIT 0,20";
+	$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+     echo "<div id=admintable><table><tr><th>ID</th><th>Sending User</th><th>Recieving User</th><th>Timestamp</th><th>Amount</th><th>WD Vote</th>";
+     // output data of each row
+     while($row = $result->fetch_assoc()) {
+		$UID = $row['userid'];
+		$RID = $row['recvid'];
+		$sql2 = "SELECT username FROM accounts WHERE id = '$UID'";
+		$sql3 = "SELECT username FROM accounts WHERE id = '$RID'";
+		$result2 = $conn->query($sql2);
+		$result3 = $conn->query($sql3);
+		while($row2 = $result2->fetch_assoc()) {
+				$uName = $row2['username'];
+		};
+		while($row3 = $result3->fetch_assoc()) {
+				$rName = $row3['username'];
+		};
+
+         echo "<tr><td>" . $row["id"]. "</td><td>$uName</td><td>$rName</td><td>" . $row["timestamp"]. "</td><td>" . $row["amount"]. "</td><td>" . $row["watchdog_approve"]. "</td>";
+         //echo "<td><form action='?m=dellog' onclick='return checkDelete()' method='POST'><input type='hidden' name='tempId' value='".$row["id"]."'/><button class='btn waves-effect waves-dark' type='submit' name='action'><i class='material-icons center'>delete</i></button></form></td></tr>";
+     }
+     echo "</table>";
+} else {
+     echo "0 results";
+};
+
+$result->free();
+
+?>
+</div>
+</div>

@@ -1,0 +1,65 @@
+# Exim test configuration 0522
+
+TIMEOUTDEFER=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = accept
+  senders = :
+  transport = t0
+
+r1:
+  driver = accept
+  local_parts = nofilter
+  transport = t1
+
+r2:
+  driver = accept
+  transport = t2
+
+
+
+# ----- Transports -----
+
+begin transports
+
+t0:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+t1:
+  driver = pipe
+  timeout = 1s
+  command = /bin/sleep 2
+  TIMEOUTDEFER
+
+t2:
+  driver = pipe
+  timeout = 5s
+  command = /bin/cat
+  transport_filter = /bin/sleep 2
+  transport_filter_timeout = 1s
+  TIMEOUTDEFER
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1h,1m
+
+
+# End

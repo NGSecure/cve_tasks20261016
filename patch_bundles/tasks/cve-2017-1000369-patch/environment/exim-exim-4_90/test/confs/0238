@@ -1,0 +1,46 @@
+# Exim test configuration 0238
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+rrr:
+  driver = manualroute
+  domains = ! +local_domains
+  require_files = un/qualified
+  route_list = * $domain byname
+  transport = smtp
+
+localuser:
+  driver = accept
+  local_parts = userx
+  require_files = ${if eq{$local_part}
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

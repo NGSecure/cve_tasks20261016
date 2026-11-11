@@ -1,0 +1,49 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+span {
+  font-size: 36px;
+}
+
+body {
+  min-width: 100vw;
+  margin: auto;
+  overflow-x: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+table {
+  margin: auto;
+  width: 200px;
+  font-size: 14px;
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+
+@media print {
+ 
+}
+
+table ~ table {
+  margin-top: 2rem;
+}
+
+td {
+  min-width: 75px;
+  text-align: center;
+}
+
+@media print {
+  @page {
+    margin: 2rem 0;
+  }
+
+  .same-page {
+    break-inside: avoid;
+  }
+}

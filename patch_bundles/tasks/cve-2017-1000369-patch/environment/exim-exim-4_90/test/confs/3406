@@ -1,0 +1,31 @@
+# Exim test configuration 3406
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+trusted_users = CALLER
+
+
+# ----- Authentication -----
+
+begin authenticators
+
+a1:
+  driver = plaintext
+  public_name = FIRST
+  server_advertise_condition = \
+    ${if eq{$sender_host_address}{10.0.0.2}{yes}{no}}
+  server_condition = yes
+
+a2:
+  driver = plaintext
+  public_name = SECOND
+  server_advertise_condition = \
+    ${if eq{$sender_host_address}{10.0.0.3}{yes}{no}}
+  server_condition = yes
+
+# End

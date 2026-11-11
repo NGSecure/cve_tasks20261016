@@ -1,0 +1,22 @@
+# Exim test configuration 0348
+
+RETRY=G,1,20m,1.5
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+qualify_domain = test.ex
+
+
+# ----- Retry -----
+
+
+begin retry
+
+*         *        RETRY
+
+# End

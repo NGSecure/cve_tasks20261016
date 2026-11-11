@@ -1,0 +1,36 @@
+# Exim test configuration 5004
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = redirect
+  data = "# Exim filter\nsave DIR/test-mail"
+  allow_filter
+  file_transport = t1
+  user = CALLER
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  maildir_format
+  message_prefix =
+  message_suffix =
+  user = CALLER
+
+
+# End

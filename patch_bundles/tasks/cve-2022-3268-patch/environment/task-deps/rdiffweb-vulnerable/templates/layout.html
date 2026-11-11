@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="{{ lang[0:2] }}">
+<head>
+{% block head %}
+<title>
+{% block title %}
+{% if title %}{{ title }}{% endif %}
+{% endblock title %}
+ - 
+{{ header_name }}
+</title>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', theme + '.css') }}" type="text/css">
+<link rel="shortcut icon" href="{{ url_for('favicon.ico') }}" >
+{% endblock head %}
+</head>
+<body>
+<!-- .navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">{% trans %}Toggle navigation{% endtrans %}</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <!-- Header_logo -->
+            <a class="navbar-brand" href="/">
+            {% if header_logo %}
+            <img src="{{ header_logo }}" style="display: inline">
+            {% else %}
+            <i class="icon-rdiffweb"></i>
+            {% endif %}
+            <!-- /Header_logo -->
+            <!-- Header_name -->
+            {{ header_name }}
+            <!-- /Header_name -->
+            </a>
+        </div>
+        {% if username %}
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li {{ attrib(class=active_page=='repo' and "active") }}><a href="{{ url_for('/') }}">{% trans %}Repositories{% endtrans %}</a></li>
+                <li {{ attrib(class=active_page=='status' and "active") }}><a href="{{ url_for('status') }}">{% trans %}Status{% endtrans %}</a></li>
+                {% if is_admin %}
+                <li {{ attrib(class=active_page=='admin' and "active") }}><a href="{{ url_for('admin') }}">{% trans %}Admin area{% endtrans %}</a></li>
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-user"></i> {{ username }} <span class="caret"></span></a>
+			        <ul class="dropdown-menu">
+			            <li class="dropdown-header">{% trans %}Signed in as {{ username }}{% endtrans %}</li>
+			            <li role="separator" class="divider"></li>
+			            <li><a href="{{ url_for('prefs', 'general') }}">Profile</a></li>
+			            <li><a href="{{ url_for('prefs', 'notification') }}">Notifications</a></li>
+			            <li role="separator" class="divider"></li>
+			            <li><a href="{{ url_for('logout') }}">{% trans %}Logout{% endtrans %}</a></li>
+			        </ul>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Include rdiffweb specifics -->
+<script src="{{ url_for('/static/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('/static/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('/static/js/plugins/jquery.validate.js') }}"></script>
+<script src="{{ url_for('/static/js/plugins/jquery.sortchildren.js') }}"></script>
+<script src="{{ url_for('/static/js/plugins/timsort.js') }}"></script>
+<script src="{{ url_for('/static/js/rdiffweb.js') }}"></script>
+{% if lang and lang[0:2] in ["fr", "ru"] %}
+<!-- Include translation for JQuery Validation -->
+<script src="/static/js/plugins/jquery.validate.{{ lang[0:2] }}.js"></script>
+{% endif %}
+
+<!-- /.navbar -->
+{% block body %}
+
+{% endblock %}
+<footer class="small text-center">{% trans %}Powered by {% endtrans %} <a href="{{footerurl}}">{{footername}}</a></footer>
+</body>
+</html>

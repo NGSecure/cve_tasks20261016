@@ -1,0 +1,46 @@
+# Exim test configuration 0332
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+queue_run_in_order
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  domains = no.delay
+  transport = t1
+
+r2:
+  driver = dnslookup
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  allow_localhost
+  hosts = 127.0.0.1
+  hosts_override
+  port = PORT_S
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1d,10m
+
+
+# End

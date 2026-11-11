@@ -1,0 +1,41 @@
+<HTML>
+<HEAD><TITLE>OutlookTwin Theme</TITLE>
+<script language="JavaScript">
+if (!document.layers) {
+	document.write('<Sty'+'le type="text/css">');
+	document.write('.plain {height:20; border:2px solid silver; text-align:center;}');
+	document.write('.vbtn {height:20; width:22; font:bold 10pt arial; border:2px solid silver;}');
+	document.write('.timebox {height:20; border:2px solid silver; font:9pt arial;}');
+	document.write('</STY'+'LE>');
+}
+</script>
+</HEAD>
+<BODY>
+
+<form>
+<a name="dateField1dummy:27"><input name="dateField1" value="" size="11" class="plain"></a><input name="popcal" type="button" value="..." class="vbtn" onclick="if(this.blur)this.blur();if(self.gfPop_1)gfPop_1.fPopMulti(this.form.dateField1);">
+<a name="dateField2dummy:27"><input name="dateField2" value="" size="11" class="plain"></a><input name="popcal" type="button" value="..." class="vbtn" onclick="if(this.blur)this.blur();if(self.gfPop_1)gfPop_1.fPopMulti(this.form.dateField2,[[2004,6,8],[2004,8,8],[2004,8]]);">
+</form>
+
+
+
+
+<font size=-1>
+<BR><BR> 
+<BR>NOTE: Set the gAgendaMask options to -1 to enable all agenda effects.
+<BR>NOTE: In this theme demo, we passed in a dynamic range constraint to the second date-picker (start from 2004.6.8 to 2004.8.8).
+</font>
+
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+
+
+
+<!-- NN4 calendar tags should sit at page bottom according to NN4Rules#6. -->
+<iframe name="gToday:outlookleft:agenda.js:gfPop_1" id="gToday:outlookleft:agenda.js:gfPop_1" src="ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
+<LAYER name="gToday:outlookleft:agenda.js:gfPop_1" src="npopeng.htm" background="npopeng.htm">     </LAYER></iframe>
+<iframe name="[gToday[0],gToday[1]+1]:outlookright:share[gfPop_1]:gfPop_2" id="[gToday[0],gToday[1]+1]:outlookright:share[gfPop_1]:gfPop_2" src="ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
+<LAYER name="[gToday[0],gToday[1]+1]:outlookright:share[gfPop_1]:gfPop_2" src="npopeng.htm" background="npopeng.htm">     </LAYER></iframe>
+</BODY>
+</HTML>

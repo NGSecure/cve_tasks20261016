@@ -1,0 +1,20 @@
+# Exim test configuration 0407
+
+HEADER_MAXSIZE=
+HEADER_LINE_MAXSIZE=
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+acl_smtp_rcpt = accept
+queue_only
+
+HEADER_MAXSIZE
+HEADER_LINE_MAXSIZE
+
+# End

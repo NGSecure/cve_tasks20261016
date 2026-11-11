@@ -1,0 +1,56 @@
+<script type="text/javascript">
+function checkDelete(){
+    return confirm('Are you sure?');
+}
+</script>
+
+<?php
+
+	$username = $_SESSION['login_user'];
+	$sql = "SELECT role FROM accounts WHERE username='$username'";
+	$result = $conn->query($sql);
+	$row = mysqli_fetch_assoc($result);
+
+if ($row["role"] == 'user') {
+	header("location: /");
+};
+	$result->free();
+?>
+
+<div id="admin">
+<div id="content">
+	<h1>System Logs</h1>
+	<br>
+
+<?php
+	
+	$sql = "SELECT id, username, alerttime, type FROM gamelogs ORDER BY id DESC LIMIT 0,20";
+	$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+
+     echo "<div id=admintable><table><tr><th>ID</th><th>Username</th><th>Date</th><th>Type</th>";
+     // output data of each row
+     while($row = $result->fetch_assoc()) {
+
+	$lookupUser = $row["username"];
+	$sql2 = "SELECT id FROM accounts WHERE username = '$lookupUser'";
+	$result2 = $conn->query($sql2);
+	while($row2 = $result2->fetch_assoc()) {
+		$userID = $row2["id"];
+	};
+	
+         echo "<tr><td>" . $row["id"]. "</td><td><a href=?a=profile&id=$userID>"  . $row["username"]. "</a></td><td>" . $row["alerttime"]. "</td><td>" . $row["type"]. "</td>";
+         //echo "<td><form action='?m=dellog' onclick='return checkDelete()' method='POST'><input type='hidden' name='tempId' value='".$row["id"]."'/><button class='btn waves-effect waves-dark' type='submit' name='action'><i class='material-icons center'>delete</i></button></form></td></tr>";
+     }
+     echo "</table>";
+} else {
+     echo "0 results";
+};
+
+$result->free();
+
+?>
+</div>
+</div>

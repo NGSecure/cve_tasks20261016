@@ -1,0 +1,39 @@
+# Exim test configuration 0300
+
+DELAY=0s
+PAH=127.0.0.1
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_connect = check_connect
+acl_smtp_helo = check_helo
+acl_smtp_rcpt = accept
+pipelining_advertise_hosts = PAH
+
+
+# ----- ACL -----
+
+begin ACL
+
+check_connect:
+  accept     delay = DELAY
+
+check_helo:
+  warn     condition = ${if eq {$sender_helo_name}{dis.able}{yes}{no}}
+           control = no_enforce_sync
+  accept
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = redirect
+  data = :blackhole:
+
+# End

@@ -1,0 +1,51 @@
+<script type="text/javascript">
+function checkDelete(){
+    return confirm('Are you sure?');
+}
+</script>
+
+<?php
+
+	$username = $_SESSION['login_user'];
+	$sql = "SELECT role FROM accounts WHERE username='$username'";
+	$result = $conn->query($sql);
+	$row = mysqli_fetch_assoc($result);
+
+if ($row["role"] == 'user') {
+	header("location: /");
+};
+	$result->free();
+?>
+
+<div id="admin">
+<div id="content">
+	<h1>User Management</h1>
+	<br>
+	
+
+<?php
+	
+	$username = $_SESSION['login_user'];
+	$sql = "SELECT id, username, password, email, role, lastip, lastlogindate, banned, deleted, regdate FROM accounts WHERE deleted < 1 AND banned < 1 AND role != 'system'";
+	$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+     echo "<div id=admintable><table><tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Last IP</th><th>Last Login</th><th>Registration Date</th><th>Action</th>";
+     // output data of each row
+     while($row = $result->fetch_assoc()) {
+    	 echo "<tr><td> <a href=?a=profile&id=" . $row["id"]. ">" . $row["id"]. "</a></td><td><a href=?a=profile&id=" . $row["id"]. ">" . $row["username"]. "</td><td>" . $row["email"]. "</td><td>" . $row["role"]. "</td><td>" . $row["lastip"]. "</td><td>" . $row["lastlogindate"]. "</td><td>" . $row["regdate"]. "";
+		 echo "<td><a href=?a=profile&id=" . $row["id"]. "><button type='submit' name='action'><i class='material-icons center'>edit</i></button></a>";
+		 echo "<input type='hidden' name='tempId' value='".$row["id"]."'/><form action='?m=deluser' method='POST'><button type='submit' name='action' action=''><i class='material-icons center'>delete</i></button></form>";
+		 echo "<input type='hidden' name='tempId' value='".$row["id"]."'/><form action='?m=banuser' method='POST'><button type='submit' name='action'><i class='material-icons center'>block</i></button></form></td>";
+     }
+     echo "</table>";
+} else {
+     echo "0 results";
+};
+
+
+$result->free();
+
+?>
+</div>
+</div>

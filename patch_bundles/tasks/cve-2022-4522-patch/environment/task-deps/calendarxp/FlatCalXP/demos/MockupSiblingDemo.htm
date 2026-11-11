@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>Mockup demo</TITLE>
+<style>
+.Nav {text-decoration:none; color:#773D08; font:bold 9pt arial;}
+</style>
+</HEAD>
+<BODY>
+
+<table border=0 cellspacing=0 cellpadding=4 width='660' style="background-color:#F8DEB5;">
+<tr>
+<td width=160 valign=top align=center >
+
+<table border=0 cellspacing=2 cellpadding=0><tr><td align=center>
+<table border=0 cellspacing=0 cellpadding=0 width="100%">
+<tr><td align=left><a class="Nav" href="javascript:void(0)" onmousedown="gfFlat_s.showPrevMon();return false" onmouseout="gfFlat_s.stopShowMon();if(this.blur)this.blur()" onmouseup="gfFlat_s.stopShowMon()">&laquo;</a></td>
+<td align=center><span id="smallCaption" class="Nav"></span></td>
+<td align=right><a class="Nav" href="javascript:void(0)" onmousedown="gfFlat_s.showNextMon();return false" onmouseout="gfFlat_s.stopShowMon();if(this.blur)this.blur()" onmouseup="gfFlat_s.stopShowMon()">&raquo;</a></td></tr>
+</table>
+</td></tr>
+
+<tr><td align=center>
+<iframe width=156 height=133 name="[2002,12]:msmall:agenda.js:gfFlat_s:plugins_s.js" id="[2002,12]:msmall:agenda.js:gfFlat_s:plugins_s.js" src="MockupSibling/iflateng.htm" scrolling="no" frameborder="0">
+</iframe>
+</td></tr>
+
+<tr><td align=center>
+<input type="Button" value="Go to Today" onclick="if(this.blur)this.blur();with(gfFlat_s)if(!fSetDate(gToday[0],gToday[1],gToday[2]))alert('You cannot select today!');return false;"
+style="width:98%;background:#E8E8F8;border:1px solid #6878A8;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='white', EndColorStr='#C6D6FD');">
+</td></tr>
+</table>
+
+</td>
+<td>
+<!--  FlatCalendar Tags (tag name and id must match) -->
+<iframe width=400 height=339 name="[2002,12]:mockup:share[gfFlat_s]:gfFlat_b:plugins_b.js" id="[2002,12]:mockup:share[gfFlat_s]:gfFlat_b:plugins_b.js" src="MockupSibling/iflateng.htm" scrolling="no" frameborder="0">
+</iframe>
+</td></tr></table>
+
+
+
+<BR>
+<OL>
+Note:
+<LI>This demo doesn't work in NN4.<BR>
+<LI>This demo set the default start month to Dec, 2002. To start from the current month, simply replace the [2002,12] with gToday in the name&id of the calendar tags.
+<LI>The mouse cursor will turn into a hand only if the underlying date has a non-empty action associated - e.g. January 1st.
+</OL>
+<BR>
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions,
+    Inc. All rights reserved.</em></font></div>
+
+
+</BODY>
+</HTML>

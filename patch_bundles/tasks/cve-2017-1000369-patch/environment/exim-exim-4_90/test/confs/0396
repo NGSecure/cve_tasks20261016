@@ -1,0 +1,12 @@
+# Exim test configuration 0396
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist fail = ${if eq {x}{y}{}fail}
+
+acl_smtp_rcpt = accept domains = +fail
+
+# End

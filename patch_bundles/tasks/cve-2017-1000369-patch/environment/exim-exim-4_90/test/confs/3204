@@ -1,0 +1,19 @@
+# Exim test configuration 3204
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+
+
+# ------ ACL ------
+
+begin acl
+
+check_recipient:
+  deny    senders = testdb;defer
+
+# End

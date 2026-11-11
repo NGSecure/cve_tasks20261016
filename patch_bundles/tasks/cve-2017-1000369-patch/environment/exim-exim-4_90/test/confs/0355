@@ -1,0 +1,34 @@
+# Exim test configuration 0355
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = redirect
+  file = .forward
+
+r1:
+  driver = accept
+  transport = t1
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  user = CALLER
+  file = DIR/test-mail/$local_part
+
+# End

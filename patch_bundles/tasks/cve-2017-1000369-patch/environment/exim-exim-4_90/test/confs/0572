@@ -1,0 +1,41 @@
+# Exim test configuration 0572
+
+OPT =
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector = +outgoing_port
+
+domainlist local_domains = test.ex : *.test.ex
+acl_smtp_rcpt = accept
+
+
+# ----- Routers -----
+
+begin routers
+
+my_main_router:
+  driver = manualroute
+  route_list = * 127.0.0.1
+  self = send
+  transport = my_smtp
+  hide debug_print = router_name <$router_name>
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+my_smtp:
+  driver = smtp
+  interface = HOSTIPV4
+  port = PORT_S
+  debug_print = transport_name <$transport_name>
+
+
+# End

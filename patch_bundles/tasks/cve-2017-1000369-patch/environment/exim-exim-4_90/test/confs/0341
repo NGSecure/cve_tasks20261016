@@ -1,0 +1,52 @@
+# Exim test configuration 0341
+
+SERVER =
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+queue_only
+
+
+# ----- Routers -----
+
+begin routers
+
+# Use an expansion for errors_to to force different copies of the string
+
+local:
+  driver = accept
+  domains = test.ex
+  transport = local_delivery
+  errors_to = postmaster@$domain
+
+remote:
+  driver = accept
+  condition = ${if eq {SERVER}{server}{no}{yes}}
+  transport = send_to_server
+  errors_to = mailmaster@$domain
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/mailbox
+  user = CALLER
+  batch_max = 10
+  envelope_to_add
+
+send_to_server:
+  driver = smtp
+  allow_localhost
+  hosts = 127.0.0.1
+  port = PORT_D
+
+
+# End

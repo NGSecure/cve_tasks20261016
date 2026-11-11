@@ -1,0 +1,16 @@
+# Exim test configuration 0601
+# udpsend
+
+exim_path = EXIM_PATH
+keep_environment =
+spool_directory = DIR/spool
+log_file_path = DIR/spool/log/%slog
+tls_advertise_hosts =
+queue_only
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept udpsend = <; 127.0.0.1 ; 1223 ; message from exim
+
+
+# End

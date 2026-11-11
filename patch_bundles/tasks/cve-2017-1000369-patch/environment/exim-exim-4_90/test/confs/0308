@@ -1,0 +1,20 @@
+# Exim test configuration 0308
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+# Use first three components of address to select ACL
+acl_smtp_rcpt = acl_${sg{${tr{$sender_host_address}{.}{_}}}{^(.*)_.*\$}{\$1}}
+
+# ----- ACLs -----
+
+begin acl
+
+acl_V4NET_0_0:
+  accept   hosts = *.test.ex
+  accept   hosts = V4NET.0.0.97
+
+# End

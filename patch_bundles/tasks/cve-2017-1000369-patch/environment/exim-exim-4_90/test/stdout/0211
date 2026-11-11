@@ -1,0 +1,55 @@
+
+******** SERVER ********
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+450 I'm busy
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Connected OK
+EHLO the.local.host.name
+450 I'm busy
+HELO the.local.host.name
+450 I'm busy
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Connected OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+550 Go away (A)
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Connected OK
+EHLO the.local.host.name
+550 Go away (B)
+HELO the.local.host.name
+550 Go away (C)
+QUIT
+250 OK
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+220 Connected OK
+EHLO the.local.host.name
+550 You are banned
+HELO the.local.host.name
+End of script
+Listening on port 1224 ... 
+Connection request from [127.0.0.1]
+554 no smtp service here
+QUIT
+220 bye
+Expected EOF read from client
+Listening on port 1224 ... 
+Connection request from [ip4.ip4.ip4.ip4]
+*sleep 2
+End of script

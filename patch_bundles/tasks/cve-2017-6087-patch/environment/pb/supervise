@@ -1,0 +1,14 @@
+#!/bin/bash
+# [patch-bundle] supervise <name> <cmd...> —— 等价于原 compose 的 restart: unless-stopped：
+# 服务进程退出后 2 秒重新拉起（原环境中容器 PID 1 退出即由 docker 重启该容器）。
+name=$1; shift
+trap 'kill -TERM "$child" 2>/dev/null; exit 0' TERM INT
+while :; do
+    echo "[pb $(date '+%F %T')] $name: starting: $*"
+    "$@" &
+    child=$!
+    wait "$child"
+    rc=$?
+    echo "[pb $(date '+%F %T')] $name: exited rc=$rc; restarting in 2s (restart: unless-stopped)"
+    sleep 2
+done

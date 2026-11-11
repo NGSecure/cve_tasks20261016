@@ -1,0 +1,63 @@
+/* main.css */
+/* Container div for elFinder */
+.elfinder,
+.elfinder .elfinder-dialog,
+.elfinder .elfinder-toolbar .elfinder-buttonset .elfinder-button-menu {
+  background: #fff;
+  border: 1px solid #69bcee;
+  box-shadow: 0 0 5px #cdcdcd;
+  border-radius: 0;
+}
+
+/* Override styles in child elements of elFinder div */
+/* Use for consistently setting text sizes and overriding general jQuery UI styles */
+.elfinder * {
+  color: #000;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Resizer */
+/* Used if elFinder is resizable and on dialogs */
+.elfinder .ui-icon-gripsmall-diagonal-se,
+.elfinder-dialog .ui-icon-gripsmall-diagonal-se {
+  /* */
+}
+
+/* type badge in "icons" view */
+.elfinder-cwd-icon:before {
+	color: white;
+	background-color: #798da7;
+}
+
+.elfinder-cwd-icon-text:before {
+    background-color: #6f99e6
+}
+
+.elfinder-cwd-icon-image:before {
+    background-color: #2ea26c
+}
+
+.elfinder-cwd-icon-audio:before {
+    background-color: #7bad2a
+}
+
+.elfinder-cwd-icon-video:before {
+    background-color: #322aad
+}
+
+.ui-front.ui-icon.elfinder-icon-close.ui-icon-closethick
+{
+    background-image: url(../../../../jquery/css/smoothness/images/ui-icons_222222_256x240.png);
+    background-position: -96px -128px;
+}
+.ui-front.ui-icon.elfinder-icon-minimize.ui-icon-minusthick
+{
+    background-image: url(../../../../jquery/css/smoothness/images/ui-icons_222222_256x240.png);
+    background-position: -64px -128px;
+}
+
+.ui-front.ui-icon.ui-icon-plusthick.elfinder-icon-full
+{
+    background-image: url(../../../../jquery/css/smoothness/images/ui-icons_222222_256x240.png);
+    background-position: -32px -128px;
+}

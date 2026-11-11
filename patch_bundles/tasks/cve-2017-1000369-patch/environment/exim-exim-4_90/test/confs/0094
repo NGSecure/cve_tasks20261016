@@ -1,0 +1,51 @@
+# Exim test configuration 0094
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+acl_smtp_rcpt = check_recipient
+domainlist local_domains = test.ex
+
+hostlist relay_hosts = *.masq.test.ex
+
+host_lookup = 0.0.0.0/0
+
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  accept  hosts = :
+  accept  domains = +local_domains
+  accept  hosts = +relay_hosts
+  deny    message = relay not permitted
+
+
+# ----- Routers -----
+
+begin routers
+
+localuser:
+  driver = accept
+  local_parts = userx
+  transport = appendfile
+
+
+# ----- Transports -----
+
+begin transports
+
+appendfile:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  headers_add = host_lookup_failed: $host_lookup_failed\n\
+                host_lookup_deferred: $host_lookup_deferred
+  user = CALLER
+
+
+# End

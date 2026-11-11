@@ -7,7 +7,8 @@
 #     却没有重启服务，判定结果与原多容器环境一致（保持题目性质不变）。
 #   * 后端（如 mysql:5.7）是原镜像的完整 rootfs，构建期已按原 environment 初始化，
 #     运行期以原镜像 entrypoint + command、原用户身份在 chroot 中运行。
-#   * 主服务以原 compose 的 command 运行，环境变量取自镜像 ENV（构建期快照），不继承调用者环境。
+#   * 主服务以原 compose 的 command、原镜像 USER 运行，环境变量取自镜像 ENV（构建期快照），
+#     不继承调用者环境。
 #
 # 调用方：镜像 CMD（/opt/pb/init）、BASH_ENV 钩子（/opt/pb/autostart.sh，平台不执行 CMD 时由
 # 沙箱内第一条 bash 命令触发）、tests/test.sh 前缀（判定前兜底）。
@@ -26,9 +27,9 @@ QUIET=0
 unset BASH_ENV
 export PB_IN_SERVICE=1
 
-mkdir -p "$RUN_DIR" "$LOG_DIR"
+mkdir -p "$RUN_DIR" "$LOG_DIR" 2>/dev/null
 log() {
-    echo "[pb $(date '+%F %T')] $*" >> "$LOG_DIR/ensure-services.log"
+    echo "[pb $(date '+%F %T')] $*" >> "$LOG_DIR/ensure-services.log" 2>/dev/null
     [ "$QUIET" = 1 ] || echo "[pb] $*" >&2
 }
 
@@ -40,13 +41,17 @@ if [ "${#PB_BACKENDS[@]}" -eq 0 ] && [ "${PB_MAIN:-0}" != 1 ]; then
     exit 0   # 本题无常驻服务（原 compose 的 main 即 sleep infinity）
 fi
 
-if [ "$(id -u)" != 0 ]; then
-    log "not root (uid=$(id -u)); cannot manage services"
+IS_ROOT=0; [ "$(id -u)" = 0 ] && IS_ROOT=1
+CHROOT=$(command -v chroot || echo /usr/sbin/chroot)   # 主镜像的 chroot（经 env -i 后 PATH 已换成服务自己的）
+# 本机主机名。docker 为每个容器设置 HOSTNAME=主机名并在 /etc/hosts 中解析它；折叠后各后端共享这一主机名
+HOST_NAME=$(cat /proc/sys/kernel/hostname 2>/dev/null || uname -n 2>/dev/null || true)
+if [ "$IS_ROOT" != 1 ] && [ "${#PB_BACKENDS[@]}" -gt 0 ]; then
+    log "not root (uid=$(id -u)); cannot start the folded backends"
     exit 1
 fi
 
 # 串行化：BASH_ENV 钩子、CMD 与 test.sh 可能并发调用
-exec 9>"$RUN_DIR/lock"
+exec 9>>"$RUN_DIR/lock"
 flock -w 900 9 || { log "lock timeout"; exit 1; }
 
 # ---------------------------------------------------------------- helpers
@@ -54,9 +59,12 @@ var()  { eval "printf '%s' \"\${$1:-}\""; }           # 取标量变量 $1 的�
 arr()  { eval "_A=(\"\${$1[@]}\")"; }                  # 把数组 $1 拷到 _A
 
 pidfile() { echo "$RUN_DIR/$1.supervisor.pid"; }
+# 监管进程存活（排除僵尸：平台以 tail -f /dev/null 为 PID 1 时不回收孤儿进程）
 supervisor_alive() {
-    local p; p=$(cat "$(pidfile "$1")" 2>/dev/null) || return 1
-    [ -n "$p" ] && kill -0 "$p" 2>/dev/null
+    local p st; p=$(cat "$(pidfile "$1")" 2>/dev/null) || return 1
+    [ -n "$p" ] || return 1
+    st=$(sed -E 's/^.*\) ([A-Za-z]).*$/\1/' "/proc/$p/stat" 2>/dev/null) || return 1
+    [ -n "$st" ] && [ "$st" != Z ] && [ "$st" != X ]
 }
 
 tcp_open() { (exec 3<>"/dev/tcp/127.0.0.1/$1") 2>/dev/null; }
@@ -65,28 +73,28 @@ tcp_open() { (exec 3<>"/dev/tcp/127.0.0.1/$1") 2>/dev/null; }
 #   CMD / CMD-SHELL：命令退出码 0 即健康（后端在其 rootfs 内以 root 执行，同 docker 的 healthcheck）
 #   TCP            ：原 compose 无 healthcheck 时，以端口可连作为“已启动”
 #   NONE           ：原 compose 无 healthcheck 且无端口，以监管进程存活作为“已启动”
+#   健康检查命令与 docker 一样在该服务自己的环境变量下执行（PATH 等取原镜像 ENV，不取调用者环境）
 healthy() {
     local name=$1 kind root to
+    local -a henv
     kind=$(var "PB_${name}_health_kind"); kind=${kind:-NONE}
     root=$(var "PB_${name}_root")
     to=$(var "PB_${name}_health_timeout"); to=${to:-30}
+    if [ -n "$root" ]; then arr "PB_${name}_env"; henv=(env -i "${_A[@]}" "$CHROOT" "$root")
+    else henv=(env -i "${PB_MAIN_ENV[@]}"); fi
     arr "PB_${name}_health"
     case "$kind" in
-        CMD)
-            if [ -n "$root" ]; then timeout "$to" chroot "$root" "${_A[@]}" >/dev/null 2>&1
-            else timeout "$to" "${_A[@]}" >/dev/null 2>&1; fi ;;
-        CMD-SHELL)
-            if [ -n "$root" ]; then timeout "$to" chroot "$root" /bin/sh -c "${_A[0]}" >/dev/null 2>&1
-            else timeout "$to" /bin/sh -c "${_A[0]}" >/dev/null 2>&1; fi ;;
-        TCP)  tcp_open "${_A[0]}" ;;
-        *)    supervisor_alive "$name" ;;
+        CMD)       timeout "$to" "${henv[@]}" "${_A[@]}" >/dev/null 2>&1 ;;
+        CMD-SHELL) timeout "$to" "${henv[@]}" /bin/sh -c "${_A[0]}" >/dev/null 2>&1 ;;
+        TCP)       tcp_open "${_A[0]}" ;;
+        *)         supervisor_alive "$name" ;;
     esac
 }
 
 # 有 compose healthcheck：首次通过即就绪（同 docker）。
 # 无 healthcheck（TCP/NONE）：要求连续 PB_STABLE_SEC 秒可用——原 entrypoint 常先起一个临时实例做初始化
-# （如 `timeout 5 <server>` 后再建管理员账号），不能把临时实例误判为就绪。原环境中这段时间被
-# agent 运行与 test.sh 联网安装依赖自然覆盖；离线化后须显式等待，才与原环境的就绪状态一致。
+# （如 `timeout 5 <server>` 后再建管理员账号），不能把临时实例误判为就绪。原环境中容器启动到判定之间
+# 隔着整个 agent 阶段，服务早已稳定；单镜像中本脚本可能在服务刚拉起时就被调用，须显式等待。
 wait_healthy() {
     local name=$1 deadline=$((SECONDS + WAIT_SEC)) kind need=1 ok=0
     kind=$(var "PB_${name}_health_kind")
@@ -117,8 +125,10 @@ add_host_aliases() {
 # 后端 rootfs 内的最小运行期准备（不改后端内容，只补容器运行时本应提供的东西）
 prepare_backend_root() {
     local root=$1 n spec
-    mkdir -p "$root/dev" "$root/tmp" "$root/run"
-    chmod 1777 "$root/tmp"
+    mkdir -p "$root/dev" "$root/dev/shm" "$root/tmp" "$root/run"
+    # /dev/shm：POSIX 共享内存。只是普通目录（chroot 内无法挂 tmpfs）：glibc >= 2.34 直接可用；
+    # 更旧的 glibc 要求它是 tmpfs，postgres 因此在构建期按 initdb 的规则改选 sysv（见 setup-image.sh）
+    chmod 1777 "$root/tmp" "$root/dev/shm"
     for spec in "null 1 3" "zero 1 5" "random 1 8" "urandom 1 9" "full 1 7" "tty 5 0"; do
         set -- $spec
         [ -c "$root/dev/$1" ] && continue
@@ -126,48 +136,84 @@ prepare_backend_root() {
         mknod -m 666 "$root/dev/$1" c "$2" "$3" 2>/dev/null || log "WARN: mknod $root/dev/$1 failed"
     done
     [ -e "$root/dev/fd" ] || ln -s /proc/self/fd "$root/dev/fd" 2>/dev/null
+    # 与 docker 为每个容器写入的 /etc/hosts 一致，本机主机名必须可解析（osixia/openldap 启动脚本的
+    # hostname --fqdn、Java 的 InetAddress.getLocalHost 等都依赖它）。折叠后各服务共享回环地址，
+    # 主机名与服务别名一样指向 127.0.0.1。
     {
         echo "127.0.0.1 localhost"
+        case "$HOST_NAME" in ''|localhost) ;; *) echo "127.0.0.1 $HOST_NAME" ;; esac
         for n in "${PB_HOST_ALIASES[@]}"; do echo "127.0.0.1 $n"; done
     } > "$root/etc/hosts" 2>/dev/null
 }
 
 start_backend() {
-    local name=$1 root user uid gid home workdir
-    root=$(var "PB_${name}_root"); user=$(var "PB_${name}_user"); workdir=$(var "PB_${name}_workdir")
+    local key=$1 name root user uid gid home workdir
+    name=$(var "PB_${key}_name"); name=${name:-$key}
+    root=$(var "PB_${key}_root"); user=$(var "PB_${key}_user"); workdir=$(var "PB_${key}_workdir")
     prepare_backend_root "$root"
-    uid=$(awk -F: -v u="$user" '$1==u || $3==u {print $3; exit}' "$root/etc/passwd")
-    gid=$(awk -F: -v u="$user" '$1==u || $3==u {print $4; exit}' "$root/etc/passwd")
-    home=$(awk -F: -v u="$user" '$1==u || $3==u {print $6; exit}' "$root/etc/passwd")
-    if [ -z "$uid" ]; then log "ERROR: user '$user' not found in $root/etc/passwd"; return 1; fi
-    arr "PB_${name}_env"; local -a envv=("${_A[@]}" "HOME=${home:-/}" "HOSTNAME=$name")
-    arr "PB_${name}_cmd"; local -a cmd=("${_A[@]}")
+    uid=$(awk -F: -v u="${user%%:*}" '$1==u || $3==u {print $3; exit}' "$root/etc/passwd")
+    gid=$(awk -F: -v u="${user%%:*}" '$1==u || $3==u {print $4; exit}' "$root/etc/passwd")
+    home=$(awk -F: -v u="${user%%:*}" '$1==u || $3==u {print $6; exit}' "$root/etc/passwd")
+    if [ -z "$uid" ]; then
+        case "${user%%:*}" in
+            ''|*[!0-9]*) log "ERROR: user '$user' not found in $root/etc/passwd"; return 1 ;;
+            *) uid=${user%%:*}; gid=$uid; home=/ ;;   # 数字 UID 且 passwd 中无条目（docker 同样允许）
+        esac
+    fi
+    case "$user" in *:*) gid=${user#*:} ;; esac
+    # 与 docker 相同：HOME、HOSTNAME 为缺省值，镜像 ENV 中若有同名变量则以镜像为准（env 后者覆盖前者）。
+    # HOSTNAME 须与 hostname 命令的结果一致（osixia/openldap 等启动脚本比较二者并据此改写 /etc/hosts）
+    arr "PB_${key}_env"; local -a envv=("HOME=${home:-/}" ${HOST_NAME:+"HOSTNAME=$HOST_NAME"} "${_A[@]}")
+    arr "PB_${key}_cmd"; local -a cmd=("${_A[@]}")
     log "starting backend '$name' as $user($uid:$gid) in $root: ${cmd[*]}"
     # chroot 不挂 /proc（容器内无 CAP_SYS_ADMIN）；原 entrypoint 在“已初始化的数据目录”分支不依赖 /proc。
     (
         cd /
         exec setsid "$PB_DIR/supervise" "pb-$name" \
-            env -i "${envv[@]}" chroot --userspec="$uid:$gid" "$root" \
+            env -i "${envv[@]}" "$CHROOT" --userspec="$uid:$gid" "$root" \
             /bin/sh -c 'cd "$1" 2>/dev/null; shift; exec "$@"' pb "${workdir:-/}" "${cmd[@]}"
-    ) </dev/null >>"$LOG_DIR/$name.log" 2>&1 9>&- &
-    echo $! > "$(pidfile "$name")"
+    ) </dev/null >>"$LOG_DIR/$key.log" 2>&1 9>&- &
+    echo $! > "$(pidfile "$key")"
+}
+
+# 以 root 调用而原镜像 USER 为非 root 时，按 docker 的做法降权到该用户（含其附加组）
+main_runas() {
+    local u="${PB_MAIN_USER:-root}" uid gid
+    RUNAS=()
+    [ "$IS_ROOT" = 1 ] || return 0
+    case "${u%%:*}" in root|0) return 0 ;; esac
+    uid=$(awk -F: -v u="${u%%:*}" '$1==u || $3==u {print $3; exit}' /etc/passwd)
+    gid=$(awk -F: -v u="${u%%:*}" '$1==u || $3==u {print $4; exit}' /etc/passwd)
+    [ -n "$uid" ] || { uid=${u%%:*}; gid=$uid; }
+    case "$u" in *:*) gid=${u#*:} ;; esac
+    if command -v setpriv >/dev/null 2>&1; then
+        local sp; sp=$(command -v setpriv)
+        if awk -F: -v n="$uid" '$3==n {f=1} END {exit !f}' /etc/passwd; then
+            RUNAS=("$sp" "--reuid=$uid" "--regid=$gid" --init-groups)
+        else
+            RUNAS=("$sp" "--reuid=$uid" "--regid=$gid" --clear-groups)
+        fi
+    else
+        RUNAS=("$CHROOT" "--userspec=$uid:$gid" /)
+    fi
 }
 
 start_main() {
     local workdir; workdir=$(var PB_main_workdir)
     arr PB_main_cmd; local -a cmd=("${_A[@]}")
     local -a envv=("${PB_MAIN_ENV[@]}")
-    log "starting main in ${workdir:-/}: ${cmd[*]}"
+    main_runas
+    log "starting main in ${workdir:-/} as ${PB_MAIN_USER:-root}: ${cmd[*]}"
     (
         cd "${workdir:-/}" 2>/dev/null || cd /
-        exec setsid env -i "${envv[@]}" "$PB_DIR/supervise" pb-main "${cmd[@]}"
+        exec setsid env -i "${envv[@]}" ${RUNAS[@]+"${RUNAS[@]}"} "$PB_DIR/supervise" pb-main "${cmd[@]}"
     ) </dev/null >>"$LOG_DIR/main.log" 2>&1 9>&- &
     echo $! > "$(pidfile main)"
 }
 
 # ---------------------------------------------------------------- main flow
 rc=0
-add_host_aliases
+[ "$IS_ROOT" = 1 ] && add_host_aliases
 
 for b in "${PB_BACKENDS[@]}"; do
     healthy "$b" && continue

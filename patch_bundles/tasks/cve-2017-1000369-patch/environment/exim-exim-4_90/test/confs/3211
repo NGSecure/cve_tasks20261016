@@ -1,0 +1,40 @@
+# Exim test configuration 3211
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+
+
+# ------ ACL ------
+
+begin acl
+
+check_recipient:
+  accept  verify = recipient
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = dnslookup
+  local_part_prefix = r1-
+  domains = !testdb;fail
+  verify_only
+
+skipped:
+  driver = redirect
+  verify_only
+  data = ${lookup testdb{fail}}
+  debug_print = +++ sender_address = <$sender_address>
+
+temp:
+  driver = dnslookup
+  verify_only
+
+# End

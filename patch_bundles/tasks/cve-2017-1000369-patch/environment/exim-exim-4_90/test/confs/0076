@@ -1,0 +1,41 @@
+# Exim test configuration 0076
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+localuser:
+  driver = accept
+  local_parts = userx
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  no_create_directory
+  delivery_date_add
+  envelope_to_add
+  file = DIR/test-mail/subdir/$local_part
+  return_path_add
+  user = CALLER
+
+# ----- Retry -----
+
+begin retry
+
+* * F,10m,2d
+
+
+# End

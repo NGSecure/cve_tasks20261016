@@ -1,0 +1,43 @@
+# Exim test configuration 0368
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  domains = manualroute
+  route_list = * ten-1.test.ex:ten-1.test.ex:ten-2.test.ex
+  transport = t1
+
+r2:
+  driver = dnslookup
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

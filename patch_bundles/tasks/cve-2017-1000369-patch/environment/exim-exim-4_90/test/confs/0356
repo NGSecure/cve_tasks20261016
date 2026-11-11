@@ -1,0 +1,30 @@
+# Exim test configuration 0356
+
+MESSAGE_LOGS =
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+MESSAGE_LOGS
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = redirect
+  allow_defer
+  data = :defer: forced defer
+
+
+# ----- Retry -----
+
+begin retry
+
+*   *   F,1d,1h
+
+# End

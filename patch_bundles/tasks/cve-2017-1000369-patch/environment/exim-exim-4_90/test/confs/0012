@@ -1,0 +1,37 @@
+# Exim test configuration 0012
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = @
+
+
+# ----- Routers -----
+
+begin routers
+
+system_aliases:
+  driver = redirect
+  data = ${if eq {$local_part}{blackhole}{:blackhole:}}
+
+localuser:
+  driver = accept
+  check_local_user
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  delivery_date_add
+  envelope_to_add
+  file = DIR/test-mail/$local_part
+  return_path_add
+
+
+# End

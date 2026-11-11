@@ -1,0 +1,37 @@
+# Exim test configuration 0358
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts = 127.0.0.1
+  allow_localhost
+  port = PORT_S
+
+
+# ----- Retry -----
+
+begin retry
+
+*   *   F,3s,1s; G,1h,2s,2
+
+# End

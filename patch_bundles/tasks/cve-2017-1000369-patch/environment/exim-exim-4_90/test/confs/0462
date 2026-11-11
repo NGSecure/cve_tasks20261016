@@ -1,0 +1,56 @@
+# Exim test configuration 0462
+
+SELECTOR=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+acl_smtp_rcpt = $local_part
+smtp_return_error_details
+log_selector = SELECTOR
+
+# ----- ACL -----
+
+begin acl
+
+checkpm:
+  deny    !verify  = sender/callout=postmaster
+  accept
+
+nocheckpm:
+  deny    !verify  = sender/callout
+  accept
+
+# ----- Routers -----
+
+begin routers
+
+all:
+  driver = manualroute
+  route_list = * 127.0.0.1
+  self = send
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_S
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,5d,10s
+
+
+# End

@@ -1,0 +1,58 @@
+# Exim test configuration 2010
+
+SERVER =
+TIMES =
+HOSTS = 127.0.0.1 : HOSTIPV4
+
+.include DIR/aux-var/tls_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector = +outgoing_port
+
+acl_smtp_rcpt = accept
+
+queue_only
+queue_run_in_order
+
+# Set certificate only if server
+
+tls_certificate = ${if eq {SERVER}{server}{DIR/aux-fixed/cert1}fail}
+tls_privatekey = ${if eq {SERVER}{server}{DIR/aux-fixed/cert1}fail}
+
+tls_advertise_hosts = HOSTIPV4
+
+
+# ----- Routers -----
+
+begin routers
+
+client:
+  driver = accept
+  condition = ${if eq {SERVER}{server}{no}{yes}}
+  retry_use_local_part
+  transport = send_to_server
+
+
+# ----- Transports -----
+
+begin transports
+
+send_to_server:
+  driver = smtp
+  allow_localhost
+  hosts = HOSTS
+  hosts_require_tls = *
+  port = PORT_D
+
+
+# ----- Retry -----
+
+begin retry
+
+* tls_required  TIMES
+* *  F,1d,5m
+
+# End

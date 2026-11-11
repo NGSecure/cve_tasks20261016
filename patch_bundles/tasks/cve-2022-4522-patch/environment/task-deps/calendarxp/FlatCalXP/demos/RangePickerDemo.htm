@@ -1,0 +1,52 @@
+
+<HTML>
+<HEAD><TITLE>Range Picker Demo</TITLE>
+</HEAD>
+<BODY onload="_nn4_loaded=true;">
+
+<script>
+function fOnRange(rng) { // call back from the calendar plugins.
+	var sd=new Date(rng[0]);
+	var ed=new Date(rng[1]);
+	document.fm.startDate.value=sd.getUTCFullYear()+"-"+(sd.getUTCMonth()+1)+"-"+sd.getUTCDate();
+	document.fm.endDate.value=ed.getUTCFullYear()+"-"+(ed.getUTCMonth()+1)+"-"+ed.getUTCDate();
+}
+</script>
+
+
+<form name="fm">
+<table>
+<tr>
+	<td>Selected range start</td>
+	<td><input name="startDate" size=14 readonly onfocus="this.blur()"></td>
+</tr>
+<tr>
+	<td>Selected range end</td>
+	<td><input name="endDate" size=14 readonly onfocus="this.blur()"></td>
+</tr>
+</table>
+</form>
+
+
+
+<!--  FlatCalendar Tags (tag name and id must match) -->
+<iframe width=178 height=163 name="gToday:xp:agenda.js:gfFlat_1" id="gToday:xp:agenda.js:gfFlat_1" src="RangePicker/iflateng.htm" scrolling="no" frameborder="0">
+</iframe>
+
+<iframe width=178 height=163 name="[gToday[0],gToday[1]+1]:xp:agenda.js:gfFlat_2" id="[gToday[0],gToday[1]+1]:xp:agenda.js:gfFlat_2" src="RangePicker/iflateng.htm" scrolling="no" frameborder="0">
+</iframe>
+
+
+<BR><font size=-1>
+<OL>NOTE:
+<LI>We set the <strong>gsAction</strong> in xp.js to " " instead of "" so that the mouse cursor will switch to hand when hovering over the dates.
+</OL></font>
+
+<BR>
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions,
+    Inc. All rights reserved.</em></font></div>
+
+
+</BODY>
+</HTML>

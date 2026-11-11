@@ -1,0 +1,29 @@
+# Exim test configuration 3203
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+test:
+  driver = redirect
+  allow_defer
+  data = postmaster@test.ex
+  retry_use_local_part
+  senders = testdb;defer
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,2h,10m
+
+
+# End

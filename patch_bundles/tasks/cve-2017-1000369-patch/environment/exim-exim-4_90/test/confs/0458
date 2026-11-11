@@ -1,0 +1,24 @@
+# Exim test configuration 0458
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+acl_smtp_mail = mail
+log_selector = +smtp_protocol_error+incoming_interface+incoming_port
+
+
+# ----- ACLs -----
+
+begin acl
+
+mail:
+  deny    condition = ${if eq{$sender_address_local_part}{deny}{yes}{no}}
+  accept
+
+# End

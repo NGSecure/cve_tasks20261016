@@ -1,0 +1,20 @@
+# Exim test configuration 0071
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+
+
+# ----- Routers -----
+
+begin routers
+
+system_aliases:
+  driver = redirect
+  allow_defer
+  data = ${lookup{$local_part}lsearch{DIR/aux-var/TESTNUM.aliases}}
+  retry_use_local_part
+
+# End

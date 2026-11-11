@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>Restricted Range Demo</TITLE>
+</HEAD>
+<BODY >
+
+<script>
+function fOnRange(rng) { // call back from within the calendar engine.
+	var sd=new Date(rng[0]);
+	var ed=new Date(rng[1]);
+	document.fm.startDate.value=sd.getUTCFullYear()+"-"+(sd.getUTCMonth()+1)+"-"+sd.getUTCDate();
+	document.fm.endDate.value=ed.getUTCFullYear()+"-"+(ed.getUTCMonth()+1)+"-"+ed.getUTCDate();
+}
+</script>
+
+
+<form name="fm">
+<table>
+<tr>
+	<td>Selected range start</td>
+	<td><input name="startDate" size=14></td>
+</tr>
+<tr>
+	<td>Selected range end</td>
+	<td><input name="endDate" size=14></td>
+</tr>
+</table>
+</form>
+
+
+
+<!--  FlatCalendar Tags (tag name and id must match) -->
+<iframe width=174 height=189 name="[2003,12]:normal:agenda.js" id="[2003,12]:normal:agenda.js" src="RestrictedRange/iflateng.htm" scrolling="no" frameborder="0">
+</iframe>
+
+
+<BR><BR>
+<UL>
+<LI>This demo shows you how to restrict the range selection to be within any 2 holidays. In other words, 
+your selection will not span across predefined holidays.
+<LI>NOTE: You need to specify the background color of holidays in the plugins.js in order to identify holidays from other events.
+Of course, you may remove the check if there are only holidays or you just want the selection be contrained between any 2 event days.
+</UL>
+<BR><BR>
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+
+
+</BODY>
+</HTML>

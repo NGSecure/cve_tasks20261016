@@ -1,0 +1,48 @@
+# Exim test configuration 9100
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = @
+hostlist   relay_hosts = net-mysql;select * from them where id='$sender_host_address'
+
+acl_smtp_rcpt = check_recipient
+
+mysql_servers = localhost/test/root/
+
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  accept  domains = +local_domains
+  accept  hosts = +relay_hosts
+  deny    message = relay not permitted
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  address_data = ${lookup mysql{select name from them where id='ph10'}}
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/\
+    ${lookup mysql{select id from them where id='ph10'}{$value}fail}
+  user = CALLER
+
+
+# End

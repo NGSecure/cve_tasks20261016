@@ -1,0 +1,13 @@
+# Exim test configuration 0384
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+qualify_domain = test.ex
+helo_verify_hosts = *
+
+# End

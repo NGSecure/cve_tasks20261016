@@ -1,0 +1,47 @@
+# Exim test configuration 0497
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = redirect
+  senders = :
+  data = :blackhole: discard bounces
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts = 127.0.0.1
+  port = PORT_S
+  allow_localhost
+
+
+# ----- Retry -----
+
+begin retry
+
+*  lost_connection
+*  mail_4xx
+*  rcpt_4xx
+*  data_4xx
+*  *         F,1d,15m
+
+
+# End

@@ -1,0 +1,28 @@
+
+
+<h1>Registration</h1>
+
+<?php
+if ($REGISTRATION == 0) {
+	echo '<span>Site Registration has been disabled by the administrator, please check back later.</span>';
+}
+?>
+
+<div id="register">
+<br>
+	<form name="registration" method="POST" action="?a=reg">
+		Username: <input type="text" name="username" value=""><br>
+		Password: <input type="password" name="password" value=""><br>
+		Confirm Password: <input type="password" name="confpass" value=""><br>
+		Email Address: <input type="text" name="email" value="" placeholder="example@gmail.com"><br><br>
+		<div id=captcha data-theme="dark" class="g-recaptcha" data-sitekey="6LfdnCMTAAAAACPT9yJWev-UGF7U3jbgCCeeCjOp"></div>
+<?php 
+	foreach ($_POST as $key => $value) {
+	echo '<p><strong>' . $key.':</strong> '.$value.'</p>';
+  }
+?>
+			<input style="width:70px;" type="submit" name="submit" value="Register">
+	</form>
+	<br>
+</div>
+</div>
