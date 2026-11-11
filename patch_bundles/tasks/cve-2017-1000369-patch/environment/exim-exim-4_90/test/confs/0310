@@ -1,0 +1,41 @@
+# Exim test configuration 0310
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+no_bounce_return_message
+
+# ----- Routers -----
+
+begin routers
+
+bounce:
+  driver = accept
+  senders = :
+  transport = bounce
+
+all:
+  driver = accept
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  quota = 5
+  user = CALLER
+
+bounce:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# End

@@ -1,0 +1,47 @@
+# Exim test configuration 0166
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+alias:
+  driver = redirect
+  allow_defer
+  data = ${lookup{$local_part}lsearch{DIR/aux-fixed/TESTNUM.aliases}}
+  headers_add = X-Delivered-To: $local_part@$domain
+  retry_use_local_part
+
+user:
+  driver = accept
+  headers_add = X-Delivered-To: $local_part@$domain
+  retry_use_local_part
+  transport = local_delivery
+  headers_add = X-rtr-hdr: 1
+  headers_add = ${if bool{false} {X-rtr-hdr: 2}}
+  headers_add = X-rtr-hdr: 3
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  envelope_to_add
+  file = DIR/test-mail/$local_part
+  user = CALLER
+  headers_add = X-tpt-hdr: 1
+  headers_add = ${if bool{false} {X-tpt-hdr: 2}}
+  headers_add = X-tpt-hdr: 3
+
+
+# End

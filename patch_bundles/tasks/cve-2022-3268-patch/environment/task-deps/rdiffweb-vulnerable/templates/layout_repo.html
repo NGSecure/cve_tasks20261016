@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="repohead" style="margin-bottom: 20px;">
+    <div class="container">
+    
+    <!-- Title -->
+    <h2>{{ repo.display_name }}</h2>
+    
+    <!-- Repo Nav -->
+	{% set repo_nav_bar = [
+	    ('browse', _('Files'), url_for('browse', repo), 'icon-docs'),
+	    ('history', _('History'), url_for('history', repo, path), 'icon-history'),
+	    ('settings', _('Settings'), url_for('settings', repo), 'icon-cog-alt'),
+	    ('graphs', _('Graphs'), url_for('graphs', 'activities', repo), 'icon-chart-bar'),
+        ('logs', _('Logs'), url_for('logs', repo), 'icon-file')
+	] -%}
+    <ul class="nav nav-tabs" role="navigation">
+    {% for item in repo_nav_bar %}
+    <li {{ attrib(class=active_repo_page==item[0] and "active") }} >
+        <a href="{{ item[2] }}"><i class="{{ item[3] }}"></i> {{ item[1] }}</a>
+    </li>
+    {% endfor %}
+    </ul>
+    
+    </div>
+</div>
+
+<div class="container" id="{{ active_repo_page }}">
+
+{% include 'message.html' %}
+
+{% block content %}
+{% endblock %}
+    
+</div>
+{% endblock %}

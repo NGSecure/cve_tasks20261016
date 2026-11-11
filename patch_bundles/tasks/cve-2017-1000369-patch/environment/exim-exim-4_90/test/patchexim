@@ -1,0 +1,41 @@
+#! /usr/bin/env perl
+
+use strict;
+use warnings;
+
+###############################################################################
+# This is an auxiliary script that is part of the Exim test suite. It must be #
+# run as root, and is normally called from the main controlling script. Its   #
+# job is to make a copy of Exim, suitably patched so that it can run in the   #
+# test harness. See further comments in the main script.                      #
+#                                                                             #
+# The only argument to this script is the name of the Exim binary that is to  #
+# be copied. The script must be run in the correct current directory.         #
+###############################################################################
+
+open(IN, $ARGV[0]) || die "** Failed to open $ARGV[0]: $!\n";
+open(OUT, '>eximdir/exim') || die "** Failed to open eximdir/exim: $!\n";
+
+while(<IN>)
+  {
+  s/>>>running<<</<<<testing>>>/;
+  s{
+    (\d+\.\d+                         # major.minor
+    (?:[_.]\d+)?                      # optional patchlevel
+    (?:[_-]RC\d+|[_-]?dev(?:start)?)? # optional RC or dev(start)
+    (?:(?:[_-]\d+)?                   # git tag distance
+       [-_][[:xdigit:]]+)?            # git id
+    (?:[-_]XX)?\0                     # git dirty bit
+    <<eximversion>>                   # marker
+    )
+   }
+   {"x.yz\0" . ("*" x (length($1) - 5))}xe;
+  print OUT;
+  }
+
+close(IN);
+close(OUT);
+
+chmod 04755, 'eximdir/exim';
+
+# End of patchexim script

@@ -1,0 +1,52 @@
+# Exim test configuration 0239
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+sss:
+  driver = manualroute
+  domains = smtp
+  route_list = * 127.0.0.1 byname
+  self = send
+  transport = smtp
+
+rrr:
+  driver = manualroute
+  domains = ! +local_domains
+  route_list = * a.host.name
+  self = send
+  transport = local
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+local:
+  driver = appendfile
+  user = CALLER
+
+smtp:
+  driver = smtp
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

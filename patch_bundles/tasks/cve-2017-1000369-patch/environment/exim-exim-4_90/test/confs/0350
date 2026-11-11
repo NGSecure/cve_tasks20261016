@@ -1,0 +1,29 @@
+# Exim test configuration 0350
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  ignore_target_hosts = ${if eq{$host_address}{V4NET.12.3.1}{$host_address}{}}
+  route_list = * 1.2.3.4:other2.test.ex
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+
+# End

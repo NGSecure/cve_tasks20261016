@@ -1,0 +1,13 @@
+<?php
+
+if ($row["role"] == 'user') {
+	header("location: /");
+};
+
+$tempID = $_POST['tempid'];
+
+	$sql = "UPDATE tickets SET status='Closed' WHERE id = '$tempID'";
+	$result = $conn->query($sql);
+
+header("location: ?m=tickets");
+?>

@@ -1,0 +1,33 @@
+# Exim test configuration 0119
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+acl_smtp_data = check_message
+
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+force_defer:
+  driver = redirect
+  allow_defer
+  data = :defer: forced defer
+  retry_use_local_part
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

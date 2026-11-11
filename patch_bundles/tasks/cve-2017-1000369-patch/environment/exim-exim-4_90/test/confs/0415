@@ -1,0 +1,20 @@
+# Exim test configuration 0415
+
+ARG1=40M
+ARG2=1.0
+VALUE=0
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+check_spool_space = ARG1
+queue_only_load = ARG2
+
+finduser_retries = VALUE
+
+# End

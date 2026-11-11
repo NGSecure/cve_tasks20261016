@@ -1,0 +1,35 @@
+# Exim test configuration 0445
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+acl_smtp_rcpt = rcpt
+
+
+# ----- ACL -----
+
+begin acl
+
+rcpt:
+  deny   !verify = sender
+
+
+# ----- Routers -----
+
+begin routers
+
+bad_addresses:
+        driver = redirect
+        data = ${lookup{$local_part@$domain}lsearch{DIR/aux-fixed/TESTNUM.data}\
+               {:fail:$value}fail}
+        allow_fail
+        verify_only
+        debug_print = "+++ sender_address=<$sender_address>"
+
+# End

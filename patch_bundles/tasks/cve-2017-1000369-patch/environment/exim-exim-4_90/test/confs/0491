@@ -1,0 +1,43 @@
+# Exim test configuration 0491
+
+UL=abc@xyz
+REWRITE=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+# When running in the test harness, this setting overrides the real login
+# (normally it acts only if no login name can be found).
+
+unknown_login = UL
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# ----- Rewrite -----
+
+begin rewrite
+
+REWRITE
+
+# End

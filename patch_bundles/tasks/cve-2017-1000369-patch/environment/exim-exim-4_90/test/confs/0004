@@ -1,0 +1,23 @@
+# Exim test configuration 0004
+
+.include DIR/aux-var/std_conf_prefix
+
+
+acl_smtp_rcpt = check_recipient
+domainlist local_domains = test.ex
+smtp_accept_max_nonmail = 1000
+
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  accept hosts = :
+  deny   senders = +caseful: a@b.c : X@Y.Z : ^\\Dx@e\\.f : ^\\DY@G\\.H :\
+                   lsearch*@;DIR/aux-fixed/0003.rej.lsearch :\
+                   @@lsearch*;DIR/aux-fixed/0003.rej.bydomain
+  accept domains = +local_domains
+  deny   message = relay not permitted
+
+# End

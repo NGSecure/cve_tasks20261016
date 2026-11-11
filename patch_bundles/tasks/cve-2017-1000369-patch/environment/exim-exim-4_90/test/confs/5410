@@ -1,0 +1,55 @@
+# Exim test configuration 5410
+
+.include DIR/aux-var/tls_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector =  +smtp_confirmation
+tls_advertise_hosts = *
+tls_certificate = ${if eq {SERVER}{server}{DIR/aux-fixed/cert1}fail}
+
+domainlist local_domains = test.ex : *.test.ex
+
+acl_smtp_rcpt = ${if eq {SERVER}{server}{queue}{cutthrough}}
+
+# ----- ACLs -------
+
+begin acl
+
+cutthrough:
+    accept	control = cutthrough_delivery
+    		verify = recipient
+
+queue:
+    accept	control = queue_only
+
+# ----- Routers -----
+
+begin routers
+
+all:
+  driver = manualroute
+  domains = ! +local_domains
+  route_list = * 127.0.0.1
+  self = send
+  address_data = $local_part
+  transport = smtp
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  interface = HOSTIPV4
+  port = PORT_D
+  hosts_avoid_tls =        ${if eq {$address_data}{usery}{*}{:}}
+  hosts_verify_avoid_tls = ${if eq {$address_data}{userz}{*}{:}}
+  tls_try_verify_hosts = :
+
+
+# End

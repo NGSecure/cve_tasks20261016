@@ -1,0 +1,27 @@
+# Exim test configuration 0070
+
+HVH=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = rcpt
+helo_verify_hosts = ten-1.test.ex : ten-3.test.ex : HVH
+helo_try_verify_hosts = ten-2.test.ex
+log_selector = -host_lookup_failed
+
+
+# ----- ACL -----
+
+begin acl
+
+rcpt:
+  require  message = helo not verified
+           verify = helo
+
+  deny     message = helo did verify
+
+# End

@@ -1,0 +1,26 @@
+<?php
+
+$ticketid = $_POST['ticketid'];
+
+$sql = "UPDATE tickets SET status = 'Closed' WHERE tickets.id = '$ticketid'";
+$result = $conn->query($sql);
+
+
+if($result)
+{
+echo "Ticket Closed";
+$sql2 = "INSERT INTO gamelogs(userid,username,type) VALUES('".$_SESSION['userid']."', '".$_SESSION['login_user']."', 'Closed ticket $ticketid ')";
+$result2 = $conn->query($sql2);
+header("location: /game/main/index.php?m=view&id=$ticketid");
+}
+else {
+echo "A problem was encountered, please contact an administrator to resolve the issue.";
+echo "<br>";
+echo "ticket id: $ticketid";
+echo "<br>";
+echo "userid : $userid";
+echo "<br>";
+echo $sql;
+};
+
+?>

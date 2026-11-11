@@ -1,0 +1,23 @@
+# Exim test configuration 0555
+
+FAKE=fakereject
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_rcpt
+queue_only
+
+
+# ----- ACLs -----
+
+begin acl
+
+check_rcpt:
+  accept  control = FAKE
+
+
+# End

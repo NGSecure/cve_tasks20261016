@@ -1,0 +1,50 @@
+# Exim test configuration 0111
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+alias:
+  driver = redirect
+  allow_defer
+  data = ${lookup{$local_part}lsearch{DIR/aux-fixed/TESTNUM.alias}}
+  errors_to = postmaster@test.ex
+  headers_add = X-Alias: $local_part
+  retry_use_local_part
+
+forward:
+  driver = redirect
+  check_ancestor
+  no_check_local_user
+  file = DIR/aux-fixed/TESTNUM.forward
+  headers_add = X-Forward: $local_part
+  headers_remove = Remove
+  retry_use_local_part
+
+deliver:
+  driver = accept
+  local_parts = userx : postmaster
+  retry_use_local_part
+  transport = appendfile
+
+
+# ----- Transports -----
+
+begin transports
+
+appendfile:
+  driver = appendfile
+  envelope_to_add
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# End

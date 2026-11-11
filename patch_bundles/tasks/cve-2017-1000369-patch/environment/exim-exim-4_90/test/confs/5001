@@ -1,0 +1,44 @@
+# Exim test configuration 5001
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+maildiruser:
+  driver = accept
+  retry_use_local_part
+  transport = maildir
+  transport_home_directory = DIR/test-mail
+
+
+# ----- Transports -----
+
+begin transports
+
+maildir:
+  driver = appendfile
+  maildir_format
+  create_file = belowhome
+  directory = ${lookup{$local_part}lsearch{DIR/aux-fixed/TESTNUM.filelist}\
+              {${if match{$value}{^/}{}{DIR/}}$value}\
+              {DIR/test-mail/$local_part}}
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

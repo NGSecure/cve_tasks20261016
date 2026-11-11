@@ -1,0 +1,24 @@
+# Exim test configuration 0526
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_connect = check_connect
+
+
+# ----- ACLs -----
+
+begin acl
+
+check_connect:
+  warn  logwrite = START: >$acl_c0< >${if def:acl_c0{}{not }}defined<
+        set acl_c0 = 0
+        logwrite = SET 0: >$acl_c0< >${if def:acl_c0{}{not }}defined<
+        set acl_c0 = 1
+        logwrite = SET 1: >$acl_c0< >${if def:acl_c0{}{not }}defined<
+  accept
+
+# End

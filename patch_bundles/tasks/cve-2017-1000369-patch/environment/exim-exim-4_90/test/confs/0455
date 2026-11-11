@@ -1,0 +1,52 @@
+# Exim test configuration 0455
+
+HOSTS_MAX_TRY=4
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_not_smtp = non
+
+ignore_bounce_errors_after = 0s
+qualify_domain = test.ex
+disable_ipv6
+
+
+# ----- ACLs -----
+
+begin acl
+
+non:
+  warn senders = :
+       control = queue_only
+  accept
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = dnslookup
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  connect_timeout = 1s
+  hosts_max_try = HOSTS_MAX_TRY
+
+
+# ----- Retry -----
+
+begin retry
+
+*                *  F,2s,1s
+
+# End

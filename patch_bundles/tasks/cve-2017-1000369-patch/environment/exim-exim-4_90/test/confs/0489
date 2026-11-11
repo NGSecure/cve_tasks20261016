@@ -1,0 +1,13 @@
+# Exim test configuration 0489
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+queue_only
+trusted_users = CALLER
+
+
+# End

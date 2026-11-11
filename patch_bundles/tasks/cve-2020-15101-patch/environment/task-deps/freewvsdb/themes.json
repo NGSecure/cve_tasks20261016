@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Wordpress-Theme-Twentyfifteen",
+    "url": "https://wordpress.org/themes/twentyfifteen/",
+    "safe": "1.2",
+    "vuln": "CVE-2015-3429",
+    "detection": [
+      {
+        "file": "style.css",
+        "variable": "Version:",
+        "subdir": 0,
+        "extra_match": "Theme Name: Twenty Fifteen"
+      }
+    ]
+  }
+]

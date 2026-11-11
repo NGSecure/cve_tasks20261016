@@ -1,0 +1,32 @@
+# Exim test configuration 0146
+
+.include DIR/aux-var/std_conf_prefix
+
+qualify_domain = test.ex
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+allow_mx_to_ip
+
+
+# ----- Routers -----
+
+begin routers
+
+domainlist:
+  driver = dnslookup
+  domains = ! +local_domains
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+
+# End

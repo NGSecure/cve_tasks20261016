@@ -1,0 +1,32 @@
+# Exim test configuration 3208
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+qualify_domain = test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+
+domainlist local_domains = !*relay.ex : test.ex : testhack.ex : \
+  testhack2.ex : testdb;defer
+
+domainlist relay_domains = test.ex : testhack.ex : testhack2.ex : \
+  yesrelay.ex : testdb;defer
+
+percent_hack_domains = !*relay.ex : !test.ex : testhack.ex : testdb;defer
+
+
+# ----- ACL -----
+
+begin acl
+
+check_recipient:
+  # Exim 3 had no checking on -bs messages
+  accept  hosts = :
+  accept  domains = +local_domains
+  accept  domains = +relay_domains
+  deny    message = relay not permitted
+
+# End

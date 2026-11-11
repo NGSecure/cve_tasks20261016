@@ -1,0 +1,58 @@
+# Exim test configuration 0516
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = redirect
+  local_parts = alwaysdefer
+  allow_defer
+  data = :defer: Always
+
+r1:
+  driver = redirect
+  local_parts = toplevel
+  data = deferfirsttime, second, third
+
+r2:
+  driver = redirect
+  data = $local_part@$domain, alwaysdefer
+
+r3:
+  driver = redirect
+  allow_defer
+  local_parts = deferfirsttime
+  condition = ${if first_delivery}
+  data = :defer: Defer the first time
+
+r4:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+  batch_max = 100
+  user = CALLER
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1h,1s
+
+# End

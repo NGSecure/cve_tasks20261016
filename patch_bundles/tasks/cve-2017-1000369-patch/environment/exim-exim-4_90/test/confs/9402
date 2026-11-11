@@ -1,0 +1,16 @@
+# Exim test configuration 9402
+
+SERVER=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+queue_only
+
+smtp_receive_timeout = 2s
+
+# End

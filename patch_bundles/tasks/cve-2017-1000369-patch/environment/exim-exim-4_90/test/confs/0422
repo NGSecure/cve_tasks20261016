@@ -1,0 +1,24 @@
+# Exim test configuration 0422
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+acl_smtp_connect = connect
+
+
+# ----- ACL -----
+
+begin acl
+
+connect:
+  deny  message = dnslist_value is $dnslist_value
+        dnslists = rbl.test.ex=127.0.0.2
+  accept
+
+
+# End

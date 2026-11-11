@@ -1,0 +1,75 @@
+# multi_domain option on smtp transport
+#
+#
+exim -DSERVER=server -bd -oX PORT_D
+****
+#
+exim userx@domA.ex usery@domB.ex
+Test message
+****
+# Default case: can multi-domain
+exim -q
+****
+#
+#
+exim userx@domC.ex usery@domD.ex
+Test message
+****
+# Equivalent explicit case: can multi-domain
+exim -DOPTION=multi_domain=yes -q
+****
+#
+#
+exim userx@domE.ex usery@domF.ex
+Test message
+****
+# no multi-domain: 2nd rcpt is deferred since parallel is disabled
+exim -DOPTION=multi_domain=no -q
+****
+exim -DOPTION=multi_domain=no -qf
+****
+#
+#
+exim userx@domG.ex usery@domH.ex
+Test message
+****
+# Expanded case: can multi-domain
+exim -DOPTION='multi_domain=${if bool{1} {true}{false}}' -q
+****
+#
+#
+exim userx@domK.ex usery@domL.ex
+Test message
+****
+# Expanded case: no multi-domain (1)
+exim -DOPTION='multi_domain=${if eqi {$address_data}{domK.ex} {no}{yes}}' -q
+****
+exim -DOPTION='multi_domain=${if eqi {$address_data}{domK.ex} {no}{yes}}' -qf
+****
+#
+#
+exim userx@domM.ex usery@domN.ex
+Test message
+****
+# Expanded case: no multi-domain (2)
+exim -DOPTION='multi_domain=${if match_domain {$address_data}{domZ.ex : domY.ex : domN.ex} {no}{yes}}' -q
+****
+exim -DOPTION='multi_domain=${if match_domain {$address_data}{domZ.ex : domY.ex : domN.ex} {no}{yes}}' -qf
+****
+#
+#
+exim userx@domP.ex usery@domP.ex userz@domQ.ex
+Test message
+****
+# Expanded case: both yes and no
+exim -DOPTION='multi_domain=${if eqi {$address_data}{domP.ex} {no}{yes}}' -q
+****
+exim -DOPTION='multi_domain=${if eqi {$address_data}{domP.ex} {no}{yes}}' -qf
+****
+#
+#
+killdaemon
+no_msglog_check
+#
+#
+##

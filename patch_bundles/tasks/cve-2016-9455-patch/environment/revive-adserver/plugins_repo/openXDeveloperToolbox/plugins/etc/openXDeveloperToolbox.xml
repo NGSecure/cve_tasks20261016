@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet type="text/xsl" href=""?>
+
+<plugin>
+    <name>openXDeveloperToolbox</name>
+    <creationDate>2015-03-30</creationDate>
+    <author>Revive adserver</author>
+    <authorEmail>revive@revive-adserver.com</authorEmail>
+    <authorUrl>http://www.revive-adserver.com</authorUrl>
+    <license>license.txt</license>
+    <description>Developer Toolbox for Revive Adserver</description>
+    <version>0.1.6</version>
+    <type>extension</type>
+
+    <install>
+
+        <files>
+            <file path="{PLUGINPATH}">openXDeveloperToolbox.readme.txt</file>
+        </files>
+
+        <contents>
+            <group name="oxToolbox">1</group>
+            <group name="oxPlugin" >2</group>
+            <group name="oxSchema" >3</group>
+        </contents>
+
+    </install>
+
+    <readme>
+
+    </readme>
+
+</plugin>

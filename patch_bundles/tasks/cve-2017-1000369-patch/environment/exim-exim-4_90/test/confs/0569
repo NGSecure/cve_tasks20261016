@@ -1,0 +1,29 @@
+# Exim test configuration 0569
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_mail = check_from
+acl_smtp_rcpt = accept
+acl_smtp_data = check_message
+
+recipient_unqualified_hosts = V4NET.10.10.9
+
+# ----- ACL -----
+
+begin acl
+
+check_from:
+  accept senders = usery@exim.test.ex
+         set acl_m_message = I do not like your message
+  accept
+
+check_message:
+  require message = ${if def:acl_m_message {$acl_m_message}}
+          verify = header_names_ascii
+  accept
+
+# End

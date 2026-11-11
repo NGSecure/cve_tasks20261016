@@ -1,0 +1,54 @@
+# Exim test configuration 5100
+
+IGNORE_QUOTA=FALSE
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+bounces:
+  driver = redirect
+  allow_defer
+  data = :blackhole:
+  retry_use_local_part
+  senders = :
+
+smartuser:
+  driver = accept
+  retry_use_local_part
+  transport = lmtp
+
+
+# ----- Transports -----
+
+begin transports
+
+lmtp:
+  driver = lmtp
+  batch_max = 100
+  command = DIR/bin/mtpscript DIR/aux-fixed/TESTNUM.script.$h_script: +DIR/spool/log/mainlog
+  timeout = 1s
+  user = EXIMUSER
+  ignore_quota = IGNORE_QUOTA
+
+
+# ----- Retry -----
+
+
+begin retry
+
+*  mail_4xx
+*  rcpt_4xx   F,1d,1m
+*  *          F,5d,1d
+
+
+# End

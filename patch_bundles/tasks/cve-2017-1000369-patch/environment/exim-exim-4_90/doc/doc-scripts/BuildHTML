@@ -1,0 +1,11 @@
+#! /bin/sh
+
+if [ $# != 1 ]; then
+  echo "*** Usage: BuildHTML <Exim version>"
+  exit 1
+fi
+
+g2h -split chapter filter.src "Exim Filter Specification"
+g2h -split chapter spec.src "Exim $1 Specification"
+
+# End

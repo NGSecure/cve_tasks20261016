@@ -1,0 +1,33 @@
+# Exim test configuration 0434
+
+ELI=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+extra_local_interfaces=ELI
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  route_list = * 1.2.3.4
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+
+
+
+# End

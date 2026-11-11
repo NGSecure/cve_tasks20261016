@@ -1,0 +1,30 @@
+<h2>System Stats</h2>
+	<p>Hey, you found an easter egg!<p>
+	<p>This part of the site shows game statistics that you might have seen on other pages throughout the game.</p>
+	<p>This specific page contains every statistic you can pull from the databases and displays it here.</p>
+	
+<?php	
+
+$sql = "SELECT id FROM accounts";
+$result = $conn->query($sql);
+$num_rows = mysqli_num_rows($result);
+
+if ($result->num_rows > 0) {
+		echo "Total User Accounts: ";
+		echo $num_rows;
+	}
+	
+$sql = "SELECT role FROM accounts WHERE role = 'admin'";
+$result = $conn->query($sql);
+$num_rows = mysqli_num_rows($result);
+
+echo "<br>";
+if ($result->num_rows > 0) {
+		echo "Total Admins: ";
+		echo $num_rows;
+	}
+
+echo "<br>";
+
+$conn->close();
+?>

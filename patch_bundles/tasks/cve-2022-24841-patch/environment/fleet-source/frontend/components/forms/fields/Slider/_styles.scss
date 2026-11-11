@@ -1,0 +1,49 @@
+.fleet-slider {
+  transition: background-color 150ms ease-in-out;
+  background-color: $ui-fleet-black-50;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  min-width: 35px;
+  position: relative;
+  width: 35px;
+
+  &:hover {
+    background-color: $ui-fleet-black-50;
+  }
+
+  &--active {
+    background-color: $core-vibrant-blue;
+
+    &:hover {
+      background-color: $core-vibrant-blue;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+
+  &__dot {
+    @include size(16px);
+    @include position(absolute, 2px null null 2px);
+    transition: left 150ms ease-in-out;
+    border-radius: 50%;
+    background-color: $core-white;
+
+    &--active {
+      left: 17px;
+    }
+  }
+
+  &__label {
+    font-size: $x-small;
+    font-weight: $regular;
+    text-align: left;
+    vertical-align: text-bottom;
+    margin-left: $pad-small;
+  }
+}

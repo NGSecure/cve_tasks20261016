@@ -1,0 +1,59 @@
+# Exim test configuration 5500
+# Server PRDR
+
+LOG_SELECTOR=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : *.test.ex
+
+LOG_SELECTOR
+
+qualify_domain = test.ex
+trusted_users = CALLER
+
+prdr_enable = true
+
+acl_smtp_mail = mail_acl
+acl_smtp_rcpt = accept
+acl_smtp_data_prdr = prdr_acl
+acl_smtp_data = data_acl
+
+# ----- ACLs -----
+
+begin acl
+
+mail_acl:
+  accept logwrite = prdr_requested: <$prdr_requested>
+
+prdr_acl:
+  defer	local_parts = usery
+  deny	local_parts = userz
+  accept
+
+data_acl:
+  deny	condition = ${if match {$recipients}{userq}}
+  accept
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+# ----- Routers -----
+
+begin routers
+
+r0:
+  driver = accept
+  transport = t1
+
+# End

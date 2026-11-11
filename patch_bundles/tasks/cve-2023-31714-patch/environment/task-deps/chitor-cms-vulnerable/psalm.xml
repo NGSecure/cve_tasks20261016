@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="5"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <file name="add_mark.php" />
+        <file name="add_student.php" />
+        <file name="award_list.php" />
+        <file name="batch_edit.php" />
+        <file name="book_list.php" />
+        <file name="calculate_position.php" />
+        <file name="check_roll_no.php" />
+        <file name="class_result.php" />
+        <file name="class_test_anwar.php" />
+        <file name="class_test_ayaz.php" />
+        <file name="config.php" />
+        <file name="db_connection.php" />
+        <file name="delete_student.php" />
+        <file name="detail_student.php" />
+        <file name="dmc_double.php" />
+        <file name="dmc_one.php" />
+        <file name="edit_student.php" />
+        <file name="index.php" />
+        <file name="nav.php" />
+        <file name="print_dmc.php" />
+        <file name="rollno_slip.php" />
+        <file name="sand_box.php" />
+        <file name="select_class.php" />
+        <file name="show_class.php" />
+        <file name="subject_result.php" />
+        <file name="test.php" />
+        <file name="update_marks.php" />
+        <file name="update_roll_no.php" />
+        <file name="vendor/autoload.php" />
+        <file name="vendor/composer/autoload_classmap.php" />
+        <file name="vendor/composer/autoload_files.php" />
+        <file name="vendor/composer/autoload_namespaces.php" />
+        <file name="vendor/composer/autoload_psr4.php" />
+        <file name="vendor/composer/autoload_real.php" />
+        <file name="vendor/composer/autoload_static.php" />
+        <file name="vendor/composer/ClassLoader.php" />
+        <file name="vendor/composer/installed.php" />
+        <file name="vendor/composer/InstalledVersions.php" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+</psalm>

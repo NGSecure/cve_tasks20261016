@@ -1,0 +1,27 @@
+# Exim test configuration 0063
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : myhost.ex
+domainlist relay_domains = test.ex
+
+hostlist relay_hosts = ^[^\\d]+2
+
+acl_smtp_rcpt = check_recipient
+
+
+# ------ ACL ------
+
+begin acl
+
+check_recipient:
+  accept  domains = +local_domains
+  accept  domains = +relay_domains
+  accept  hosts = +relay_hosts
+  deny    message = relay not permitted
+
+# End

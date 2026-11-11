@@ -1,0 +1,32 @@
+# Exim test configuration 0313
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = redirect
+  local_parts = filter
+  file = DIR/test-holey
+  allow_filter
+  user = CALLER
+
+r2:
+  driver = redirect
+  local_parts = include
+  data = :include:DIR/test-holey
+
+
+# ------ Retry ------
+
+begin retry
+
+*  *  F,1d,1h
+
+# End

@@ -1,0 +1,23 @@
+# Exim test configuration 0381
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_rcpt
+trusted_users = CALLER
+
+# ----- ACL -----
+
+begin acl
+
+check_rcpt:
+  warn       hosts   =  *.gov.uk.test.ex
+  warn       hosts   = !*.gov.uk.test.ex
+  warn       hosts   =  *.co.uk.test.ex
+  warn       hosts   = !*.co.uk.test.ex
+  accept
+
+# End

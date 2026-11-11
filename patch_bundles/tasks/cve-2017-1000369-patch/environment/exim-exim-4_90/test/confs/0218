@@ -1,0 +1,65 @@
+# Exim test configuration 0218
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector =  \
+              +sender_on_delivery
+ignore_bounce_errors_after = 0s
+qualify_domain = test.ex
+queue_run_in_order
+queue_only
+
+
+# ----- ACLs ----
+
+begin acl
+
+expand_check:
+  accept message = ACL
+
+# ----- Routers -----
+
+begin routers
+
+bounce:
+  driver = redirect
+  allow_defer
+  allow_fail
+  data = :fail: just discard
+  retry_use_local_part
+  senders = :
+  debug_print = R: $router_name  (${acl {expand_check}})
+
+client:
+  driver = accept
+  retry_use_local_part
+  transport = send_to_server
+  debug_print = R: $router_name  (${acl {expand_check}})
+
+
+# ----- Transports -----
+
+begin transports
+
+send_to_server:
+  driver = smtp
+  allow_localhost
+  command_timeout = 1s
+  hosts = 127.0.0.1
+  port = PORT_S
+  debug_print = T: $transport_name  (${acl {expand_check}})
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,5d,10s
+
+
+# End

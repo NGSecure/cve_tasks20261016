@@ -1,0 +1,64 @@
+# Exim test configuration 0002
+
+LENCHECK=
+PTBC=
+
+exim_path = EXIM_PATH
+keep_environment = USER
+host_lookup_order = bydns
+primary_hostname = myhost.test.ex
+spool_directory = DIR/spool
+log_file_path = DIR/spool/log/%slog
+gecos_pattern = ""
+gecos_name = CALLER_NAME
+tls_advertise_hosts =
+
+# ----- Main settings -----
+
+domainlist dlist = *.aa.bb : ^\Nxxx(.*)
+domainlist elist = +dlist : ;;
+domainlist flist = <; a ; b;;c ; +elist ; 2001:630:212:8:204::b664 ;
+hostlist   hlist = V4NET.11.12.13 : iplsearch;DIR/aux-fixed/0002.iplsearch
+headers_charset = iso-8859-8
+
+acl_smtp_connect = connect${substr_-1_1:$sender_host_address}
+acl_smtp_rcpt = accept
+acl_smtp_data = check_data
+
+PTBC
+LENCHECK
+
+# ----- ACL -----
+
+begin acl
+
+connect0:
+  accept
+
+connect1:
+  deny  hosts = <\n partial-lsearch;DIR/aux-fixed/0002.lsearch \n 1.2.3.4
+
+connect2:
+  deny  hosts = net-lsearch;DIR/aux-fixed/0002.lsearch
+
+check_data:
+  warn  logwrite = Subject is: "$h_subject:"
+  deny  message = reply_address=<$reply_address>
+
+a_ret:
+  accept message = ($acl_narg) [$acl_arg1] [$acl_arg2]
+
+a_none:
+  accept
+
+a_deny:
+  deny message = ($acl_narg) [$acl_arg1] [$acl_arg2]
+
+a_defer:
+  defer
+
+a_sub:
+  require acl = a_none foo bar baz barf
+  require acl = a_deny "new arg1" $acl_arg1
+
+# End

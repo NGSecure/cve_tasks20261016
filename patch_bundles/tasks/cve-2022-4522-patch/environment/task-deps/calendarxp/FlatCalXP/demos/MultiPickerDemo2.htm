@@ -1,0 +1,104 @@
+<HTML>
+<HEAD><TITLE>Multi-Picker Demo 2</TITLE>
+<script language="JavaScript">
+function fAddListItem(strDate,caller) {
+	// caller is the reference to the iframe engine which init the call, ie. gfFlat_1 or gfFlat_2
+	var dl=document.testForm.dateList;
+	dl.options[dl.options.length]=new Option(strDate,strDate);
+}
+function fRemoveListItem(strDate,caller) {
+	// caller is the reference to the iframe engine which init the call, ie. gfFlat_1 or gfFlat_2
+	var dl=document.testForm.dateList;
+	for (var i=0;i<dl.options.length;i++)
+		if (strDate==dl.options[i].value) break;
+	dl.options[i]=null;
+}
+// The above 2 functions are called from within the plugins2.js when adding dates into the selected ranges. We use them to add dates explicitly to the <select> list.
+// These 2 have to be defined in the same page with the <select> tag, otherwise a bug of IE5.0 will prevent the list from getting new options. IE5.5+ doesn't have this bug.
+// param strDate has a format of yyyy/mm/dd, you may modify this format in function fDateString in the plugins2.js
+
+function submitByDates(fm) {	// construct the selected dates in the hidden form field allSelected
+	fm.allSelected.value="";
+	for (var i=0; i<fm.dateList.length; i++) {
+		if (i>0) fm.allSelected.value+=",";
+		fm.allSelected.value+=fm.dateList.options[i].value;
+	}
+	// fm.action="ByDate.php";
+	alert(fm.allSelected.value); // in your app you should call fm.submit() instead so that the allSelected.value can be submitted.
+}
+
+function submitByRanges(fm) {	// construct the selected date ranges in the hidden form field allSelected
+	fm.allSelected.value="";
+	var _cxp_pds=gfFlat_1.fGetPDS();
+	for (var i=0; i<_cxp_pds.length; i++) {
+		var d0=new Date(_cxp_pds[i][0]);
+		var d1=new Date(_cxp_pds[i][1]);
+		fm.allSelected.value+="["+d0.getUTCFullYear()+"/"+(d0.getUTCMonth()+1)+"/"+d0.getUTCDate()
+			+","
+			+d1.getUTCFullYear()+"/"+(d1.getUTCMonth()+1)+"/"+d1.getUTCDate()+"]";
+	}
+	// fm.action="ByRange.php";
+	alert(fm.allSelected.value); // in your app you should call fm.submit() instead so that the allSelected.value can be submitted.
+}
+
+function fInitAgenda() {
+	// the following presets the date range selected, check the fOnload() in plugins2.js
+	with (gfFlat_1) {
+		fAddRange(gToday[0],gToday[1],5,false);
+		fAddRange(gToday[0],gToday[1],10,true);
+		fAddRange(gToday[0],gToday[1],15,false);
+		fAddRange(gToday[0],gToday[1],16,false);
+		if (gRange.length>0) fRepaint();
+	}
+}
+</script>
+</HEAD>
+<BODY onload="_nn4_loaded=true" >
+
+<h3>This demo uses the plugins2.js</h3>
+
+
+
+<form name="testForm">
+<table>
+<tr>
+<td valign=top>
+<!--  FlatCalendar Tags (tag name and id must match), note it's using plugins2.js -->
+<iframe width=174 height=172 name="gToday:normal:agenda.js:gfFlat_1:plugins2.js" id="gToday:normal:agenda.js:gfFlat_1:plugins2.js" src="MultiPicker/iflateng.htm" scrolling="no" frameborder="0">
+<a name="gfFlat_1_spacer"><img width=172 height=178></a>
+</iframe>
+<iframe width=174 height=172 name="[gToday[0],gToday[1]+1]:normal:share[gfFlat_1]:gfFlat_2:plugins2.js" id="[gToday[0],gToday[1]+1]:normal:share[gfFlat_1]:gfFlat_2:plugins2.js" src="MultiPicker/iflateng.htm" scrolling="no" frameborder="0">
+<a name="gfFlat_2_spacer"><img width=172 height=178></a>
+</iframe>
+</td>
+<td nowrap>&nbsp;&nbsp;
+<select name="dateList" size="9" style="display:none">
+</select><BR>
+&nbsp;&nbsp;&nbsp;<input type="button" value="Clear All" onclick="gfFlat_1.fClearAll();gfFlat_1.fRepaint();gfFlat_2.fRepaint();return false;">
+</td>
+</tr>
+</table>
+<input type="Button" value="Submit By Dates" onclick="submitByDates(this.form)">
+<input type="Button" value="Submit By Ranges" onclick="submitByRanges(this.form)">
+<input type="hidden" name="allSelected">
+</form>
+
+
+
+<P>
+NOTE: You can remove the pre-selected dates by editing the fInitAgenda() in the header of this page.
+
+
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions,
+    Inc. All rights reserved.</em></font></div>
+
+
+
+
+
+<!-- calendar engine for netscape 4.x. "src" and "background" must match. -->
+<LAYER name="gToday:normal:agenda.js:gfFlat_1:plugins2.js" src="MultiPicker/nflateng.htm" background="MultiPicker/nflateng.htm">     </LAYER>
+<LAYER name="[gToday[0],gToday[1]+1]:normal:share[gfFlat_1]:gfFlat_2:plugins2.js" src="MultiPicker/nflateng.htm" background="MultiPicker/nflateng.htm">     </LAYER>
+</BODY>
+</HTML>

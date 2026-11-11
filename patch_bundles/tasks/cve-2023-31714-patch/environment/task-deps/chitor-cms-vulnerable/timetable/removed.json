@@ -1,0 +1,62 @@
+  "Anwar Khaliq": {
+    "Mon": {
+              "1": "Empty",
+              "2": { "Class": 9, "Section": "A", "Subject": "Mat"},
+              "3": "Empty",
+              "4": { "Class": 9, "Section": "B", "Subject": "Phy"},
+              "5": "Empty",
+              "6": "Empty",
+              "7":  "Empty",
+              "8": "Empty"
+           },
+    "Tue": {
+              "1": "Empty",
+              "2": { "Class": 9, "Section": "A", "Subject": "Mat"},
+              "3": "Empty",
+              "4": { "Class": 9, "Section": "B", "Subject": "Phy"},
+              "5": "Empty",
+              "6": "Empty",
+              "7":  "Empty",
+              "8": "Empty"
+   },
+    "Wed": {
+              "1": "Empty",
+              "2": { "Class": 9, "Section": "A", "Subject": "Mat"},
+              "3": "Empty",
+              "4": { "Class": 9, "Section": "B", "Subject": "Phy"},
+              "5": "Empty",
+              "6": "Empty",
+              "7":  "Empty",
+              "8": "Empty"
+    },
+    "Thu": {
+              "1": "Empty",
+              "2": { "Class": 9, "Section": "A", "Subject": "Mat"},
+              "3": "Empty",
+              "4": { "Class": 9, "Section": "B", "Subject": "Phy"},
+              "5": "Empty",
+              "6": "Empty",
+              "7":  "Empty",
+              "8": "Empty"
+    },
+    "Fri": {
+              "1": "Empty",
+              "2": { "Class": 9, "Section": "A", "Subject": "Mat"},
+              "3": "Empty",
+              "4": "Empty",
+              "5": "Empty",
+              "6": "---",
+              "7": "---",
+              "8": "---"
+    },
+    "Sat": {
+              "1": "Empty",
+              "2": { "Class": 9, "Section": "A", "Subject": "Mat"},
+              "3": "Empty",
+              "4": { "Class": 9, "Section": "B", "Subject": "Phy"},
+              "5": "Empty",
+              "6": "Empty",
+              "7":  "Empty",
+              "8": "Empty"
+    }
+  },

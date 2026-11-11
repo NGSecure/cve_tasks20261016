@@ -1,0 +1,5131 @@
+{
+  "adoptopenjdk:13-hotspot": {
+    "Cmd": [
+      "jshell"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk-13.0.2+8",
+      "JAVA_HOME=/opt/java/openjdk"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "baserproject/basercms:php7.4": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "clojure:temurin-8-lein-bookworm": {
+    "Cmd": [
+      "lein",
+      "repl"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin/",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LEIN_VERSION=2.12.0",
+      "LEIN_INSTALL=/usr/local/bin/",
+      "LEIN_ROOT=1"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/tmp"
+  },
+  "coolacid/misp-docker:core-v2.4.136a": {
+    "Cmd": null,
+    "Entrypoint": [
+      "/entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "DEBIAN_FRONTEND=noninteractive"
+    ],
+    "User": "",
+    "Volumes": null,
+    "WorkingDir": "/var/www/MISP"
+  },
+  "couchdb:3.2": {
+    "Cmd": [
+      "/opt/couchdb/bin/couchdb"
+    ],
+    "Entrypoint": [
+      "tini",
+      "--",
+      "/docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GPG_COUCH_KEY=390EF70BB1EA12B2773962950EE62FB37A00258D",
+      "COUCHDB_VERSION=3.2.3"
+    ],
+    "User": null,
+    "Volumes": {
+      "/opt/couchdb/data": {}
+    },
+    "WorkingDir": null
+  },
+  "debian:11": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "debian:11-slim": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "debian:12": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "debian:12-slim": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "debian:bookworm": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "debian:bookworm-slim": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "debian:bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "debian:bullseye-slim": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "debian:buster-slim": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "docker.m.daocloud.io/library/golang:1.19-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.19.13",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "docker.m.daocloud.io/library/python:3.9-slim": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+      "PYTHON_VERSION=3.9.25",
+      "PYTHON_SHA256=00e07d7c0f2f0cc002432d1ee84d2a40dae404a99303e3f97701c10966c91834"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "dolibarr/dolibarr:17.0.4-php8.1": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-run.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.34",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.34.tar.xz.asc",
+      "PHP_SHA256=ffa9e0982e82eeaea848f57687b425ed173aa278fe563001310ae2638db5c251",
+      "DOLI_VERSION=17.0.4",
+      "DOLI_VERSION_FOR_INIT_DEMO=17.0",
+      "DOLI_INSTALL_AUTO=1",
+      "DOLI_PROD=1",
+      "DOLI_DB_TYPE=mysqli",
+      "DOLI_DB_HOST=mysql",
+      "DOLI_DB_HOST_PORT=3306",
+      "DOLI_DB_NAME=dolidb",
+      "DOLI_DB_SSL=false",
+      "DOLI_URL_ROOT=http://localhost",
+      "DOLI_AUTH=dolibarr",
+      "DOLI_LDAP_HOST=127.0.0.1",
+      "DOLI_LDAP_PORT=389",
+      "DOLI_LDAP_VERSION=3",
+      "DOLI_LDAP_SERVER_TYPE=openldap",
+      "DOLI_LDAP_LOGIN_ATTRIBUTE=uid",
+      "DOLI_LDAP_DN=ou=users,dc=my-domain,dc=com",
+      "DOLI_LDAP_FILTER=",
+      "DOLI_LDAP_BIND_DN=",
+      "DOLI_LDAP_BIND_PASS=",
+      "DOLI_LDAP_DEBUG=false",
+      "DOLI_CRON=0",
+      "WWW_USER_ID=33",
+      "WWW_GROUP_ID=33",
+      "PHP_INI_DATE_TIMEZONE=UTC",
+      "PHP_INI_MEMORY_LIMIT=256M",
+      "PHP_INI_UPLOAD_MAX_FILESIZE=20M",
+      "PHP_INI_POST_MAX_SIZE=22M",
+      "PHP_INI_ALLOW_URL_FOPEN=0"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/documents": {},
+      "/var/www/html/custom": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "eclipse-temurin:11-jdk": {
+    "Cmd": [
+      "jshell"
+    ],
+    "Entrypoint": [
+      "/__cacert_entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk-11.0.33+10"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "eclipse-temurin:11-jdk-jammy": {
+    "Cmd": [
+      "jshell"
+    ],
+    "Entrypoint": [
+      "/__cacert_entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk-11.0.33+10"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "eclipse-temurin:17-jdk": {
+    "Cmd": [
+      "jshell"
+    ],
+    "Entrypoint": [
+      "/__cacert_entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk-17.0.21+9"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "eclipse-temurin:17-jdk-jammy": {
+    "Cmd": [
+      "jshell"
+    ],
+    "Entrypoint": [
+      "/__cacert_entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk-17.0.21+9"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "eclipse-temurin:8-jdk": {
+    "Cmd": null,
+    "Entrypoint": [
+      "/__cacert_entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk8u512-b09"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "eclipse-temurin:8-jre": {
+    "Cmd": null,
+    "Entrypoint": [
+      "/__cacert_entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk8u512-b09"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "elixir:1.12": {
+    "Cmd": [
+      "iex"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "OTP_VERSION=24.3.4.17",
+      "REBAR3_VERSION=3.23.0",
+      "REBAR_VERSION=2.6.4",
+      "ELIXIR_VERSION=v1.12.3",
+      "LANG=C.UTF-8"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "erlang:20": {
+    "Cmd": [
+      "erl"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "OTP_VERSION=20.3.8.26",
+      "REBAR_VERSION=2.6.4",
+      "REBAR3_VERSION=3.15.2"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "espocrm/espocrm:8.0.4": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.25",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.25.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.25.tar.xz.asc",
+      "PHP_SHA256=66fdba064aa119b1463a7969571d42f4642690275d8605ab5149bcc5107e2484",
+      "ESPOCRM_VERSION=8.0.4",
+      "ESPOCRM_SHA256=926fabb2a93a17680beb39e6bd678c160e3185d6780c90ad78062beea8654880"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "fedora:28": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "DISTTAG=f28container",
+      "FGC=f28",
+      "FBR=f28"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "fedora:33": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "DISTTAG=f33container",
+      "FGC=f33",
+      "FBR=f33"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "fedora:34": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "DISTTAG=f34container",
+      "FGC=f34",
+      "FBR=f34"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "fedora:35": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "DISTTAG=f35container",
+      "FGC=f35",
+      "FBR=f35"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "fedora:36": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "DISTTAG=f36container",
+      "FGC=f36",
+      "FBR=f36"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "gcc:11": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GPG_KEYS=B215C1633BCA0477615F1B35A5B3A004745C015A \tB3C42148A44E6983B3E4CC0793FA9B1AB75C61B8 \t90AA470469D3965A87A5DCB494D03953902C9419 \t80F98B2E0DAB6C8281BDF541A7C8C3B2F71EDF1C \t7F74F97C103468EE5D750B583AB00996FC26A641 \t33C235A34C46AA3FFB293709A328C3A2C3C45C06 \tD3A93CAD751C2AF4F8C7AD516C35B99309B5FA62",
+      "GCC_MIRRORS=https://ftpmirror.gnu.org/gcc \t\thttps://mirrors.kernel.org/gnu/gcc \t\thttps://bigsearcher.com/mirrors/gcc/releases \t\thttp://www.netgull.com/gcc/releases \t\thttps://ftpmirror.gnu.org/gcc \t\thttps://sourceware.org/pub/gcc/releases \t\tftp://ftp.gnu.org/gnu/gcc",
+      "GCC_VERSION=11.5.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ghcr.io/rroemhild/docker-test-openldap:master": {
+    "Cmd": [
+      "/init"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "DATA_DIR=/opt/openldap/bootstrap/data",
+      "CONFIG_DIR=/opt/openldap/bootstrap/config",
+      "LDAP_DOMAIN=planetexpress.com",
+      "LDAP_ORGANISATION=Planet Express, Inc.",
+      "LDAP_BINDDN=cn=admin,dc=planetexpress,dc=com",
+      "LDAP_SECRET=GoodNewsEveryone",
+      "LDAP_CA_CERT=/etc/ldap/ssl/fullchain.crt",
+      "LDAP_SSL_KEY=/etc/ldap/ssl/ldap.key",
+      "LDAP_SSL_CERT=/etc/ldap/ssl/ldap.crt",
+      "LDAP_FORCE_STARTTLS=false"
+    ],
+    "User": null,
+    "Volumes": {
+      "/etc/ldap/slapd.d": {},
+      "/etc/ldap/ssl": {},
+      "/run/slapd": {},
+      "/var/lib/ldap": {}
+    },
+    "WorkingDir": null
+  },
+  "glpi/glpi:10.0.18": {
+    "Cmd": [
+      "/opt/startup.sh"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1198C0117593497A5EC5C199286AF1F9897469DC C28D937575603EB4ABB725861C0779DC5C0A9DE4 AFD8691FDAEDF03BDF6E460563F15A9B715376CA",
+      "PHP_VERSION=8.3.23",
+      "PHP_URL=https://www.php.net/distributions/php-8.3.23.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.3.23.tar.xz.asc",
+      "PHP_SHA256=08be64700f703bca6ff1284bf1fdaffa37ae1b9734b6559f8350248e8960a6db",
+      "GLPI_INSTALL_MODE=DOCKER",
+      "GLPI_CONFIG_DIR=/var/glpi/config",
+      "GLPI_MARKETPLACE_DIR=/var/glpi/marketplace",
+      "GLPI_VAR_DIR=/var/glpi/files",
+      "GLPI_LOG_DIR=/var/glpi/logs",
+      "GLPI_SKIP_AUTOINSTALL=false",
+      "GLPI_SKIP_AUTOUPDATE=false"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/glpi": {}
+    },
+    "WorkingDir": "/var/www/glpi"
+  },
+  "golang:1.10": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.10.8",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.14-buster": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.14.15",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.15-buster": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.15.15",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.16": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.16.15",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.16-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.16.15",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.17": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.17.13",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.17-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.17.13",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.18": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.18.10",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.18-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.18.10",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.19": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.19.13",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.19-bookworm": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.19.13",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.19-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.19.13",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.19.3": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.19.3",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.19.3-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.19.3",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.20": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.20.14",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.20-bookworm": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.20.14",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.20-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.20.14",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.20.2": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.20.2",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.21": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.21.13",
+      "GOTOOLCHAIN=local",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.21-bookworm": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.21.13",
+      "GOTOOLCHAIN=local",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.21-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.21.13",
+      "GOTOOLCHAIN=local",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "golang:1.22": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.22.12",
+      "GOTOOLCHAIN=local",
+      "GOPATH=/go"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/go"
+  },
+  "haproxy:2.2.16": {
+    "Cmd": [
+      "haproxy",
+      "-f",
+      "/usr/local/etc/haproxy/haproxy.cfg"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "HAPROXY_VERSION=2.2.16",
+      "HAPROXY_URL=https://www.haproxy.org/download/2.2/src/haproxy-2.2.16.tar.gz",
+      "HAPROXY_SHA256=b81e03a181070d1f7bcdaeec9f09af701fb1ab015c3c9c997a881f4773e29375"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "i386/debian:11": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": [],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "influxdb:1.7.5": {
+    "Cmd": [
+      "influxd"
+    ],
+    "Entrypoint": [
+      "/entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "INFLUXDB_VERSION=1.7.5"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/influxdb": {}
+    },
+    "WorkingDir": null
+  },
+  "joomla:3.9-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "/entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_EXTRA_BUILD_DEPS=apache2-dev",
+      "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=CBAF69F173A0FEA4B537F470D66C9593118BCCB6 F38252826ACD957EF380D39F2F7956BC5DA04B5D",
+      "PHP_VERSION=7.3.29",
+      "PHP_URL=https://www.php.net/distributions/php-7.3.29.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.3.29.tar.xz.asc",
+      "PHP_SHA256=7db2834511f3d86272dca3daee3f395a5a4afce359b8342aa6edad80e12eb4d0",
+      "JOOMLA_INSTALLATION_DISABLE_LOCALHOST_CHECK=1",
+      "JOOMLA_VERSION=3.9.28",
+      "JOOMLA_SHA512=0751036475d9b527bd6da5f5a0c67e0c728449bf02ba9d508f206b4b2f35697093c938a4350b6e9412b16f5eabb8700575268b564fd8db451308ae4cfe4d882e"
+    ],
+    "User": "",
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "louislam/uptime-kuma:1.23.2": {
+    "Cmd": [
+      "node",
+      "server/server.js"
+    ],
+    "Entrypoint": [
+      "/usr/bin/dumb-init",
+      "--",
+      "extra/entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=16.20.2",
+      "YARN_VERSION=1.22.19",
+      "UPTIME_KUMA_IS_CONTAINER=1"
+    ],
+    "User": null,
+    "Volumes": {
+      "/app/data": {}
+    },
+    "WorkingDir": "/app"
+  },
+  "lucee/lucee:5.3.7.34-RC-tomcat9.0-jdk11-openjdk": {
+    "Cmd": [
+      "catalina.sh",
+      "run"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/tomcat/bin:/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "JAVA_HOME=/usr/local/openjdk-11",
+      "JAVA_VERSION=11.0.7",
+      "JAVA_BASE_URL=https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.7%2B10/OpenJDK11U-jdk_",
+      "JAVA_URL_VERSION=11.0.7_10",
+      "CATALINA_HOME=/usr/local/tomcat",
+      "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+      "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+      "GPG_KEYS=05AB33110949707C93A279E3D3EFE6B686867BA6 07E48665A34DCAFAE522E5E6266191C37C037D42 47309207D818FFD8DCD3F83F1931D684307A10A5 541FBE7D8F78B25E055DDEE13C370389288584E7 61B832AC2F1C5A90F0F9B00A1C506407564C17A3 79F7026C690BAA50B92CD8B66A3AD3F4F22C4FED 9BA44C2621385CB966EBA586F72C284D731FABEE A27677289986DB50844682F8ACB77FC2E86E29AC A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243 F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23",
+      "TOMCAT_MAJOR=9",
+      "TOMCAT_VERSION=9.0.35",
+      "TOMCAT_SHA512=0db27185d9fc3174f2c670f814df3dda8a008b89d1a38a5d96cbbe119767ebfb1cf0bce956b27954aee9be19c4a7b91f2579d967932207976322033a86075f98",
+      "LUCEE_JAVA_OPTS=-Xms64m -Xmx512m"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/local/tomcat"
+  },
+  "mariadb:10.1": {
+    "Cmd": [
+      "mysqld"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.12",
+      "GPG_KEYS=177F4010FE56CA3336300305F1656F24C74CD1D8",
+      "MARIADB_MAJOR=10.1",
+      "MARIADB_VERSION=1:10.1.48+maria-1~bionic"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "mariadb:10.11": {
+    "Cmd": [
+      "mariadbd"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.19",
+      "LANG=C.UTF-8",
+      "MARIADB_VERSION=1:10.11.19+maria~ubu2204"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "mariadb:10.3": {
+    "Cmd": [
+      "mysqld"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.14",
+      "LANG=C.UTF-8",
+      "MARIADB_MAJOR=10.3",
+      "MARIADB_VERSION=1:10.3.39+maria~ubu2004"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "mariadb:10.4": {
+    "Cmd": [
+      "mysqld"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.17",
+      "LANG=C.UTF-8",
+      "MARIADB_MAJOR=10.4",
+      "MARIADB_VERSION=1:10.4.34+maria~ubu2004"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "mariadb:10.5": {
+    "Cmd": [
+      "mysqld"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.17",
+      "LANG=C.UTF-8",
+      "MARIADB_MAJOR=10.5",
+      "MARIADB_VERSION=1:10.5.29+maria~ubu2004"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "mariadb:10.6": {
+    "Cmd": [
+      "mariadbd"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.19",
+      "LANG=C.UTF-8",
+      "MARIADB_MAJOR=10.6",
+      "MARIADB_VERSION=1:10.6.28+maria~ubu2204"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "mariadb:10.7": {
+    "Cmd": [
+      "mariadbd"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.14",
+      "LANG=C.UTF-8",
+      "MARIADB_MAJOR=10.7",
+      "MARIADB_VERSION=1:10.7.8+maria~ubu2004"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "maven:3.8-eclipse-temurin-8": {
+    "Cmd": [
+      "mvn"
+    ],
+    "Entrypoint": [
+      "/usr/local/bin/mvn-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk8u392-b08",
+      "MAVEN_HOME=/usr/share/maven",
+      "MAVEN_CONFIG=/root/.m2"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "maven:3.8-openjdk-11": {
+    "Cmd": [
+      "mvn"
+    ],
+    "Entrypoint": [
+      "/usr/local/bin/mvn-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/usr/local/openjdk-11",
+      "LANG=C.UTF-8",
+      "JAVA_VERSION=11.0.16",
+      "MAVEN_HOME=/usr/share/maven",
+      "MAVEN_CONFIG=/root/.m2"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "maven:3.8-openjdk-8": {
+    "Cmd": [
+      "mvn"
+    ],
+    "Entrypoint": [
+      "/usr/local/bin/mvn-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/openjdk-8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/usr/local/openjdk-8",
+      "LANG=C.UTF-8",
+      "JAVA_VERSION=8u342",
+      "MAVEN_HOME=/usr/share/maven",
+      "MAVEN_CONFIG=/root/.m2"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "maven:3.9-eclipse-temurin-11": {
+    "Cmd": [
+      "mvn"
+    ],
+    "Entrypoint": [
+      "/usr/local/bin/mvn-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk-11.0.32.1+1",
+      "MAVEN_HOME=/usr/share/maven",
+      "MAVEN_CONFIG=/root/.m2"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "maven:3.9-eclipse-temurin-8": {
+    "Cmd": [
+      "mvn"
+    ],
+    "Entrypoint": [
+      "/usr/local/bin/mvn-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk8u504-b01",
+      "MAVEN_HOME=/usr/share/maven",
+      "MAVEN_CONFIG=/root/.m2"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "mcr.microsoft.com/dotnet/aspnet:6.0": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "ASPNETCORE_URLS=http://+:80",
+      "DOTNET_RUNNING_IN_CONTAINER=true",
+      "DOTNET_VERSION=6.0.36",
+      "ASPNET_VERSION=6.0.36"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "mcr.microsoft.com/dotnet/sdk:6.0": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "ASPNETCORE_URLS=",
+      "DOTNET_RUNNING_IN_CONTAINER=true",
+      "DOTNET_VERSION=6.0.36",
+      "ASPNET_VERSION=6.0.36",
+      "DOTNET_GENERATE_ASPNET_CERTIFICATE=false",
+      "DOTNET_NOLOGO=true",
+      "DOTNET_SDK_VERSION=6.0.428",
+      "DOTNET_USE_POLLING_FILE_WATCHER=true",
+      "NUGET_XMLDOC_MODE=skip",
+      "POWERSHELL_DISTRIBUTION_CHANNEL=PSDocker-DotnetSDK-Debian-11"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "mcr.microsoft.com/dotnet/sdk:7.0": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "ASPNETCORE_URLS=",
+      "DOTNET_RUNNING_IN_CONTAINER=true",
+      "DOTNET_VERSION=7.0.20",
+      "ASPNET_VERSION=7.0.20",
+      "DOTNET_GENERATE_ASPNET_CERTIFICATE=false",
+      "DOTNET_NOLOGO=true",
+      "DOTNET_SDK_VERSION=7.0.410",
+      "DOTNET_USE_POLLING_FILE_WATCHER=true",
+      "NUGET_XMLDOC_MODE=skip",
+      "POWERSHELL_DISTRIBUTION_CHANNEL=PSDocker-DotnetSDK-Debian-11"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "mcr.microsoft.com/powershell:7.4-debian-12": {
+    "Cmd": [
+      "pwsh-preview"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false",
+      "LC_ALL=en_US.UTF-8",
+      "LANG=en_US.UTF-8",
+      "PS_INSTALL_FOLDER=/opt/microsoft/powershell/7",
+      "PSModuleAnalysisCachePath=/var/cache/microsoft/powershell/PSModuleAnalysisCache/ModuleAnalysisCache",
+      "POWERSHELL_DISTRIBUTION_CHANNEL=PSDocker-Debian-12"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/"
+  },
+  "mediawiki:1.35": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F 2C16C765DBE54A088130F1BC4B9B5F600B55F3B4 39B641343D8C104B2B146DC3F9C39DC0B9698544",
+      "PHP_VERSION=8.0.30",
+      "PHP_URL=https://www.php.net/distributions/php-8.0.30.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.30.tar.xz.asc",
+      "PHP_SHA256=216ab305737a5d392107112d618a755dc5df42058226f1670e9db90e77d777d9",
+      "MEDIAWIKI_MAJOR_VERSION=1.35",
+      "MEDIAWIKI_VERSION=1.35.13"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "memcached:1.5": {
+    "Cmd": [
+      "memcached"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "MEMCACHED_VERSION=1.5.22",
+      "MEMCACHED_SHA1=3fe5d3929130e860efcfde18d4d396a29db006b7"
+    ],
+    "User": "memcache",
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "mongo:3.6": {
+    "Cmd": [
+      "mongod"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.12",
+      "JSYAML_VERSION=3.13.1",
+      "GPG_KEYS=2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5",
+      "MONGO_PACKAGE=mongodb-org",
+      "MONGO_REPO=repo.mongodb.org",
+      "MONGO_MAJOR=3.6",
+      "MONGO_VERSION=3.6.23"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data/configdb": {},
+      "/data/db": {}
+    },
+    "WorkingDir": null
+  },
+  "mongo:4.0": {
+    "Cmd": [
+      "mongod"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.12",
+      "JSYAML_VERSION=3.13.1",
+      "MONGO_PACKAGE=mongodb-org",
+      "MONGO_REPO=repo.mongodb.org",
+      "MONGO_MAJOR=4.0",
+      "MONGO_VERSION=4.0.28",
+      "HOME=/data/db"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data/configdb": {},
+      "/data/db": {}
+    },
+    "WorkingDir": null
+  },
+  "mongo:4.4": {
+    "Cmd": [
+      "mongod"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.19",
+      "JSYAML_VERSION=3.13.1",
+      "JSYAML_CHECKSUM=662e32319bdd378e91f67578e56a34954b0a2e33aca11d70ab9f4826af24b941",
+      "MONGO_PACKAGE=mongodb-org",
+      "MONGO_REPO=repo.mongodb.org",
+      "MONGO_MAJOR=4.4",
+      "MONGO_VERSION=4.4.30",
+      "HOME=/data/db"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data/configdb": {},
+      "/data/db": {}
+    },
+    "WorkingDir": null
+  },
+  "mongo:5": {
+    "Cmd": [
+      "mongod"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.17",
+      "JSYAML_VERSION=3.13.1",
+      "JSYAML_CHECKSUM=662e32319bdd378e91f67578e56a34954b0a2e33aca11d70ab9f4826af24b941",
+      "MONGO_PACKAGE=mongodb-org",
+      "MONGO_REPO=repo.mongodb.org",
+      "MONGO_MAJOR=5.0",
+      "MONGO_VERSION=5.0.31",
+      "HOME=/data/db"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data/configdb": {},
+      "/data/db": {}
+    },
+    "WorkingDir": null
+  },
+  "mongo:5.0": {
+    "Cmd": [
+      "mongod"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.19",
+      "JSYAML_VERSION=3.13.1",
+      "JSYAML_CHECKSUM=662e32319bdd378e91f67578e56a34954b0a2e33aca11d70ab9f4826af24b941",
+      "MONGO_PACKAGE=mongodb-org",
+      "MONGO_REPO=repo.mongodb.org",
+      "MONGO_MAJOR=5.0",
+      "MONGO_VERSION=5.0.33",
+      "HOME=/data/db"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data/configdb": {},
+      "/data/db": {}
+    },
+    "WorkingDir": null
+  },
+  "mongo:5.0-focal": {
+    "Cmd": [
+      "mongod"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.19",
+      "JSYAML_VERSION=3.13.1",
+      "JSYAML_CHECKSUM=662e32319bdd378e91f67578e56a34954b0a2e33aca11d70ab9f4826af24b941",
+      "MONGO_PACKAGE=mongodb-org",
+      "MONGO_REPO=repo.mongodb.org",
+      "MONGO_MAJOR=5.0",
+      "MONGO_VERSION=5.0.33",
+      "HOME=/data/db"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data/configdb": {},
+      "/data/db": {}
+    },
+    "WorkingDir": null
+  },
+  "mysql:5.6": {
+    "Cmd": [
+      "mysqld"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.12",
+      "MYSQL_MAJOR=5.6",
+      "MYSQL_VERSION=5.6.51-1debian9"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "mysql:5.7": {
+    "Cmd": [
+      "mysqld"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.16",
+      "MYSQL_MAJOR=5.7",
+      "MYSQL_VERSION=5.7.44-1.el7",
+      "MYSQL_SHELL_VERSION=8.0.35-1.el7"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "mysql:8.0": {
+    "Cmd": [
+      "mysqld"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.19",
+      "MYSQL_MAJOR=8.0",
+      "MYSQL_VERSION=8.0.46-1.el9",
+      "MYSQL_SHELL_VERSION=8.0.46-1.el9"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": "/"
+  },
+  "mysql:8.0.19": {
+    "Cmd": [
+      "mysqld"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.12",
+      "MYSQL_MAJOR=8.0",
+      "MYSQL_VERSION=8.0.19-1debian10"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/mysql": {}
+    },
+    "WorkingDir": null
+  },
+  "nextcloud:25": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "/entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.26",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.26.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.26.tar.xz.asc",
+      "PHP_SHA256=17f87133596449327451ad4b8d9911bfaea59ff5109f3a6f2bb679f967a8ea0f",
+      "PHP_MEMORY_LIMIT=512M",
+      "PHP_UPLOAD_LIMIT=512M",
+      "APACHE_BODY_LIMIT=1073741824",
+      "NEXTCLOUD_VERSION=25.0.13"
+    ],
+    "User": "",
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "nextcloud:26-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "/entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=39B641343D8C104B2B146DC3F9C39DC0B9698544 E60913E4DF209907D8E30D96659A97C9CF2A795A 1198C0117593497A5EC5C199286AF1F9897469DC",
+      "PHP_VERSION=8.2.18",
+      "PHP_URL=https://www.php.net/distributions/php-8.2.18.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.2.18.tar.xz.asc",
+      "PHP_SHA256=44b306fc021e56441f691da6c3108788bd9e450f293b3bc70fcd64b08dd41a50",
+      "PHP_MEMORY_LIMIT=512M",
+      "PHP_UPLOAD_LIMIT=512M",
+      "APACHE_BODY_LIMIT=1073741824",
+      "NEXTCLOUD_VERSION=26.0.13"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "nginx:1.17.6": {
+    "Cmd": [
+      "nginx",
+      "-g",
+      "daemon off;"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NGINX_VERSION=1.17.6",
+      "NJS_VERSION=0.3.7",
+      "PKG_RELEASE=1~buster"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "nocodb/nocodb:0.91.10": {
+    "Cmd": [
+      "/usr/src/appEntry/start.sh"
+    ],
+    "Entrypoint": [
+      "/usr/bin/dumb-init",
+      "--"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NC_DOCKER=0.6",
+      "PORT=8080",
+      "NC_TOOL_DIR=/usr/app/data/"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/src/app"
+  },
+  "node:10-alpine": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=10.24.1",
+      "YARN_VERSION=1.22.5"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:10-buster": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=10.24.1",
+      "YARN_VERSION=1.22.5"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:12-bullseye": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=12.22.12",
+      "YARN_VERSION=1.22.18"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:12-bullseye-slim": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=12.22.12",
+      "YARN_VERSION=1.22.18"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:12-buster": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=12.22.12",
+      "YARN_VERSION=1.22.18"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:14-bullseye": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=14.21.3",
+      "YARN_VERSION=1.22.19"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:14-bullseye-slim": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=14.21.3",
+      "YARN_VERSION=1.22.19"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:16-bullseye": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=16.20.2",
+      "YARN_VERSION=1.22.19"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:16-bullseye-slim": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=16.20.2",
+      "YARN_VERSION=1.22.19"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:18": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=18.20.8",
+      "YARN_VERSION=1.22.22"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:18-bookworm": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=18.20.8",
+      "YARN_VERSION=1.22.22"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:18-bullseye": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=18.20.8",
+      "YARN_VERSION=1.22.22"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:18-slim": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=18.20.8",
+      "YARN_VERSION=1.22.22"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:20": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=20.20.2",
+      "YARN_VERSION=1.22.22"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:20-bullseye": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=20.20.2",
+      "YARN_VERSION=1.22.22"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:20-bullseye-slim": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=20.20.2",
+      "YARN_VERSION=1.22.22"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:4": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=4.9.1",
+      "YARN_VERSION=1.5.1"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "node:6": {
+    "Cmd": [
+      "node"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=6.17.1",
+      "YARN_VERSION=1.15.2"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "openemr/openemr:7.0.0": {
+    "Cmd": [
+      "./openemr.sh"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "APACHE_LOG_DIR=/var/log/apache2"
+    ],
+    "User": null,
+    "Volumes": {
+      "/etc/letsencrypt/": {},
+      "/etc/ssl": {}
+    },
+    "WorkingDir": "/var/www/localhost/htdocs/openemr"
+  },
+  "openjdk:8u342-jdk": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/openjdk-8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/usr/local/openjdk-8",
+      "LANG=C.UTF-8",
+      "JAVA_VERSION=8u342"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "osixia/openldap:1.5.0": {
+    "Cmd": null,
+    "Entrypoint": [
+      "/container/tool/run"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "perl:5.30": {
+    "Cmd": [
+      "perl5.30.3",
+      "-de0"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/"
+  },
+  "perl:5.32": {
+    "Cmd": [
+      "perl5.32.1",
+      "-de0"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/"
+  },
+  "perl:5.34": {
+    "Cmd": [
+      "perl5.34.3",
+      "-de0"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/src/app"
+  },
+  "perl:5.36": {
+    "Cmd": [
+      "perl5.36.3",
+      "-de0"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/src/app"
+  },
+  "perl:5.36-bookworm": {
+    "Cmd": [
+      "perl5.36.3",
+      "-de0"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/src/app"
+  },
+  "perl:5.38-bookworm": {
+    "Cmd": [
+      "perl5.38.5",
+      "-de0"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/src/app"
+  },
+  "php:5.6-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_EXTRA_BUILD_DEPS=apache2-dev",
+      "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2",
+      "PHP_LDFLAGS=-Wl,-O1 -Wl,--hash-style=both -pie",
+      "GPG_KEYS=0BD78B5F97500D450838F95DFE857D9A90D90EC1 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3",
+      "PHP_VERSION=5.6.40",
+      "PHP_URL=https://secure.php.net/get/php-5.6.40.tar.xz/from/this/mirror",
+      "PHP_ASC_URL=https://secure.php.net/get/php-5.6.40.tar.xz.asc/from/this/mirror",
+      "PHP_SHA256=1369a51eee3995d7fbd1c5342e5cc917760e276d561595b6052b21ace2656d1c",
+      "PHP_MD5="
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:5.6-cli": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2",
+      "PHP_LDFLAGS=-Wl,-O1 -Wl,--hash-style=both -pie",
+      "GPG_KEYS=0BD78B5F97500D450838F95DFE857D9A90D90EC1 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3",
+      "PHP_VERSION=5.6.40",
+      "PHP_URL=https://secure.php.net/get/php-5.6.40.tar.xz/from/this/mirror",
+      "PHP_ASC_URL=https://secure.php.net/get/php-5.6.40.tar.xz.asc/from/this/mirror",
+      "PHP_SHA256=1369a51eee3995d7fbd1c5342e5cc917760e276d561595b6052b21ace2656d1c",
+      "PHP_MD5="
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:7.0-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_EXTRA_BUILD_DEPS=apache2-dev",
+      "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2",
+      "PHP_LDFLAGS=-Wl,-O1 -Wl,--hash-style=both -pie",
+      "GPG_KEYS=1A4E8B7277C42E53DBA9C7B9BCAA30EA9C0D5763 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3",
+      "PHP_VERSION=7.0.33",
+      "PHP_URL=https://secure.php.net/get/php-7.0.33.tar.xz/from/this/mirror",
+      "PHP_ASC_URL=https://secure.php.net/get/php-7.0.33.tar.xz.asc/from/this/mirror",
+      "PHP_SHA256=ab8c5be6e32b1f8d032909dedaaaa4bbb1a209e519abb01a52ce3914f9a13d96",
+      "PHP_MD5="
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:7.1-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_EXTRA_BUILD_DEPS=apache2-dev",
+      "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -Wl,--hash-style=both -pie",
+      "GPG_KEYS=A917B1ECDA84AEC2B568FED6F50ABC807BD5DCD0 528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 1729F83938DA44E27BA0F4D3DBDB397470D12172",
+      "PHP_VERSION=7.1.33",
+      "PHP_URL=https://www.php.net/get/php-7.1.33.tar.xz/from/this/mirror",
+      "PHP_ASC_URL=https://www.php.net/get/php-7.1.33.tar.xz.asc/from/this/mirror",
+      "PHP_SHA256=bd7c0a9bd5433289ee01fd440af3715309faf583f75832b64fe169c100d52968",
+      "PHP_MD5="
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:7.2-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_EXTRA_BUILD_DEPS=apache2-dev",
+      "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 B1B44D8F021E4E2D6021E995DC9FF8D3EE5AF27F",
+      "PHP_VERSION=7.2.34",
+      "PHP_URL=https://www.php.net/distributions/php-7.2.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.2.34.tar.xz.asc",
+      "PHP_SHA256=409e11bc6a2c18707dfc44bc61c820ddfd81e17481470f3405ee7822d8379903"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:7.2-apache-buster": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_EXTRA_BUILD_DEPS=apache2-dev",
+      "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 B1B44D8F021E4E2D6021E995DC9FF8D3EE5AF27F",
+      "PHP_VERSION=7.2.34",
+      "PHP_URL=https://www.php.net/distributions/php-7.2.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.2.34.tar.xz.asc",
+      "PHP_SHA256=409e11bc6a2c18707dfc44bc61c820ddfd81e17481470f3405ee7822d8379903"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:7.2-cli": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 B1B44D8F021E4E2D6021E995DC9FF8D3EE5AF27F",
+      "PHP_VERSION=7.2.34",
+      "PHP_URL=https://www.php.net/distributions/php-7.2.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.2.34.tar.xz.asc",
+      "PHP_SHA256=409e11bc6a2c18707dfc44bc61c820ddfd81e17481470f3405ee7822d8379903"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:7.3-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=CBAF69F173A0FEA4B537F470D66C9593118BCCB6 F38252826ACD957EF380D39F2F7956BC5DA04B5D",
+      "PHP_VERSION=7.3.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.3.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.3.33.tar.xz.asc",
+      "PHP_SHA256=166eaccde933381da9516a2b70ad0f447d7cec4b603d07b9a916032b215b90cc"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:7.3-cli": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=CBAF69F173A0FEA4B537F470D66C9593118BCCB6 F38252826ACD957EF380D39F2F7956BC5DA04B5D",
+      "PHP_VERSION=7.3.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.3.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.3.33.tar.xz.asc",
+      "PHP_SHA256=166eaccde933381da9516a2b70ad0f447d7cec4b603d07b9a916032b215b90cc"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:7.4": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:7.4-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:7.4-apache-bullseye": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:7.4-cli": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:7.4-fpm": {
+    "Cmd": [
+      "php-fpm"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:7.4-fpm-bullseye": {
+    "Cmd": [
+      "php-fpm"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:8.0-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F 2C16C765DBE54A088130F1BC4B9B5F600B55F3B4 39B641343D8C104B2B146DC3F9C39DC0B9698544",
+      "PHP_VERSION=8.0.30",
+      "PHP_URL=https://www.php.net/distributions/php-8.0.30.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.30.tar.xz.asc",
+      "PHP_SHA256=216ab305737a5d392107112d618a755dc5df42058226f1670e9db90e77d777d9"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:8.0-apache-bullseye": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F 2C16C765DBE54A088130F1BC4B9B5F600B55F3B4 39B641343D8C104B2B146DC3F9C39DC0B9698544",
+      "PHP_VERSION=8.0.30",
+      "PHP_URL=https://www.php.net/distributions/php-8.0.30.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.30.tar.xz.asc",
+      "PHP_SHA256=216ab305737a5d392107112d618a755dc5df42058226f1670e9db90e77d777d9"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:8.0-cli": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F 2C16C765DBE54A088130F1BC4B9B5F600B55F3B4 39B641343D8C104B2B146DC3F9C39DC0B9698544",
+      "PHP_VERSION=8.0.30",
+      "PHP_URL=https://www.php.net/distributions/php-8.0.30.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.30.tar.xz.asc",
+      "PHP_SHA256=216ab305737a5d392107112d618a755dc5df42058226f1670e9db90e77d777d9"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:8.0-fpm": {
+    "Cmd": [
+      "php-fpm"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F 2C16C765DBE54A088130F1BC4B9B5F600B55F3B4 39B641343D8C104B2B146DC3F9C39DC0B9698544",
+      "PHP_VERSION=8.0.30",
+      "PHP_URL=https://www.php.net/distributions/php-8.0.30.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.30.tar.xz.asc",
+      "PHP_SHA256=216ab305737a5d392107112d618a755dc5df42058226f1670e9db90e77d777d9"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:8.1-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.34",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.34.tar.xz.asc",
+      "PHP_SHA256=ffa9e0982e82eeaea848f57687b425ed173aa278fe563001310ae2638db5c251"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:8.1-apache-bookworm": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.34",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.34.tar.xz.asc",
+      "PHP_SHA256=ffa9e0982e82eeaea848f57687b425ed173aa278fe563001310ae2638db5c251"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:8.1-bullseye": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.33",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.33.tar.xz.asc",
+      "PHP_SHA256=9db83bf4590375562bc1a10b353cccbcf9fcfc56c58b7c8fb814e6865bb928d1"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:8.1-cli": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.34",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.34.tar.xz.asc",
+      "PHP_SHA256=ffa9e0982e82eeaea848f57687b425ed173aa278fe563001310ae2638db5c251"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:8.1-cli-bookworm": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.34",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.34.tar.xz.asc",
+      "PHP_SHA256=ffa9e0982e82eeaea848f57687b425ed173aa278fe563001310ae2638db5c251"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:8.1-fpm": {
+    "Cmd": [
+      "php-fpm"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.34",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.34.tar.xz.asc",
+      "PHP_SHA256=ffa9e0982e82eeaea848f57687b425ed173aa278fe563001310ae2638db5c251"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:8.2-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=39B641343D8C104B2B146DC3F9C39DC0B9698544 E60913E4DF209907D8E30D96659A97C9CF2A795A 1198C0117593497A5EC5C199286AF1F9897469DC",
+      "PHP_VERSION=8.2.35",
+      "PHP_URL=https://www.php.net/distributions/php-8.2.35.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.2.35.tar.xz.asc",
+      "PHP_SHA256=5737b98601fe5ab1b8c5db0c82ed3158acb9283ed3081ffe2faffb9ac81455e6"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "php:8.2-cli": {
+    "Cmd": [
+      "php",
+      "-a"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=39B641343D8C104B2B146DC3F9C39DC0B9698544 E60913E4DF209907D8E30D96659A97C9CF2A795A 1198C0117593497A5EC5C199286AF1F9897469DC",
+      "PHP_VERSION=8.2.35",
+      "PHP_URL=https://www.php.net/distributions/php-8.2.35.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.2.35.tar.xz.asc",
+      "PHP_SHA256=5737b98601fe5ab1b8c5db0c82ed3158acb9283ed3081ffe2faffb9ac81455e6"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "php:8.2-fpm": {
+    "Cmd": [
+      "php-fpm"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=39B641343D8C104B2B146DC3F9C39DC0B9698544 E60913E4DF209907D8E30D96659A97C9CF2A795A 1198C0117593497A5EC5C199286AF1F9897469DC",
+      "PHP_VERSION=8.2.35",
+      "PHP_URL=https://www.php.net/distributions/php-8.2.35.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.2.35.tar.xz.asc",
+      "PHP_SHA256=5737b98601fe5ab1b8c5db0c82ed3158acb9283ed3081ffe2faffb9ac81455e6"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "postgres:11": {
+    "Cmd": [
+      "postgres"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/11/bin",
+      "GOSU_VERSION=1.14",
+      "LANG=en_US.utf8",
+      "PG_MAJOR=11",
+      "PG_VERSION=11.16-1.pgdg90+1",
+      "PGDATA=/var/lib/postgresql/data"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/postgresql/data": {}
+    },
+    "WorkingDir": null
+  },
+  "postgres:12": {
+    "Cmd": [
+      "postgres"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/12/bin",
+      "GOSU_VERSION=1.17",
+      "LANG=en_US.utf8",
+      "PG_MAJOR=12",
+      "PG_VERSION=12.22-1.pgdg120+1",
+      "PGDATA=/var/lib/postgresql/data"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/postgresql/data": {}
+    },
+    "WorkingDir": null
+  },
+  "postgres:12.2": {
+    "Cmd": [
+      "postgres"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/12/bin",
+      "GOSU_VERSION=1.12",
+      "LANG=en_US.utf8",
+      "PG_MAJOR=12",
+      "PG_VERSION=12.2-2.pgdg100+1",
+      "PGDATA=/var/lib/postgresql/data"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/postgresql/data": {}
+    },
+    "WorkingDir": null
+  },
+  "postgres:13": {
+    "Cmd": [
+      "postgres"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/13/bin",
+      "GOSU_VERSION=1.19",
+      "LANG=en_US.utf8",
+      "PG_MAJOR=13",
+      "PG_VERSION=13.23-1.pgdg13+1",
+      "PGDATA=/var/lib/postgresql/data"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/postgresql/data": {}
+    },
+    "WorkingDir": null
+  },
+  "postgres:14": {
+    "Cmd": [
+      "postgres"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/14/bin",
+      "GOSU_VERSION=1.19",
+      "LANG=en_US.utf8",
+      "PG_MAJOR=14",
+      "PG_VERSION=14.24-1.pgdg13+2",
+      "PGDATA=/var/lib/postgresql/data"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/postgresql/data": {}
+    },
+    "WorkingDir": null
+  },
+  "postgres:15": {
+    "Cmd": [
+      "postgres"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/15/bin",
+      "GOSU_VERSION=1.19",
+      "LANG=en_US.utf8",
+      "PG_MAJOR=15",
+      "PG_VERSION=15.19-1.pgdg13+2",
+      "PGDATA=/var/lib/postgresql/data"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/postgresql/data": {}
+    },
+    "WorkingDir": null
+  },
+  "postgres:9.4": {
+    "Cmd": [
+      "postgres"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/9.4/bin",
+      "GOSU_VERSION=1.11",
+      "LANG=en_US.utf8",
+      "PG_MAJOR=9.4",
+      "PG_VERSION=9.4.26-1.pgdg90+1",
+      "PGDATA=/var/lib/postgresql/data"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/postgresql/data": {}
+    },
+    "WorkingDir": null
+  },
+  "postgres:9.6": {
+    "Cmd": [
+      "postgres"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/9.6/bin",
+      "GOSU_VERSION=1.14",
+      "LANG=en_US.utf8",
+      "PG_MAJOR=9.6",
+      "PG_VERSION=9.6.24-1.pgdg90+1",
+      "PGDATA=/var/lib/postgresql/data"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/postgresql/data": {}
+    },
+    "WorkingDir": null
+  },
+  "prestashop/prestashop:1.7.6.4-apache": {
+    "Cmd": [
+      "/tmp/docker_run.sh"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_EXTRA_BUILD_DEPS=apache2-dev",
+      "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 B1B44D8F021E4E2D6021E995DC9FF8D3EE5AF27F",
+      "PHP_VERSION=7.2.34",
+      "PHP_URL=https://www.php.net/distributions/php-7.2.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.2.34.tar.xz.asc",
+      "PHP_SHA256=409e11bc6a2c18707dfc44bc61c820ddfd81e17481470f3405ee7822d8379903",
+      "PS_DOMAIN=<to be defined>",
+      "DB_SERVER=<to be defined>",
+      "DB_PORT=3306",
+      "DB_NAME=prestashop",
+      "DB_USER=root",
+      "DB_PASSWD=admin",
+      "DB_PREFIX=ps_",
+      "ADMIN_MAIL=demo@prestashop.com",
+      "ADMIN_PASSWD=prestashop_demo",
+      "PS_LANGUAGE=en",
+      "PS_COUNTRY=GB",
+      "PS_ALL_LANGUAGES=0",
+      "PS_INSTALL_AUTO=0",
+      "PS_ERASE_DB=0",
+      "PS_INSTALL_DB=0",
+      "PS_DEV_MODE=0",
+      "PS_HOST_MODE=0",
+      "PS_DEMO_MODE=0",
+      "PS_ENABLE_SSL=0",
+      "PS_HANDLE_DYNAMIC_DOMAIN=0",
+      "PS_FOLDER_ADMIN=admin",
+      "PS_FOLDER_INSTALL=install",
+      "PS_VERSION=1.7.6.4"
+    ],
+    "User": "",
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "prestashop/prestashop:1.7.8": {
+    "Cmd": [
+      "/tmp/docker_run.sh"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927",
+      "PS_DOMAIN=<to be defined>",
+      "DB_SERVER=<to be defined>",
+      "DB_PORT=3306",
+      "DB_NAME=prestashop",
+      "DB_USER=root",
+      "DB_PASSWD=admin",
+      "DB_PREFIX=ps_",
+      "ADMIN_MAIL=demo@prestashop.com",
+      "ADMIN_PASSWD=prestashop_demo",
+      "PS_LANGUAGE=en",
+      "PS_COUNTRY=GB",
+      "PS_ALL_LANGUAGES=0",
+      "PS_INSTALL_AUTO=0",
+      "PS_ERASE_DB=0",
+      "PS_INSTALL_DB=0",
+      "PS_DEV_MODE=0",
+      "PS_HOST_MODE=0",
+      "PS_DEMO_MODE=0",
+      "PS_ENABLE_SSL=0",
+      "PS_HANDLE_DYNAMIC_DOMAIN=0",
+      "PS_FOLDER_ADMIN=admin",
+      "PS_FOLDER_INSTALL=install",
+      "PS_VERSION=1.7.8.11"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "prestashop/prestashop:1.7.8.8": {
+    "Cmd": [
+      "/tmp/docker_run.sh"
+    ],
+    "Entrypoint": [
+      "docker-php-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927",
+      "PS_DOMAIN=<to be defined>",
+      "DB_SERVER=<to be defined>",
+      "DB_PORT=3306",
+      "DB_NAME=prestashop",
+      "DB_USER=root",
+      "DB_PASSWD=admin",
+      "DB_PREFIX=ps_",
+      "ADMIN_MAIL=demo@prestashop.com",
+      "ADMIN_PASSWD=prestashop_demo",
+      "PS_LANGUAGE=en",
+      "PS_COUNTRY=GB",
+      "PS_ALL_LANGUAGES=0",
+      "PS_INSTALL_AUTO=0",
+      "PS_ERASE_DB=0",
+      "PS_INSTALL_DB=0",
+      "PS_DEV_MODE=0",
+      "PS_HOST_MODE=0",
+      "PS_DEMO_MODE=0",
+      "PS_ENABLE_SSL=0",
+      "PS_HANDLE_DYNAMIC_DOMAIN=0",
+      "PS_FOLDER_ADMIN=admin",
+      "PS_FOLDER_INSTALL=install",
+      "PS_VERSION=1.7.8.8"
+    ],
+    "User": "",
+    "Volumes": null,
+    "WorkingDir": "/var/www/html"
+  },
+  "python:2.7": {
+    "Cmd": [
+      "python2"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "PYTHONIOENCODING=UTF-8",
+      "GPG_KEY=C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF",
+      "PYTHON_VERSION=2.7.18",
+      "PYTHON_PIP_VERSION=20.0.2",
+      "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/d59197a3c169cef378a22428a3fa99d33e080a5d/get-pip.py",
+      "PYTHON_GET_PIP_SHA256=421ac1d44c0cf9730a088e337867d974b91bdce4ea2636099275071878cc189e"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:2.7-slim": {
+    "Cmd": [
+      "python2"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "PYTHONIOENCODING=UTF-8",
+      "GPG_KEY=C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF",
+      "PYTHON_VERSION=2.7.18",
+      "PYTHON_PIP_VERSION=20.0.2",
+      "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/d59197a3c169cef378a22428a3fa99d33e080a5d/get-pip.py",
+      "PYTHON_GET_PIP_SHA256=421ac1d44c0cf9730a088e337867d974b91bdce4ea2636099275071878cc189e"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:2.7-slim-buster": {
+    "Cmd": [
+      "python2"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "PYTHONIOENCODING=UTF-8",
+      "GPG_KEY=C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF",
+      "PYTHON_VERSION=2.7.18",
+      "PYTHON_PIP_VERSION=20.0.2",
+      "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/d59197a3c169cef378a22428a3fa99d33e080a5d/get-pip.py",
+      "PYTHON_GET_PIP_SHA256=421ac1d44c0cf9730a088e337867d974b91bdce4ea2636099275071878cc189e"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.10": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+      "PYTHON_VERSION=3.10.22",
+      "PYTHON_SHA256=c61fe9b1a1a7ec2a0b0388e664187c378a5325a89e3606d220abf5bdfccb2543"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.10-bookworm": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+      "PYTHON_VERSION=3.10.22",
+      "PYTHON_SHA256=c61fe9b1a1a7ec2a0b0388e664187c378a5325a89e3606d220abf5bdfccb2543"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.10-bullseye": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+      "PYTHON_VERSION=3.10.18",
+      "PYTHON_SHA256=ae665bc678abd9ab6a6e1573d2481625a53719bc517e9a634ed2b9fefae3817f"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.10-slim": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+      "PYTHON_VERSION=3.10.22",
+      "PYTHON_SHA256=c61fe9b1a1a7ec2a0b0388e664187c378a5325a89e3606d220abf5bdfccb2543"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.10-slim-bullseye": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+      "PYTHON_VERSION=3.10.18",
+      "PYTHON_SHA256=ae665bc678abd9ab6a6e1573d2481625a53719bc517e9a634ed2b9fefae3817f"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.10.3": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+      "PYTHON_VERSION=3.10.3",
+      "PYTHON_PIP_VERSION=22.0.4",
+      "PYTHON_SETUPTOOLS_VERSION=58.1.0",
+      "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/38e54e5de07c66e875c11a1ebbdb938854625dd8/public/get-pip.py",
+      "PYTHON_GET_PIP_SHA256=e235c437e5c7d7524fbce3880ca39b917a73dc565e0c813465b7a7a329bb279a"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.11": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+      "PYTHON_VERSION=3.11.18",
+      "PYTHON_SHA256=9120e0a653868f6e3698d36cdd99e5a58903ec9469e448f21d98f7b16d8fa290"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.11-slim": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+      "PYTHON_VERSION=3.11.18",
+      "PYTHON_SHA256=9120e0a653868f6e3698d36cdd99e5a58903ec9469e448f21d98f7b16d8fa290"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.6": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+      "PYTHON_VERSION=3.6.15",
+      "PYTHON_PIP_VERSION=21.2.4",
+      "PYTHON_SETUPTOOLS_VERSION=57.5.0",
+      "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/3cb8888cc2869620f57d5d2da64da38f516078c7/public/get-pip.py",
+      "PYTHON_GET_PIP_SHA256=c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0d9b5674309"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.6-slim": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+      "PYTHON_VERSION=3.6.15",
+      "PYTHON_PIP_VERSION=21.2.4",
+      "PYTHON_SETUPTOOLS_VERSION=57.5.0",
+      "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/3cb8888cc2869620f57d5d2da64da38f516078c7/public/get-pip.py",
+      "PYTHON_GET_PIP_SHA256=c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0d9b5674309"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.7": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+      "PYTHON_VERSION=3.7.17",
+      "PYTHON_PIP_VERSION=23.0.1",
+      "PYTHON_SETUPTOOLS_VERSION=57.5.0",
+      "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/9af82b715db434abb94a0a6f3569f43e72157346/public/get-pip.py",
+      "PYTHON_GET_PIP_SHA256=45a2bb8bf2bb5eff16fdd00faef6f29731831c7c59bd9fc2bf1f3bed511ff1fe"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.7-slim": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+      "PYTHON_VERSION=3.7.17",
+      "PYTHON_PIP_VERSION=23.0.1",
+      "PYTHON_SETUPTOOLS_VERSION=57.5.0",
+      "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/9af82b715db434abb94a0a6f3569f43e72157346/public/get-pip.py",
+      "PYTHON_GET_PIP_SHA256=45a2bb8bf2bb5eff16fdd00faef6f29731831c7c59bd9fc2bf1f3bed511ff1fe"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.8": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+      "PYTHON_VERSION=3.8.20"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.8-bullseye": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+      "PYTHON_VERSION=3.8.20"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.8-slim": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+      "PYTHON_VERSION=3.8.20"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.8-slim-bullseye": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+      "PYTHON_VERSION=3.8.20"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.9": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+      "PYTHON_VERSION=3.9.25",
+      "PYTHON_SHA256=00e07d7c0f2f0cc002432d1ee84d2a40dae404a99303e3f97701c10966c91834"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.9-bullseye": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+      "PYTHON_VERSION=3.9.23",
+      "PYTHON_SHA256=61a42919e13d539f7673cf11d1c404380e28e540510860b9d242196e165709c9"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.9-slim": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+      "PYTHON_VERSION=3.9.25",
+      "PYTHON_SHA256=00e07d7c0f2f0cc002432d1ee84d2a40dae404a99303e3f97701c10966c91834"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "python:3.9-slim-bullseye": {
+    "Cmd": [
+      "python3"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+      "PYTHON_VERSION=3.9.23",
+      "PYTHON_SHA256=61a42919e13d539f7673cf11d1c404380e28e540510860b9d242196e165709c9"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "quay.io/keycloak/keycloak:15.0.0": {
+    "Cmd": [
+      "-b",
+      "0.0.0.0"
+    ],
+    "Entrypoint": [
+      "/opt/jboss/tools/docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "container=oci",
+      "KEYCLOAK_VERSION=15.0.0",
+      "JDBC_POSTGRES_VERSION=42.2.5",
+      "JDBC_MYSQL_VERSION=8.0.22",
+      "JDBC_MARIADB_VERSION=2.5.4",
+      "JDBC_MSSQL_VERSION=8.2.2.jre11",
+      "LAUNCH_JBOSS_IN_BACKGROUND=1",
+      "PROXY_ADDRESS_FORWARDING=false",
+      "JBOSS_HOME=/opt/jboss/keycloak",
+      "LANG=en_US.UTF-8"
+    ],
+    "User": "1000",
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "racket/racket:8.1": {
+    "Cmd": [
+      "racket"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt",
+      "SSL_CERT_DIR=/etc/ssl/certs"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "redis:5": {
+    "Cmd": [
+      "redis-server"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.14",
+      "REDIS_VERSION=5.0.14",
+      "REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-5.0.14.tar.gz",
+      "REDIS_DOWNLOAD_SHA=3ea5024766d983249e80d4aa9457c897a9f079957d0fb1f35682df233f997f32"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data": {}
+    },
+    "WorkingDir": "/data"
+  },
+  "redis:5.0.6": {
+    "Cmd": [
+      "redis-server"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOSU_VERSION=1.11",
+      "REDIS_VERSION=5.0.6",
+      "REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-5.0.6.tar.gz",
+      "REDIS_DOWNLOAD_SHA=6624841267e142c5d5d5be292d705f8fb6070677687c5aad1645421a936d22b3"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data": {}
+    },
+    "WorkingDir": "/data"
+  },
+  "redis:6": {
+    "Cmd": [
+      "redis-server"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "REDIS_VERSION=6.2.24"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data": {}
+    },
+    "WorkingDir": "/data"
+  },
+  "redis:6-alpine": {
+    "Cmd": [
+      "redis-server"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "REDIS_VERSION=6.2.24"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data": {}
+    },
+    "WorkingDir": "/data"
+  },
+  "redis:6-bookworm": {
+    "Cmd": [
+      "redis-server"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "REDIS_VERSION=6.2.24"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data": {}
+    },
+    "WorkingDir": "/data"
+  },
+  "redis:6.2": {
+    "Cmd": [
+      "redis-server"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "REDIS_VERSION=6.2.24"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data": {}
+    },
+    "WorkingDir": "/data"
+  },
+  "redis:7": {
+    "Cmd": [
+      "redis-server"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "REDIS_VERSION=7.4.12"
+    ],
+    "User": null,
+    "Volumes": {
+      "/data": {}
+    },
+    "WorkingDir": "/data"
+  },
+  "redmine:3.1": {
+    "Cmd": [
+      "rails",
+      "server",
+      "-b",
+      "0.0.0.0"
+    ],
+    "Entrypoint": [
+      "/docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUBY_MAJOR=2.2",
+      "RUBY_VERSION=2.2.8",
+      "RUBY_DOWNLOAD_SHA256=37eafc15037396c26870f6a6c5bcd0658d14b46cd5e191a3b56d89dd22d561b0",
+      "RUBYGEMS_VERSION=2.6.13",
+      "BUNDLER_VERSION=1.15.4",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_PATH=/usr/local/bundle",
+      "BUNDLE_BIN=/usr/local/bundle/bin",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle",
+      "GOSU_VERSION=1.10",
+      "TINI_VERSION=v0.16.1",
+      "RAILS_ENV=production",
+      "REDMINE_VERSION=3.1.7",
+      "REDMINE_DOWNLOAD_MD5=625b7705b70521a205491a53f6df506a"
+    ],
+    "User": null,
+    "Volumes": {
+      "/usr/src/redmine/files": {}
+    },
+    "WorkingDir": "/usr/src/redmine"
+  },
+  "registry:2": {
+    "Cmd": [
+      "/etc/docker/registry/config.yml"
+    ],
+    "Entrypoint": [
+      "/entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/lib/registry": {}
+    },
+    "WorkingDir": "/"
+  },
+  "ruby:2.2": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUBY_MAJOR=2.2",
+      "RUBY_VERSION=2.2.10",
+      "RUBY_DOWNLOAD_SHA256=bf77bcb7e6666ccae8d0882ea12b05f382f963f0a9a5285a328760c06a9ab650",
+      "RUBYGEMS_VERSION=2.7.6",
+      "BUNDLER_VERSION=1.16.1",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_PATH=/usr/local/bundle",
+      "BUNDLE_BIN=/usr/local/bundle/bin",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": "",
+    "Volumes": null,
+    "WorkingDir": ""
+  },
+  "ruby:2.3": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/bundle/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUBY_MAJOR=2.3",
+      "RUBY_VERSION=2.3.8",
+      "RUBY_DOWNLOAD_SHA256=910f635d84fd0d81ac9bdee0731279e6026cb4cd1315bbbb5dfb22e09c5c1dfe",
+      "RUBYGEMS_VERSION=3.0.3",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_PATH=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.3-slim-stretch": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/bundle/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUBY_MAJOR=2.3",
+      "RUBY_VERSION=2.3.8",
+      "RUBY_DOWNLOAD_SHA256=910f635d84fd0d81ac9bdee0731279e6026cb4cd1315bbbb5dfb22e09c5c1dfe",
+      "RUBYGEMS_VERSION=3.0.3",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_PATH=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.3.8": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/bundle/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUBY_MAJOR=2.3",
+      "RUBY_VERSION=2.3.8",
+      "RUBY_DOWNLOAD_SHA256=910f635d84fd0d81ac9bdee0731279e6026cb4cd1315bbbb5dfb22e09c5c1dfe",
+      "RUBYGEMS_VERSION=3.0.3",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_PATH=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.3.8-stretch": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/bundle/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUBY_MAJOR=2.3",
+      "RUBY_VERSION=2.3.8",
+      "RUBY_DOWNLOAD_SHA256=910f635d84fd0d81ac9bdee0731279e6026cb4cd1315bbbb5dfb22e09c5c1dfe",
+      "RUBYGEMS_VERSION=3.0.3",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_PATH=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.4": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUBY_MAJOR=2.4",
+      "RUBY_VERSION=2.4.10",
+      "RUBY_DOWNLOAD_SHA256=d5668ed11544db034f70aec37d11e157538d639ed0d0a968e2f587191fc530df",
+      "RUBYGEMS_VERSION=3.0.3",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.4.10": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUBY_MAJOR=2.4",
+      "RUBY_VERSION=2.4.10",
+      "RUBY_DOWNLOAD_SHA256=d5668ed11544db034f70aec37d11e157538d639ed0d0a968e2f587191fc530df",
+      "RUBYGEMS_VERSION=3.0.3",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.5": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.5",
+      "RUBY_VERSION=2.5.9",
+      "RUBY_DOWNLOAD_SHA256=a87f2fa901408cc77652c1a55ff976695bbe54830ff240e370039eca14b358f0",
+      "RUBYGEMS_VERSION=3.0.3",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.6": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.6",
+      "RUBY_VERSION=2.6.10",
+      "RUBY_DOWNLOAD_SHA256=5fd8ded51321b88fdc9c1b4b0eb1b951d2eddbc293865da0151612c2e814c1f2",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.6-bullseye": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.6",
+      "RUBY_VERSION=2.6.10",
+      "RUBY_DOWNLOAD_SHA256=5fd8ded51321b88fdc9c1b4b0eb1b951d2eddbc293865da0151612c2e814c1f2",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.6-buster": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.6",
+      "RUBY_VERSION=2.6.10",
+      "RUBY_DOWNLOAD_SHA256=5fd8ded51321b88fdc9c1b4b0eb1b951d2eddbc293865da0151612c2e814c1f2",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.6.3": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/bundle/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUBY_MAJOR=2.6",
+      "RUBY_VERSION=2.6.3",
+      "RUBY_DOWNLOAD_SHA256=11a83f85c03d3f0fc9b8a9b6cad1b2674f26c5aaa43ba858d4b0fcc2b54171e1",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_PATH=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.7": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.7",
+      "RUBY_VERSION=2.7.8",
+      "RUBY_DOWNLOAD_SHA256=f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.7-bullseye": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.7",
+      "RUBY_VERSION=2.7.8",
+      "RUBY_DOWNLOAD_SHA256=f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.7-slim": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.7",
+      "RUBY_VERSION=2.7.8",
+      "RUBY_DOWNLOAD_SHA256=f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.7-slim-bullseye": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.7",
+      "RUBY_VERSION=2.7.8",
+      "RUBY_DOWNLOAD_SHA256=f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.7.5": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.7",
+      "RUBY_VERSION=2.7.5",
+      "RUBY_DOWNLOAD_SHA256=d216d95190eaacf3bf165303747b02ff13f10b6cfab67a9031b502a49512b516",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.7.6": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.7",
+      "RUBY_VERSION=2.7.6",
+      "RUBY_DOWNLOAD_SHA256=54dcd3044726c4ab75a9d4604720501442b229a3aed6a55fe909567da8807f24",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:2.7.6-slim": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=2.7",
+      "RUBY_VERSION=2.7.6",
+      "RUBY_DOWNLOAD_SHA256=54dcd3044726c4ab75a9d4604720501442b229a3aed6a55fe909567da8807f24",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:3.0": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=3.0",
+      "RUBY_VERSION=3.0.7",
+      "RUBY_DOWNLOAD_SHA256=1748338373c4fad80129921080d904aca326e41bd9589b498aa5ee09fd575bab",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:3.0-slim": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=3.0",
+      "RUBY_VERSION=3.0.7",
+      "RUBY_DOWNLOAD_SHA256=1748338373c4fad80129921080d904aca326e41bd9589b498aa5ee09fd575bab",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:3.0.6": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=3.0",
+      "RUBY_VERSION=3.0.6",
+      "RUBY_DOWNLOAD_SHA256=b5cbee93e62d85cfb2a408c49fa30a74231ae8409c2b3858e5f5ea254d7ddbd1",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:3.1": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_VERSION=3.1.7",
+      "RUBY_DOWNLOAD_URL=https://cache.ruby-lang.org/pub/ruby/3.1/ruby-3.1.7.tar.xz",
+      "RUBY_DOWNLOAD_SHA256=658acc455b6bda87ac6cc1380e86552b9c1af87055e7a127589c5bf7ed80b035",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:3.1-slim": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_VERSION=3.1.7",
+      "RUBY_DOWNLOAD_URL=https://cache.ruby-lang.org/pub/ruby/3.1/ruby-3.1.7.tar.xz",
+      "RUBY_DOWNLOAD_SHA256=658acc455b6bda87ac6cc1380e86552b9c1af87055e7a127589c5bf7ed80b035",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:3.1.2": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=3.1",
+      "RUBY_VERSION=3.1.2",
+      "RUBY_DOWNLOAD_SHA256=ca10d017f8a1b6d247556622c841fc56b90c03b1803f87198da1e4fd3ec3bf2a",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:3.1.2-bullseye": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_MAJOR=3.1",
+      "RUBY_VERSION=3.1.2",
+      "RUBY_DOWNLOAD_SHA256=ca10d017f8a1b6d247556622c841fc56b90c03b1803f87198da1e4fd3ec3bf2a",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ruby:3.2-slim": {
+    "Cmd": [
+      "irb"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "RUBY_VERSION=3.2.11",
+      "RUBY_DOWNLOAD_URL=https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.11.tar.xz",
+      "RUBY_DOWNLOAD_SHA256=c13aec0c206725d5d356acbae6e5fd8bffd92dc325aec14fd5dd7795d4b763d2",
+      "GEM_HOME=/usr/local/bundle",
+      "BUNDLE_SILENCE_ROOT_WARNING=1",
+      "BUNDLE_APP_CONFIG=/usr/local/bundle"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.55": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.55.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.57-slim-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.57.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.60-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.60.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.65-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.65.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.67-slim": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.67.1"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.70": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.70.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.70-slim": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.70.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.70-slim-bookworm": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.70.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.70-slim-bullseye": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.70.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.72-bookworm": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.72.1"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.75": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.75.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.83": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.83.0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "rust:1.84-slim": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "RUSTUP_HOME=/usr/local/rustup",
+      "CARGO_HOME=/usr/local/cargo",
+      "RUST_VERSION=1.84.1"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "sqlpad/sqlpad:6.10.0": {
+    "Cmd": null,
+    "Entrypoint": [
+      "/docker-entrypoint"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "NODE_VERSION=16.14.0",
+      "YARN_VERSION=1.22.17",
+      "NODE_ENV=production",
+      "SQLPAD_DB_PATH=/var/lib/sqlpad",
+      "SQLPAD_PORT=3000"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/var/lib/sqlpad"
+  },
+  "swift:5.10-jammy": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "SWIFT_SIGNING_KEY=A62AE125BBBFBB96A6E042EC925CC1CCED3D1561",
+      "SWIFT_PLATFORM=ubuntu22.04",
+      "SWIFT_BRANCH=swift-5.10.1-release",
+      "SWIFT_VERSION=swift-5.10.1-RELEASE",
+      "SWIFT_WEBROOT=https://download.swift.org"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "swift:5.5-focal": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "SWIFT_SIGNING_KEY=A62AE125BBBFBB96A6E042EC925CC1CCED3D1561",
+      "SWIFT_PLATFORM=ubuntu20.04",
+      "SWIFT_BRANCH=swift-5.5.3-release",
+      "SWIFT_VERSION=swift-5.5.3-RELEASE",
+      "SWIFT_WEBROOT=https://download.swift.org"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "swift:5.6": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "SWIFT_SIGNING_KEY=A62AE125BBBFBB96A6E042EC925CC1CCED3D1561",
+      "SWIFT_PLATFORM=ubuntu18.04",
+      "SWIFT_BRANCH=swift-5.6.3-release",
+      "SWIFT_VERSION=swift-5.6.3-RELEASE",
+      "SWIFT_WEBROOT=https://download.swift.org"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "tensorflow/tensorflow:2.4.1": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "tensorflow/tensorflow:2.9.0": {
+    "Cmd": [
+      "bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "DEBIAN_FRONTEND=noninteractive",
+      "LANG=C.UTF-8"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "tomcat:8.5-jre8": {
+    "Cmd": [
+      "catalina.sh",
+      "run"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/tomcat/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk8u402-b06",
+      "CATALINA_HOME=/usr/local/tomcat",
+      "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+      "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+      "GPG_KEYS=05AB33110949707C93A279E3D3EFE6B686867BA6 07E48665A34DCAFAE522E5E6266191C37C037D42 47309207D818FFD8DCD3F83F1931D684307A10A5 541FBE7D8F78B25E055DDEE13C370389288584E7 5C3C5F3E314C866292F359A8F3AD5C94A67F707E 765908099ACF92702C7D949BFA0C35EA8AA299F1 79F7026C690BAA50B92CD8B66A3AD3F4F22C4FED 9BA44C2621385CB966EBA586F72C284D731FABEE A27677289986DB50844682F8ACB77FC2E86E29AC A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243 F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23",
+      "TOMCAT_MAJOR=8",
+      "TOMCAT_VERSION=8.5.100",
+      "TOMCAT_SHA512=14d8dca911fe9c5b7e636e054ac2e70a532ddc358eda83ed3679e51df8baa7a397cabb8a5777b815014d46064cbc33e8d9ea75b9426dccdae54fb3913d9a54f0"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/local/tomcat"
+  },
+  "tomcat:9-jdk11": {
+    "Cmd": [
+      "catalina.sh",
+      "run"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/tomcat/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk-11.0.33+10",
+      "CATALINA_HOME=/usr/local/tomcat",
+      "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+      "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+      "TOMCAT_MAJOR=9",
+      "TOMCAT_VERSION=9.0.123",
+      "TOMCAT_SHA512=64b1130e719399c0a409e6996081433b16af8d9c89266c7aaa9849af70a1815feca91e13896f5ccc41451dc5759716d1c84882682de955822c30509de102f290"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/local/tomcat"
+  },
+  "tomcat:9-jre11-temurin": {
+    "Cmd": [
+      "catalina.sh",
+      "run"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/tomcat/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk-11.0.33+10",
+      "CATALINA_HOME=/usr/local/tomcat",
+      "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+      "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+      "TOMCAT_MAJOR=9",
+      "TOMCAT_VERSION=9.0.123",
+      "TOMCAT_SHA512=64b1130e719399c0a409e6996081433b16af8d9c89266c7aaa9849af70a1815feca91e13896f5ccc41451dc5759716d1c84882682de955822c30509de102f290"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/local/tomcat"
+  },
+  "tomcat:9.0-jdk8": {
+    "Cmd": [
+      "catalina.sh",
+      "run"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/tomcat/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk8u512-b09",
+      "CATALINA_HOME=/usr/local/tomcat",
+      "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+      "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+      "TOMCAT_MAJOR=9",
+      "TOMCAT_VERSION=9.0.123",
+      "TOMCAT_SHA512=64b1130e719399c0a409e6996081433b16af8d9c89266c7aaa9849af70a1815feca91e13896f5ccc41451dc5759716d1c84882682de955822c30509de102f290"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": "/usr/local/tomcat"
+  },
+  "tuxgasy/dolibarr:16.0.4": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-run.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.17",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.17.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.17.tar.xz.asc",
+      "PHP_SHA256=b5c48f95b8e1d8624dd05fc2eab7be13277f9a203ccba97bdca5a1a0fb4a1460",
+      "DOLI_VERSION=16.0.4",
+      "DOLI_INSTALL_AUTO=1",
+      "DOLI_DB_TYPE=mysqli",
+      "DOLI_DB_HOST=mysql",
+      "DOLI_DB_HOST_PORT=3306",
+      "DOLI_DB_NAME=dolidb",
+      "DOLI_URL_ROOT=http://localhost",
+      "DOLI_NOCSRFCHECK=0",
+      "DOLI_AUTH=dolibarr",
+      "DOLI_LDAP_HOST=127.0.0.1",
+      "DOLI_LDAP_PORT=389",
+      "DOLI_LDAP_VERSION=3",
+      "DOLI_LDAP_SERVER_TYPE=openldap",
+      "DOLI_LDAP_LOGIN_ATTRIBUTE=uid",
+      "DOLI_LDAP_DN=ou=users,dc=my-domain,dc=com",
+      "DOLI_LDAP_FILTER=",
+      "DOLI_LDAP_BIND_DN=",
+      "DOLI_LDAP_BIND_PASS=",
+      "DOLI_LDAP_DEBUG=false",
+      "DOLI_CRON=0",
+      "WWW_USER_ID=33",
+      "WWW_GROUP_ID=33",
+      "PHP_INI_DATE_TIMEZONE=UTC",
+      "PHP_INI_MEMORY_LIMIT=256M"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/documents": {},
+      "/var/www/html/custom": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "ubuntu:16.04": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ubuntu:18.04": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ubuntu:20.04": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ubuntu:22.04": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ubuntu:24.04": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "ubuntu:jammy-20230624": {
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    ],
+    "User": null,
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "wordpress:5.8-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.27",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.27.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.27.tar.xz.asc",
+      "PHP_SHA256=3f8b937310f155822752229c2c2feb8cc2621e25a728e7b94d0d74c128c43d0c"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:5.8-php7.4-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.27",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.27.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.27.tar.xz.asc",
+      "PHP_SHA256=3f8b937310f155822752229c2c2feb8cc2621e25a728e7b94d0d74c128c43d0c"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:5.9-php7.4-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.29",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.29.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.29.tar.xz.asc",
+      "PHP_SHA256=7d0f07869f33311ff3fe1138dc0d6c0d673c37fcb737eaed2c6c10a949f1aed6"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:5.9-php8.0-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F",
+      "PHP_VERSION=8.0.19",
+      "PHP_URL=https://www.php.net/distributions/php-8.0.19.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.19.tar.xz.asc",
+      "PHP_SHA256=ba62219c4b0486cbb2a04f0796749a46b0ee1f5a142ed454212b4e2460cb0fab"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:6.1-php8.0-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F 2C16C765DBE54A088130F1BC4B9B5F600B55F3B4",
+      "PHP_VERSION=8.0.28",
+      "PHP_URL=https://www.php.net/distributions/php-8.0.28.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.28.tar.xz.asc",
+      "PHP_SHA256=5e07278a1f315a67d36a676c01343ca2d4da5ec5bdb15d018e4248b3012bc0cd"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:6.2-php8.0-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F 2C16C765DBE54A088130F1BC4B9B5F600B55F3B4 39B641343D8C104B2B146DC3F9C39DC0B9698544",
+      "PHP_VERSION=8.0.30",
+      "PHP_URL=https://www.php.net/distributions/php-8.0.30.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.30.tar.xz.asc",
+      "PHP_SHA256=216ab305737a5d392107112d618a755dc5df42058226f1670e9db90e77d777d9"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:6.4-php8.1-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.27",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.27.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.27.tar.xz.asc",
+      "PHP_SHA256=479e65c3f05714d4aace1370e617d78e49e996ec7a7579a5be47535be61f0658"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:6.4-php8.2-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=39B641343D8C104B2B146DC3F9C39DC0B9698544 E60913E4DF209907D8E30D96659A97C9CF2A795A 1198C0117593497A5EC5C199286AF1F9897469DC",
+      "PHP_VERSION=8.2.17",
+      "PHP_URL=https://www.php.net/distributions/php-8.2.17.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.2.17.tar.xz.asc",
+      "PHP_SHA256=1cc4ef733ba58f6557db648012471f1916e5bac316303aa165535bedab08ee35"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:php7.4-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+      "PHP_VERSION=7.4.33",
+      "PHP_URL=https://www.php.net/distributions/php-7.4.33.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+      "PHP_SHA256=924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:php8.0-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F 2C16C765DBE54A088130F1BC4B9B5F600B55F3B4 39B641343D8C104B2B146DC3F9C39DC0B9698544",
+      "PHP_VERSION=8.0.30",
+      "PHP_URL=https://www.php.net/distributions/php-8.0.30.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.30.tar.xz.asc",
+      "PHP_SHA256=216ab305737a5d392107112d618a755dc5df42058226f1670e9db90e77d777d9"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  },
+  "wordpress:php8.1-apache": {
+    "Cmd": [
+      "apache2-foreground"
+    ],
+    "Entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "APACHE_CONFDIR=/etc/apache2",
+      "APACHE_ENVVARS=/etc/apache2/envvars",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD",
+      "PHP_VERSION=8.1.34",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.34.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.34.tar.xz.asc",
+      "PHP_SHA256=ffa9e0982e82eeaea848f57687b425ed173aa278fe563001310ae2638db5c251"
+    ],
+    "User": null,
+    "Volumes": {
+      "/var/www/html": {}
+    },
+    "WorkingDir": "/var/www/html"
+  }
+}

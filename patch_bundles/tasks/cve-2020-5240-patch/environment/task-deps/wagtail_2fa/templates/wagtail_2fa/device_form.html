@@ -1,0 +1,68 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+
+{% trans "Add new 2FA device" as titletag %}
+{% block titletag %}{{ titletag }}{% endblock %}
+{% block content %}
+    {% trans "Two Factor Settings" as prefs_str %}
+    {% include "wagtailadmin/shared/header.html" with title=prefs_str %}
+
+
+    <div class="nice-padding">
+        <div class="help-block help-info">
+            {% blocktrans %}
+            <p>
+                Two-Factor authentication is a method for making your account
+                more secure, by requiring you to provide an additional piece
+                of evidence (a factor) next to your password.
+            </p>
+            <p>
+                The most common way of providing this secondary factor, is by
+                having one of your devices generate a random code that
+                changes every minute. This is called a One Time Password.
+            </p>
+            <p>
+                For generating codes, you can use one of the following apps.
+                You might even have them installed already.
+                <ul>
+                    <li>Google Authenticator for iOS or Android</li>
+                    <li>Microsoft Authenticator</li>
+                    <li>Authy for iOS or Android</li>
+                    <li>
+                        A password manager like 1Password, that also supports
+                        generating One-Time-Passwords
+                    </li>
+                </ul>
+            </p>
+            <p>
+                To configure two-factor authentication for your Wagtail CMS
+                account, install one of those apps and scan the below QR
+                code. Note that if you lose or reset your phone, you
+                will no longer be able to log in.
+            </p>
+            {% endblocktrans %}
+        </div>
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+            <ul class="fields">
+                {% if not form.instance.confirmed %}
+                <li>
+                    <div class="field char_field text_input">
+                        <label>{% trans 'QR Code' %}</label>
+                        <div class="field-content">
+                            <img src="{% url 'wagtail_2fa_device_qrcode' %}">
+                        </div>
+                    </div>
+                </li>
+                {% endif %}
+                {% for field in form %}
+                    {% include "wagtailadmin/shared/field_as_li.html" with field=field %}
+                {% endfor %}
+                <li class="submit">
+                    <a href="{% url 'wagtail_2fa_device_list' user.id %}" class="button button-secondary">{% trans "Cancel" %}</a>
+                    <input type="submit" value="{% if form.instance.confirmed %}{% trans 'Update' %}{% else %}{% trans 'Create' %}{% endif %}" class="button" />
+                </li>
+            </ul>
+        </form>
+    </div>
+{% endblock %}

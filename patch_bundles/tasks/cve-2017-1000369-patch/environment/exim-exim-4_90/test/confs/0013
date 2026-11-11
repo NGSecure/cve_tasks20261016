@@ -1,0 +1,12 @@
+# Exim test configuration 0013
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+qualify_domain = test.ex
+
+# ----- Main settings -----
+
+hostlist relay_hosts = "XXXX" and junk
+
+# End

@@ -1,0 +1,21 @@
+# Exim test configuration 0558
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = a1
+
+
+# ----- ACLs -----
+
+begin acl
+
+a1:
+  deny message = Special deny message
+       local_parts = ^special
+  deny message = Default deny message\non two lines
+
+# End

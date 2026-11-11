@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>Hello World</title>
+<link href="style-1.0/css/tigris.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.style1 {	color: #FF0000;
+	font-weight: bold;
+}
+.style2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+<div class="app">
+  <h3>Hello World - The beginner's guide</h3>
+  <p>The vision of CalendarXP is to keep it simple outside while powerful inside. 
+    Most of the time, to get a calendar shown on your page is as simple as inserting the following tag to wherever 
+  you want, just like other HTML tags. </p>
+    <blockquote> 
+    <div class="dottedBox"><code>&lt;iframe name=&quot;gToday:normal:agenda.js&quot; 
+      id=&quot;gToday:normal:agenda.js&quot;<br>
+    src=&quot;iflateng.htm&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</code></div>
+  </blockquote>
+<p>Yes, as you can tell from the HelloWorld demo, it's very simple and straightforward. We'll reference the above &lt;iframe&gt; tag as <strong>the calendar tag</strong> from now on. </p>
+<p>If you want to support the outdated Netscape 4.x browser, you'll have to add 3 more tags - a &lt;a&gt; and a &lt;img&gt; tag in &lt;iframe&gt; and another &lt;layer&gt; tag at page bottom, as following. 
+  </p>
+  <blockquote>
+<div class="dottedBox"> 
+    <p><code><code>...<br>
+      &lt;iframe name=&quot;gToday:normal:agenda.js&quot; id=&quot;gToday:normal:agenda.js&quot;<br>
+src=&quot;iflateng.htm&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot;&gt;<br>
+&lt;a name=&quot;_spacer&quot;&gt;&lt;img width=172 height=180&gt;&lt;/a&gt;&lt;/iframe&gt;</code><br>
+...<br>
+      &lt;layer name=&quot;gToday:normal:agenda.js&quot; src=&quot;nflateng.htm&quot; background=&quot;nflateng.htm&quot;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/layer&gt;<br>
+      &lt;/body&gt;<br>
+      &lt;/html&gt;</code></p>
+  </div>
+</blockquote>
+<p>Now ensure you have the following files in the same directory where the iflateng.htm is located: </p>
+<ul>
+  <li><strong>iflateng.htm</strong> &amp; <strong>nflateng.htm</strong> - these are so-called engine files (nflateng.htm is for NN4 and only available in commercial edition). </li>
+  <li><strong>&quot;theme-name&quot;.js</strong> &amp; <strong>&quot;theme-name&quot;.css</strong> - these are theme files, e.g. normal.js &amp; normal.css in above example.</li>
+  <li><strong>plugins.js</strong> - plugins file. It could be empty if nothing needs to be plugged in, but  MUST exist.</li>
+  <li><strong>agenda.js</strong> -  events &amp; holiday definition file. It could be empty, but you should have it there unless you removed it from the name &amp; id of the calendar tag.</li>
+</ul>
+<p><strong>We always suggest you put all calendar related files into a separate directory and set the src of the calendar tags to reference them. This makes them more like a self-contained component and is easy for you to maintain in future.</strong></p>
+<p>So now, where is the &quot;Hello World&quot;? - Simply append the 
+    following line to the <code>agenda.js</code> and click the date of Sep 23, 
+  2002 in the calendar... Voila! </p>
+<blockquote>
+    <div class="dottedBox"> 
+      <p><code>fAddEvent(2002,9,23, &quot;Hello World!&quot;, &quot;alert('Hello 
+      World!')&quot;, &quot;#87ceeb&quot;, &quot;dodgerblue&quot;);</code></p>
+    </div>
+  </blockquote>
+    <p>Sometimes you may want to redirect the current page to another URL upon any click against a specific date, and we have pre-defined a <code>popup()</code> call in <code>plugins.js</code> to help you: </p>
+    <blockquote>
+      <div class="dottedBox">
+        <p><code>fAddEvent(2002,9,23, &quot;Hello World!&quot;, &quot;popup('http://www.calendarxp.net','_top')&quot;, &quot;#87ceeb&quot;, &quot;dodgerblue&quot;);</code></p>
+      </div>
+    </blockquote>
+    <p>Of course, you may use <code>'_blank'</code> as the 2nd parameter for the <code>popup()</code> call so as to pop up a new window instead of redirecting. In addition,  numbered values like &quot;<code>#87ceeb</code>&quot; can be used anywhere that accepts literal color names. </p>
+    <h4>Calendar Tag - iFrame</h4>
+    <p>The &lt;iframe&gt; of the calendar tag is the main calendar engine for all supported browsers except NN4. It has the following important properties:</p>
+    <TABLE cellSpacing=2 cellPadding=3 width="100%" border=1>
+      <TBODY>
+        <tr> 
+          <th>Property Name</th>
+          <th>Description</th>
+        </tr>
+        <TR class=a> 
+          <TD width="21%" noWrap>src</TD>
+          <TD width="79%">Loading the script engine &quot;iflateng.htm&quot;. You may specify either an absolute path or a relative one here, e.g. src=&quot;/calendar/iflateng.htm&quot; or src=&quot;../../calendar/iflateng.htm&quot;, any will do.<br>            <span class="style1">NOTE: </span><span class="style2">all relative paths set in the following name &amp; id are relative to this src location instead of the container page!!</span> Therefore you don't need to set any path in the name &amp; id if you have all calendar files in one folder.</TD>
+        </TR>
+        <TR class=b> 
+          <TD noWrap>name &amp; id</TD>
+          <TD><code>&quot;default-month:theme-name[:agenda-file[:context-name[:plugin-file[:charset]]]]&quot; -- [] indicates optional </code>
+              <ul>
+            <li><strong>default-month</strong> should be set in an array whose first element indicates the year and second one indicates the month, e.g. <code>&quot;[2003,9]:normal&quot;</code>;  you may also use the predefined <code>gToday</code> 
+              variable to bring up the current month.</li>
+            <li><strong>theme-name</strong> denotes the name of the theme used 
+              to render the calendar. It should be prepended with the absolute web path if the theme files were not located together 
+              with the engine files, e.g. &quot;gToday:/caltheme/normal&quot;. Note that you should not set any domain or protocol prefix before the path. </li>
+            <li><strong>agendar-file</strong> is the js file that defines all 
+              your agenda events and holidays. It should be prepended with the absolute 
+              path if the agenda file were 
+              not located together with the engine files, e.g. &quot;gToday:normal:/events/agenda.js&quot;. It can also be set to 
+              share another calendar's agenda store, more detailed in &quot;Setup 
+              agenda &amp; holidays&quot; tutorial.</li>
+            <li><strong>context-name</strong> declares the naming space of the 
+              calendar engine so that you can access the build-in calendar functions 
+              and variables via <code>context-name.function-or-variable</code> 
+              from your web page.  It's NOT available for reference until the page is fully loaded. If it's omitted, you won't be able to reference anything inside the calendar from the container page. </li>
+            <li><strong>plugin-file</strong> is a javascript file that contains all 
+              plugin functions. We'll talk about it in details later. If omitted, 
+              the engine will try to use the <code>plugins.js</code> file  
+              in the  directory where the engine files are located.</li>
+              <li><strong>charset</strong> indicates the character set used in the themes, plugins and agenda. e.g. GB2312, ISO-8859-1, etc.<br>
+              </li>
+              </ul>
+          <em>Note: The name and id of the &lt;iframe&gt; must be set to exactly the same.</em></TD>
+        </TR>
+        <TR class=a> 
+          <TD noWrap>width &amp; height</TD>
+          <TD>They are the default initial width and height of the calendar panel. <font color="#FF0000">&nbsp; </font>You don't have to specify them most of time. However, the built-in auto-resize function might not work on some certain browser, in which case you may set the width and height manually to be exact the size you need. </TD>
+        </TR>
+        <TR class=b> 
+          <TD noWrap>scrolling &amp; frameborder</TD>
+          <TD>They should always be set to &quot;no&quot; and &quot;0&quot;.</TD>
+        </TR>
+      </TBODY>
+    </TABLE>
+  <h4>Calendar Tag - Layer</h4>
+  <p>The &lt;layer&gt; tag is dedicated to support 
+    the Netscape 4.x browser. Only the <code>name</code>, <code>src</code> and <code>background</code> properties are 
+    required in the &lt;layer&gt; tag. The enclosed &lt;a&gt;&lt;img&gt;&lt;/a&gt; works as a placeholder  for 
+    the calendar.  They are embraced by the 
+    &lt;iframe&gt; tag so as not to be parsed by other browsers. Please check the Rule#6 in &quot;Netscape 4&quot; tutorial for details.</p>
+  <p>One important note here is that the <code>src</code> and <code>background</code> properties must be exactly the same - this is a workaround for a bug of NN4.</p>
+  <h4>Summary</h4>
+  <p>We now know that the calendar tag mentioned before actually says - show a calendar using 
+    the &quot;normal&quot; theme, initialize it with the current month and load 
+    with all agendas and holidays from <code>agenda.js</code>. </p>
+  <p>If you want a default selected day, you may set the <code>gdSelect</code> option in the theme. For options like first-day-of-week, colors, fonts and sizes, please take a look at the &quot;Working with themes&quot; tutorial. There are more than 60 options that can be used to control the look and feel of the calendar, all self-documented in the theme files. <em><br>
+    <br>
+  </em></p>
+  <p><strong>Exercise. </strong>What to do if I want to show a calendar default to next month using the supermini theme? </p>
+  <p><strong>Solution.</strong> Simply change the name &amp; id from <code>&quot;gToday:normal&quot;</code> 
+    to <code>&quot;[gToday[0],gToday[1]+1]:supermini&quot;</code>.</p>
+  <p>&nbsp;</p>
+
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+  <p>&nbsp;</p>
+</div>
+</body>
+</html>

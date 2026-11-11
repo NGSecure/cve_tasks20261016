@@ -1,0 +1,41 @@
+# Exim test configuration 0513
+
+HARDLIMIT=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_rcpt
+
+
+# ----- ACL -----
+
+begin acl
+
+check_rcpt:
+  defer !verify = recipient
+         message = >$acl_verify_message< ++++
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = dnslookup
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+# End

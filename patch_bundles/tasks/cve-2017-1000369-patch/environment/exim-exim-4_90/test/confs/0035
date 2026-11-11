@@ -1,0 +1,28 @@
+# Exim test configuration 0035
+
+SERVER=
+SUBMISSION_OPTIONS=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_mail = a1
+acl_smtp_rcpt = accept
+
+queue_only
+trusted_users = CALLER
+
+
+# ----- ACL -----
+
+begin acl
+
+a1:
+  warn senders = ^(?!notsubmit@)
+       control = submissionSUBMISSION_OPTIONS
+  accept
+
+# End

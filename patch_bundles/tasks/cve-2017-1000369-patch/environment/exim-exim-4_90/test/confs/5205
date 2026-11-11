@@ -1,0 +1,31 @@
+# Exim test configuration 5205
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+
+# ----- Routers -----
+
+begin routers
+
+queryprogram:
+  driver = queryprogram
+  command = /bin/echo ACCEPT transport=smtp hosts=ten-3.test.ex lookup=byname
+  command_user = nobody
+  domains = ten-3.test.ex
+  ignore_target_hosts = V4NET.0.0.0/8
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_S
+
+# End

@@ -1,0 +1,56 @@
+# Exim test configuration 0548
+
+SERVER=
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_connect = acl_connect
+acl_smtp_rcpt = acl_rcpt
+qualify_domain = test.ex
+queue_run_in_order
+
+
+# ----- ACLs -----
+
+begin acls
+
+acl_connect:
+  defer message = host deferred
+        hosts = thishost.test.ex
+  accept
+
+acl_rcpt:
+  defer message = Recipient deferred
+
+
+# ----- Routers -----
+
+begin routers
+
+smarthost:
+  driver = accept
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  hosts = HOSTIPV4 : thishost.test.ex
+  allow_localhost
+  port = PORT_D
+
+
+# ----- Retry -----
+
+begin retry
+
+thishost.test.ex  *  F,20s,2s
+*                 *  F,1s,1s; F,1s,5s
+
+# End

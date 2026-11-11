@@ -1,0 +1,39 @@
+# Exim test configuration 9900
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+local_interfaces = 127.0.0.1
+primary_hostname = myhost.text.ex
+qualify_domain = test.ex
+
+
+
+# ----- Routers -----
+
+begin routers
+
+lookuphost:
+  driver = dnslookup
+  transport = smtp
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_S
+
+
+# ----- Retry -----
+
+begin retry
+
+46c.test.ex * F,1s,1s
+46d.test.ex * F,1m,1s
+
+
+# End

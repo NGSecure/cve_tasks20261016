@@ -1,0 +1,9 @@
+/backups
+/custom
+/extensions
+/site
+/templates
+/cache
+/.idea
+.DS_Store
+.htaccess

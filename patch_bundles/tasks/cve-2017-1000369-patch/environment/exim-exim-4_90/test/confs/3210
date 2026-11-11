@@ -1,0 +1,37 @@
+# Exim test configuration 3210
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist defer_lookup = testdb;defer
+domainlist local_domains = +defer_lookup : test.ex
+qualify_domain = test.ex
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  domains = ! +local_domains
+  transport = t1
+
+# ----- Retry -----
+
+begin retry
+
+*                *   F,5d,5m
+
+# End

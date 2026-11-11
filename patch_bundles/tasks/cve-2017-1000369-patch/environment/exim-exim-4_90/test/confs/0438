@@ -1,0 +1,12 @@
+# Exim test configuration 0438
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+disable_ipv6
+
+# End

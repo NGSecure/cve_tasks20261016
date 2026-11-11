@@ -1,0 +1,48 @@
+# Exim test configuration 0540
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_rcpt
+
+queue_only
+
+
+# ----- ACLs -----
+
+begin acl
+
+check_rcpt:
+  accept  verify = recipient/callout
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = ${if match {$domain}{^yes}{t1}{t2}}
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts = 127.0.0.1
+  port = PORT_S
+  allow_localhost
+  helo_data = ${if eq{$domain}{yes1}{localhost}{aname}}
+
+t2:
+  driver = smtp
+  hosts = 127.0.0.1
+  port = PORT_S
+  allow_localhost
+
+# End

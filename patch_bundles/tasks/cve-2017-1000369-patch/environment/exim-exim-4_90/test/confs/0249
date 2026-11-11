@@ -1,0 +1,18 @@
+# Exim test configuration 0249
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Rewrite -----
+
+
+begin rewrite
+
+*@a.domain  $1@b.domain
+*@c.domain  $local_part@d.domain
+
+# End

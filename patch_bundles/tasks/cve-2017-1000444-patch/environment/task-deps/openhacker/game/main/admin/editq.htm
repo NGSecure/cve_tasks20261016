@@ -1,0 +1,28 @@
+<?php
+
+if ($row["role"] == 'user') {
+	header("location: /");
+};
+
+$id = $_POST['tempId'];
+$question = $_POST['Question'];
+$correctanswer = $_POST['correctanswer'];
+$level = $_POST['level'];
+
+
+$sql = "UPDATE 'questions' SET 'Question'='$question', 'correctanswer'='$correctanswer', 'level'='$level' WHERE 'id' = '$id'";
+
+$result = $conn->query($sql);
+if($result) {
+	echo "Question was updated successfully";
+}
+else {
+	echo "Question did not update as expected, please check the logs.";
+	echo "<br>";
+	echo $question;
+	echo "<br>";
+	echo $correctanswer;
+	echo "<br>";
+	echo $level;
+};
+?>

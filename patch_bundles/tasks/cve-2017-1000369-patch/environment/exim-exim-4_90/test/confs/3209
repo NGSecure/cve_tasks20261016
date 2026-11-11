@@ -1,0 +1,42 @@
+# Exim test configuration 3209
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+qualify_domain = test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+lookuphost:
+  driver = dnslookup
+  domains = ! +local_domains
+  mx_domains = localhost : testdb;defer
+  transport = smtp
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  connect_timeout = 1s
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,1h,10m
+
+
+# End

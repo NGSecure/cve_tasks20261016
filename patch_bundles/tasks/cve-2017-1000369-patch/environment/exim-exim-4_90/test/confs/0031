@@ -1,0 +1,35 @@
+# Exim test configuration 0031
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.ex
+
+
+# ----- Main settings -----
+
+domainlist local_domains = *.test.ex : myhost.ex
+hold_domains = !one.test.ex : *.test.ex : myhost.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+localuser:
+  driver = accept
+  check_local_user
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  delivery_date_add
+  envelope_to_add
+  file = DIR/test-mail/$local_part
+  return_path_add
+
+# End

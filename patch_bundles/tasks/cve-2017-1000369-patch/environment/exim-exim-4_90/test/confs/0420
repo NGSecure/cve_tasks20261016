@@ -1,0 +1,17 @@
+# Exim test configuration 0420
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+queue_only
+acl_smtp_rcpt = accept
+acl_smtp_data =	accept logwrite = h: <$h_Received:>
+
+received_header_text = ${if eq{$sender_address}{x@y}{}{Received: some text}}
+
+# End

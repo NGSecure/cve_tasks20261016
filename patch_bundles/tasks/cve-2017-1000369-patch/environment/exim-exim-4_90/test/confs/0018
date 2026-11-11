@@ -1,0 +1,21 @@
+# Exim test configuration 0018
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_etrn = check_etrn
+no_smtp_etrn_serialize
+log_selector = -etrn
+
+# ----- ACL -----
+
+begin acl
+
+check_etrn:
+  deny   hosts = !localhost
+  warn   log_message = accepted $smtp_command
+  accept
+
+# End

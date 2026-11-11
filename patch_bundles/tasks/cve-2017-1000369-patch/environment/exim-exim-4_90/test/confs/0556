@@ -1,0 +1,34 @@
+# Exim test configuration 0556
+
+ACL_MAIL=accept
+ACL_RCPT=accept
+ACL_PREDATA=accept
+PAH=127.0.0.1
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_predata = ACL_PREDATA
+acl_smtp_mail = ACL_MAIL
+acl_smtp_rcpt = ACL_RCPT
+pipelining_advertise_hosts = PAH
+
+queue_only
+
+# ----- ACL -----
+
+begin ACL
+
+check_predata:
+  accept     delay = 2s
+
+check_mail:
+  accept     delay = 2s
+
+check_rcpt:
+  accept     delay = 2s
+
+# End

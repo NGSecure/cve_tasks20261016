@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% set active_page='admin' %}
+{% block title %}{% trans %}Admin area{% endtrans %}{% endblock %}
+{% block body %}
+
+<div class="spacer"></div>
+
+<div class="container">
+{# Navigation bar for Administration #}
+<div class="row">
+<ul class="nav nav-tabs" role="tablist">
+    <li {% if not admin_nav_active %}class="active"{% endif %}>
+        <a href="{{ url_for('admin') }}">{% trans %}Overview{% endtrans %}</a>
+    </li>
+    <li {% if admin_nav_active=="users"%}class="active"{% endif %}>
+        <a href="{{ url_for('admin/users') }}">{% trans %}Users{% endtrans %}</a>
+    </li>
+    <li {% if admin_nav_active=="repos"%}class="active"{% endif %}>
+        <a href="{{ url_for('admin/repos') }}">{% trans %}Repositories{% endtrans %}</a>
+    </li>
+    <li {% if admin_nav_active=="logs"%}class="active"{% endif %}>
+        <a href="{{ url_for('admin/logs') }}">{% trans %}Logs{% endtrans %}</a>
+    </li>
+    <li {% if admin_nav_active=="sysinfo"%}class="active"{% endif %}>
+        <a href="{{ url_for('admin/sysinfo') }}">{% trans %}System Info{% endtrans %}</a>
+    </li>
+</ul>
+{% include 'message.html' %}
+<div class="spacer"></div>
+</div>
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="well clearfix">
+          <h2 class="text-center">
+            <a href={{ url_for('admin/users') }}>
+            {% trans %}Users:{% endtrans %} {{ user_count }}
+            </a>
+          </h2>
+        </div>  
+    </div>
+    <div class="col-md-6">
+        <div class="well">
+          <h2 class="text-center">
+            <a href={{ url_for('admin/repos') }}>
+            {% trans %}Repositories:{% endtrans %} {{ repo_count }}
+            </a>
+          </h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- /.container -->
+</div>
+
+{% endblock %}

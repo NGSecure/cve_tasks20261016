@@ -1,0 +1,100 @@
+<div id="content">
+<h1>Player Stats</h1>
+
+<?php
+$username = $_SESSION['login_user'];
+$id = $_SESSION['userid'];
+$sql = "SELECT *  FROM accounts WHERE username = '$username'";
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()){
+$prouser = $row['username'];
+$email = $row['email'];
+$userlevel = $row['level'];
+$role = $row['role'];
+$regdate = $row['regdate'];
+$lastlogindate = $row['lastlogindate'];
+$lastseen = $row['lastseen'];
+$lastip = $row['lastip'];
+$regip = $row['regip'];
+$bio = $row['bio'];
+$modnotes = $row['modnotes'];
+$ep = $row['experience'];
+$hp = $row['hp'];
+$bio = $row['bio'];
+$smalljobcount = $row['smalljobcount'];
+$smalljobsuccess = $row['smalljobsuccess'];
+$timesjailed = $row['timesjailed'];
+
+$smalljobstat = $smalljobsuccess / $smalljobcount * 100;
+
+$timesjailed = $row['timesjailed'];
+//$timesbrokenout = $row['brokenout'];
+//$breakoutattempts = $row['breakoutattempts'];
+
+//$breakoutattemptstat = $timesbrokenout / $breakoutattempts * 100;
+
+};
+
+$sql2 = "SELECT * FROM usersystems WHERE userid = '$id'";
+$result2 = $conn->query($sql2);
+
+while ($row2 = $result2->fetch_assoc()){
+$sysstat = $row2['systemstatus'];
+}
+
+
+
+?>
+
+
+<table class="rounded" style="width:50%;">
+			<tbody>
+				<tr>
+					<td>Join Date</td>
+					<td style="min-width:300px;"><?php echo $regdate; ?></td></tr>
+					<tr><td>Email</td>
+					<td style="min-width:300px;"><?php echo $email; ?></td>
+					<tr><td>Last Seen</td>
+					<td style="min-width:300px;"><?php echo $lastseen; ?></td>
+				</tr>
+
+				<tr>
+					<td>Level</td>
+					<td style="min-width:300px;"><?php echo $userlevel;?></td></tr>
+					<tr><td>HP</td>
+					<td style="min-width:300px;"><?php echo $hp;?></td></tr>
+					<tr><td>EP</td>
+					<td style="min-width:300px;"><?php echo $ep;?></td>
+				</tr>
+				<tr>
+					<td>System Status</td>
+					<?php 
+					if ($sysstat == 'online'){
+						echo '<td style="min-width:300px;color:limegreen !important;">Online</td>';
+					}
+					else {
+						echo '<td style="min-width:300px;color:red !important;">Offline</td>';
+					}; 
+
+					?>
+				</tr>
+				<tr>
+					<td>Bio</td>
+						<td style="min-width:300px;"><?php echo $bio;?></td></tr>
+				<tr><td>Times Jailed</td>
+						<td style="min-width:300px;"><?php echo $timesjailed;?></td></tr>
+				<tr><td>Small Job Statistics</td>
+						<td style="min-width:300px;"><?php if($smalljobcount == 0) { echo "No Data"; } else { printf("%.2f", $smalljobstat); echo "%"; echo " "; echo "("; echo $smalljobsuccess; echo "/"; echo $smalljobcount; echo ")";};?></td></tr>
+						<tr><td>Jail Statistics</td>
+						<td style="min-width:300px;"><?php if($timesjailed == 0) { echo "No Data"; } else { printf("%.2f", $timesjailed); echo "%"; echo " "; echo "("; echo $smalljobsuccess; echo "/"; echo $smalljobcount; echo ")";};?></td></tr>
+						</td>
+						</tr>
+				
+			</tbody>
+		</table>
+
+
+
+</div>
+</div>

@@ -1,0 +1,51 @@
+# Exim test configuration 0222
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+untrusted_set_sender = *
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+replyto:
+  driver = accept
+  retry_use_local_part
+  senders = !:
+  transport = autoreply
+
+all:
+  driver = accept
+  retry_use_local_part
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+autoreply:
+  driver = autoreply
+  once = DIR/test-once
+  once_file_size = 30
+  once_repeat = 4s
+  text = "Auto reply message"
+  to = $sender_address
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+# End

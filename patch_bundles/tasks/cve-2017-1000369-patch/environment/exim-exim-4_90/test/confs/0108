@@ -1,0 +1,37 @@
+# Exim test configuration 0108
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+acl_smtp_data = check_message
+
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+
+remote_sort_domains = black.com:myhost.com:other.edu
+
+
+# ----- Routers -----
+
+begin routers
+
+remote:
+  driver = manualroute
+  domains = ! +local_domains
+  route_list = * ten-1.test.ex byname
+  transport = smtp
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+
+# End

@@ -1,0 +1,50 @@
+# Exim test configuration 0400
+
+DATA=
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = redirect
+  local_parts = ^t1
+  data = DATA
+
+r2:
+  driver = redirect
+  local_parts = ^alias
+  data = ${lookup{$local_part}lsearch{DIR/aux-fixed/TESTNUM.alias}}
+
+r3:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = DIR/test-mail/$address_file
+  user = CALLER
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1d,1d
+
+
+# End

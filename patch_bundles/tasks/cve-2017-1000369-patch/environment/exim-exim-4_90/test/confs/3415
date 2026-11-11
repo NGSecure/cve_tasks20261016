@@ -1,0 +1,43 @@
+# Exim test configuration 3415
+
+SERVER=
+SUBMISSION_OPTIONS=
+AUTH_ID_DOMAIN=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_mail = a1
+acl_smtp_rcpt = accept
+
+queue_only
+trusted_users = CALLER
+
+
+# ----- ACL -----
+
+begin acl
+
+a1:
+  warn senders = ^(?!notsubmit@)
+       control = submissionSUBMISSION_OPTIONS
+  accept
+
+
+# ----- Authenticators -----
+
+begin authenticators
+
+au1:
+  driver = plaintext
+  public_name = PLAIN
+  server_prompts = :
+  server_condition = \
+    ${if and {{eq{$2}{username}}{eq{$3}{mysecret}}}{yes}{no}}
+  server_set_id = $2AUTH_ID_DOMAIN
+
+
+# End

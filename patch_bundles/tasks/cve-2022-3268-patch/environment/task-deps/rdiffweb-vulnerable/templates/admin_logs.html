@@ -1,0 +1,33 @@
+{% extends 'admin.html' %}
+{% block title %}{% trans %}User management{% endtrans %}{% endblock %}
+{% set admin_nav_active="logs" %}
+{% block content %}
+    
+{% from 'include/empty.html' import empty %}
+
+<div class="row">
+  {% if logfiles %}
+    <div class="col-md-12">
+        <ul class="nav nav-pills">
+            {% for fn in logfiles %}
+            <li {% if fn == filename%}class="active"{% endif %}>
+                <a href="{{ url_for('admin/logs', fn) }}">{{ fn }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="spacer"></div>
+        <div class="well well-sm">{% trans %}Notice: To prevent performance issues, only the last 2000 lines are displayed.{% endtrans %}</div>
+        <pre class="file-content">{{data}}</pre>
+    </div>
+  {% else %}
+    <div class="col-md-12">
+      {% call empty('icon-doc-text', _("No log files")) %}
+        <p>{% trans %}The application must be configured with logfile location if you want to display their content in this view.{% endtrans %}</p>
+      {% endcall%}
+    </div>
+  {% endif %}
+<!-- /.row -->
+</div>
+
+{% endblock %}
+

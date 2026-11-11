@@ -1,0 +1,21 @@
+# Exim test configuration 0549
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_connect = check_connect
+
+
+# ----- ACL -----
+
+begin ACL
+
+check_connect:
+  accept   hosts   = 127.0.0.1
+           control = no_pipelining
+  accept
+
+# End

@@ -1,0 +1,26 @@
+# Exim test configuration 0468
+
+SRV=smtp
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+acl_smtp_data = data
+
+message_body_visible = 50
+
+
+# ----- ACLs -----
+
+begin acl
+
+data:
+  deny message = message body <$message_body> message end <$message_body_end>
+
+
+
+# End

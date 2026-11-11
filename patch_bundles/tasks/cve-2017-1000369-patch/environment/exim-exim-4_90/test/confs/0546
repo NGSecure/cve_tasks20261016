@@ -1,0 +1,41 @@
+# Exim test configuration 0546
+
+HELO_MSG=One line
+RCPT_MSG=RCPT is OK
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_helo = check_helo
+acl_smtp_mail = check_mail
+acl_smtp_rcpt = check_rcpt
+acl_smtp_data = check_data
+acl_smtp_predata = check_predata
+
+qualify_domain = test.ex
+queue_only
+
+
+# ----- ACLs -----
+
+begin acl
+
+check_helo:
+  accept     message = HELO_MSG
+
+check_mail:
+  accept     message = 299 MAIL is\nOK
+
+check_rcpt:
+  accept     message = RCPT_MSG
+
+check_data:
+  accept     message = 288 I like the data
+
+check_predata:
+  accept     message = 300 Funny, but OK code
+
+
+# End

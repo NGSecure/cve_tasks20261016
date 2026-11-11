@@ -1,0 +1,42 @@
+# Exim test configuration 0432
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+# This isn't relevant - it's just here to test that -odi
+# can override it.
+
+acl_smtp_mail = mail
+
+
+# ----- ACLs -----
+
+begin acl
+
+mail:
+  accept verify = sender/callout=1s,maxwait=1s
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+  hosts = <; 127.0.0.1 ;
+  port = PORT_S
+  allow_localhost
+
+# End

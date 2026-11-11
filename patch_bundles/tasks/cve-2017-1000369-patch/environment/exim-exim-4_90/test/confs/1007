@@ -1,0 +1,17 @@
+# Exim test configuration 1007
+
+PORT=
+IFACE=
+
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+PORT
+IFACE
+
+
+# End

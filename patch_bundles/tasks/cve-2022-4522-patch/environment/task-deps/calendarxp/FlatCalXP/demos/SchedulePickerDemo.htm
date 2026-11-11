@@ -1,0 +1,114 @@
+<HTML>
+<HEAD><TITLE>Schedule Picker Demo</TITLE>
+<script language="JavaScript">
+function fAddListItem(y,m,d) {	// called by plugins1.js
+	var dl=document.testForm.dateList;
+	dl.options[dl.options.length]=new Option(gfFlat2.fDateString(y,m,d),y+"-"+m+"-"+d);
+	gfFlat2.fAddEvent(y,m,d,"Already included",null);
+	gfFlat2.fRepaint();
+}
+function fRemoveListItem(y,m,d) {	// called by plugins1.js
+	var dl=document.testForm.dateList;
+	for (var i=0;i<dl.options.length;i++)
+		if (gfFlat2.fDateString(y,m,d)==dl.options[i].text) break;
+	dl.options[i]=null;
+	gfFlat2.fRemoveEvent(y,m,d);
+	if (gfFlat2.fIsSelected(y,m,d)) fAddListItem2(y,m,d);
+	gfFlat2.fRepaint();
+}
+function fAddListItem2(y,m,d) {	// called by plugins2.js
+	var dl=document.testForm.dateList2;
+	dl.options[dl.options.length]=new Option(gfFlat.fDateString(y,m,d),y+"-"+m+"-"+d);
+	gfFlat.fAddEvent(y,m,d,"Already excluded",null);
+	gfFlat.fRepaint();
+}
+function fRemoveListItem2(y,m,d) {	// called by plugins2.js
+	var dl=document.testForm.dateList2;
+	for (var i=0;i<dl.options.length;i++)
+		if (gfFlat.fDateString(y,m,d)==dl.options[i].text) break;
+	dl.options[i]=null;
+	gfFlat.fRemoveEvent(y,m,d);
+	if (gfFlat.fIsSelected(y,m,d)) fAddListItem(y,m,d);
+	gfFlat.fRepaint();
+}
+// The above 4 functions are called from within the plugins.js when adding dates into the selected ranges. We use them to add dates explicitly to the <select> list.
+// They have to be defined in the same page with the <select> tag, otherwise a bug of IE5.0 will prevent the list from getting new options. IE5.5+ doesn't have this bug.
+
+function removeSelected(which) {	// remove selected dates from the listbox and the calendar
+	if (which==1) {
+		var dl=document.testForm.dateList;
+	} else {
+		var dl=document.testForm.dateList2;
+	}
+	var b=false;
+	for (var i=dl.options.length-1;i>=0;i--)
+		if (dl.options[i].selected) {
+			var dt=dl.options[i].value.split("-");
+			b=true;
+			if (which==1) {
+				gfFlat.fRemoveRange(dt[0],dt[1],dt[2],false);
+				gfFlat.fRepaint();
+			} else {
+				gfFlat2.fRemoveRange(dt[0],dt[1],dt[2],false);
+				gfFlat2.fRepaint();
+			}
+		}
+	if (!b) alert("No dates selected!");
+	
+}
+</script>
+</HEAD>
+<BODY onload="_nn4_loaded=true;" >
+
+
+<form name="testForm">
+<table cellspacing="0" cellpadding="6" border="0">
+<tr>
+<td align="center" colspan="2">Days to Be Included in Schedule</td>
+<td width="20"></td>
+<td align="center" colspan="2">Days to Be Excluded from Schedule</td>
+</tr>
+<tr>
+<td valign="top"><select name="dateList" size="11" multiple="multiple" style="width:120"></select>
+</td>
+<td valign="top"><iframe name="gToday:normal:agenda.js:gfFlat:plugins1.js" id="gToday:normal:agenda.js:gfFlat:plugins1.js" src="SchedulePicker/iflateng.htm" scrolling="no" frameborder="0">
+<a name="gfFlat_spacer"><img width=172 height=180></a>
+</iframe>
+</td>
+<td></td>
+<td valign="top"><select name="dateList2" size="11" multiple="multiple" style="width:120"></select>
+</td>
+<td valign="top"><iframe name="gToday:normal:agenda.js:gfFlat2:plugins2.js" id="gToday:normal:agenda.js:gfFlat2:plugins2.js" src="SchedulePicker/iflateng.htm" scrolling="no" frameborder="0">
+<a name="gfFlat2_spacer"><img width=172 height=180></a>
+</iframe>
+</td>
+</tr>
+<tr>
+<td align="center" colspan="2"><input type=button onclick="removeSelected(1)" value="Remove selected items from list"></td>
+<td width="20"></td>
+<td align="center" colspan="2"><input type=button onclick="removeSelected(2)" value="Remove selected items from list"></td>
+</tr>
+</table>
+</form>
+
+
+
+
+<UL>
+  <LI>This is an extensive demo of the multi-select plugin. 2 calendars are coordinating each other to provide an including &amp; excluding schedule of dates.
+  <LI>The dates picked to be included will not be available in the excluded list, and vice versa.
+</UL>
+
+<font size=-1>
+</font>
+
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+
+
+<!-- calendar engine for netscape 4.x. "src" and "background" must match. -->
+<LAYER name="gToday:normal:agenda.js:gfFlat:plugins1.js" src="SchedulePicker/nflateng.htm" background="SchedulePicker/nflateng.htm">     </LAYER>
+<LAYER name="gToday:normal:agenda.js:gfFlat2:plugins2.js" src="SchedulePicker/nflateng.htm" background="SchedulePicker/nflateng.htm">     </LAYER>
+</BODY>
+</HTML>

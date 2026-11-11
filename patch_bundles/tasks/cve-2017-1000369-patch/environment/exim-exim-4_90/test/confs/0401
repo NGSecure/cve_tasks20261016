@@ -1,0 +1,27 @@
+# Exim test configuration 0401
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+acl_smtp_connect = connect
+acl_smtp_mail = mail
+queue_only
+
+
+# ----- ACL -----
+
+begin acl
+
+connect:
+  accept hosts = DIR/aux-var/TESTNUM.hosts1
+
+mail:
+  accept hosts = DIR/aux-var/TESTNUM.hosts2
+
+
+# End

@@ -1,0 +1,26 @@
+# Exim test configuration 0020
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+
+# ----- Main settings -----
+
+acl_smtp_connect = check_connect
+
+# Note that we use an explicit address in the 10.250.0.0/16 network, because
+# that is what is used by the testing code in Exim when it generates 2048 IP
+# addresses for the absurdly multi-homed host.
+
+host_lookup = 10.250.104.0/21
+
+
+# ----- ACL -----
+
+begin acl
+
+check_connect:
+  accept  hosts = 10.250.104.0/21
+
+# End

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% set active_page='settings' %}
+{% block title %}{% trans %}User settings{% endtrans %}{% endblock %}
+{% block body %}
+<div class="container">
+    <h2>{{ title }}</h2>
+    
+	<!-- Navigation bar for preference page -->
+	<ul class="nav nav-tabs" role="tablist">
+	    {% for panelid, panellabel in panels %}
+	        <li {% if active_panelid==panelid %}class="active"{% endif %}>
+	            <a href="{{ url_for('prefs', panelid) }}">{{ panellabel }}</a>
+	        </li>	    
+	    {% endfor %}
+	</ul>
+    
+    <!-- panel content -->
+    {% include template_content with context %}
+
+</div>
+{% endblock %}

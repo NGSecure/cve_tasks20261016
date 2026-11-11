@@ -1,0 +1,31 @@
+# Exim test configuration 0527
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_rcpt
+
+
+# ----- ACLs -----
+
+begin acl
+
+check_rcpt:
+  accept  verify = sender/callout
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = manualroute
+  route_list = * "<= 127.0.0.1:PORT_S"
+  self = send
+  verify_only
+
+
+# End

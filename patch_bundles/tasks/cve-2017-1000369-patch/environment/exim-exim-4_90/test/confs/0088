@@ -1,0 +1,20 @@
+# Exim test configuration 0088
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+hosts_treat_as_local = ten-1.test.ex : ten-99.test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+lookuphost:
+  driver = dnslookup
+  verify_only
+
+# End

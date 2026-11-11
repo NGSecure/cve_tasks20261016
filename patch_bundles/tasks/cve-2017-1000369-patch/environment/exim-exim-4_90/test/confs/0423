@@ -1,0 +1,28 @@
+# Exim test configuration 0423
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+acl_smtp_connect = connect
+
+
+# ----- ACL -----
+
+begin acl
+
+connect:
+  deny    message = xxxxxxxxxxxxxx has refused this message because it looks \
+                    like it is infected with the Sobig.E worm. See \
+                    http://www.xxxx.xxx/xxxxxxxx/xxxx/xxxx/w32.sobig.e@xx.html \
+                    for details. If you feel this determination is in error, \
+                    please forward the entire message to \
+                    postmaster@xxxxxxxxxxxxx.com and include code \"xx#1\" \
+                    in the Subject
+
+
+# End

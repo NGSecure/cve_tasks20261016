@@ -1,0 +1,8 @@
+; This is a testing reverse zone file for use when testing DNS handling in
+; Exim. This is a fake zone of no real use - hence no SOA record. The zone name
+; is 127.in-addr.arpa. This file is passed through the substitution mechanism
+; before being used by the fakens auxiliary program.
+
+1.0.0.127.in-addr.arpa.   PTR    localhost.
+
+; End

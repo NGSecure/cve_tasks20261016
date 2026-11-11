@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet type="text/xsl" href=""?>
+
+<plugin>
+    <name>demoDeliveryLimitation</name>
+    <creationDate>2008-05-30</creationDate>
+    <author>Revive Adserver</author>
+    <authorEmail>noreply@revive-adserver.com</authorEmail>
+    <authorUrl>http://www.revive-adserver.com</authorUrl>
+    <license>license.txt</license>
+    <description>Demo Delivery Limitiation for Revive Adserver</description>
+    <version>1.0.3</version>
+    <oxversion>3.2.0-beta-rc3</oxversion>
+    <extends>deliveryLimitations</extends>
+
+    <install>
+        <files>
+            <file path="{MODULEPATH}deliveryLimitations/demoDeliveryLimitation/">demoLimitation.class.php</file>
+            <file path="{MODULEPATH}deliveryLimitations/demoDeliveryLimitation/">demoLimitation.delivery.php</file>
+
+        </files>
+    </install>
+
+</plugin>

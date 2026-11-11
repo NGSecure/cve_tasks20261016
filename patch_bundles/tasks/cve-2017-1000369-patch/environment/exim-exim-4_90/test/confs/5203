@@ -1,0 +1,35 @@
+# Exim test configuration 5203
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+query:
+  driver = queryprogram
+  command = DIR/bin/fd -q
+  command_user = nobody
+  domains = ! +local_domains
+  transport = userx_delivery
+  no_more
+
+# ----- Transports -----
+
+begin transports
+
+userx_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  message_suffix = "$address_data\n"
+  user = CALLER
+
+
+# End

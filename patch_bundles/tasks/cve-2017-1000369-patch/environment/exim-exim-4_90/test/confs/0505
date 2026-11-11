@@ -1,0 +1,25 @@
+# Exim test configuration 0505
+
+ACL=
+CONTROL=
+RECIPIENT=acl_smtp_rcpt=accept
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_ACL = test_acl
+RECIPIENT
+
+queue_only
+
+# ----- ACLs -----
+
+begin acl
+
+test_acl:
+  accept control = CONTROL
+
+# End

@@ -1,0 +1,180 @@
+<html>
+<head>
+<title>Netscape 4.x trouble-shooting</title>
+<link href="style-1.0/css/tigris.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="app"> 
+  <h3>Working in Netscape 4.x</h3>
+  <p>In this tutorial, we'll focus on how to make the calendar work properly in 
+    the outdated NN4 browser. Before we start, please bear it in mind that what 
+    we are dealing with is an old browser engine with only preliminary DHTML support 
+    and funky bugs. Therefore, your web authoring life has to be a bit more tough 
+    than without it.</p>
+  <h4>Rule #1: Set _nn4_loaded in the onload event of HTML body</h4>
+  <p>A simple but mandatory rule for NN4 is to set the <code>_nn4_loaded</code> 
+    variable in the onload event of the <code>&lt;body&gt;</code> tag of your 
+    web page, as following:</p>
+  <div class="dottedBox"> 
+    <p><code>...<br>
+      &lt;BODY onload=&quot;_nn4_loaded=true;&quot;&gt;<br>
+      ...</code></p>
+  </div>
+  <p>It's required by the calendar engine. If you have other functions need to 
+    be triggered by the onload event, you may simply append them behind.</p>
+  <h4>Rule #2: Never use inline CSS style in HTML tags, use CSS classes instead.</h4>
+  <p>In order to make FlatCalendarXP work seamlessly under Netscape 4.x, you MUST 
+    NOT use any inline CSS style (like style=&quot;xxxx&quot;) in the HTML tags. 
+    NN4 has serious problems with inline styles. Although sometimes the inline 
+    CSS styles won't cause any trouble, sticking to CSS classes (like class=&quot;xxx&quot;) 
+    is always a safe approach.</p>
+  <h4>Rule #3: Fix the infamous resize bug.</h4>
+  <p>Some versions of Netscape 4.x have an infamous bug - all the dynamic layers 
+    will get lost when the browser is resized. There are many solutions posted 
+    over the internet to fix it, you may do a search to get the detail description 
+    from google or yahoo.</p>
+  <p>For a quick example, simply insert the following javascript snippet into 
+    the header of your html page. </p>
+  <div class="dottedBox"><code>&lt;script language=&quot;JavaScript&quot;&gt;<br>
+    if(document.layers){<br>
+    origWidth=innerWidth;origHeight=innerHeight;<br>
+    onresize=function(){if(innerWidth!=origWidth||innerHeight!=origHeight)location.reload()<br>
+    }}<br>
+    &lt;/script&gt;</code></div>
+  <p>If you have a better solution, you may use your own.</p>
+  <h4>Rule #4: Do NOT put the calendar tag within a &lt;form&gt; tag.</h4>
+  <p>The <code>&lt;form&gt;</code> tag in NN4 cannot span across <code>&lt;layer&gt;</code> 
+    tags -- another infamous bug of NN4. Since the calendar is implemented with 
+    <code>&lt;layer&gt;</code> tags putting it into a <code>&lt;form&gt;</code> 
+    will trigger this bug. If you need the calendar to be shown within a form, 
+    please follow Rule#6.</p>
+  <h4>Rule #5: Never tamper the script engine</h4>
+  <p>Some free web hosting service providers, like GeoCity!Yahoo, mandatorily 
+    inject ad code into every html file they hosted. Such actions will disrupt 
+    the calendar engine totally since the script engine files, like <code>iflateng.htm</code>, 
+    are very sensitive to modifications. There is no workaround for it and the 
+    license agreement also requires the engine remaining intact.</p>
+  <h4>Rule #6: Use NN4 placeholders</h4>
+  <p>Since version 8.0.170, FlatCalendarXP needs a placeholder to work under NN4. 
+    The placeholder is just a sized &lt;img&gt; tag wrapped by a named &lt;a&gt; 
+    tag. They must be enclosed within the &lt;iframe&gt; tag so as not to affect 
+    page layout in other browsers.</p>
+  <p>Suppose you have the following calendar tags ready in your page:</p>
+  <div class="dottedBox"> 
+    <p><code>...<br>
+      &lt;iframe name=&quot;gToday:normal:agenda.js&quot; id=&quot;gToday:normal:agenda.js&quot; 
+      src=&quot;iflateng.htm&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot;&gt;<br>
+      &lt;a name=&quot;_spacer&quot;&gt;&lt;IMG width=172 height=180&gt;&lt;/a&gt;<br>
+      &lt;/iframe&gt;<br>
+      ...<br>
+      &lt;layer name=&quot;gToday:normal:agenda.js&quot; src=&quot;nflateng.htm&quot; background=&quot;nflateng.htm&quot;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/layer&gt;<br>
+      &lt;/body&gt;<br>
+      &lt;/html&gt; </code></p>
+  </div>
+  <ol>
+    <li> 
+      <div class="app">The <code>&lt;layer&gt;</code> tag must be put at the very 
+        bottom of page, just above <code>&lt;/body&gt;</code>.</div>
+    </li>
+    <li>The name of <code>&lt;a&gt;</code> tag must be set in accordance with 
+      the calendar context name - &quot;ContextName_spacer&quot;. If no context 
+      name being specified, use &quot;_spacer&quot; as the name. This <code>&lt;a&gt;</code> 
+      tag will be treated as a stand-in of the calendar tag, the calendar won't 
+      show up on the page if it doesn't exist or being included in a hidden <code>&lt;layer&gt;</code>.</li>
+    <li>Make sure you reserve enough space for the calendar by using a blank <code>&lt;IMG&gt;</code> 
+      tag with proper width and height as spacer inside the <code>&lt;iframe&gt;</code> 
+      tag. You may set the image src to a blank gif and set the border to 0 if 
+      you like.</li>
+  </ol>
+  <p>Of course, you may also use a sized <code>&lt;table&gt;</code> to replace 
+    the <code>&lt;IMG&gt;</code> spacer. e.g. <code>&lt;table width=172 height=180&gt;&lt;tr&gt;&lt;td&gt; 
+    &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code></p>
+  <h4>Rule #7: Bypass the borderWidth &amp; paddings CSS properties</h4>
+  <p>In themes that have <code>borderWidths</code>, <code>padding</code> or <code>margin</code> 
+    CSS settings, NN4 will throw out errors against them and stop interpreting 
+    the subsequent CSS rules. Whenever you notice that part of the calendar is 
+    not rendered properly, you may type &quot;javascript:&quot; into the address 
+    bar of NN4 to show the related errors in the popup debug window.</p>
+  <p>To work around, you just need to append the name of the class with a border 
+    or padding style in it to a build-in array in the <code>plugins.js</code> 
+    file and the engine will handle the remaining work. e.g. We introduced an 
+    extra DIV with a border style in outlook theme, and then added the following 
+    NN4 specific code.</p>
+  <div class="dottedBox"> 
+    <p><code>if (NN4) _nn4_css[_nn4_css.length]=&quot;BottomDiv&quot;;</code></p>
+  </div>
+  <p>Remember to do the same for every new class added to the theme, unless it 
+    has no border, padding or margin settings.</p>
+  <h4>Rule #8: Work around the missing fonts</h4>
+  <p>In certain situation, the fonts on the page might turn into rectangles if 
+    the page were generated by ASP or other cgi server. It's caused by the server 
+    sending different charset encoding than NN4's default setting. To workaround, 
+    simply specify an empty string as the http charset header in your server-end 
+    code. e.g. in ASP we may have the following set:</p>
+  <div class="dottedBox"> 
+    <p><code>Response.Charset=&quot;&quot;</code></p>
+  </div>
+  <p>The other way to work around is using the engine wrappers mentioned in the 
+    i18n tutorial, which is a bit more complicated but very effective if your 
+    page were to serve multiple languages.</p>
+  <h4>Rule #9: Fill NN4 calendar tag with proper spaces</h4>
+  <p>If you don't follow Rule #2, sometimes NN4 will embed some strange duplicated 
+    closing tags right behind the calendar tag, like <code>&lt;/layer&gt;</code> 
+    or other weird tags. You'll see them blinking in blue color when you open 
+    the &quot;page source&quot; window. This is really a weird bug and it may 
+    cause other strange behaviors on your page.</p>
+  <p>To work around, you need to place some dummy SPACE characters inside the 
+    <code>&lt;layer&gt;</code> tag to adjust the offset of those garbage tags 
+    until they become normal and stop blinking in the page-source-window. Usually 
+    5 spaces will do the trick, but you'd better verify it by looking into the 
+    page source window.</p>
+  <p>We strongerly suggest you following Rule #2 to avoid such problems.</p>
+  <h4>Rule #10: Floating with layer</h4>
+  <p>From version 8.0 we strongly suggest using Rule#6 to implement the calendar 
+    tag. However, you may still look for a way to make the calendar stick on a 
+    layer and float with it. e.g. You may have a floating menu that holds its 
+    position static even when the user scrolls the page down, in other words it 
+    can always be seen at the same place of the page, and you want to have a calendar 
+    inside that menu. There are 2 ways to achieve it:</p>
+
+<ul>
+  <li> 
+    <div class="app"> You may put the &lt;iframe&gt; calendar tag and the spacer 
+      mentioned in Rule#6 into that layer, then append the <code>gfFlat.fRelocate()</code> 
+      call to the scripts that make the layer static on the page so that it get 
+      called whenever the position of the layer is changed. Once called, the <code>fRelocate()</code> 
+      will automatically align the calendar with the spacer. Since the spacer 
+      is moving with the floating layer, the calendar will then moving with the 
+      spacer. This approach is usually a better choice.</div>
+  </li>
+  <li>The other way is to append a line <code>_nn4_UseSpacer=false;</code> to 
+    the plugins.js then wrap the &lt;layer&gt; calendar tag at page bottom with 
+    &lt;ilayer&gt; tag and move it into the &lt;iframe&gt; to replace the spacer 
+    mentioned in Rule#6. e.g. 
+    <div class="app"> 
+      <div class="dottedBox"><code>&lt;iframe name=&quot;gToday:normal:agenda.js&quot; 
+        id=&quot;gToday:normal:agenda.js&quot; src=&quot;iflateng.htm&quot; scrolling=&quot;no&quot; 
+        frameborder=&quot;0&quot;&gt;<br>
+        &lt;ILAYER&gt;&lt;LAYER name=&quot;gToday:normal:agenda.js&quot; src=&quot;nflateng.htm&quot; background=&quot;nflateng.htm&quot;&gt; 
+        &lt;/LAYER&gt;&lt;/ILAYER&gt;<br>
+        &lt;/iframe&gt;</code></div>
+    </div>
+  </li>
+</ul>
+  <p> The latter approach sometimes may cause problems when the calendar tag is 
+    nested within several tables and layers, but it doesn't need to deal with 
+    the menu moving scripts. It's up to you to choose one to implement.</p>
+  <h4>Rule #11: Relative path fix </h4>
+  <p>Whenever you try to put the calendar related files into a separate directory and reference them via a relative path in the <code>src</code> property of the &lt;layer&gt; tag, you'll have to set up the <code>background</code> property to have the same relative path. To make it simple, always keep both properties the same. If you don't, graphics will be disappeared from the calendar panel after redrawing.</p>
+  <p>You don't need to do it if you keep using absolute path in the <code>src</code> property. </p>
+</div>
+
+  
+<hr size="1">
+<div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+  Inc. All rights reserved.</em></font></div>
+<p>&nbsp;</p>
+  
+</body>
+</html>

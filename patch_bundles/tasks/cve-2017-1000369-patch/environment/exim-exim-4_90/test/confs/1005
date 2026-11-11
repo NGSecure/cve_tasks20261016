@@ -1,0 +1,30 @@
+# Exim test configuration 1005
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+dns_ipv4_lookup = eximtesthost.ipv6.test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+lookuphost:
+  driver = manualroute
+  route_list = * $domain byname
+  self = send
+  transport = smtp
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_S
+
+
+# End

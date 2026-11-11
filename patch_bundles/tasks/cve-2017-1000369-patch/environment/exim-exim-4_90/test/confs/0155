@@ -1,0 +1,32 @@
+# Exim test configuration 0155
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+qualify_domain = test.ex
+queue_run_in_order
+split_spool_directory
+
+
+# ----- Routers -----
+
+begin routers
+
+defer_always:
+  driver = redirect
+  allow_defer
+  data = :defer: forced defer
+  retry_use_local_part
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

@@ -1,0 +1,32 @@
+# Exim test configuration 5208
+
+LIST=
+SELF=freeze
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = queryprogram
+  domains = query.program
+  transport = t1
+  command = /bin/echo "accept hosts=LIST"
+  command_user = CALLER
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+
+# End

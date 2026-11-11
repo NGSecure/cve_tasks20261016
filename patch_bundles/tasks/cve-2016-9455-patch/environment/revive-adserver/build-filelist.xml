@@ -1,0 +1,143 @@
+<project name="openx-filelist" basedir=".">
+
+  <!--
+    This file contains include and exclude patterns to be used during building
+    of a distribution package of Revive Adserver.
+  -->
+
+  <patternset id="dist.included">
+    <!-- Files in the main directory -->
+    <include name="COPYRIGHT.txt"/>
+    <include name="LICENSE.txt"/>
+    <include name="README.md"/>
+    <include name="RELEASE_NOTES.txt"/>
+    <include name="*.php"/>
+    <include name="*.js"/>
+    <include name="robots.txt"/>
+    <include name="crossdomain.xml"/>
+    <exclude name="build.sh"/>
+
+    <!-- Subdirectory rules -->
+    <exclude name="docs/**"/>
+    <include name="etc/**"/>
+    <exclude name="etc/*.properties*"/>
+    <exclude name="etc/test.conf.php"/>
+    <exclude name="etc/changesfantasy/**"/>
+    <include name="etc/permanentcache/**"/>
+    <include name="lib/**"/>
+    <exclude name="lib/simpletest/**"/>
+    <exclude name="lib/ant/**"/>
+    <include name="maintenance/**"/>
+    <include name="plugins/**"/>
+    <include name="scripts/maintenance/**"/>
+    <include name="scripts/rpm/**"/>
+    <exclude name="scripts/rpm/*.spec*" />
+    <exclude name="scripts/translations/**"/>
+    <include name="scripts/.htaccess"/>
+    <include name="var/cache/README.txt"/>
+    <include name="var/plugins/cache"/>
+    <include name="var/plugins/config"/>
+    <include name="var/plugins/log"/>
+    <include name="var/plugins/recover"/>
+    <include name="var/plugins/DataObjects"/>
+    <include name="var/plugins/README.txt"/>
+    <include name="var/templates_compiled"/>
+    <include name="var/.htaccess"/>
+    <include name="var/UPGRADE"/>
+    <include name="www/**"/>
+    <exclude name="www/devel"/>
+    <exclude name="www/devel/**"/>
+    <exclude name="www/delivery_dev"/>
+    <exclude name="www/delivery_dev/**"/>
+    <include name="www/images/1x1.gif"/>
+    <include name="www/images/robots.txt"/>
+    <include name="www/images/layerstyles/**"/>
+    <exclude name="www/images/*.jpg"/>
+    <exclude name="www/images/*.png"/>
+
+    <exclude name="www/admin/assets/js/jscalendar/test.php"/>
+
+    <!-- Build-wide rules -->
+    <exclude name="nbproject/**"/>
+    <exclude name="**/tests"/>
+    <exclude name="**/tests/**"/>
+    <exclude name="**/.git*"/>
+    <exclude name="**/*.log"/><!-- Log files -->
+  </patternset>
+
+  <patternset id="dist.excluded">
+    <!-- Files in the main directory -->
+    <include name="tests.xsl"/>
+    <include name="*.xml"/>
+    <include name="*.properties"/>
+    <include name="*.properties.example"/>
+    <include name="build.sh"/>
+    <include name="crowdin.*"/>
+    <include name="should_not_exist"/><!-- Required for one of the tests - ask Andrew -->
+    <exclude name="crossdomain.xml"/>
+
+    <!-- Subdirectory rules -->
+    <include name="build/**"/>
+    <include name="docs/**"/>
+    <include name="etc/*.properties*"/>
+    <include name="etc/test.conf.php"/>
+    <include name="etc/changesfantasy/**"/>
+    <include name="lib/ant/**"/>
+    <include name="lib/simpletest/**"/>
+    <exclude name="plugins/**"/>
+    <include name="scripts/db_dataobject/**"/>
+    <include name="scripts/delivery/**"/>
+    <include name="scripts/plugins/**"/>
+    <include name="scripts/upgrade/**"/>
+    <include name="scripts/rpm/*.spec*" />
+    <include name="scripts/updateDocs.sh"/>
+    <include name="scripts/translations/**"/>
+    <include name="tutorials/**"/>
+    <include name="simulation/**"/>
+    <include name="var/*.conf.php*"/>
+    <include name="var/changes_*.xml"/>
+    <include name="var/INSTALLED"/>
+    <include name="var/cache/deliverycache_*"/><!-- Cache files -->
+    <include name="var/cache/cache_*"/>
+    <include name="var/cache/minify_*"/>
+    <include name="var/cache/*.html"/>
+    <include name="var/cache/mergedDeliveryFunctions.php"/>
+    <include name="var/cache/test_api_*"/>
+    <include name="var/templates_compiled/**"/>
+    <include name="var/plugins/config/**"/>
+    <include name="www/admin/assets/js/jscalendar/test.php"/>
+    <include name="plugins_repo/**"/>
+    <include name="www/devel"/>
+    <include name="www/devel/**"/>
+    <include name="www/delivery_dev"/>
+    <include name="www/delivery_dev/**"/>
+    <exclude name="www/images/1x1.gif"/>
+    <exclude name="www/images/robots.txt"/>
+    <exclude name="www/images/layerstyles/**"/>
+    <include name="www/images/*.jpg"/>
+    <include name="www/images/*.png"/>
+
+    <!-- Build-wide rules -->
+    <include name="nbproject/**"/>
+    <include name="**/tests"/>
+    <include name="**/tests/**"/>
+    <include name="**/.git*"/>
+    <include name="**/.git*/**"/>
+    <include name="**/*.log"/><!-- Log files -->
+    <include name="**/.*.swp"/><!-- Vim swap files -->
+  </patternset>
+
+  <!-- List of all directories that should be set to globally
+       writable as part of the packaging process -->
+  <patternset id="dist.writable">
+    <include name="var"/>
+    <include name="var/cache"/>
+    <include name="var/tmp"/>
+    <include name="var/plugins/**"/>
+    <include name="var/templates_compiled"/>
+    <include name="www/images"/>
+    <include name="www/admin/plugins"/>
+    <include name="plugins/**"/>
+  </patternset>
+
+</project>

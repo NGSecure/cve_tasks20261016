@@ -1,0 +1,70 @@
+# Exim test configuration 0099
+
+RETRY =
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = primary.test.ex
+qualify_domain = test.ex
+retry_data_expire = 2s
+log_selector = +received_recipients
+
+
+# ----- Routers -----
+
+begin routers
+
+bydns:
+  driver = dnslookup
+  domains = mxt2.test.ex : mxnonexist.test.ex
+  transport = smtp
+  fail_defer_domains = *
+
+all:
+  driver = manualroute
+  route_list = simple  thishost.test.ex  byname \
+	     ; complex thisloop.test.ex  byname \
+	     ; nonexist nonexist.test.ex byname \
+	     ; *       127.0.0.1         byname
+  self = send
+  host_find_failed = defer
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = 999
+  RETRY
+
+
+# ----- Retry -----
+
+begin retry
+
+*       *     senders=:                    G,1d,1m,1.5
+*       *     senders = "a@b.c : d@e.f"    G,2d,2m,1.5
+
+rcpt45x.test.ex              rcpt_45x      F,10d,2m
+rcpt463.test.ex              rcpt_463      F,10d,3m
+rcpt4xx.test.ex              rcpt_4xx      F,10d,1m
+*                            lookup        F,10d,30m
+
+*@\N^\d                      *             F,5d,1m
+*@*.abcd.ex                  *             F,5d,2m
+*@literal.ex                 *             F,5d,3m
+*@lsearch;DIR/aux-fixed/TESTNUM.rlist2 *             F,5d,4m
+*@@[]                        *             F,5d,5m
+*@@                          *             F,5d,6m
+lsearch*@;DIR/aux-fixed/TESTNUM.rlist  *             F,1d,3m
+*.star.ex                    *             F,3d,10m
+!*.not.ex                    *             F,2d,15m
+*                            *             F,12d,150m
+
+# End

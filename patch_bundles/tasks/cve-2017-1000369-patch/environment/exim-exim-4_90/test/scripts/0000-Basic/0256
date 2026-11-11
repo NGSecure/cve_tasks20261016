@@ -1,0 +1,11 @@
+# errors_copy
+exim -odi unknown
+.
+****
+exim -odi -bs
+mail from:<"abc@def"@unknown.domain>
+rcpt to:<unknown@test.ex>
+data
+.
+quit
+****

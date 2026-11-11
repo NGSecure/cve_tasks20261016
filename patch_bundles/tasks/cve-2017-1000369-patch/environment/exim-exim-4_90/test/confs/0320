@@ -1,0 +1,36 @@
+# Exim test configuration 0320
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = check_recipient
+qualify_domain = test.ex
+
+
+# ------ ACL ------
+
+begin acl
+
+check_recipient:
+  accept local_parts = DIR/aux-fixed/TESTNUM.list : +caseful : LP10
+
+# ----- Routers -----
+
+begin routers
+
+
+# ----- Transports -----
+
+begin transports
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,5d,1d
+
+
+# End

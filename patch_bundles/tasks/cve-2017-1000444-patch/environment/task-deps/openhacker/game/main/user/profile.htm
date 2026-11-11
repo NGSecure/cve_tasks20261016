@@ -1,0 +1,220 @@
+<script type="text/javascript">
+function checkDelete(){
+    return confirm('Are you sure? This action can only be reversed by an administrator.');
+}
+</script>
+
+<?php
+$safeid = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['id']);
+$sql = "SELECT * FROM accounts WHERE id = '$safeid'";
+$result = $conn->query($sql);
+$id = $_GET['id'];
+
+while ($row = $result->fetch_assoc()){
+$prouser = $row['username'];
+$userlevel = $row['level'];
+$role = $row['role'];
+$regdate = $row['regdate'];
+$lastlogindate = $row['lastlogindate'];
+$lastseen = $row['lastseen'];
+$lastip = $row['lastip'];
+$regip = $row['regip'];
+$bio = $row['bio'];
+$modnotes = $row['modnotes'];
+$ep = $row['experience'];
+$clanid = $row['clan'];
+
+if($clanid != ''){
+	$sqlClan = "SELECT * FROM clans WHERE id = '$clanid'";
+	$sqlClanResult = $conn->query($sqlClan);
+	while ($row78 = $sqlClanResult->fetch_assoc()){
+		$clanname = $row78['clanname'];
+	};
+}
+else {
+	// do nothing
+};
+
+$prevclan = $row['prevclan'];
+
+};
+
+$sql2 = "SELECT * FROM usersystems WHERE userid = '$safeid'";
+$result2 = $conn->query($sql2);
+
+while ($row2 = $result2->fetch_assoc()){
+$sysstat = $row2['systemstatus'];
+}
+
+if ($role != 'user') {
+$userlevel = "***HIDDEN***";
+$ep = "***HIDDEN***";
+}
+
+
+
+?>
+<div id="profile" style="background-image:url('');">
+
+<h1><?php echo $prouser;?></h1>
+<ul>
+
+<?php 
+
+		
+$b = $safeid;
+
+$filename = "/usr/share/nginx/html/public/images/avatars/{$b}.png";
+
+if (file_exists($filename)) {
+    $b = $safeid;
+} else {
+    $b = "default";
+}
+
+?>
+
+
+	<li><img style="display:inline-block;height:150;width:150px;"src="/public/images/avatars/<?php echo $b;?>.png"></li>
+	<?php
+	
+echo "<br>";
+	
+		if ($role == 'admin'){
+			echo '<span id="level-tag" class="level-admin">Admin 🔨</span>';
+		}
+		else if ($role == 'moderator') {
+			echo '<span id="level-tag" class="level-moderator">Mod 🔨 </span>';
+		}
+		else if ($role == 'system') {
+			echo '<span id="level-tag" class="level-system">💀 System 💀</span>';
+		}
+		else {
+			echo '<span id="level-tag" class="level-user">User</span>';
+		}
+echo "<br>";
+echo "<br>";
+	
+	
+if ($safeid == '1'){
+	echo '<div id="conf_user">';
+	echo 'Name: Francis<br>';
+	echo 'Status: Game Administrator<br>';
+	echo "</div>";
+}
+else if ($safeid == '2'){
+	echo '<div id="conf_user">';
+	echo 'Name: Chris<br>';
+	echo 'Status: Head Game Moderator<br>';
+	echo "</div>";
+}
+else if ($safeid == '9'){
+	echo '<div id="hello_user">';
+	echo "Greetings, "; echo $_SESSION['login_user'];
+	echo "</div>";
+}
+else {
+	echo '';
+};
+
+
+	?>
+	<br>
+	<li>Bio: <?php echo $bio;?></li>
+
+</ul>
+
+<table class="rounded" style="width:50%;">
+			<tbody>
+				<tr>
+					<td>Join Date</td>
+					<td style="min-width:300px;"><?php echo $regdate; ?></td></tr>
+					<tr><td>Last Seen</td>
+					<td style="min-width:300px;"><?php echo $lastseen; ?></td>
+				</tr>
+
+				<tr>
+					<td>Level</td>
+					<td style="min-width:300px;"><?php echo $userlevel;?></td></tr>
+					<tr><td>EP</td>
+					<td style="min-width:300px;"><?php echo $ep;?></td>
+				</tr>
+				<tr>
+					<td>System Status</td>
+					<?php 
+					if ($sysstat == 'online'){
+						echo '<td style="min-width:300px;color:limegreen !important;">Online</td>';
+					}
+					else {
+						echo '<td style="min-width:300px;color:red !important;">Offline</td>';
+					}; 
+
+					?>
+				</tr>
+				<tr>
+					<td>Clan</td>
+					<?php
+						if($clan == ''){
+							echo '<td style="min-width:300px;">NONE</td>';
+						}
+						else{
+							echo '<td style="min-width:300px;">'; echo "<a href='?a=clanpage&id=$clan'>"; echo $clanname;
+						}
+						?>
+				</tr>
+				<tr>
+					<td>Previous Clan</td>
+					<?php
+						if($prevclan == ''){
+							echo '<td style="min-width:300px;">NONE</td>';
+						}
+						else{
+							echo '<td style="min-width:300px;">'; echo "<a href='?a=clanpage&id=$prevclan'>"; echo $prevclan;
+						}
+						?>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	
+	
+		<?php
+
+?>
+	
+	
+	
+
+
+<?php
+
+	$username = $_SESSION['login_user'];
+	$sql = "SELECT role FROM accounts WHERE username='$username'";
+	$result = $conn->query($sql);
+	$row = mysqli_fetch_assoc($result);
+
+if ($row["role"] != 'user') {
+		echo "<h6>Registration IP: "; echo $regip; echo "</h6>";
+		echo "<h6>Last IP: "; echo $lastip; echo "</h6>";		
+		echo "<h6>Mod Notes: ";
+
+echo "<form action='?m=modtag' method='POST'><input type='hidden' name='tempId' value='$id'/>";
+
+echo "<textarea style='background-color:#2D2628;color:white;height:10%;width:50%;border:0;box-shadow: 2px 2px 10px black;' rows='40' cols='1000' type='Text' name='modnotes'>$modnotes</textarea>";
+
+echo "<br>";
+echo "<br>";
+
+echo "<button class='btn waves-effect waves-dark' type='submit' name='action'>Set Modnote<i class='material-icons center'></i></button></form>"; 
+
+
+
+}
+else { 
+echo '';
+}
+
+?>
+
+</div>

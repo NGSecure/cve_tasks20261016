@@ -1,0 +1,11 @@
+# Exim test configuration 4200
+
+.include DIR/aux-var/std_conf_prefix
+
+# ----- Main settings -----
+
+headers_charset = UTF8
+
+# ----- ACL -----
+
+# End

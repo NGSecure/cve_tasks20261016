@@ -1,0 +1,10 @@
+Exim repository: doc/doc-scripts
+--------------------------------
+
+This directory contains various scripts that are used to build the distributed
+documentation from its SGCAL source files. This method of maintaining the
+documentation was used up to and including release 4.50 of Exim. There is also
+a script for building the FAQ from its source. This is still (June 2005)
+current, but may be superseded in due course.
+
+End

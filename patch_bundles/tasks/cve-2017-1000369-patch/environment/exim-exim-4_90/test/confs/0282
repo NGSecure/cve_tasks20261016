@@ -1,0 +1,34 @@
+# Exim test configuration 0282
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+local_interfaces = <; 127.0.0.1.PORT_D ; [127.0.0.1]:PORT_D2 ; HOSTIPV4
+log_selector = +incoming_interface+incoming_port
+queue_only
+queue_run_in_order
+
+# ----- Routers -----
+
+begin routers
+
+all:
+  driver = accept
+  transport = local_delivery
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  user = CALLER
+  headers_add = interface-port: $interface_port\n\
+                received-port:  $received_port
+
+# End

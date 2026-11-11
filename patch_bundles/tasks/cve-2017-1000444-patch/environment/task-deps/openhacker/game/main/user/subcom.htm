@@ -1,0 +1,27 @@
+<?php
+
+$userid = $_SESSION["userid"];
+$body = $_POST["body"];
+$safebody = mysqli_real_escape_string($conn, $body);
+$ticketid = $_POST["ticketid"];
+
+$sql = "INSERT INTO ticketcomments(userid, ticketid, body) VALUES('$userid', '$ticketid', '$safebody')";
+$result = $conn->query($sql);
+if($result)
+{
+echo "Comment Added";
+header("location: /game/main/index.php?m=view&id=$ticketid");
+}
+else {
+echo "There was a problem adding your comment to this ticket, please contact an administrator to resolve the issue.";
+echo "<br>";
+echo "ticket id: $ticketid";
+echo "<br>";
+echo "userid : $userid";
+echo "<br>";
+echo "body : $body";
+echo "<br>";
+echo $sql;
+};
+
+?>

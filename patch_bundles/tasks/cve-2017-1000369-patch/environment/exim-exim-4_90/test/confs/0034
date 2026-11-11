@@ -1,0 +1,18 @@
+# Exim test configuration 0034
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+acl_smtp_rcpt = accept
+queue_only
+
+smtp_accept_max_nonmail = 3
+smtp_accept_max_nonmail_hosts = !10.0.0.1
+
+# Set this large to avoid it biting first
+smtp_max_synprot_errors = 20
+
+# End

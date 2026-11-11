@@ -1,0 +1,27 @@
+# Exim test configuration 0501
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+acl_smtp_rcpt = check_rcpt
+
+trusted_users = CALLER
+
+# ------ ACLs ------
+
+begin acl
+
+check_rcpt:
+  warn   logwrite = 1: $local_part ${if match{$local_part}{[A-Z]}{yes}{no}}
+         control  = caseful_local_part
+         logwrite = 2: $local_part ${if match{$local_part}{[A-Z]}{yes}{no}}
+         control  = caselower_local_part
+         logwrite = 3: $local_part ${if match{$local_part}{[A-Z]}{yes}{no}}
+  accept
+
+# End

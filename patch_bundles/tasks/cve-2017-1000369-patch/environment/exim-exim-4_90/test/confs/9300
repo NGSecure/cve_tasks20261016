@@ -1,0 +1,26 @@
+# Exim test configuration 9300
+
+SERVER=
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+# ----- Authentication -----
+
+begin authenticators
+
+sasl1:
+  driver = cyrus_sasl
+  public_name = ANONYMOUS
+  server_set_id = $auth1
+
+sasl2:
+  driver = cyrus_sasl
+  public_name = PLAIN
+  server_set_id = $auth1
+
+# End

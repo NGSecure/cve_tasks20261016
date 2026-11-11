@@ -1,0 +1,38 @@
+# Exim test configuration 2501
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = dsearch;DIR/aux-fixed/TESTNUM.domains
+
+
+# ------ Routers ------
+
+begin routers
+
+r1:
+  driver = accept
+  domains = +local_domains
+  transport = t1
+
+
+# ------ Transports ------
+
+begin transports
+
+t1:
+  driver = appendfile
+  file = /dev/null
+  user = CALLER
+
+
+# ------ Retry ------
+
+begin retry
+
+* * F,1d,10m
+
+# End

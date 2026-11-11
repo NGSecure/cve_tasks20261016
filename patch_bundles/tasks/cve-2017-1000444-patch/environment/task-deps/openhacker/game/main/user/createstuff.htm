@@ -1,0 +1,15 @@
+<div id="content">
+
+<?php 
+
+for ($i = 1; $i <= 110; $i++) {
+$sql = "INSERT INTO servers (serverid, location) VALUES ('$i', 'Admin')";
+//sql = "UPDATE bank_transactions SET watchdog_approve = '0';
+$result = $conn->query($sql);
+
+};
+
+
+?>
+
+</div>

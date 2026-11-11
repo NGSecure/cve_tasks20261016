@@ -1,0 +1,41 @@
+# Exim test configuration 0570
+# multi_domain option on smtp transport
+
+OPTION =
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = primary.test.ex
+qualify_domain = test.ex
+queue_only
+queue_run_in_order
+
+
+# for server
+acl_smtp_rcpt= discard
+
+# ----- Routers -----
+
+begin routers
+
+all:
+  driver = manualroute
+address_data = $domain
+  route_list = *       127.0.0.1         byname
+  self = send
+  transport = smtp
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_D
+  OPTION
+  max_parallel = 1
+
+# End

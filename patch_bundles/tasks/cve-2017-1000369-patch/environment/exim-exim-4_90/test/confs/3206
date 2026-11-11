@@ -1,0 +1,50 @@
+# Exim test configuration 3206
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+qualify_domain = test.ex
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex : !*.remote.ex : testdb;defer
+
+hold_domains = !test.ex : hold.remote.ex : !*.go.remote.ex : testdb;defer
+queue_domains = !test.ex : queue.go.remote.ex : testdb;defer
+
+
+# ----- Routers -----
+
+begin routers
+
+fail_remote_domains:
+  driver = redirect
+  domains = ! +local_domains
+  data = :fail: unrouteable mail domain "$domain"
+
+all:
+  driver = accept
+  retry_use_local_part
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  envelope_to_add
+  file = DIR/test-mail/$local_part
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,1h,10m
+
+
+# End

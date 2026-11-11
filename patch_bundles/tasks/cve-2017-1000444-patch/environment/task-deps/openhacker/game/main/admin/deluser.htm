@@ -1,0 +1,32 @@
+<?php
+
+if ($row["role"] == 'user') {
+	header("location: /");
+};
+
+$tempID = $_POST['tempid'];
+
+if ($_POST['tempid'] == 1) {
+
+echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('User cannot be deleted, user is game admin')
+    window.location.href='?m=usermanagement';
+    </SCRIPT>");
+}
+
+else {
+	$sql1 = "SELECT username FROM accounts WHERE id = '$tempID'";
+	$result1 = $conn->query($sql1);
+	while($row = $result1->fetch_assoc()) {
+		$deleteuser = $row["username"];
+	};
+
+
+	$sql = "INSERT INTO gamelogs(userid,username,type) VALUES('".$_SESSION['userid']."', '".$_SESSION['login_user']."', '$username deleted user $deleteuser')";
+	$result = $conn->query($sql);
+	$sql = "UPDATE accounts SET deleted='1', username = CONCAT(username, '_deleted') WHERE id = '$tempID'";
+	$result = $conn->query($sql);
+
+header("location: ?m=usermanagement");
+};
+?>

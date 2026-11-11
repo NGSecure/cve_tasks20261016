@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>Netscape 4 anti-penetrating demo</title>
+<script language="JavaScript">
+if(document.layers){origWidth=innerWidth;origHeight=innerHeight;onresize=function(){if(innerWidth!=origWidth||innerHeight!=origHeight)location.reload()}}
+// The above script shows you an example how to work around with the NN4 resize bug. It's not part of this product and you may use your own instead.
+</script>
+
+<style>
+code, pre {
+ font-family: 'Andale Mono', Courier, monospace;
+ color : #A52A2A;
+}
+h2 {
+	font-family: "Verdana", "Arial", "Helvetica", "sans-serif";
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #999999;
+	padding: 5px;
+}
+</style>
+</head>
+
+<body>
+<br>
+<h1>Netscape 4.x anti-penetrating demo</h1>
+<h2> The problem</h2>
+<p>The following is a common form with calendar controls that you may have seen 
+  in thousands of websites. You may find it very enjoyful when running in browsers 
+  other than NN4. However, problems come up with NN4 - the calendar panel gets 
+  penetrated by the description text fields, which leaves the whole control nearly 
+  unusable.</p>
+<p>Since that's the way NN4 handling the form items, we have to live with it.</p>
+
+
+<hr noshade>
+<form name="demoform">
+  <table border="0" cellpadding="5" cellspacing="0">
+    <tr> 
+      <td width="133"> 
+        <div align="left">Date:</div></td>
+      <td colspan="2" nowrap>Arrival<a name="dc1dummy:27"> 
+        <input name="dc1" value="" size="11"></a><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.demoform.dc1);return false;" ><img name="popcal" align="absmiddle" src="Netscape4/calbtn.gif" width="34" height="22" border="0" alt=""></a></td>
+      <td width="291" nowrap>Departure<a name="dc2dummy:27"> 
+        <input name="dc2" value="" size="11"></a><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.demoform.dc2);return false;" ><img name="popcal" align="absmiddle" src="Netscape4/calbtn.gif" width="34" height="22" border="0" alt=""></a></td>
+    </tr>
+    <tr> 
+      <td><div align="left">Description:</div></td>
+      <td colspan="3" align="left"><textarea name="desc" cols="40" rows="5" id="desc"></textarea></td>
+    </tr>
+  </table>
+</form>
+<hr noshade>
+
+
+<p>A good news is that now PopCalendarXP gives you more choices to work around 
+  this problem. With a bit effort you can make your page work 
+  without compromising much usability.</p>
+<p>&nbsp;</p>
+<h2><a name="dc3dummy:27">Repositioning Trick</a></h2>
+<p>Let's start with the simplest solution - if you can find or arrange a place 
+  in your page that is large enough for the calendar to show up and has no form 
+  items around, we can just make the calendar pops from there to avoid the penetrating 
+  problem. PopCalendarXP supports relocating the pop-up point by moving around 
+  the localizer <code>&lt;A&gt;</code> tag (with the word &quot;dummy&quot; in 
+  its name).</p>
+<p>Using the same form above, we now make the calendar pop-up from aside instead 
+  of the center. Please check the page source to see how we move the localizer 
+  <code>&lt;A&gt;</code> tags.</p>
+<p><em>Note: The localizer <code>&lt;A&gt;</code> &nbsp;tags are used for locating 
+  popup positions in NN4 only. Other browsers won't be affected.</em><br>
+</p>
+
+
+<hr noshade>
+<form name="demoform2">
+  <table border="0" cellpadding="5" cellspacing="0">
+    <tr> 
+      <td colspan="4" align="right"></td>
+    </tr>
+    <tr> 
+      <td width="133" > <div align="left">Date:</div></td>
+      <td colspan="2" nowrap>Arrival 
+        <input name="dc3" value="" size="11"><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.demoform2.dc3);return false;" ><img name="popcal" align="absmiddle" src="Netscape4/calbtn.gif" width="34" height="22" border="0" alt=""></a></td>
+      <td width="291" nowrap>Departure 
+        <input name="dc4" id="dc4" value="" size="11"><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.demoform2.dc4);return false;" ><img name="popcal" align="absmiddle" src="Netscape4/calbtn.gif" width="34" height="22" border="0" alt=""></a><a name="dc4dummy:0"> </a></td>
+    </tr>
+    <tr> 
+      <td><div align="left">Description:</div></td>
+      <td colspan="3" align="left"><textarea name="desc" cols="40" rows="5" id="desc"></textarea></td>
+    </tr>
+  </table>
+</form>
+<hr noshade>
+
+
+<p>Or, even more simple, you may just set the <code>gbPopDown</code> in <code>normal.js</code> 
+  to <code>false</code> if the good place is above the date fields. Try by yourself 
+  and see how it works.</p>
+<p>&nbsp;</p>
+<h2>Auto-hiding Trick</h2>
+<p>PopCalendarXP has build-in capabilities to hide specific layers(whose name 
+  starts with &quot;toggle&quot;) before popping itself out. This feature is designed to 
+  hide all form items if browser is NN4.</p>
+<p>Let's rebuild the original problematical sample to take advantage of the auto-hiding 
+  feature.</p>
+<ol>
+  <li>Find the <code>&lt;form&gt;</code> tag in your webpage and enclose it with 
+    <code>&lt;ilayer name=&quot;toggle&quot;&gt;&lt;/ilayer&gt;</code> tags.</li>
+  <li>Find the <code>fPopCalendar()</code> of the pop button and pass in &quot;toggle&quot;, 
+    the name of the ilayer which contains the localizer <code>&lt;A&gt;</code> 
+    tags, as the 3rd parameter.</li>
+</ol>
+<p>That's all. It's not too intimidating, is it? And the page keeps working 
+  well in other browsers because they will simply ignore the <code>&lt;ilayer&gt;</code> 
+  tags.</p>
+
+
+<HR noshade>
+<ilayer name="toggle"> 
+<form name="demoform3">
+  <table border="0" cellpadding="5" cellspacing="0">
+    <tr> 
+      <td width="133"> <div align="left">Date:</div></td>
+      <td colspan="2" nowrap>Arrival<a name="dc1dummy:27"> 
+        <input name="dc1" value="" size="11"></a><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.demoform3.dc1,null,'toggle');return false;" ><img name="popcal" align="absmiddle" src="Netscape4/calbtn.gif" width="34" height="22" border="0" alt=""></a></td>
+      <td width="291" nowrap>Departure<a name="dc2dummy:27"> 
+        <input name="dc2" value="" size="11"></a><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.demoform3.dc2,null,'toggle');return false;" ><img name="popcal" align="absmiddle" src="Netscape4/calbtn.gif" width="34" height="22" border="0" alt=""></a></td>
+    </tr>
+    <tr> 
+      <td><div align="left">Description:</div></td>
+      <td colspan="3" align="left"><textarea name="textarea" cols="40" rows="5" id="textarea"></textarea></td>
+    </tr>
+  </table>
+</form>
+</ilayer>
+<HR noshade>
+
+
+<p>Both tricks are cross-browser and none of them breaks the form, which means 
+  your page will still be functional even in browsers with no Javascript support!</p>
+<p>&nbsp;</p>
+
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2007 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+
+
+
+<!--  PopCalendar(tag name and id must match) Tags should not be enclosed in tags other than the html body tag. -->
+<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="Netscape4/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
+<LAYER name="gToday:normal:agenda.js" src="Netscape4/npopeng.htm" background="Netscape4/npopeng.htm">     </LAYER>
+</iframe>
+</body>
+</html>

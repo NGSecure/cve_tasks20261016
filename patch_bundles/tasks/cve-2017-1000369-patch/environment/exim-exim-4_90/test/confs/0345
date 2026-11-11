@@ -1,0 +1,45 @@
+# Exim test configuration 0345
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+qualify_domain = test.ex
+ignore_bounce_errors_after = 0s
+admin_groups = CALLER
+
+
+# ----- Routers -----
+
+begin routers
+
+smart:
+  driver = accept
+  retry_use_local_part
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  file = DIR/test-mail/$local_part
+  quota = 20
+  user = CALLER
+
+
+# ----- Retry -----
+
+
+begin retry
+
+*         quota_7d
+*         quota    F,1h,20s
+*         *        F,1d,15m
+
+# End

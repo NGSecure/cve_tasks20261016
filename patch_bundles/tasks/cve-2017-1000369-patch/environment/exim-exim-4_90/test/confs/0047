@@ -1,0 +1,29 @@
+# Exim test configuration 0047
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+
+# ----- Routers -----
+
+begin routers
+
+domainlist:
+  driver = manualroute
+  route_list = \
+    domain1                                ten-1.test.ex   byname;\
+    lsearch;;DIR/aux-fixed/TESTNUM.routes  $value          bydns;\
+    ^domain(3)                             ten-$1.test.ex  byname
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+
+# End

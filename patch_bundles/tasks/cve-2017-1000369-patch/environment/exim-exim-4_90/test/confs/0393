@@ -1,0 +1,40 @@
+# Exim test configuration 0393
+
+FILTER=/bin/cat
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = test.ex
+
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = accept
+  transport = t1
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = appendfile
+  user = CALLER
+  file = DIR/test-mail/$local_part
+  transport_filter = FILTER
+
+
+# ----- Retry -----
+
+begin retry
+
+* * F,1d,1d
+
+# End

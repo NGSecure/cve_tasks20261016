@@ -1,0 +1,40 @@
+<?php
+
+	$username = $_SESSION['login_user'];
+	$sql = "SELECT role FROM accounts WHERE username='$username'";
+	$result = $conn->query($sql);
+	$row = mysqli_fetch_assoc($result);
+
+if ($row["role"] == 'user') {
+	header("location: /");
+};
+	$result->free();
+?>
+
+<div id="admin">
+	<h5>Question Management | Edit Question</h5>
+	<br>
+</div>
+
+<?php
+	$id = $_POST['tempId'];
+	$sql = "SELECT id, Question, correctanswer, level FROM questions where id ='$id'";
+	$result = $conn->query($sql);
+	
+
+if ($result->num_rows > 0) {
+     echo "<div id=admintable><table><tr><th>ID</th><th>Question</th><th>Correct Answer</th><th>Level</th>";
+     // output data of each row
+     while($row = $result->fetch_assoc()) {
+     
+    	 echo "<tr><td><input id=Question value='". $row["id"]."' </td><td>'" . $row["Question"]. "</td><td><input id=answer value='" . $row["correctanswer"]. "'></td><td><input value='" . $row["level"]. "'</td></table>";
+         echo "<form action='?m=editq' method='POST'><input type='hidden' name='tempId' value='".$row["id"]."'/><input type='submit' name='submit-btn' value='Submit' /></form></div>";
+        
+     }
+     echo "</table>";
+} else {
+     echo "0 results";
+};
+
+ $result->free();
+ ?>

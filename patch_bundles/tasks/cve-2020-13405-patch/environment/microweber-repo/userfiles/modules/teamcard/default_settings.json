@@ -1,0 +1,36 @@
+{
+    "settings": [
+        {
+            "file": "{SITE_URL}userfiles/modules/teamcard/default-content/1.jpg",
+            "name": "Beverly A Richardson",
+            "role": "Creator",
+            "website": "https://www.example.com",
+            "bio": "Pop culture specialist. Evil tv practitioner. Friend of animals everywhere. Creator.",
+            "itemId": 1
+        },
+        {
+            "file": "{SITE_URL}userfiles/modules/teamcard/default-content/2.jpg",
+            "name": "Margaret J Otero",
+            "role": "Game Designer",
+            "website": "https://www.example.com",
+            "bio": "Gamer. Incurable twitter buff. Communicator. Zombie nerd. Devoted student.",
+            "itemId":2
+        },
+        {
+            "file": "{SITE_URL}userfiles/modules/teamcard/default-content/3.jpg",
+            "name": "Maryln E Walker",
+            "role": "Social Media Ninja",
+            "website": "https://www.example.com",
+            "bio": "Gamer. Music maven. Hardcore social media ninja. Reader. Beer buff.",
+            "itemId": 3
+        },
+        {
+            "file": "{SITE_URL}userfiles/modules/teamcard/default-content/4.jpg",
+            "name": "Maryln E Walker",
+            "role": "Social Media Ninja",
+            "website": "https://www.example.com",
+            "bio": "Gamer. Music maven. Hardcore social media ninja. Reader. Beer buff.",
+            "itemId": 4
+        }
+    ]
+}

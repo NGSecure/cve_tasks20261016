@@ -1,0 +1,46 @@
+# Exim test configuration 0288
+# serialize_hosts option on smtp transport
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+qualify_domain = test.ex
+queue_run_in_order
+remote_max_parallel = 2
+
+
+# ----- Routers -----
+
+begin routers
+
+all:
+  driver = manualroute
+  route_list = * 127.0.0.1
+  self = send
+  transport = smtp
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  port = PORT_S
+  max_rcpt = 1
+  connection_max_messages = 1
+  serialize_hosts = 127.0.0.1
+
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,1h,10m
+
+
+# End

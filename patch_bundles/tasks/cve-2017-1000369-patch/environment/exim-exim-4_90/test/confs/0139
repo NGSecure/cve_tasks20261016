@@ -1,0 +1,91 @@
+# Exim test configuration 0139
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+domainlist local_domains = exim.test.ex
+trusted_users = CALLER
+
+acl_smtp_helo = check_helo
+acl_smtp_rcpt = check_recipient
+acl_smtp_mail = check_mail
+acl_smtp_vrfy = check_vrfy
+
+# ------ ACL ------
+
+begin acl
+
+check_helo:
+  warn    dnslists = rbl2.test.ex!=127.0.0.3 : rbl3.test.ex=127.0.0.3
+  accept
+
+check_vrfy:
+  warn    dnslists = rbl.test.ex=127.0.0.1
+  warn    dnslists = rbl.test.ex!=127.0.0.1
+  warn    dnslists = rbl.test.ex!=127.0.0.3
+  warn    dnslists = rbl.test.ex==127.0.0.1
+  warn    dnslists = rbl.test.ex==127.0.0.1,127.0.0.2
+  warn    dnslists = rbl.test.ex!==127.0.0.1
+  warn    dnslists = rbl.test.ex!==127.0.0.3
+  warn    dnslists = rbl.test.ex!==127.0.0.1,127.0.0.2
+  accept
+
+check_mail:
+  warn    dnslists = rbl4.test.ex&0.0.0.6
+  warn    dnslists = rbl4.test.ex&127.0.0.3
+  warn    dnslists = rbl4.test.ex!&0.0.0.7
+          add_header = DNSlist: $dnslist_domain $dnslist_text $dnslist_matched
+  warn    dnslists = rbl5.test.ex,rbl4.test.ex=127.0.0.128
+          add_header = DNSlist: $dnslist_domain $dnslist_text $dnslist_matched
+  accept
+
+check_recipient:
+  warn    message = X-Warn: host is listed in $dnslist_domain but not =127.0.0.3\
+                    ${if def:dnslist_text{\n  $dnslist_text}}
+          dnslists = rbl3.test.ex!=127.0.0.3
+  deny    message = host is listed in $dnslist_domain with value 127.0.0.3\
+                    ${if def:dnslist_text{\n$dnslist_text}}
+          dnslists = rbl3.test.ex=127.0.0.3
+  require verify = sender
+  deny    message = unrouteable address
+         !verify = recipient
+  accept  domains = +local_domains
+  deny    message = relay not permitted
+
+
+# ----- Routers -----
+
+begin routers
+
+system_aliases:
+  driver = redirect
+  allow_defer
+  data = ${lookup{$local_part}lsearch{DIR/aux-fixed/TESTNUM.aliases}}
+  qualify_preserve_domain
+  retry_use_local_part
+
+localuser:
+  driver = accept
+  local_parts = userx
+  transport = local_delivery
+
+
+# ----- Transports -----
+
+begin transports
+
+local_delivery:
+  driver = appendfile
+  delivery_date_add
+  envelope_to_add
+  file = DIR/test-mail/$local_part
+  return_path_add
+  user = CALLER
+
+file:
+  driver = appendfile
+  user = CALLER
+
+# End

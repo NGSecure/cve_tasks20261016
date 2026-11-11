@@ -1,0 +1,41 @@
+# Exim test configuration 0417
+
+RETURN_ERROR_DETAILS = false
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+acl_smtp_rcpt = rcpt
+smtp_return_error_details = RETURN_ERROR_DETAILS
+
+
+# ----- ACLs -----
+
+begin acl
+
+rcpt:
+  require verify = sender
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = dnslookup
+  transport = t1
+
+
+# ----- Transports -----
+
+begin transports
+
+t1:
+  driver = smtp
+
+# End

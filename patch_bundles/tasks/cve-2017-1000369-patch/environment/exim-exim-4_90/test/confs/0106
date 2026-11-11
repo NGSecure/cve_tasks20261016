@@ -1,0 +1,41 @@
+# Exim test configuration 0106
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+
+
+# ----- Routers -----
+
+begin routers
+
+all:
+  driver = manualroute
+  route_list = * 127.0.0.1
+  self = send
+  transport = smtp
+  no_more
+
+
+# ----- Transports -----
+
+begin transports
+
+smtp:
+  driver = smtp
+  command_timeout = 1s
+  final_timeout = 1s
+  port = PORT_S
+
+# ----- Retry -----
+
+
+begin retry
+
+* * F,1h,1s
+
+
+# End

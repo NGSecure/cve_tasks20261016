@@ -1,0 +1,23 @@
+# Exim test configuration 0017
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+acl_smtp_etrn = check_etrn
+
+# ----- ACL -----
+
+begin acl
+
+check_etrn:
+  deny   hosts = 10.9.8.7
+         sender_domains = some.domain
+
+  deny   hosts = 10.9.8.8
+         senders = x@y
+
+  accept hosts = localhost
+
+# End

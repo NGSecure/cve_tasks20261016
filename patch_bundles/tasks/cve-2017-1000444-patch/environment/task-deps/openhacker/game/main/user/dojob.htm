@@ -1,0 +1,388 @@
+<div id="content">
+
+
+<?php
+
+$sql = "SELECT * FROM accounts WHERE id ='$userid'";
+$result = $conn->query($sql);
+while ($row = $result->fetch_assoc()){
+$sjcd = $row['smallhackcd'];
+$currenttime = $row['lastseen'];
+}
+
+$sql2 = "UPDATE accounts SET smalljobcount = smalljobcount + 1 WHERE id = '$userid'";
+$result2 = $conn->query($sql2);
+
+$jobid = $_POST['smalljob'];
+$roll = rand(0, 100);
+$roll2 = rand(0,200);
+$userid = $_SESSION["userid"];
+$jailroll = 175;
+
+if($roll2 >= 175){ // User is jailed
+	$sql911 = "UPDATE accounts SET 'injail' = '1' WHERE id = $userid";
+	$result911 = $conn->query($sql);
+
+		// Set jail cooldown
+		$fixTime = strtotime($currenttime);
+		$jailminutes = rand(1,9);
+		$jailrelease = $fixTime+(60*$jailminutes);
+		$formatTime = date("Y-m-d H:i:s", $jailrelease);
+
+		$sql7 = "UPDATE accounts SET jailcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+}
+
+$sql = "SELECT * FROM accounts WHERE id = '$userid'";
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()){
+
+$oldExperience = $row['experience'];
+
+};
+
+$sql = "SELECT * FROM economy WHERE userid = '$userid'";
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()){
+	$oldcash = $row['cash'];
+};
+
+
+if ($jobid == 1) {      // Get password looking over shoulder
+	$successroll = 15;
+	if ($roll >= $successroll) {
+		$amount = rand(50, 100);
+		echo "You looked over the shoulder of an unsuspecting user and successfully retrieved their password. The hacker paid you $$amount for your work.";
+		$earnedExperience = 10;
+		$newExperience = $oldExperience + $earnedExperience;
+		$newCash = $oldcash + $amount;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+		$sql2 = "UPDATE economy SET cash = '$newCash' WHERE userid = '$userid'";
+		$result2 = $conn->query($sql2);
+		$sql3 = "UPDATE accounts SET smalljobsuccess = smalljobsuccess + 1 WHERE id = '$userid'";
+		$result3 = $conn->query($sql3);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(30*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+
+	}
+	else {
+		echo "You looked over their shoulder but they felt your presence and turned around... the other hacker was not pleased.";
+		$earnedExperience = $earnedExperience / 2;
+		$newExperience = $oldExperience + $earnedExperience;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+		
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(30*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+}
+if ($jobid == 2) {        // Install a keylogger
+	$successroll = 20;
+	if ($roll >= $successroll) {
+		$amount = rand(75, 120);
+		echo "You successfully installed a keylogger onto the target system. The hacker paid you $$amount for a job well done.";
+		$earnedExperience = 20;
+		$newExperience = $oldExperience + $earnedExperience;
+		$newCash = $oldcash + $amount;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+		$sql2 = "UPDATE economy SET cash = '$newCash' WHERE userid = '$userid'";
+		$result2 = $conn->query($sql2);
+		$sql3 = "UPDATE accounts SET smalljobsuccess = smalljobsuccess + 1 WHERE id = '$userid'";
+		$result3 = $conn->query($sql3);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(45*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+	else {
+		echo "Your keylogger was detected by the host's systems antivirus and was removed before you could get any information.";
+		$earnedExperience = $earnedExperience / 2;
+		$newExperience = $oldExperience + $earnedExperience;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(45*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+}
+if ($jobid == 3) {        // Sniff wireless traffic
+	$successroll = 24;
+	if ($roll >= $successroll) {
+		$amount = rand(100, 175);
+		echo "You hopped onto the local coffee shop's wifi and collected the PII of everyone connected. The hacker paid you $$amount for your time.";
+		$earnedExperience = 30;
+		$newExperience = $oldExperience + $earnedExperience;
+		$newCash = $oldcash + $amount;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+		$sql2 = "UPDATE economy SET cash = '$newCash' WHERE userid = '$userid'";
+		$result2 = $conn->query($sql2);
+		$sql3 = "UPDATE accounts SET smalljobsuccess = smalljobsuccess + 1 WHERE id = '$userid'";
+		$result3 = $conn->query($sql3);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(55*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+	else {
+		echo "There were no open wireless networks in the area you tried.";
+		$earnedExperience = $earnedExperience / 2;
+		$newExperience = $oldExperience + $earnedExperience;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(55*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+}
+if ($jobid == 4) {        // Crack a WEP secured wireless network
+	$successroll = 28;
+	if ($roll >= $successroll) {
+		$amount = rand(175, 250);
+		echo "You successfully broke your way onto the network and found the owner's stash of porn. The owner paid you $$amount to keep your mouth shut.";
+		$earnedExperience = 40;
+		$newExperience = $oldExperience + $earnedExperience;
+		$newCash = $oldcash + $amount;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+		$sql2 = "UPDATE economy SET cash = '$newCash' WHERE userid = '$userid'";
+		$result2 = $conn->query($sql2);
+		$sql3 = "UPDATE accounts SET smalljobsuccess = smalljobsuccess + 1 WHERE id = '$userid'";
+		$result3 = $conn->query($sql3);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(60*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+	else {
+		echo "You were unable to break the into the network as the owner turned off the wireless network before you were able to break it.";
+		$earnedExperience = $earnedExperience / 2;
+		$newExperience = $oldExperience + $earnedExperience;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(60*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+}
+
+if ($jobid == 5) {        // Decrypt a Windows 10 Password
+	$successroll = 36;
+	if ($roll >= $successroll) {
+		$amount = rand(250, 300);
+		echo "You were successfully able to decrypt the password and the owner paid you $$amount because they were able to access their files again.";
+		$earnedExperience = 50;
+		$newExperience = $oldExperience + $earnedExperience;
+		$newCash = $oldcash + $amount;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+		$sql2 = "UPDATE economy SET cash = '$newCash' WHERE userid = '$userid'";
+		$result2 = $conn->query($sql2);
+		$sql3 = "UPDATE accounts SET smalljobsuccess = smalljobsuccess + 1 WHERE id = '$userid'";
+		$result3 = $conn->query($sql3);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(80*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+	}
+	else {
+		echo "After downloading all the tools necessary your computer's antivirus program removed them.";
+		$earnedExperience = $earnedExperience / 2;
+		$newExperience = $oldExperience + $earnedExperience;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(80*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+}
+
+if ($jobid == 6) {        // Change your grades
+	$successroll = 58;
+	if ($roll >= $successroll) {
+		$amount = rand(250, 300);
+		echo "You successfully broke into your school's grade reporting system and changed your grades to A's.";
+		$earnedExperience = 60;
+		$newExperience = $oldExperience + $earnedExperience;
+		$newCash = $oldcash + $amount;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+		$sql2 = "UPDATE economy SET cash = '$newCash' WHERE userid = '$userid'";
+		$result2 = $conn->query($sql2);
+		$sql3 = "UPDATE accounts SET smalljobsuccess = smalljobsuccess + 1 WHERE id = '$userid'";
+		$result3 = $conn->query($sql3);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(100*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+	else {
+		echo "After changing your grades your teacher goes back and notices your edit and reports you to the principal.";
+		$earnedExperience = $earnedExperience / 2;
+		$newExperience = $oldExperience + $earnedExperience;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(100*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+}
+
+if ($jobid == 7) {        // DDoS A government website offline
+	$successroll = 80;
+	if ($roll >= $successroll) {
+		$amount = rand(300, 400);
+		echo "You successfully joined a 4chan raid and knocked HBGary offline. AnonOPS paid you $$amount for your help.";
+		$earnedExperience = 70;
+		$newExperience = $oldExperience + $earnedExperience;
+		$newCash = $oldcash + $amount;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+		$sql2 = "UPDATE economy SET cash = '$newCash' WHERE userid = '$userid'";
+		$result2 = $conn->query($sql2);
+		$sql3 = "UPDATE accounts SET smalljobsuccess = smalljobsuccess + 1 WHERE id = '$userid'";
+		$result3 = $conn->query($sql3);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(110*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+	else {
+		echo "Your ISP found out you were using LOIC to attack websites and nullrouted your packets.";
+		$earnedExperience = $earnedExperience / 4;
+		$newExperience = $oldExperience + $earnedExperience;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(110*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+
+	}
+}
+
+if ($jobid == 8) {        // Break into the NSA
+	$successroll = 90;
+	if ($roll >= $successroll) {
+		$amount = rand(1000, 10000);
+		echo "You successfully broke into the servers of Fort Mead, After sifting around you were able to collect enough information to implicate the US Government for mass spying. The Russian's paid you $$amount for the information";
+		$earnedExperience = 100;
+		$newExperience = $oldExperience + $earnedExperience;
+		$newCash = $oldcash + $amount;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+		$sql2 = "UPDATE economy SET cash = '$newCash' WHERE userid = '$userid'";
+		$result2 = $conn->query($sql2);
+		$sql3 = "UPDATE accounts SET smalljobsuccess = smalljobsuccess + 1 WHERE id = '$userid'";
+		$result3 = $conn->query($sql3);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(120*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+	}
+	else {
+		echo "You were disconnected before you found anything.";
+		$earnedExperience = 100;
+		$earnedExperience = $earnedExperience / 2;
+		$newExperience = $oldExperience + $earnedExperience;
+		$sql = "UPDATE accounts SET experience = '$newExperience' WHERE id = $userid";
+		$result = $conn->query($sql);
+
+		// Set system cooldown
+		$fixTime = strtotime($currenttime);
+		$systemready = $fixTime+(120*1);
+		$formatTime = date("Y-m-d H:i:s", $systemready);
+
+		$sql7 = "UPDATE accounts SET smallhackcd = '$formatTime' WHERE id = '$userid'";
+		$result7 = $conn->query($sql7);
+	}
+}
+
+?>
+</div>

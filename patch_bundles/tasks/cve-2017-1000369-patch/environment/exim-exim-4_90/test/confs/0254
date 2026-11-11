@@ -1,0 +1,15 @@
+# Exim test configuration 0254
+
+.include DIR/aux-var/std_conf_prefix
+
+primary_hostname = myhost.test.ex
+
+# ----- Main settings -----
+
+log_selector =  +subject
+
+begin rewrite
+
+xx@yy  xxxx@yyyy
+
+# End

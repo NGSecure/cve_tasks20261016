@@ -1,0 +1,131 @@
+# TLS server: general ops and certificate extractions
+#
+# NOTE: current OpenSSL libraries return faulty my-cert information
+# when more than one is loaded, which the conf for this testcase does.
+# As a result the expansion done and logged is misleading.
+#
+# Make RSA authentication the only acceptable
+exim -DSERVER=server -DORDER=RSA -bd -oX PORT_D
+****
+client-ssl 127.0.0.1 PORT_D
+??? 220
+ehlo rhu.barb
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250
+starttls
+??? 220
+mail from:<CALLER@test.ex>
+??? 250
+rcpt to:<CALLER@test.ex>
+??? 250
+DATA
+??? 3
+This is a test encrypted message.
+.
+??? 250
+quit
+??? 221
+****
+client-ssl 127.0.0.1 PORT_D
+??? 220
+ehlo rhu.barb
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250
+starttls
+??? 220
+mail from:<"name with spaces"@test.ex>
+??? 250
+rcpt to:<CALLER@test.ex>
+??? 250
+DATA
+??? 3
+This is a test encrypted message.
+.
+??? 250
+quit
+??? 221
+****
+# nonloop addr conn rejected lacking cert
+client-ssl HOSTIPV4 PORT_D
+??? 220
+ehlo rhu.barb
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250
+starttls
+??? 220 TLS go ahead
++++ 1
+help
+??? 554
+****
+client-ssl HOSTIPV4 PORT_D DIR/aux-fixed/exim-ca/example.com/server2.example.com/server2.example.com.pem DIR/aux-fixed/exim-ca/example.com/server2.example.com/server2.example.com.unlocked.key
+??? 220
+ehlo rhu.barb
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250
+starttls
+??? 220
+mail from:<CALLER@test.ex>
+??? 250
+rcpt to:<CALLER@test.ex>
+??? 250
+DATA
+??? 3
+This is a test encrypted message from a verified host.
+.
+??? 250
+quit
+??? 221
+****
+killdaemon
+#
+# make ECDSA authentication preferred
+# DEFAULT:+RSA should work but does not seem to
+exim -DSERVER=server -DORDER=ECDSA:RSA:!COMPLEMENTOFDEFAULT -bd -oX PORT_D
+****
+client-ssl 127.0.0.1 PORT_D
+??? 220
+ehlo rhu.barb
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250-
+??? 250
+starttls
+??? 220
+mail from:<CALLER@test.ex>
+??? 250
+rcpt to:<CALLER@test.ex>
+??? 250
+DATA
+??? 3
+This is a test encrypted message.
+It should be sent under the EC server cert and with an ECDSA cipher.
+.
+??? 250
+quit
+??? 221
+****
+killdaemon
+exim -qf
+****
+exim -bh 10.0.0.1
+starttls
+quit
+****

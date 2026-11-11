@@ -1,0 +1,22 @@
+# Exim test configuration 0424
+
+.include DIR/aux-var/std_conf_prefix
+
+
+# ----- Main settings -----
+
+primary_hostname = mail.test.ex
+qualify_domain = test.ex
+
+
+# ----- Routers -----
+
+begin routers
+
+r1:
+  driver = redirect
+  allow_fail
+  data = :fail: Return_path is: <$return_path>
+
+
+# End
